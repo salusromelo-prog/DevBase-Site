@@ -6,6 +6,7 @@ interface ProductCardProps {
   desc: string
   features: string[]
   price: string
+  priceOld?: string
   priceColor: 'green' | 'indigo'
   priceLabel: string
   ctaLabel: string
@@ -20,6 +21,7 @@ export default function ProductCard({
   desc,
   features,
   price,
+  priceOld,
   priceColor,
   priceLabel,
   ctaLabel,
@@ -42,6 +44,7 @@ export default function ProductCard({
       </ul>
       <div className="ft">
         <div className="price">
+          {priceOld && <span className="old">{priceOld}</span>}
           <span className={`big ${priceColor}`}>{price}</span>
           <span className="small">{priceLabel}</span>
         </div>

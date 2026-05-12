@@ -42,8 +42,9 @@ export default function Produtos() {
                   'Documentação 100% em PT-BR',
                 ]}
                 price="R$ 147"
+                priceOld="R$ 297"
                 priceColor="green"
-                priceLabel="pagamento único · acesso vitalício"
+                priceLabel="lançamento · acesso vitalício"
                 ctaLabel="Comprar agora"
                 ctaHref="https://saas-kit-br-salusromelo-progs-projects.vercel.app"
                 ctaExternal

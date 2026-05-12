@@ -138,8 +138,9 @@ export default function Home() {
                   'Dashboard e painel admin',
                 ]}
                 price="R$ 147"
+                priceOld="R$ 297"
                 priceColor="green"
-                priceLabel="pagamento único · vitalício"
+                priceLabel="lançamento · acesso vitalício"
                 ctaLabel="Comprar"
                 ctaHref="/produtos"
               />
