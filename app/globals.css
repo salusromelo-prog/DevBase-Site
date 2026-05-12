@@ -293,7 +293,7 @@ section.section + section.section { padding-top: 0; }
    Hero
    ================================================================ */
 .hero {
-  padding: 120px 0 110px; text-align: center;
+  padding: 120px 0 56px; text-align: center;
   position: relative; isolation: isolate;
 }
 .hero .pill { margin-bottom: 32px; }

@@ -26,25 +26,21 @@ export default function Sobre() {
       {/* Nossa história */}
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <div className="two-col">
-            <div>
-              <Reveal>
-                <SectionLabel>// nossa história</SectionLabel>
-              </Reveal>
-            </div>
-            <div className="text">
-              <Reveal>
-                <p>
-                  Nascemos da frustração de quem vive o mercado tech brasileiro. Boilerplate genérico que assume Stripe. Vagas com &quot;salário a combinar&quot;. Ferramentas em inglês com docs que ninguém traduz. Suporte que demora 3 dias pra responder uma issue.
-                </p>
-                <p>
-                  Decidimos construir o que gostaríamos de ter. Produto por produto. Do zero. Em português. Cada lançamento é uma resposta a uma dor real que a gente também sentiu como dev.
-                </p>
-                <p>
-                  Começamos em 2025 com dois produtos no ar: um boilerplate SaaS feito pra mercado brasileiro e um job board onde salário é obrigatório. Mais chegando — sem promessa, sem data, só quando estiver pronto.
-                </p>
-              </Reveal>
-            </div>
+          <Reveal>
+            <SectionLabel>// nossa história</SectionLabel>
+          </Reveal>
+          <div className="text" style={{ marginTop: 24, maxWidth: 720 }}>
+            <Reveal>
+              <p>
+                Nascemos da frustração de quem vive o mercado tech brasileiro. Boilerplate genérico que assume Stripe. Vagas com &quot;salário a combinar&quot;. Ferramentas em inglês com docs que ninguém traduz. Suporte que demora 3 dias pra responder uma issue.
+              </p>
+              <p>
+                Decidimos construir o que gostaríamos de ter. Produto por produto. Do zero. Em português. Cada lançamento é uma resposta a uma dor real que a gente também sentiu como dev.
+              </p>
+              <p>
+                Começamos em 2025 com dois produtos no ar: um boilerplate SaaS feito pra mercado brasileiro e um job board onde salário é obrigatório. Mais chegando — sem promessa, sem data, só quando estiver pronto.
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>

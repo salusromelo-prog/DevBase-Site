@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Reveal from '@/components/reveal'
-import Pill from '@/components/pill'
 import SectionLabel from '@/components/section-label'
 import ProductCard from '@/components/product-card'
 import StatCard from '@/components/stat-card'
@@ -19,9 +18,6 @@ export default function Home() {
           <span className="a3" />
         </div>
         <div className="wrap">
-          <Reveal className="flex justify-center">
-            <Pill>devbase — v1 · 2025</Pill>
-          </Reveal>
           <Reveal>
             <h1>
               Ferramentas para
@@ -39,7 +35,7 @@ export default function Home() {
               <Link href="/produtos" className="btn btn-primary">
                 Conhecer produtos <span className="arrow">→</span>
               </Link>
-              <a href="https://devbase.jobs" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+              <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
                 DevBase Jobs
               </a>
             </div>
@@ -141,7 +137,7 @@ export default function Home() {
                   'Pagar.me · PIX · boleto · cartão',
                   'Dashboard e painel admin',
                 ]}
-                price="R$ 297"
+                price="R$ 147"
                 priceColor="green"
                 priceLabel="pagamento único · vitalício"
                 ctaLabel="Comprar"
@@ -164,7 +160,7 @@ export default function Home() {
                 priceColor="indigo"
                 priceLabel="em beta · sempre gratuito"
                 ctaLabel="Acessar"
-                ctaHref="https://devbase.jobs"
+                ctaHref="https://dev-base-jobs.vercel.app"
                 ctaExternal
               />
             </Reveal>

@@ -41,7 +41,7 @@ export default function Produtos() {
                   'Deploy na Vercel com 1 clique',
                   'Documentação 100% em PT-BR',
                 ]}
-                price="R$ 297"
+                price="R$ 147"
                 priceColor="green"
                 priceLabel="pagamento único · acesso vitalício"
                 ctaLabel="Comprar agora"
@@ -66,7 +66,7 @@ export default function Produtos() {
                 priceColor="indigo"
                 priceLabel="em beta · sempre gratuito pra devs"
                 ctaLabel="Acessar"
-                ctaHref="https://devbase.jobs"
+                ctaHref="https://dev-base-jobs.vercel.app"
                 ctaExternal
               />
             </Reveal>
