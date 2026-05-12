@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>DevBase — Ferramentas para devs brasileiros</title>
+<meta name="description" content="DevBase constrói ferramentas para desenvolvedores brasileiros: boilerplate SaaS pronto e job board com salário obrigatório." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="fx.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="#/home" data-route-link="home" class="logo" aria-label="dev/base">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none">
+          <rect width="64" height="64" rx="12" fill="#6366f1"/>
+          <path d="M32 12 L50 22 L32 32 L14 22 Z" fill="#fff"/>
+          <path d="M14 22 L32 32 L32 50 L14 40 Z" fill="#fff" opacity=".85"/>
+          <path d="M50 22 L32 32 L32 50 L50 40 Z" fill="#fff" opacity=".55"/>
+          <line x1="12" y1="55" x2="52" y2="55" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+        </svg>
+      </span>
+      <span class="logo-text">dev<span class="slash">/</span>base</span>
+    </a>
+    <div class="nav-links">
+      <a href="#/produtos" data-route-link="produtos" data-route="produtos" class="nav-link">Produtos</a>
+      <a href="#/sobre" data-route-link="sobre" data-route="sobre" class="nav-link">Sobre</a>
+    </div>
+    <div class="nav-cta">
+      <a href="https://devbase.jobs" target="_blank" rel="noopener" class="btn btn-ghost">DevBase Jobs</a>
+      <a href="#/produtos" data-route-link="produtos" class="btn btn-primary">Ver produtos <span class="arrow">→</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================
+     MAIN — pages
+============================================================ -->
+<main class="page">
+
+<!-- ===== HOME =========================================== -->
+<div class="page-view" data-route="home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+    <div class="wrap">
+      <h1 class="reveal">Ferramentas para<br/><span class="accent">devs brasileiros.</span></h1>
+      <p class="sub reveal">Construímos o que o dev BR precisa — sem documentação em inglês, sem preço em dólar, sem suporte que ignora.</p>
+      <div class="cta-row reveal">
+        <a href="#/produtos" data-route-link="produtos" class="btn btn-primary">Conhecer produtos <span class="arrow">→</span></a>
+        <a href="https://devbase.jobs" target="_blank" rel="noopener" class="btn btn-ghost">DevBase Jobs</a>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><div class="k" data-count="2"></div><div class="v">produtos ativos</div></div>
+        <div class="stat"><div class="k">BR</div><div class="v">feito por devs BR</div></div>
+        <div class="stat"><div class="k" data-count="100" data-suffix="%"></div><div class="v">em português</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="dot"></span>Next.js 14</span>
+      <span class="marquee-item"><span class="dot"></span>TypeScript</span>
+      <span class="marquee-item"><span class="dot"></span>Supabase</span>
+      <span class="marquee-item"><span class="dot"></span>Pagar.me</span>
+      <span class="marquee-item"><span class="dot"></span>Tailwind CSS</span>
+      <span class="marquee-item"><span class="dot"></span>Resend</span>
+      <span class="marquee-item"><span class="dot"></span>Vercel</span>
+      <span class="marquee-item"><span class="dot"></span>PIX · boleto · cartão</span>
+      <!-- duplicate for seamless loop -->
+      <span class="marquee-item"><span class="dot"></span>Next.js 14</span>
+      <span class="marquee-item"><span class="dot"></span>TypeScript</span>
+      <span class="marquee-item"><span class="dot"></span>Supabase</span>
+      <span class="marquee-item"><span class="dot"></span>Pagar.me</span>
+      <span class="marquee-item"><span class="dot"></span>Tailwind CSS</span>
+      <span class="marquee-item"><span class="dot"></span>Resend</span>
+      <span class="marquee-item"><span class="dot"></span>Vercel</span>
+      <span class="marquee-item"><span class="dot"></span>PIX · boleto · cartão</span>
+    </div>
+  </div>
+
+  <!-- Por que existimos -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-label">// por que existimos</span>
+        <h2>O dev brasileiro merece ferramentas feitas pra ele.</h2>
+        <p>Não adaptações mal traduzidas. Produtos que entendem nossa realidade.</p>
+      </div>
+      <div class="grid-3 stagger reveal">
+        <div class="feat">
+          <div class="ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 9c0-1.1.9-2 2-2h2a2 2 0 0 1 0 4h-2a2 2 0 0 0 0 4h2c1.1 0 2-.9 2-2"/><path d="M12 6v1M12 17v1"/></svg>
+          </div>
+          <h3>Preço em real</h3>
+          <p>Sem conversão de dólar, sem IOF, sem surpresa no cartão. Pagamento único em PIX, boleto ou cartão.</p>
+        </div>
+        <div class="feat">
+          <div class="ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h3>Docs em português</h3>
+          <p>Tutoriais, exemplos e suporte 100% em PT-BR. Você não precisa traduzir nada pra começar.</p>
+        </div>
+        <div class="feat">
+          <div class="ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>Feito pra nossa stack</h3>
+          <p>Pagar.me, Asaas, Mercado Pago, Next.js e Supabase já integrados. Nada de gambiarra pra fazer funcionar no Brasil.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nossos produtos -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-label">// nossos produtos</span>
+        <h2>O que construímos até agora.</h2>
+        <p>Dois produtos no ar. Mais chegando.</p>
+      </div>
+      <div class="products-grid">
+        <article class="product reveal">
+          <div><span class="badge badge-live">● ao vivo</span></div>
+          <h3>DevBase Boilerplate</h3>
+          <p class="desc">Boilerplate SaaS pronto pro mercado brasileiro. Auth, pagamentos em PIX/boleto/cartão, dashboard e deploy — tudo configurado.</p>
+          <ul>
+            <li>Next.js 14 + TypeScript + Tailwind</li>
+            <li>Auth com Supabase</li>
+            <li>Pagar.me · PIX · boleto · cartão</li>
+            <li>Dashboard e painel admin</li>
+          </ul>
+          <div class="ft">
+            <div class="price"><span class="big green">R$ 297</span><span class="small">pagamento único · vitalício</span></div>
+            <a href="#/produtos" data-route-link="produtos" class="btn btn-primary">Comprar <span class="arrow">→</span></a>
+          </div>
+        </article>
+        <article class="product reveal scale">
+          <div><span class="badge badge-beta">◉ beta</span></div>
+          <h3>DevBase Jobs</h3>
+          <p class="desc">Job board para devs brasileiros. Salário obrigatório em toda vaga, stack real e remoto verificado.</p>
+          <ul>
+            <li>Salário sempre visível</li>
+            <li>Stack real do dia a dia</li>
+            <li>Remoto verificado</li>
+            <li>Alertas por e-mail</li>
+          </ul>
+          <div class="ft">
+            <div class="price"><span class="big indigo">Grátis</span><span class="small">em beta · sempre gratuito</span></div>
+            <a href="https://devbase.jobs" target="_blank" rel="noopener" class="btn btn-primary">Acessar <span class="arrow">→</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quem somos -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-label">// quem somos</span>
+        <h2>Três devs de Goiânia. Construindo do zero.</h2>
+        <p>Sem investidor, sem escritório, sem frescura.</p>
+      </div>
+      <div class="two-col">
+        <div class="text reveal">
+          <p>A DevBase nasceu da frustração de quem vive o mercado tech brasileiro. Boilerplate genérico que ignora pagamento em real. Vagas sem salário. Ferramentas em inglês com suporte que demora 3 dias pra responder.</p>
+          <p>Decidimos construir o que gostaríamos de ter. Produto por produto. Do zero. Em português. <strong style="color:#fff;">Samuel</strong>, <strong style="color:#fff;">Isaque</strong> e <strong style="color:#fff;">Daniel</strong> tocam tudo — código, design, suporte, conteúdo.</p>
+          <p>Começamos em 2025 com dois produtos no ar e uma promessa simples: lançamos coisa pronta. Não vendemos promessa.</p>
+        </div>
+        <div class="stats-col reveal">
+          <div class="stat-card">
+            <span class="label">Fundada em</span>
+            <span class="v">2025</span>
+            <span class="meta">Goiânia · GO</span>
+          </div>
+          <div class="stat-card">
+            <span class="label">Time</span>
+            <span class="v">3 fundadores</span>
+            <span class="meta">Samuel · Isaque · Daniel</span>
+          </div>
+          <div class="stat-card">
+            <span class="label">Foco</span>
+            <span class="v">Devs BR</span>
+            <span class="meta">Ferramentas para o mercado brasileiro</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sua dor como dev -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head centered reveal">
+        <span class="section-label">// sua dor como dev</span>
+        <h2>Qual é o seu maior problema como dev brasileiro?</h2>
+        <p>Sua resposta vira o nosso próximo produto.</p>
+      </div>
+      <div class="pain-card reveal">
+        <form>
+          <div class="chip-grid">
+            <div class="chip"><span class="tick"></span>Perco horas em setup/boilerplate</div>
+            <div class="chip"><span class="tick"></span>Vagas sem salário visível</div>
+            <div class="chip"><span class="tick"></span>Ferramentas só em inglês</div>
+            <div class="chip"><span class="tick"></span>Pagamentos BR complicados</div>
+            <div class="chip"><span class="tick"></span>Documentação ruim ou em inglês</div>
+            <div class="chip"><span class="tick"></span>Suporte que não responde</div>
+          </div>
+          <textarea placeholder="Ou descreve com suas palavras..."></textarea>
+          <div class="field-row">
+            <input type="email" placeholder="seu e-mail (opcional)" />
+            <button type="submit" class="btn btn-primary">Enviar sugestão <span class="arrow">→</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section">
+    <div class="wrap">
+      <div class="newsletter reveal">
+        <span class="section-label">// fique por dentro</span>
+        <h2>Novos produtos em breve.</h2>
+        <p>Deixa seu e-mail e avisamos quando lançarmos algo novo. Sem spam.</p>
+        <form class="inline-input">
+          <input type="email" placeholder="seu@email.com" required />
+          <button type="submit">Me avisar <span class="arrow">→</span></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /home -->
+
+
+<!-- ===== PRODUTOS ======================================= -->
+<div class="page-view" data-route="produtos" style="display:none;">
+  <header class="page-head">
+    <div class="wrap">
+      <span class="section-label reveal">// produtos</span>
+      <h1 class="reveal">O que construímos.</h1>
+      <p class="sub reveal">Produtos avulsos. Pagamento único ou gratuito. Sem assinatura.</p>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="products-grid">
+        <article class="product reveal">
+          <div><span class="badge badge-live">● ao vivo</span></div>
+          <h3>DevBase Boilerplate</h3>
+          <p class="desc">Boilerplate SaaS pronto pro mercado brasileiro. Auth, pagamentos, dashboard, painel admin e deploy — tudo configurado. Você foca no produto.</p>
+          <ul>
+            <li>Next.js 14 + TypeScript + Tailwind CSS</li>
+            <li>Auth completo com Supabase</li>
+            <li>Pagar.me: PIX, boleto e cartão</li>
+            <li>Dashboard com métricas</li>
+            <li>Painel admin completo</li>
+            <li>E-mail transacional com Resend</li>
+            <li>Deploy na Vercel com 1 clique</li>
+            <li>Documentação 100% em PT-BR</li>
+          </ul>
+          <div class="ft">
+            <div class="price"><span class="big green">R$ 297</span><span class="small">pagamento único · acesso vitalício</span></div>
+            <a href="https://saas-kit-br-salusromelo-progs-projects.vercel.app" target="_blank" rel="noopener" class="btn btn-primary">Comprar agora <span class="arrow">→</span></a>
+          </div>
+        </article>
+        <article class="product reveal">
+          <div><span class="badge badge-beta">◉ beta gratuito</span></div>
+          <h3>DevBase Jobs</h3>
+          <p class="desc">Job board pra dev brasileiro. Sem vaga fake, sem "salário a combinar", sem stack inflada. Transparência por padrão.</p>
+          <ul>
+            <li>Salário obrigatório em toda vaga</li>
+            <li>Stack real do dia a dia</li>
+            <li>Remoto verificado</li>
+            <li>Alertas por e-mail da sua stack</li>
+            <li>Publicação de vaga grátis pra empresas</li>
+          </ul>
+          <div class="ft">
+            <div class="price"><span class="big indigo">Grátis</span><span class="small">em beta · sempre gratuito pra devs</span></div>
+            <a href="https://devbase.jobs" target="_blank" rel="noopener" class="btn btn-primary">Acessar <span class="arrow">→</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</div><!-- /produtos -->
+
+
+<!-- ===== SOBRE ========================================== -->
+<div class="page-view" data-route="sobre" style="display:none;">
+  <header class="page-head">
+    <div class="wrap">
+      <span class="section-label reveal">// sobre a DevBase</span>
+      <h1 class="reveal">Três devs de Goiânia. Construindo do zero.</h1>
+      <p class="sub reveal">Sem investidor, sem escritório, sem frescura.</p>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="two-col reveal">
+        <div>
+          <span class="section-label">// nossa história</span>
+        </div>
+        <div class="text">
+          <p>Nascemos da frustração de quem vive o mercado tech brasileiro. Boilerplate genérico que assume Stripe. Vagas com "salário a combinar". Ferramentas em inglês com docs que ninguém traduz. Suporte que demora 3 dias pra responder uma issue.</p>
+          <p>Decidimos construir o que gostaríamos de ter. Produto por produto. Do zero. Em português. Cada lançamento é uma resposta a uma dor real que a gente também sentiu como dev.</p>
+          <p>Começamos em 2025 com dois produtos no ar: um boilerplate SaaS feito pra mercado brasileiro e um job board onde salário é obrigatório. Mais chegando — sem promessa, sem data, só quando estiver pronto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal" style="text-align:center; margin-left:auto; margin-right:auto;">
+        <span class="section-label">// o time</span>
+        <h2>Quem está construindo.</h2>
+      </div>
+      <div class="team-grid">
+        <div class="member reveal">
+          <div class="avatar">SL</div>
+          <div class="name">Samuel Lustosa Rodrigues Melo</div>
+          <div class="role">founder · dev</div>
+        </div>
+        <div class="member reveal">
+          <div class="avatar">IL</div>
+          <div class="name">Isaque Lustosa Rodrigues Melo</div>
+          <div class="role">co-founder</div>
+        </div>
+        <div class="member reveal">
+          <div class="avatar">DO</div>
+          <div class="name">Daniel de Oliveira Pimenta Melo</div>
+          <div class="role">co-founder</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-label">// nossos valores</span>
+        <h2>Três regras. Nenhuma negociável.</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value reveal">
+          <div class="num">01</div>
+          <h3>Transparência acima de tudo</h3>
+          <p>Preço visível, stack real, salário obrigatório. Nenhum produto nosso esconde o que importa.</p>
+        </div>
+        <div class="value reveal">
+          <div class="num">02</div>
+          <h3>Português primeiro</h3>
+          <p>Documentação, suporte e produto em PT-BR. O dev BR não precisa traduzir pra usar ferramenta boa.</p>
+        </div>
+        <div class="value reveal">
+          <div class="num">03</div>
+          <h3>Real antes de escala</h3>
+          <p>Não lançamos promessa. Lançamos produto. Sem "em breve" sem data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /sobre -->
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-left">
+      <span class="logo sm">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <rect width="64" height="64" rx="12" fill="#6366f1"/>
+            <path d="M32 12 L50 22 L32 32 L14 22 Z" fill="#fff"/>
+            <path d="M14 22 L32 32 L32 50 L14 40 Z" fill="#fff" opacity=".85"/>
+            <path d="M50 22 L32 32 L32 50 L50 40 Z" fill="#fff" opacity=".55"/>
+            <line x1="12" y1="55" x2="52" y2="55" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+          </svg>
+        </span>
+        <span class="logo-text">dev<span class="slash">/</span>base</span>
+      </span>
+      <span>· feito no Brasil 🇧🇷</span>
+    </div>
+    <div class="footer-center">
+      <a href="#/produtos" data-route-link="produtos">Produtos</a>
+      <a href="https://devbase.jobs" target="_blank" rel="noopener">Jobs</a>
+      <a href="#/sobre" data-route-link="sobre">Sobre</a>
+    </div>
+    <div class="legal">© 2025 DevBase</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script src="fx.js"></script>
+</body>
+</html>

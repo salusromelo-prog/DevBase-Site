@@ -1,0 +1,248 @@
+/* DevBase — premium FX layer
+   Loaded after styles.css to layer effects without rewriting base styles */
+
+/* ===== Scroll progress bar ================================ */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px;
+  z-index: 100; pointer-events: none;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transform-origin: left center;
+  transform: scaleX(var(--sp, 0));
+  transition: transform .08s linear;
+  box-shadow: 0 0 12px rgba(99,102,241,0.6);
+}
+
+/* ===== Animated aurora background ========================= */
+@keyframes aurora-drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(40px, -30px, 0) scale(1.08); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+}
+.aurora {
+  position: fixed; inset: -10% -10% auto auto;
+  width: 70vw; height: 70vw; max-width: 900px; max-height: 900px;
+  background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 65%);
+  filter: blur(40px); pointer-events: none; z-index: 0;
+  animation: aurora-drift 22s ease-in-out infinite;
+}
+.aurora.b {
+  inset: auto auto -10% -10%;
+  background: radial-gradient(circle, rgba(129,140,248,0.10) 0%, transparent 65%);
+  animation-duration: 28s; animation-delay: -8s;
+}
+
+/* ===== Hero cursor spotlight ============================== */
+.hero { isolation: isolate; }
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 30%),
+    rgba(99,102,241,0.10), transparent 40%
+  );
+  opacity: 0; transition: opacity .35s ease;
+  z-index: -1;
+}
+.hero:hover::after { opacity: 1; }
+
+/* ===== Headline shine on load ============================= */
+@keyframes shine {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.hero h1 .accent {
+  background: linear-gradient(90deg,
+    var(--accent) 0%,
+    var(--accent-light) 40%,
+    #fff 50%,
+    var(--accent-light) 60%,
+    var(--accent) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 6s linear infinite;
+}
+
+/* ===== Primary button sheen =============================== */
+.btn-primary { position: relative; overflow: hidden; isolation: isolate; }
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(120deg,
+    transparent 30%,
+    rgba(255,255,255,0.22) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform .7s ease;
+  pointer-events: none;
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+
+/* gradient ring on focus / hover */
+.btn-primary::after {
+  content: '';
+  position: absolute; inset: -2px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-light), var(--accent), var(--accent-deep));
+  z-index: -1; opacity: 0;
+  transition: opacity .2s ease;
+}
+.btn-primary:hover::after { opacity: 0.6; filter: blur(8px); }
+
+/* ===== Pill — subtle glow ================================= */
+.pill { position: relative; }
+.pill::before {
+  content: ''; position: absolute; inset: 0; border-radius: 999px;
+  box-shadow: 0 0 30px rgba(99,102,241,0.15);
+  pointer-events: none;
+}
+
+/* ===== Stats — counter style ============================== */
+.stat .k { font-variant-numeric: tabular-nums; }
+
+/* ===== Section labels — animated caret =================== */
+.section-label::before {
+  content: ''; display: inline-block;
+  width: 6px; height: 6px; background: var(--accent);
+  margin-right: 8px; vertical-align: middle;
+  animation: blink 1.4s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 60%, 100% { opacity: 1; }
+  30% { opacity: 0.2; }
+}
+/* Tighten — already had `//` prefix in text; replace dot with caret bar */
+.section-label { position: relative; }
+
+/* ===== Product cards — 3D tilt + glow ===================== */
+.product {
+  transform-style: preserve-3d;
+  transition: border-color .25s ease, transform .15s ease, box-shadow .25s ease;
+  will-change: transform;
+}
+.product.tilt {
+  transform:
+    perspective(900px)
+    rotateX(var(--ry, 0deg))
+    rotateY(var(--rx, 0deg))
+    translateZ(0);
+  box-shadow:
+    0 30px 60px -30px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(99,102,241,0.18);
+}
+.product .ft, .product h3 { transform: translateZ(20px); }
+.product ul { transform: translateZ(10px); }
+
+/* Spotlight on product card following cursor */
+.product::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(
+    400px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(99,102,241,0.13), transparent 40%
+  );
+  opacity: 0; transition: opacity .25s ease;
+  pointer-events: none; z-index: 0; border-radius: inherit;
+}
+.product:hover::before { opacity: 1; }
+
+/* ===== Feature cards — icon hover ========================= */
+.feat .ico { transition: transform .3s cubic-bezier(.34,1.56,.64,1), background .25s ease; }
+.feat:hover .ico {
+  transform: translateY(-3px) rotate(-4deg);
+  background: rgba(99,102,241,0.18);
+}
+
+/* ===== Magnetic hover for buttons ========================= */
+.btn { will-change: transform; transition: background .15s ease, border-color .15s ease, transform .18s cubic-bezier(.34,1.56,.64,1); }
+
+/* ===== Stagger reveal — children of .stagger ============= */
+.stagger > .reveal { transition-delay: calc(var(--i, 0) * 80ms); }
+
+/* ===== Tech marquee ======================================= */
+.marquee {
+  position: relative; overflow: hidden;
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+  background: rgba(255,255,255,0.012);
+  padding: 22px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.marquee-track {
+  display: flex; gap: 56px; width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee-item {
+  font-family: var(--mono); font-size: 14px;
+  color: var(--text-2); letter-spacing: -0.2px;
+  display: inline-flex; align-items: center; gap: 10px;
+  white-space: nowrap;
+}
+.marquee-item .dot {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ===== Reveal — better entry curve + variants ============ */
+.reveal { transition: opacity .7s cubic-bezier(.2,.65,.2,1), transform .7s cubic-bezier(.2,.65,.2,1); }
+.reveal.from-left  { transform: translate(-18px, 0); }
+.reveal.from-right { transform: translate(18px, 0); }
+.reveal.scale      { transform: scale(.96); }
+.reveal.in.from-left, .reveal.in.from-right, .reveal.in.scale { transform: none; }
+
+/* ===== Logo mark — subtle hover lift ===================== */
+.logo { transition: transform .25s ease; }
+.logo:hover { transform: translateY(-1px); }
+.logo-mark { transition: filter .3s ease, transform .3s ease; }
+.logo:hover .logo-mark { filter: drop-shadow(0 6px 22px rgba(99,102,241,0.55)); }
+
+/* ===== Nav — link active indicator improvement =========== */
+.nav-link::after {
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  height: 1.5px;
+}
+
+/* ===== Chips — gentle press ============================== */
+.chip { transition: border-color .15s ease, background .15s ease, color .15s ease, transform .12s ease; }
+.chip:active { transform: scale(.98); }
+.chip.on { box-shadow: 0 0 0 3px rgba(99,102,241,0.08); }
+
+/* ===== Forms — focus glow ================================ */
+textarea:focus, input[type="email"]:focus, .inline-input:focus-within {
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.10);
+}
+
+/* ===== Footer — subtle top gradient ====================== */
+.footer { position: relative; }
+.footer::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99,102,241,0.4), transparent);
+}
+
+/* ===== Reduced motion ==================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+  }
+  .aurora { animation: none; }
+  .hero h1 .accent { -webkit-text-fill-color: var(--accent); }
+}
+
+/* ===== Mobile — disable heavy effects ==================== */
+@media (max-width: 880px) {
+  .aurora { opacity: 0.6; }
+  .product.tilt { transform: none; }
+  .product::before { display: none; }
+  .marquee-track { animation-duration: 28s; gap: 36px; }
+}
