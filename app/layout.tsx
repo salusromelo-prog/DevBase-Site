@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   title: 'DevBase — Ferramentas para devs brasileiros',
   description:
     'DevBase constrói ferramentas para desenvolvedores brasileiros: boilerplate SaaS pronto e job board com salário obrigatório.',
-  metadataBase: new URL('https://devbase.com.br'),
+  metadataBase: new URL('https://devbase.tools'),
   openGraph: {
     title: 'DevBase',
     description: 'Ferramentas para devs brasileiros.',
