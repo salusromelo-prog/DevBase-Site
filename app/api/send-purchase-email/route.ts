@@ -121,6 +121,7 @@ export async function POST(request: NextRequest) {
   const { error } = await resend.emails.send({
     from: 'DevBase <contato@devbase.tools>',
     to: email,
+    replyTo: 'devbasebr@gmail.com',
     subject: 'Seu DevBase Boilerplate está pronto 🚀',
     html: BOILERPLATE_HTML,
   })
