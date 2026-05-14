@@ -1,8 +1,9 @@
-type BadgeVariant = 'live' | 'beta'
+type BadgeVariant = 'live' | 'beta' | 'combo'
 
 const VARIANTS: Record<BadgeVariant, string> = {
-  live: 'badge badge-live',
-  beta: 'badge badge-beta',
+  live:  'badge badge-live',
+  beta:  'badge badge-beta',
+  combo: 'badge badge-combo',
 }
 
 export default function Badge({ variant, children }: { variant: BadgeVariant; children: React.ReactNode }) {

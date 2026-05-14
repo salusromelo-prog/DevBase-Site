@@ -24,7 +24,7 @@ export default function Produtos() {
 
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <div className="products-grid">
+          <div className="products-grid products-grid-3">
             <Reveal>
               <ProductCard
                 badge="live"
@@ -52,6 +52,29 @@ export default function Produtos() {
             </Reveal>
             <Reveal>
               <ProductCard
+                badge="live"
+                badgeLabel="● ao vivo"
+                title="DevBase Components"
+                desc="Kit de componentes React prontos para o mercado brasileiro. CPF, CNPJ, CEP, PIX, parcelamento e cartão — sem dependências pesadas."
+                features={[
+                  'CPF/CNPJ Input com validação automática',
+                  'CEP Input com busca via ViaCEP',
+                  'Telefone com máscara (celular e fixo)',
+                  'Seletor de Banco (20 bancos BR)',
+                  'Pix Button com QR Code e copia-e-cola',
+                  'Parcelamento Select com fórmula Price',
+                  'Cartão de Crédito Form com validação Luhn',
+                ]}
+                price="R$ 67"
+                priceColor="green"
+                priceLabel="acesso vitalício · TypeScript + Tailwind"
+                ctaLabel="Comprar agora"
+                ctaHref="https://pay.kiwify.com.br/7OQNJ1C"
+                ctaExternal
+              />
+            </Reveal>
+            <Reveal>
+              <ProductCard
                 badge="beta"
                 badgeLabel="◉ beta gratuito"
                 title="DevBase Jobs"
@@ -69,6 +92,35 @@ export default function Produtos() {
                 ctaLabel="Acessar"
                 ctaHref="https://dev-base-jobs.vercel.app"
                 ctaExternal
+              />
+            </Reveal>
+          </div>
+
+          <div className="combo-wrap">
+            <Reveal>
+              <ProductCard
+                badge="combo"
+                badgeLabel="◈ combo"
+                title="Boilerplate + Components"
+                desc="Os dois produtos juntos com desconto. Tudo que você precisa pra lançar um SaaS brasileiro do zero — estrutura completa e componentes prontos."
+                features={[
+                  'Tudo do DevBase Boilerplate',
+                  'Next.js 14 + TypeScript + Tailwind CSS',
+                  'Auth, pagamentos, dashboard e painel admin',
+                  'Tudo do DevBase Components',
+                  'CPF/CNPJ, CEP, Telefone, PIX e Cartão',
+                  'Parcelamento com fórmula Price',
+                  'Documentação 100% em PT-BR',
+                  'Acesso vitalício a ambos os produtos',
+                ]}
+                price="R$ 197"
+                priceOld="R$ 214"
+                priceColor="gold"
+                priceLabel="combo · economia de R$ 17"
+                ctaLabel="Comprar combo"
+                ctaHref="https://pay.kiwify.com.br/d4yYNFy"
+                ctaExternal
+                highlight
               />
             </Reveal>
           </div>

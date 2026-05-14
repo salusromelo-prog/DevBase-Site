@@ -7,13 +7,14 @@ interface ProductCardProps {
   features: string[]
   price: string
   priceOld?: string
-  priceColor: 'green' | 'indigo'
+  priceColor: 'green' | 'indigo' | 'gold'
   priceLabel: string
   ctaLabel: string
   ctaHref: string
   ctaExternal?: boolean
-  badge: 'live' | 'beta'
+  badge: 'live' | 'beta' | 'combo'
   badgeLabel: string
+  highlight?: boolean
 }
 
 export default function ProductCard({
@@ -29,9 +30,10 @@ export default function ProductCard({
   ctaExternal,
   badge,
   badgeLabel,
+  highlight,
 }: ProductCardProps) {
   return (
-    <article className="product">
+    <article className={`product${highlight ? ' product-highlight' : ''}`}>
       <div>
         <Badge variant={badge}>{badgeLabel}</Badge>
       </div>
