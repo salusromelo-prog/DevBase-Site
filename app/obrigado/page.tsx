@@ -19,7 +19,7 @@ const PRODUTOS: Record<Produto, ProdutoConfig> = {
     subtitulo: 'Seu DevBase Boilerplate está pronto.',
     texto: 'Clique no botão abaixo para baixar o ZIP com todo o código, documentação e instruções de setup.',
     botaoLabel: 'Baixar Boilerplate →',
-    botaoHref: '#',
+    botaoHref: 'https://drive.google.com/uc?export=download&id=18JQJQJHe3nMjAwnpq4Chny2jJmR5S7wd',
   },
   'kit-componentes': {
     subtitulo: 'Seu Kit de Componentes BR está pronto.',
@@ -167,6 +167,8 @@ function ObrigadoContent() {
               <>
                 <a
                   href={config.botaoHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-primary"
                   style={{ marginTop: 20, width: '100%', justifyContent: 'center' }}
                 >
