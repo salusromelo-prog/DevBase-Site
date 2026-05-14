@@ -34,7 +34,7 @@ const PRODUTOS: Record<Produto, ProdutoConfig> = {
     subtitulo: 'Seu Kit de Componentes BR está pronto.',
     texto: 'Clique no botão abaixo para baixar o ZIP com todos os componentes e documentação.',
     botaoLabel: 'Baixar Kit →',
-    botaoHref: '#',
+    botaoHref: 'https://drive.google.com/file/d/1YzibsQeuNNA_-NfDN56viJRf71XSBDQ_/view?usp=sharing',
   },
 }
 
