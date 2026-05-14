@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Reveal from '@/components/reveal'
 
-type Produto = 'boilerplate' | 'kit-componentes'
+type Produto = 'boilerplate' | 'kit-componentes' | 'combo'
 
 interface ProdutoConfig {
   subtitulo: string
@@ -35,6 +35,20 @@ const PRODUTOS: Record<Produto, ProdutoConfig> = {
     texto: 'Clique no botão abaixo para baixar o ZIP com todos os componentes e documentação.',
     botaoLabel: 'Baixar Kit →',
     botaoHref: 'https://drive.google.com/file/d/1YzibsQeuNNA_-NfDN56viJRf71XSBDQ_/view?usp=sharing',
+  },
+  combo: {
+    subtitulo: 'Seu combo Boilerplate + Components está pronto.',
+    texto: 'Clique nos botões abaixo para baixar os dois ZIPs — o Boilerplate e o Kit de Componentes BR.',
+    botaoLabel: 'Baixar Boilerplate →',
+    botaoHref: 'https://drive.google.com/uc?export=download&id=18JQJQJHe3nMjAwnpq4Chny2jJmR5S7wd',
+    instrucoes: [
+      "Baixe os dois arquivos acima",
+      "Extraia cada ZIP em sua respectiva pasta",
+      "Copie o .env.example do Boilerplate para .env.local e preencha suas chaves",
+      "Rode npm install e depois npm run dev no Boilerplate",
+      "Copie a pasta kit-componentes-br para dentro do seu projeto",
+      "Acesse http://localhost:3000 — seu SaaS está no ar com os componentes prontos",
+    ],
   },
 }
 
@@ -196,6 +210,19 @@ function ObrigadoContent() {
                   <DownloadIcon />
                   {config.botaoLabel}
                 </a>
+
+                {produto === 'combo' && (
+                  <a
+                    href="https://drive.google.com/file/d/1YzibsQeuNNA_-NfDN56viJRf71XSBDQ_/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                    style={{ marginTop: 10, width: '100%', justifyContent: 'center' }}
+                  >
+                    <DownloadIcon />
+                    Baixar Components →
+                  </a>
+                )}
 
                 {config.instrucoes && (
                   <div style={{ marginTop: 24 }}>
