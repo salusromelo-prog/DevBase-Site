@@ -118,7 +118,7 @@ export default function Produtos() {
                 priceColor="gold"
                 priceLabel="combo · economia de R$ 17"
                 ctaLabel="Comprar combo"
-                ctaHref="https://pay.kiwify.com.br/d4yYNFy"
+                ctaHref="https://pay.kiwify.com.br/Y6jViIR"
                 ctaExternal
                 highlight
               />
