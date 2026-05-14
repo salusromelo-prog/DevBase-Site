@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Reveal from '@/components/reveal'
@@ -65,6 +65,18 @@ function ObrigadoContent() {
   const searchParams = useSearchParams()
   const produto = searchParams.get('produto') as Produto | null
   const config = produto ? (PRODUTOS[produto] ?? null) : null
+  const emailSent = useRef(false)
+
+  useEffect(() => {
+    const email = searchParams.get('customer_email')
+    if (!email || !produto || emailSent.current) return
+    emailSent.current = true
+    fetch('/api/send-purchase-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, produto }),
+    }).catch(() => {})
+  }, [searchParams, produto])
 
   return (
     <div
