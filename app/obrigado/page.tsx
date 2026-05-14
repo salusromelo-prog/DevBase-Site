@@ -35,6 +35,13 @@ const PRODUTOS: Record<Produto, ProdutoConfig> = {
     texto: 'Clique no botão abaixo para baixar o ZIP com todos os componentes e documentação.',
     botaoLabel: 'Baixar Kit →',
     botaoHref: 'https://drive.google.com/file/d/1YzibsQeuNNA_-NfDN56viJRf71XSBDQ_/view?usp=sharing',
+    instrucoes: [
+      "Clique em 'Baixar Kit' acima — o download começa automaticamente",
+      "Copie a pasta kit-componentes-br para dentro do seu projeto Next.js",
+      "Rode npm install para instalar as dependências do seu projeto",
+      "Para usar o PixButton, instale também: npm install qrcode.react",
+      "Importe os componentes direto de kit-componentes-br — sem configuração extra",
+    ],
   },
   combo: {
     subtitulo: 'Seu combo Boilerplate + Components está pronto.',
