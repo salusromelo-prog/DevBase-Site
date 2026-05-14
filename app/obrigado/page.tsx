@@ -12,6 +12,7 @@ interface ProdutoConfig {
   texto: string
   botaoLabel: string
   botaoHref: string
+  instrucoes?: string[]
 }
 
 const PRODUTOS: Record<Produto, ProdutoConfig> = {
@@ -20,6 +21,14 @@ const PRODUTOS: Record<Produto, ProdutoConfig> = {
     texto: 'Clique no botão abaixo para baixar o ZIP com todo o código, documentação e instruções de setup.',
     botaoLabel: 'Baixar Boilerplate →',
     botaoHref: 'https://drive.google.com/uc?export=download&id=18JQJQJHe3nMjAwnpq4Chny2jJmR5S7wd',
+    instrucoes: [
+      "Clique em 'Baixar Boilerplate' acima — o download começa automaticamente",
+      'Extraia o arquivo ZIP em uma pasta do seu projeto',
+      'Copie o arquivo .env.example para .env.local e preencha suas chaves',
+      'Rode npm install e depois npm run dev',
+      'Acesse http://localhost:3000 — seu SaaS está no ar',
+      'Personalize à vontade — o código é todo seu',
+    ],
   },
   'kit-componentes': {
     subtitulo: 'Seu Kit de Componentes BR está pronto.',
@@ -175,6 +184,39 @@ function ObrigadoContent() {
                   <DownloadIcon />
                   {config.botaoLabel}
                 </a>
+
+                {config.instrucoes && (
+                  <div style={{ marginTop: 24 }}>
+                    <span
+                      style={{
+                        display: 'block',
+                        fontFamily: 'var(--mono)',
+                        fontSize: 11,
+                        letterSpacing: '0.1em',
+                        color: '#6366f1',
+                        marginBottom: 12,
+                      }}
+                    >
+                      // como começar
+                    </span>
+                    <ol style={{ margin: 0, padding: '0 0 0 18px' }}>
+                      {config.instrucoes.map((step, i) => (
+                        <li
+                          key={i}
+                          style={{
+                            fontFamily: 'var(--mono)',
+                            fontSize: 12,
+                            color: '#a1a1aa',
+                            lineHeight: 1.7,
+                            marginBottom: i < config.instrucoes!.length - 1 ? 6 : 0,
+                          }}
+                        >
+                          {step}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
 
                 <p
                   style={{
