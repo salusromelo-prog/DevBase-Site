@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+﻿import { NextRequest } from 'next/server'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -93,7 +93,7 @@ const BOILERPLATE_HTML = `
               </p>
               <p style="margin:6px 0 0;font-size:11px;color:#3f3f46;">
                 Dúvidas? Fale com a gente em
-                <a href="mailto:contato@devbase.tools" style="color:#3f3f46;text-decoration:underline;">contato@devbase.tools</a>
+                <a href="mailto:devbasebr@gmail.com" style="color:#3f3f46;text-decoration:underline;">devbasebr@gmail.com</a>
               </p>
             </td>
           </tr>
@@ -195,7 +195,7 @@ const KIT_HTML = `
               </p>
               <p style="margin:6px 0 0;font-size:11px;color:#3f3f46;">
                 Dúvidas? Fale com a gente em
-                <a href="mailto:contato@devbase.tools" style="color:#3f3f46;text-decoration:underline;">contato@devbase.tools</a>
+                <a href="mailto:devbasebr@gmail.com" style="color:#3f3f46;text-decoration:underline;">devbasebr@gmail.com</a>
               </p>
             </td>
           </tr>
@@ -309,7 +309,7 @@ const COMBO_HTML = `
               </p>
               <p style="margin:6px 0 0;font-size:11px;color:#3f3f46;">
                 Dúvidas? Fale com a gente em
-                <a href="mailto:contato@devbase.tools" style="color:#3f3f46;text-decoration:underline;">contato@devbase.tools</a>
+                <a href="mailto:devbasebr@gmail.com" style="color:#3f3f46;text-decoration:underline;">devbasebr@gmail.com</a>
               </p>
             </td>
           </tr>
@@ -348,7 +348,7 @@ export async function POST(request: NextRequest) {
   }
 
   const { error } = await resend.emails.send({
-    from: 'DevBase <contato@devbase.tools>',
+    from: 'DevBase <devbasebr@gmail.com>',
     to: email,
     replyTo: 'devbasebr@gmail.com',
     subject: subjects[produto],

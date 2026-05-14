@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { Suspense, useEffect, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
@@ -275,7 +275,7 @@ function ObrigadoContent() {
                 >
                   Dúvidas? Entre em contato:{' '}
                   <a
-                    href="mailto:contato@devbase.tools"
+                    href="mailto:devbasebr@gmail.com"
                     style={{
                       color: 'var(--text-2)',
                       textDecoration: 'underline',
@@ -285,7 +285,7 @@ function ObrigadoContent() {
                     onMouseEnter={e => ((e.target as HTMLElement).style.color = 'var(--text)')}
                     onMouseLeave={e => ((e.target as HTMLElement).style.color = 'var(--text-2)')}
                   >
-                    contato@devbase.tools
+                    devbasebr@gmail.com
                   </a>
                 </p>
               </>
