@@ -95,7 +95,7 @@ export default function AcessoLoginPage() {
               letterSpacing: '0.4px',
               margin: '0 0 10px',
             }}>
-              // acesso à plataforma
+              // reenviar acesso
             </p>
             <h1 style={{
               margin: '0 0 8px',
@@ -104,7 +104,7 @@ export default function AcessoLoginPage() {
               letterSpacing: '-0.5px',
               color: '#ffffff',
             }}>
-              Entrar na plataforma
+              Reenviar link de acesso
             </h1>
             <p style={{
               margin: '0 0 24px',
@@ -112,7 +112,7 @@ export default function AcessoLoginPage() {
               color: '#6b7280',
               lineHeight: '1.6',
             }}>
-              Digite o email usado na compra. Vamos enviar um link de acesso direto, sem senha.
+              Se o link do seu email expirou ou não chegou, digite o email usado na compra e enviamos um novo.
             </p>
 
             {/* Divider */}
@@ -200,7 +200,7 @@ export default function AcessoLoginPage() {
                   transition: 'opacity .15s ease, background .15s ease',
                 }}
               >
-                {status === 'loading' ? 'Enviando...' : 'Enviar link de acesso'}
+                {status === 'loading' ? 'Enviando...' : 'Reenviar link de acesso'}
               </button>
             </form>
           </>
@@ -254,9 +254,9 @@ function SentState({ email, onReset }: { email: string; onReset: () => void }) {
           Verifique seu email
         </p>
         <p style={{ margin: '0', fontSize: '13px', color: '#6b7280', lineHeight: '1.6' }}>
-          Enviamos um link de acesso para{' '}
+          Enviamos um novo link para{' '}
           <span style={{ color: '#ffffff', fontFamily: 'var(--mono)', fontSize: '12px' }}>{email}</span>.
-          <br />O link expira em 1 hora.
+          {' '}O link expira em 1 hora.
         </p>
       </div>
 
