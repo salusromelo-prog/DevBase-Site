@@ -88,17 +88,41 @@ function makeEmailHtml(nome: string, nomeProduto: string, magicLink: string, sit
 }
 
 export async function POST(request: NextRequest) {
-  // ── Auth ──────────────────────────────────────────────────────────────────
+  // ── Debug: loga tudo que chegou ───────────────────────────────────────────
   const url = new URL(request.url)
-  const token = url.searchParams.get('token')
 
-  if (process.env.KIWIFY_TOKEN && token !== process.env.KIWIFY_TOKEN) {
+  const headersObj: Record<string, string> = {}
+  request.headers.forEach((value, key) => { headersObj[key] = value })
+
+  const queryParams: Record<string, string> = {}
+  url.searchParams.forEach((value, key) => { queryParams[key] = value })
+
+  let rawBody: string
+  try {
+    rawBody = await request.text()
+  } catch {
+    rawBody = '<erro ao ler body>'
+  }
+
+  console.log('[kiwify-webhook] Headers recebidos:', JSON.stringify(headersObj, null, 2))
+  console.log('[kiwify-webhook] Query params recebidos:', JSON.stringify(queryParams, null, 2))
+  console.log('[kiwify-webhook] Body recebido:', rawBody)
+
+  // ── Auth ──────────────────────────────────────────────────────────────────
+  const tokenFromQuery  = url.searchParams.get('token')
+  const tokenFromHeader = request.headers.get('x-kiwify-token')
+  const tokenFromAuth   = request.headers.get('authorization')
+
+  const receivedToken = tokenFromQuery ?? tokenFromHeader ?? tokenFromAuth
+
+  if (process.env.KIWIFY_TOKEN && receivedToken !== process.env.KIWIFY_TOKEN) {
+    console.log('[kiwify-webhook] Token inválido. Recebido:', receivedToken)
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   let body: Record<string, unknown>
   try {
-    body = await request.json() as Record<string, unknown>
+    body = JSON.parse(rawBody) as Record<string, unknown>
   } catch {
     return Response.json({ error: 'Invalid JSON' }, { status: 400 })
   }
