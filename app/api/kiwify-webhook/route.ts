@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { supabaseAdmin } from '@/lib/supabase-admin'
 
@@ -89,12 +89,11 @@ function makeEmailHtml(nome: string, nomeProduto: string, magicLink: string, sit
 
 export async function POST(request: NextRequest) {
   // ── Auth ──────────────────────────────────────────────────────────────────
-  const token =
-    request.nextUrl.searchParams.get('token') ||
-    request.headers.get('x-kiwify-token')
+  const url = new URL(request.url)
+  const token = url.searchParams.get('token')
 
-  if (!token || token !== process.env.KIWIFY_TOKEN) {
-    return Response.json({ error: 'Unauthorized' }, { status: 401 })
+  if (process.env.KIWIFY_TOKEN && token !== process.env.KIWIFY_TOKEN) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   let body: Record<string, unknown>
