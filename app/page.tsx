@@ -159,7 +159,7 @@ export default function Home() {
                   <span className="pli-desc">100 ideias + 25 automações prontas</span>
                 </div>
                 <span className="pli-price">R$ 29,90</span>
-                <a href="https://pay.kiwify.com.br/bSBfROo" target="_blank" rel="noopener noreferrer" className="pli-btn">Comprar <span className="arrow">→</span></a>
+                <a href="https://pay.kiwify.com.br/5cyFrhr" target="_blank" rel="noopener noreferrer" className="pli-btn">Comprar <span className="arrow">→</span></a>
               </div>
               <div className="product-list-item">
                 <span className="badge badge-beta">◉ beta gratuito</span>
@@ -176,7 +176,7 @@ export default function Home() {
             <div className="produtos-cta" style={{ marginTop: '24px' }}>
               <h2>Não sabe por onde começar?</h2>
               <p>Compra o 100 Micro SaaS por R$29,90 e escolhe sua próxima ideia.</p>
-              <a href="https://pay.kiwify.com.br/bSBfROo" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              <a href="https://pay.kiwify.com.br/5cyFrhr" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 Ver 100 ideias <span className="arrow">→</span>
               </a>
             </div>
