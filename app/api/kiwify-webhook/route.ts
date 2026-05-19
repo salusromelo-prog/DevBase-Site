@@ -4,12 +4,13 @@ import { supabaseAdmin } from '@/lib/supabase-admin'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-type Produto = 'boilerplate' | 'components' | 'combo'
+type Produto = 'boilerplate' | 'components' | 'combo' | 'microsaas'
 
 const PRODUTO_MAP: Record<string, { produto: Produto; nome: string }> = {
   '68680ef0-4728-11f1-a69e-ddf874444b77': { produto: 'boilerplate', nome: 'DevBase Boilerplate' },
   '7eff05b0-4fc5-11f1-b00b-3baa6973ec19': { produto: 'components', nome: 'DevBase Components' },
   '47e01a50-4fda-11f1-ad93-a1ef8c0c7f93': { produto: 'combo',       nome: 'DevBase Boilerplate + Components' },
+  '203d3800-532e-11f1-b721-a71d7454cdca': { produto: 'microsaas',   nome: '100 Micro SaaS + 25 Automações' },
 }
 
 function makeEmailHtml(nome: string, nomeProduto: string, magicLink: string, siteUrl: string): string {
