@@ -15,6 +15,7 @@ interface ProductCardProps {
   badge: 'live' | 'beta' | 'combo'
   badgeLabel: string
   highlight?: boolean
+  className?: string
 }
 
 export default function ProductCard({
@@ -31,9 +32,10 @@ export default function ProductCard({
   badge,
   badgeLabel,
   highlight,
+  className = '',
 }: ProductCardProps) {
   return (
-    <article className={`product${highlight ? ' product-highlight' : ''}`}>
+    <article className={`product${highlight ? ' product-highlight' : ''}${className ? ` ${className}` : ''}`}>
       <div>
         <Badge variant={badge}>{badgeLabel}</Badge>
       </div>

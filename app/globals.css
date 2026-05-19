@@ -828,3 +828,374 @@ textarea { min-height: 88px; }
 .combo-wrap .product { background: linear-gradient(135deg, rgba(245,158,11,0.04) 0%, var(--card) 40%); border-color: rgba(245,158,11,0.25); }
 .combo-wrap .product:hover { border-color: rgba(245,158,11,0.5); box-shadow: 0 24px 60px -28px rgba(245,158,11,0.25), 0 4px 14px -8px rgba(0,0,0,0.5); }
 @media (max-width: 880px) { .products-grid-3 { grid-template-columns: 1fr; } }
+
+/* ================================================================
+   Product list (home — seção de produtos em tabela)
+   ================================================================ */
+.product-list {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.product-list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #1e1e1e;
+  transition: background .15s ease;
+}
+.product-list-item:last-child { border-bottom: none; }
+.product-list-item:hover { background: #0f0f0f; }
+.pli-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+.pli-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pli-desc {
+  font-size: 13px;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pli-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.pli-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color .15s ease, border-color .15s ease;
+}
+.pli-btn:hover { color: var(--text); border-color: var(--border-hover); }
+.pli-btn .arrow { transition: transform .2s ease; display: inline-block; }
+.pli-btn:hover .arrow { transform: translateX(3px); }
+@media (max-width: 880px) {
+  .product-list-item { gap: 10px; padding: 14px 16px; flex-wrap: wrap; }
+  .pli-meta { width: 100%; }
+  .pli-desc { display: none; }
+}
+
+/* ================================================================
+   100 Micro SaaS — destaque visual
+   ================================================================ */
+.product-microsaas {
+  background: linear-gradient(135deg, rgba(34,197,94,0.05) 0%, var(--card) 55%) !important;
+  border-color: rgba(34,197,94,0.22) !important;
+}
+.product-microsaas:hover {
+  border-color: rgba(34,197,94,0.44) !important;
+  box-shadow: 0 24px 60px -28px rgba(34,197,94,0.22), 0 4px 14px -8px rgba(0,0,0,0.5) !important;
+}
+
+/* ================================================================
+   Produtos page — CTA final
+   ================================================================ */
+.produtos-cta {
+  background: #0f0f0f;
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  padding: 32px 40px;
+  text-align: center;
+}
+.produtos-cta h2 {
+  font-size: clamp(22px, 2.8vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.15;
+  margin: 0 0 10px;
+}
+.produtos-cta p {
+  color: var(--text-2);
+  font-size: 16px;
+  margin: 0 0 24px;
+}
+/* scroll-margin for anchor links */
+[id] { scroll-margin-top: 80px; }
+
+/* ================================================================
+   Micro SaaS hero card (produtos — destaque principal)
+   ================================================================ */
+.ms-hero-card {
+  background: #111116;
+  border: 1px solid rgba(99,102,241,0.30);
+  border-radius: 12px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .25s ease;
+}
+.ms-hero-card:hover { border-color: rgba(99,102,241,0.50); }
+.ms-hero-card::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(700px circle at 78% 50%, rgba(99,102,241,0.07), transparent 55%);
+}
+.ms-hero-inner {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 40px;
+  align-items: center;
+  position: relative; z-index: 1;
+}
+.ms-hero-left { display: flex; flex-direction: column; gap: 18px; }
+.ms-hero-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.badge-entry {
+  color: var(--accent-light);
+  border-color: rgba(99,102,241,0.40);
+  background: rgba(99,102,241,0.12);
+}
+.ms-hero-title {
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+  margin: 0;
+}
+.ms-hero-desc {
+  color: var(--text-2);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 520px;
+}
+.ms-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 24px;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.ms-features-grid li {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13.5px; color: rgba(255,255,255,0.82); line-height: 1.45;
+}
+.ms-features-grid li::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0; margin-top: 7px;
+}
+.ms-hero-right {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(99,102,241,0.18);
+  border-radius: 10px;
+  padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  align-items: flex-start;
+}
+.ms-price-big {
+  font-family: var(--mono);
+  font-size: 40px; font-weight: 700;
+  letter-spacing: -1.5px; color: #fff; line-height: 1;
+}
+.ms-price-label { font-size: 12px; color: var(--text-2); }
+.ms-note { font-size: 11px; color: var(--text-3); font-family: var(--mono); }
+
+/* Jobs card — menor destaque */
+.jobs-wrap { margin-top: 18px; max-width: 560px; }
+.jobs-wrap .product:hover {
+  box-shadow: 0 12px 28px -14px rgba(0,0,0,0.5);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 880px) {
+  .ms-hero-inner { grid-template-columns: 1fr; gap: 28px; }
+  .ms-features-grid { grid-template-columns: 1fr; }
+  .ms-hero-right { width: 100%; }
+  .jobs-wrap { max-width: 100%; }
+  .ms-hero-card { padding: 24px 20px; }
+}
+
+/* ================================================================
+   Produtos page v2 — custom design system
+   ================================================================ */
+
+/* Badges */
+.pd-badge {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 20px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  white-space: nowrap; line-height: 18px; border: 1px solid;
+}
+.pd-badge-live  { color: #22c55e;  background: rgba(34,197,94,0.10);  border-color: rgba(34,197,94,0.20);  }
+.pd-badge-beta  { color: #818cf8;  background: rgba(99,102,241,0.10); border-color: rgba(99,102,241,0.20); }
+.pd-badge-combo { color: #eab308;  background: rgba(234,179,8,0.10);  border-color: rgba(234,179,8,0.20);  }
+.pd-badge-novo  { color: #a5b4fc;  background: rgba(99,102,241,0.15); border-color: rgba(99,102,241,0.30); }
+
+/* Section label with line */
+.pd-sec-label {
+  display: flex; align-items: center; gap: 12px;
+  margin: 52px 0 28px;
+}
+.pd-sec-label-text {
+  font-family: var(--mono); font-size: 11px; color: var(--accent);
+  white-space: nowrap; flex-shrink: 0; letter-spacing: 0.4px;
+}
+.pd-sec-label-line { flex: 1; height: 1px; background: var(--border); }
+
+/* Feature row helper */
+.pd-feat {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13.5px; color: rgba(255,255,255,0.82); line-height: 1.45;
+  list-style: none;
+}
+.pd-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0; margin-top: 8px;
+  display: inline-block;
+}
+
+/* Hero — 100 Micro SaaS */
+.pd-hero {
+  background: #0d0d0d;
+  border: 1px solid rgba(99,102,241,0.25);
+  border-radius: 16px; padding: 40px;
+  position: relative; overflow: hidden;
+  transition: border-color .25s ease;
+}
+.pd-hero:hover { border-color: rgba(99,102,241,0.42); }
+.pd-hero::before {
+  content: '';
+  position: absolute; top: -120px; right: -120px;
+  width: 480px; height: 480px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.pd-hero-inner {
+  display: grid; grid-template-columns: 1fr 260px;
+  gap: 36px; align-items: center; position: relative; z-index: 1;
+}
+.pd-hero-left { display: flex; flex-direction: column; gap: 20px; }
+.pd-hero-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.pd-hero-title {
+  font-size: 28px; font-weight: 700; letter-spacing: -0.7px;
+  line-height: 1.1; margin: 0; color: #fff;
+}
+.pd-hero-desc {
+  color: #6b7280; font-size: 14.5px; line-height: 1.6; margin: 0;
+}
+.pd-hero-feats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px 20px; list-style: none; margin: 0; padding: 0;
+}
+.pd-price-box {
+  background: #111; border: 1px solid #1e1e1e;
+  border-radius: 12px; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 10px;
+  align-items: center; text-align: center; align-self: start;
+}
+.pd-price-tag   { font-family: var(--mono); font-size: 11px; color: #6b7280; letter-spacing: 0.3px; }
+.pd-price-big   { font-family: var(--mono); font-size: 36px; font-weight: 700; letter-spacing: -1.5px; color: #fff; line-height: 1; }
+.pd-price-sub   { font-size: 11px; color: #4b5563; line-height: 1.5; }
+.pd-price-note  { font-family: var(--mono); font-size: 11px; color: #4b5563; }
+
+/* Cards grid 2 colunas */
+.pd-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* Card genérico */
+.pd-card {
+  background: #0f0f0f; border: 1px solid #1e1e1e;
+  border-radius: 14px; padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  transition: border-color .2s ease;
+}
+.pd-card:hover { border-color: #2a2a2a; }
+.pd-card-title { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; margin: 0; color: #fff; }
+.pd-card-desc  { color: #6b7280; font-size: 14px; line-height: 1.6; margin: 0; }
+.pd-card-feats { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.pd-card-ft {
+  padding-top: 18px; border-top: 1px solid #1e1e1e; margin-top: auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.pd-card-prices { display: flex; flex-direction: column; gap: 2px; }
+.pd-price-old  { font-size: 12px; color: #4b5563; text-decoration: line-through; }
+.pd-price-main { font-family: var(--mono); font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+.pd-price-lbl  { font-size: 11.5px; color: #6b7280; }
+
+/* Combo card */
+.pd-combo {
+  background: #0f0f0f; border: 1px solid #1e1e1e;
+  border-radius: 14px; padding: 32px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 32px; align-items: center;
+  transition: border-color .2s ease;
+}
+.pd-combo:hover { border-color: #2a2a2a; }
+.pd-combo-left  { display: flex; flex-direction: column; gap: 14px; }
+.pd-combo-title { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; margin: 0; color: #fff; }
+.pd-combo-desc  { color: #6b7280; font-size: 14px; line-height: 1.6; margin: 0; }
+.pd-combo-feats { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 20px; list-style: none; margin: 0; padding: 0; }
+.pd-combo-right { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; min-width: 180px; }
+.pd-combo-old   { font-size: 13px; color: #4b5563; text-decoration: line-through; }
+.pd-combo-price { font-family: var(--mono); font-size: 28px; font-weight: 700; letter-spacing: -0.8px; color: #eab308; }
+.pd-combo-econ  { font-family: var(--mono); font-size: 11px; color: #eab308; margin-bottom: 4px; }
+
+/* Jobs card */
+.pd-jobs {
+  background: #0f0f0f; border: 1px solid #1e1e1e;
+  border-radius: 14px; padding: 28px 32px;
+  display: flex; align-items: center; gap: 32px;
+  transition: border-color .2s ease;
+}
+.pd-jobs:hover { border-color: #2a2a2a; }
+.pd-jobs-left  { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.pd-jobs-title { font-size: 18px; font-weight: 700; letter-spacing: -0.4px; margin: 0; color: #fff; }
+.pd-jobs-desc  { color: #6b7280; font-size: 14px; line-height: 1.55; margin: 0; }
+.pd-jobs-tags  { display: flex; flex-wrap: wrap; align-items: center; gap: 0; }
+.pd-jobs-tag   { font-size: 13px; color: rgba(255,255,255,0.7); display: flex; align-items: center; }
+.pd-jobs-tag + .pd-jobs-tag::before { content: '·'; color: var(--accent); padding: 0 7px; font-size: 16px; }
+.pd-jobs-right { display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center; min-width: 160px; flex-shrink: 0; }
+.pd-jobs-free  { font-family: var(--mono); font-size: 24px; font-weight: 700; color: var(--accent); line-height: 1; }
+.pd-jobs-sub   { font-size: 11.5px; color: #6b7280; }
+
+/* Outline button */
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; border: 1px solid #2a2a2a; color: #9ca3af;
+  border-radius: 8px; padding: 10px 20px;
+  font-size: 13px; font-weight: 500; font-family: var(--font);
+  white-space: nowrap; cursor: pointer;
+  transition: border-color .15s ease, color .15s ease;
+}
+.btn-outline:hover { border-color: #3a3a3a; color: #d1d5db; }
+.btn-outline .arrow { transition: transform .2s ease; display: inline-block; }
+.btn-outline:hover .arrow { transform: translateX(3px); }
+
+/* Mobile */
+@media (max-width: 880px) {
+  .pd-hero { padding: 24px 20px; }
+  .pd-hero-inner { grid-template-columns: 1fr; gap: 28px; }
+  .pd-hero-feats { grid-template-columns: 1fr; }
+  .pd-price-box { width: 100%; }
+  .pd-grid-2 { grid-template-columns: 1fr; }
+  .pd-card { padding: 24px 20px; }
+  .pd-card-ft { flex-direction: column; align-items: flex-start; }
+  .pd-combo { grid-template-columns: 1fr; padding: 24px 20px; }
+  .pd-combo-feats { grid-template-columns: 1fr; }
+  .pd-combo-right { align-items: flex-start; min-width: unset; }
+  .pd-jobs { flex-direction: column; align-items: flex-start; padding: 24px 20px; }
+  .pd-jobs-right { align-items: flex-start; min-width: unset; text-align: left; }
+  .pd-sec-label { margin: 36px 0 20px; }
+}
