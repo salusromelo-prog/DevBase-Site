@@ -4,8 +4,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Logo from './logo'
 
+const HIDDEN_ROUTES = ['/microsaas', '/acesso']
+
 export default function Nav() {
   const pathname = usePathname()
+
+  if (HIDDEN_ROUTES.some(r => pathname.startsWith(r))) return null
 
   return (
     <nav className="nav">

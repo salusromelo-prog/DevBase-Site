@@ -1,7 +1,16 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import Logo from './logo'
 
+const HIDDEN_ROUTES = ['/microsaas', '/acesso']
+
 export default function Footer() {
+  const pathname = usePathname()
+
+  if (HIDDEN_ROUTES.some(r => pathname.startsWith(r))) return null
+
   return (
     <footer className="footer">
       <div className="wrap footer-inner">
