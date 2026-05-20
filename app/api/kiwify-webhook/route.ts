@@ -89,105 +89,111 @@ function makeEmailHtml(nome: string, nomeProduto: string, magicLink: string, sit
 }
 
 export async function POST(request: NextRequest) {
-  const url = new URL(request.url)
-
-  // ── Auth (token vem como query param ?token=...) ──────────────────────────
-  const receivedToken = url.searchParams.get('token')
-    ?? request.headers.get('x-kiwify-token')
-    ?? request.headers.get('authorization')
-
-  if (process.env.KIWIFY_TOKEN && receivedToken !== process.env.KIWIFY_TOKEN) {
-    console.log('[kiwify-webhook] Token inválido. Recebido:', receivedToken)
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
-  let body: Record<string, unknown>
   try {
-    body = await request.json() as Record<string, unknown>
-  } catch {
-    return Response.json({ error: 'Invalid JSON' }, { status: 400 })
+    const url = new URL(request.url)
+
+    // ── Auth (token vem como query param ?token=...) ────────────────────────
+    const receivedToken = url.searchParams.get('token')
+      ?? request.headers.get('x-kiwify-token')
+      ?? request.headers.get('authorization')
+
+    if (process.env.KIWIFY_TOKEN && receivedToken !== process.env.KIWIFY_TOKEN) {
+      console.log('[kiwify-webhook] Token inválido. Recebido:', receivedToken)
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    let body: Record<string, unknown>
+    try {
+      body = await request.json() as Record<string, unknown>
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
+    }
+
+    // ── Extrai campos do payload real do Kiwify ───────────────────────────────
+    const order      = body.order as Record<string, unknown> | undefined
+    const email      = (order?.Customer as Record<string, string> | undefined)?.email
+    const nome       = (order?.Customer as Record<string, string> | undefined)?.full_name
+    const productId  = (order?.Product  as Record<string, string> | undefined)?.product_id
+    const status     = order?.order_status as string | undefined
+
+    console.log('Webhook recebido:', JSON.stringify(body, null, 2))
+    console.log('Email:', email)
+    console.log('Product ID:', productId)
+    console.log('Status:', status)
+
+    // ── Status — só processa "paid" ─────────────────────────────────────────
+    if (status !== 'paid') {
+      console.log(`[kiwify-webhook] Status ignorado: ${status}`)
+      return NextResponse.json({ ok: true })
+    }
+
+    // ── Produto ─────────────────────────────────────────────────────────────
+    const mapped = PRODUTO_MAP[productId ?? '']
+
+    if (!mapped) {
+      console.log('[kiwify-webhook] Produto não reconhecido:', productId)
+      return NextResponse.json({ ok: true })
+    }
+
+    const { produto, nome: nomeProduto } = mapped
+    console.log(`[kiwify-webhook] Produto identificado: ${nomeProduto}`)
+
+    // ── Email do comprador ───────────────────────────────────────────────────
+    if (!email) {
+      console.error('[kiwify-webhook] Email não encontrado no payload:', JSON.stringify(body))
+      return NextResponse.json({ error: 'email não encontrado no payload' }, { status: 400 })
+    }
+
+    const customerName = nome ?? email.split('@')[0]
+
+    // ── a) Upsert na tabela acessos ─────────────────────────────────────────
+    const { error: dbError } = await supabaseAdmin
+      .from('acessos')
+      .upsert({ email, produto }, { onConflict: 'email', ignoreDuplicates: false })
+
+    if (dbError) {
+      console.error('[kiwify-webhook] Supabase error:', dbError)
+      return NextResponse.json({ error: 'Erro ao registrar acesso' }, { status: 500 })
+    }
+
+    console.log(`[kiwify-webhook] Acesso criado para email ${email}`)
+
+    // ── b) Gera magic link ──────────────────────────────────────────────────
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://devbase.tools'
+
+    const { data: linkData, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
+      type: 'magiclink',
+      email,
+      options: { redirectTo: `${siteUrl}/acesso` },
+    })
+
+    if (linkError || !linkData?.properties?.action_link) {
+      console.error('[kiwify-webhook] generateLink error:', linkError)
+      return NextResponse.json({ error: 'Erro ao gerar magic link' }, { status: 500 })
+    }
+
+    const magicLink = linkData.properties.action_link
+
+    // ── c) Envia email via Resend ────────────────────────────────────────────
+    const { error: emailError } = await resend.emails.send({
+      from: 'DevBase <contato@devbase.tools>',
+      to: email,
+      replyTo: 'devbasebr@gmail.com',
+      subject: `Seu acesso ao ${nomeProduto} está pronto 🎉`,
+      html: makeEmailHtml(customerName, nomeProduto, magicLink, siteUrl),
+    })
+
+    if (emailError) {
+      console.error('[kiwify-webhook] Resend error:', emailError)
+      return NextResponse.json({ error: 'Falha ao enviar email' }, { status: 500 })
+    }
+
+    console.log('[kiwify-webhook] Email enviado')
+
+    return NextResponse.json({ ok: true })
+
+  } catch (error) {
+    console.error('Erro no webhook:', error)
+    return NextResponse.json({ error: String(error) }, { status: 500 })
   }
-
-  // ── Extrai campos do payload real do Kiwify ───────────────────────────────
-  const order      = body.order as Record<string, unknown> | undefined
-  const email      = (order?.Customer as Record<string, string> | undefined)?.email
-  const nome       = (order?.Customer as Record<string, string> | undefined)?.full_name
-  const productId  = (order?.Product  as Record<string, string> | undefined)?.product_id
-  const status     = order?.order_status as string | undefined
-
-  console.log('Webhook recebido:', JSON.stringify(body, null, 2))
-  console.log('Email:', email)
-  console.log('Product ID:', productId)
-  console.log('Status:', status)
-
-  // ── Status — só processa "paid" ───────────────────────────────────────────
-  if (status !== 'paid') {
-    console.log(`[kiwify-webhook] Status ignorado: ${status}`)
-    return Response.json({ ok: true })
-  }
-
-  // ── Produto ───────────────────────────────────────────────────────────────
-  const mapped = PRODUTO_MAP[productId ?? '']
-
-  if (!mapped) {
-    console.log('[kiwify-webhook] Produto não reconhecido:', productId)
-    return Response.json({ ok: true })
-  }
-
-  const { produto, nome: nomeProduto } = mapped
-  console.log(`[kiwify-webhook] Produto identificado: ${nomeProduto}`)
-
-  // ── Email do comprador ────────────────────────────────────────────────────
-  if (!email) {
-    console.error('[kiwify-webhook] Email não encontrado no payload:', JSON.stringify(body))
-    return Response.json({ error: 'email não encontrado no payload' }, { status: 400 })
-  }
-
-  const customerName = nome ?? email.split('@')[0]
-
-  // ── a) Upsert na tabela acessos ───────────────────────────────────────────
-  const { error: dbError } = await supabaseAdmin
-    .from('acessos')
-    .upsert({ email, produto }, { onConflict: 'email', ignoreDuplicates: false })
-
-  if (dbError) {
-    console.error('[kiwify-webhook] Supabase error:', dbError)
-    return Response.json({ error: 'Erro ao registrar acesso' }, { status: 500 })
-  }
-
-  console.log(`[kiwify-webhook] Acesso criado para email ${email}`)
-
-  // ── b) Gera magic link ────────────────────────────────────────────────────
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://devbase.tools'
-
-  const { data: linkData, error: linkError } = await supabaseAdmin.auth.admin.generateLink({
-    type: 'magiclink',
-    email,
-    options: { redirectTo: `${siteUrl}/acesso` },
-  })
-
-  if (linkError || !linkData?.properties?.action_link) {
-    console.error('[kiwify-webhook] generateLink error:', linkError)
-    return Response.json({ error: 'Erro ao gerar magic link' }, { status: 500 })
-  }
-
-  const magicLink = linkData.properties.action_link
-
-  // ── c) Envia email via Resend ─────────────────────────────────────────────
-  const { error: emailError } = await resend.emails.send({
-    from: 'DevBase <contato@devbase.tools>',
-    to: email,
-    replyTo: 'devbasebr@gmail.com',
-    subject: `Seu acesso ao ${nomeProduto} está pronto 🎉`,
-    html: makeEmailHtml(customerName, nomeProduto, magicLink, siteUrl),
-  })
-
-  if (emailError) {
-    console.error('[kiwify-webhook] Resend error:', emailError)
-    return Response.json({ error: 'Falha ao enviar email' }, { status: 500 })
-  }
-
-  console.log('[kiwify-webhook] Email enviado')
-
-  return Response.json({ ok: true })
 }
