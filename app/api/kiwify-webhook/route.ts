@@ -89,32 +89,12 @@ function makeEmailHtml(nome: string, nomeProduto: string, magicLink: string, sit
 }
 
 export async function POST(request: NextRequest) {
-  // ── Debug: loga tudo que chegou ───────────────────────────────────────────
   const url = new URL(request.url)
 
-  const headersObj: Record<string, string> = {}
-  request.headers.forEach((value, key) => { headersObj[key] = value })
-
-  const queryParams: Record<string, string> = {}
-  url.searchParams.forEach((value, key) => { queryParams[key] = value })
-
-  let rawBody: string
-  try {
-    rawBody = await request.text()
-  } catch {
-    rawBody = '<erro ao ler body>'
-  }
-
-  console.log('[kiwify-webhook] Headers recebidos:', JSON.stringify(headersObj, null, 2))
-  console.log('[kiwify-webhook] Query params recebidos:', JSON.stringify(queryParams, null, 2))
-  console.log('[kiwify-webhook] Body recebido:', rawBody)
-
-  // ── Auth ──────────────────────────────────────────────────────────────────
-  const tokenFromQuery  = url.searchParams.get('token')
-  const tokenFromHeader = request.headers.get('x-kiwify-token')
-  const tokenFromAuth   = request.headers.get('authorization')
-
-  const receivedToken = tokenFromQuery ?? tokenFromHeader ?? tokenFromAuth
+  // ── Auth (token vem como query param ?token=...) ──────────────────────────
+  const receivedToken = url.searchParams.get('token')
+    ?? request.headers.get('x-kiwify-token')
+    ?? request.headers.get('authorization')
 
   if (process.env.KIWIFY_TOKEN && receivedToken !== process.env.KIWIFY_TOKEN) {
     console.log('[kiwify-webhook] Token inválido. Recebido:', receivedToken)
@@ -123,39 +103,34 @@ export async function POST(request: NextRequest) {
 
   let body: Record<string, unknown>
   try {
-    body = JSON.parse(rawBody) as Record<string, unknown>
+    body = await request.json() as Record<string, unknown>
   } catch {
     return Response.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  console.log('[kiwify-webhook] Webhook recebido')
+  // ── Extrai campos do payload real do Kiwify ───────────────────────────────
+  const order      = body.order as Record<string, unknown> | undefined
+  const email      = (order?.Customer as Record<string, string> | undefined)?.email
+  const nome       = (order?.Customer as Record<string, string> | undefined)?.full_name
+  const productId  = (order?.Product  as Record<string, string> | undefined)?.product_id
+  const status     = order?.order_status as string | undefined
 
-  // ── Extrai body.order (estrutura real do Kiwify) ──────────────────────────
-  const order = body.order as Record<string, unknown> | undefined
+  console.log('Webhook recebido:', JSON.stringify(body, null, 2))
+  console.log('Email:', email)
+  console.log('Product ID:', productId)
+  console.log('Status:', status)
 
-  const orderStatus = (order?.order_status) as string | undefined
-  const orderCustomer = order?.Customer as Record<string, string> | undefined
-  const orderProduct  = order?.Product  as Record<string, string> | undefined
-
-  console.log('[kiwify-webhook] Valores extraídos:', JSON.stringify({
-    orderStatus,
-    email:     orderCustomer?.email,
-    fullName:  orderCustomer?.full_name,
-    productId: orderProduct?.product_id,
-  }, null, 2))
-
-  // ── Status — só processa compras aprovadas ────────────────────────────────
-  if (orderStatus !== 'paid' && orderStatus !== 'approved') {
-    console.log(`[kiwify-webhook] Status ignorado: ${orderStatus}`)
+  // ── Status — só processa "paid" ───────────────────────────────────────────
+  if (status !== 'paid') {
+    console.log(`[kiwify-webhook] Status ignorado: ${status}`)
     return Response.json({ ok: true })
   }
 
   // ── Produto ───────────────────────────────────────────────────────────────
-  const productId = orderProduct?.product_id ?? ''
-  const mapped = PRODUTO_MAP[productId]
+  const mapped = PRODUTO_MAP[productId ?? '']
 
   if (!mapped) {
-    console.log('[kiwify-webhook] Produto não reconhecido. Payload completo:', JSON.stringify(body))
+    console.log('[kiwify-webhook] Produto não reconhecido:', productId)
     return Response.json({ ok: true })
   }
 
@@ -163,14 +138,12 @@ export async function POST(request: NextRequest) {
   console.log(`[kiwify-webhook] Produto identificado: ${nomeProduto}`)
 
   // ── Email do comprador ────────────────────────────────────────────────────
-  const email = orderCustomer?.email
-
   if (!email) {
     console.error('[kiwify-webhook] Email não encontrado no payload:', JSON.stringify(body))
     return Response.json({ error: 'email não encontrado no payload' }, { status: 400 })
   }
 
-  const customerName = orderCustomer?.full_name ?? email.split('@')[0]
+  const customerName = nome ?? email.split('@')[0]
 
   // ── a) Upsert na tabela acessos ───────────────────────────────────────────
   const { error: dbError } = await supabaseAdmin
