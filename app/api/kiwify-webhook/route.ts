@@ -130,16 +130,28 @@ export async function POST(request: NextRequest) {
 
   console.log('[kiwify-webhook] Webhook recebido')
 
+  // ── Extrai body.order (estrutura real do Kiwify) ──────────────────────────
+  const order = body.order as Record<string, unknown> | undefined
+
+  const orderStatus = (order?.order_status) as string | undefined
+  const orderCustomer = order?.Customer as Record<string, string> | undefined
+  const orderProduct  = order?.Product  as Record<string, string> | undefined
+
+  console.log('[kiwify-webhook] Valores extraídos:', JSON.stringify({
+    orderStatus,
+    email:     orderCustomer?.email,
+    fullName:  orderCustomer?.full_name,
+    productId: orderProduct?.product_id,
+  }, null, 2))
+
   // ── Status — só processa compras aprovadas ────────────────────────────────
-  const orderStatus = (body.order_status ?? body.status) as string | undefined
   if (orderStatus !== 'paid' && orderStatus !== 'approved') {
     console.log(`[kiwify-webhook] Status ignorado: ${orderStatus}`)
     return Response.json({ ok: true })
   }
 
   // ── Produto ───────────────────────────────────────────────────────────────
-  const product = body.product as Record<string, string> | undefined
-  const productId = product?.id ?? product?.product_id ?? ''
+  const productId = orderProduct?.product_id ?? ''
   const mapped = PRODUTO_MAP[productId]
 
   if (!mapped) {
@@ -150,16 +162,15 @@ export async function POST(request: NextRequest) {
   const { produto, nome: nomeProduto } = mapped
   console.log(`[kiwify-webhook] Produto identificado: ${nomeProduto}`)
 
-  // ── Email do comprador (Kiwify usa Customer com C maiúsculo) ──────────────
-  const customer = (body.Customer ?? body.customer) as Record<string, string> | undefined
-  const email = customer?.email ?? (body.buyer as Record<string, string> | undefined)?.email
+  // ── Email do comprador ────────────────────────────────────────────────────
+  const email = orderCustomer?.email
 
   if (!email) {
     console.error('[kiwify-webhook] Email não encontrado no payload:', JSON.stringify(body))
     return Response.json({ error: 'email não encontrado no payload' }, { status: 400 })
   }
 
-  const customerName = customer?.name ?? customer?.full_name ?? email.split('@')[0]
+  const customerName = orderCustomer?.full_name ?? email.split('@')[0]
 
   // ── a) Upsert na tabela acessos ───────────────────────────────────────────
   const { error: dbError } = await supabaseAdmin
