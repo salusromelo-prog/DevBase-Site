@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import Nav from '@/components/nav'
-import Footer from '@/components/footer'
 import FxLayer from '@/components/fx-layer'
+import SmoothScroll from '@/app/providers/SmoothScroll'
 
 const inter = localFont({
   src: [
@@ -46,10 +46,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
-        <FxLayer />
-        <Nav />
-        <main className="page-transition">{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <FxLayer />
+          <Nav />
+          <main className="page-transition">{children}</main>
+        </SmoothScroll>
       </body>
     </html>
   )
