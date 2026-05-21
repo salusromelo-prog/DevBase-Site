@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
-import { supabaseAdmin } from '@/lib/supabase-admin'
+import { getSupabaseAdmin } from '@/lib/supabase-admin'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -90,6 +90,7 @@ function makeEmailHtml(nome: string, nomeProduto: string, magicLink: string, sit
 
 export async function POST(request: NextRequest) {
   try {
+    const supabaseAdmin = getSupabaseAdmin()
     const url = new URL(request.url)
 
     // ── Auth (token vem como query param ?token=...) ────────────────────────

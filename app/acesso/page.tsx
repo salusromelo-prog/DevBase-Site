@@ -14,7 +14,7 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
-type Produto = 'boilerplate' | 'components' | 'combo'
+type Produto = 'boilerplate' | 'components' | 'combo' | 'microsaas'
 interface Bloco { titulo: string; codigo: string }
 interface StepData {
   blocos: Bloco[]
@@ -2979,6 +2979,12 @@ export default function AcessoPage() {
       if (!data) { router.replace('/acesso/login'); return }
 
       const produto = (data.produto as Produto) || 'boilerplate'
+
+      if (produto === 'microsaas') {
+        router.replace('/microsaas')
+        return
+      }
+
       setAcesso({ email, produto })
 
       const firstId =
