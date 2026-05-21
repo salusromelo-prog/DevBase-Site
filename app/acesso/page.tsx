@@ -2959,6 +2959,7 @@ interface AcessoState {
 export default function AcessoPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
+  const [erro, setErro] = useState<string | null>(null)
   const [acesso, setAcesso] = useState<AcessoState | null>(null)
   const [ativoId, setAtivoId] = useState('')
   const [stepAtivo, setStepAtivo] = useState<Record<string, number>>({})
@@ -2978,10 +2979,16 @@ export default function AcessoPage() {
 
       if (!data) { router.replace('/acesso/login'); return }
 
-      const produto = (data.produto as Produto) || 'boilerplate'
+      const produto = data.produto as Produto | null
 
       if (produto === 'microsaas') {
         router.replace('/microsaas')
+        return
+      }
+
+      if (produto !== 'boilerplate' && produto !== 'components' && produto !== 'combo') {
+        setErro(email)
+        setLoading(false)
         return
       }
 
@@ -3025,6 +3032,42 @@ export default function AcessoPage() {
         <p style={{ fontFamily: 'var(--mono)', fontSize: '13px', color: '#6b7280' }}>
           // carregando plataforma...
         </p>
+      </div>
+    )
+  }
+
+  if (erro !== null) {
+    return (
+      <div style={{
+        height: 'calc(100vh - 64px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: '#0a0a0a', padding: '0 24px',
+      }}>
+        <div style={{
+          background: '#0f0f0f', border: '1px solid #1e1e1e', borderRadius: '12px',
+          padding: '32px', maxWidth: '420px', width: '100%', textAlign: 'center',
+        }}>
+          <p style={{ fontFamily: 'var(--mono)', fontSize: '11px', color: '#ef4444', marginBottom: '12px' }}>
+            // erro de acesso
+          </p>
+          <p style={{ fontSize: '15px', fontWeight: '600', color: '#ffffff', margin: '0 0 8px' }}>
+            Produto não reconhecido
+          </p>
+          <p style={{ fontSize: '13px', color: '#6b7280', lineHeight: '1.6', margin: '0 0 20px' }}>
+            Sua conta <span style={{ fontFamily: 'var(--mono)', color: '#9ca3af' }}>{erro}</span> não tem um produto válido associado.
+            Entre em contato com o suporte.
+          </p>
+          <a
+            href="mailto:devbasebr@gmail.com"
+            style={{
+              display: 'inline-block', background: '#6366f1', color: '#ffffff',
+              textDecoration: 'none', fontSize: '13px', fontWeight: '600',
+              padding: '10px 20px', borderRadius: '8px',
+            }}
+          >
+            devbasebr@gmail.com
+          </a>
+        </div>
       </div>
     )
   }
