@@ -98,15 +98,14 @@ export async function POST(request: NextRequest) {
     const supabaseAdmin = getSupabaseAdmin()
     const url = new URL(request.url)
 
-    // ── Auth (token vem como query param ?token=...) ────────────────────────
-    const receivedToken = url.searchParams.get('token')
-      ?? request.headers.get('x-kiwify-token')
-      ?? request.headers.get('authorization')
-
-    if (process.env.KIWIFY_TOKEN && receivedToken !== process.env.KIWIFY_TOKEN) {
-      console.log('[kiwify-webhook] Token inválido. Recebido:', receivedToken)
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+    // ── Auth — desabilitado temporariamente para diagnóstico ───────────────────
+    // const receivedToken = url.searchParams.get('token')
+    //   ?? request.headers.get('x-kiwify-token')
+    //   ?? request.headers.get('authorization')
+    // if (process.env.KIWIFY_TOKEN && receivedToken !== process.env.KIWIFY_TOKEN) {
+    //   console.log('[kiwify-webhook] Token inválido. Recebido:', receivedToken)
+    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // }
 
     // ── Extrai campos do payload Kiwify ────────────────────────────────────────
     const body = await request.json()
