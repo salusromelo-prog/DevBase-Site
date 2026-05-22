@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { getSupabaseAdmin } from '@/lib/supabase-admin'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 type Produto = 'boilerplate' | 'components' | 'combo' | 'microsaas'
 
 const PRODUTO_MAP: Record<string, { produto: Produto; nome: string }> = {
@@ -183,6 +181,7 @@ export async function POST(request: NextRequest) {
     const magicLink = linkData.properties.action_link
 
     // ── c) Envia email via Resend ────────────────────────────────────────────
+    const resend = new Resend(process.env.RESEND_API_KEY)
     const { error: emailError } = await resend.emails.send({
       from: 'DevBase <contato@devbase.tools>',
       to: email,
