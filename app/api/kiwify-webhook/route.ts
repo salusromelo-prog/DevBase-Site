@@ -108,28 +108,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // ── Extrai campos do payload — cobre todas as variações do Kiwify ─────────
+    // ── Extrai campos do payload Kiwify ────────────────────────────────────────
     const body = await request.json()
-    const order = body.order || body
-
-    const email =
-      order?.Customer?.email ||
-      order?.customer?.email ||
-      body?.Customer?.email ||
-      body?.customer?.email
-
-    const customerName =
-      order?.Customer?.full_name ||
-      order?.customer?.full_name ||
-      'Dev'
-
-    const productId =
-      order?.Product?.product_id ||
-      order?.Product?.id ||
-      order?.product?.id ||
-      order?.product_id
-
-    const orderStatus = order?.order_status || body?.order_status
+    const order = body.order
+    const email = order?.Customer?.email
+    const customerName = order?.Customer?.full_name || 'Dev'
+    const productId = order?.Product?.product_id
+    const orderStatus = order?.order_status
 
     console.log('[kiwify-webhook] extracted:', { email, customerName, productId, orderStatus })
 
