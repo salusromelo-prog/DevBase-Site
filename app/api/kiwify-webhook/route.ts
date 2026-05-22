@@ -108,28 +108,34 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    let body: Record<string, unknown>
-    try {
-      body = await request.json() as Record<string, unknown>
-    } catch {
-      return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
-    }
+    // ── Extrai campos do payload — cobre todas as variações do Kiwify ─────────
+    const body = await request.json()
+    const order = body.order || body
 
-    // ── Extrai campos do payload real do Kiwify ───────────────────────────────
-    const order      = body.order as Record<string, unknown> | undefined
-    const email      = (order?.Customer as Record<string, string> | undefined)?.email
-    const nome       = (order?.Customer as Record<string, string> | undefined)?.full_name
-    const productId  = (order?.Product  as Record<string, string> | undefined)?.product_id
-    const status     = order?.order_status as string | undefined
+    const email =
+      order?.Customer?.email ||
+      order?.customer?.email ||
+      body?.Customer?.email ||
+      body?.customer?.email
 
-    console.log('Webhook recebido:', JSON.stringify(body, null, 2))
-    console.log('Email:', email)
-    console.log('Product ID:', productId)
-    console.log('Status:', status)
+    const customerName =
+      order?.Customer?.full_name ||
+      order?.customer?.full_name ||
+      'Dev'
+
+    const productId =
+      order?.Product?.product_id ||
+      order?.Product?.id ||
+      order?.product?.id ||
+      order?.product_id
+
+    const orderStatus = order?.order_status || body?.order_status
+
+    console.log('[kiwify-webhook] extracted:', { email, customerName, productId, orderStatus })
 
     // ── Status — só processa "paid" ─────────────────────────────────────────
-    if (status !== 'paid') {
-      console.log(`[kiwify-webhook] Status ignorado: ${status}`)
+    if (orderStatus !== 'paid') {
+      console.log(`[kiwify-webhook] Status ignorado: ${orderStatus}`)
       return NextResponse.json({ ok: true })
     }
 
@@ -149,8 +155,6 @@ export async function POST(request: NextRequest) {
       console.error('[kiwify-webhook] Email não encontrado no payload:', JSON.stringify(body))
       return NextResponse.json({ error: 'email não encontrado no payload' }, { status: 400 })
     }
-
-    const customerName = nome ?? email.split('@')[0]
 
     // ── a) Upsert na tabela acessos ─────────────────────────────────────────
     const { error: dbError } = await supabaseAdmin
@@ -182,13 +186,14 @@ export async function POST(request: NextRequest) {
 
     // ── c) Envia email via Resend ────────────────────────────────────────────
     const resend = new Resend(process.env.RESEND_API_KEY)
-    const { error: emailError } = await resend.emails.send({
+    const { data: emailData, error: emailError } = await resend.emails.send({
       from: 'DevBase <contato@devbase.tools>',
       to: email,
       replyTo: 'devbasebr@gmail.com',
       subject: `Seu acesso ao ${nomeProduto} está pronto 🎉`,
       html: makeEmailHtml(customerName, nomeProduto, magicLink, siteUrl),
     })
+    console.log('[kiwify-webhook] Resend result:', JSON.stringify({ emailData, emailError }))
 
     if (emailError) {
       console.error('[kiwify-webhook] Resend error:', emailError)
