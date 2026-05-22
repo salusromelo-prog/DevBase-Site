@@ -90,6 +90,13 @@ function makeEmailHtml(nome: string, nomeProduto: string, magicLink: string, sit
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('WEBHOOK_ENV_CHECK', {
+      hasToken: !!process.env.KIWIFY_TOKEN,
+      hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      hasSupabaseServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+      hasResendKey: !!process.env.RESEND_API_KEY,
+    })
+
     const supabaseAdmin = getSupabaseAdmin()
     const url = new URL(request.url)
 
@@ -194,7 +201,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true })
 
   } catch (error) {
-    console.error('Erro no webhook:', error)
+    console.error('WEBHOOK_ERROR', error)
     return NextResponse.json({ error: String(error) }, { status: 500 })
   }
 }
