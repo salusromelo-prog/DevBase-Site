@@ -108,7 +108,21 @@ export async function POST(request: NextRequest) {
     // }
 
     // ── Extrai campos do payload Kiwify ────────────────────────────────────────
-    const body = await request.json()
+    const rawBody = await request.text()
+    console.log('[kiwify-webhook] rawBody:', rawBody.substring(0, 200))
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let body: any
+    try {
+      body = JSON.parse(rawBody)
+    } catch {
+      // Zapier pode enviar como string serializada
+      try {
+        body = JSON.parse(JSON.parse(rawBody))
+      } catch {
+        body = {}
+      }
+    }
 
     // Zapier achata o payload - tenta os dois formatos
     const order = body.order || body
