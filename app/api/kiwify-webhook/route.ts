@@ -109,13 +109,33 @@ export async function POST(request: NextRequest) {
 
     // ── Extrai campos do payload Kiwify ────────────────────────────────────────
     const body = await request.json()
-    const order = body.order
-    const email = order?.Customer?.email
-    console.log('[kiwify-webhook] email extraído:', email)
-    const customerName = order?.Customer?.full_name || 'Dev'
-    const productId = order?.Product?.product_id
-    const orderStatus = order?.order_status
 
+    // Zapier achata o payload - tenta os dois formatos
+    const order = body.order || body
+
+    const email =
+      order?.Customer?.email ||
+      order?.customer?.email ||
+      body?.customer_email ||
+      body?.['order customer email']
+
+    const customerName =
+      order?.Customer?.full_name ||
+      order?.customer?.full_name ||
+      body?.customer_full_name ||
+      'Dev'
+
+    const productId =
+      order?.Product?.product_id ||
+      order?.product?.product_id ||
+      body?.product_product_id ||
+      body?.['order product product id']
+
+    const orderStatus =
+      order?.order_status ||
+      body?.order_status
+
+    console.log('[kiwify-webhook] body keys:', Object.keys(body))
     console.log('[kiwify-webhook] extracted:', { email, customerName, productId, orderStatus })
 
     // ── Status — só processa "paid" ─────────────────────────────────────────
