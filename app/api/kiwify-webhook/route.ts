@@ -109,48 +109,27 @@ export async function POST(request: NextRequest) {
 
     // ── Extrai campos do payload Kiwify ────────────────────────────────────────
     const rawBody = await request.text()
-    console.log('[kiwify-webhook] rawBody:', rawBody.substring(0, 200))
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let body: any
+    let body: any = {}
+
     try {
-      body = JSON.parse(rawBody)
-    } catch {
-      // Zapier pode enviar como string serializada
-      try {
-        body = JSON.parse(JSON.parse(rawBody))
-      } catch {
-        body = {}
+      const firstParse = JSON.parse(rawBody)
+      if (typeof firstParse[''] === 'string') {
+        body = JSON.parse(firstParse[''])
+      } else {
+        body = firstParse
       }
+    } catch {
+      body = {}
     }
 
-    // Zapier achata o payload - tenta os dois formatos
-    const order = body.order || body
+    const order = body.order || {}
+    const email = order?.Customer?.email
+    const customerName = order?.Customer?.full_name || 'Dev'
+    const productId = order?.Product?.product_id
+    const orderStatus = order?.order_status
 
-    const email =
-      order?.Customer?.email ||
-      order?.customer?.email ||
-      body?.customer_email ||
-      body?.['order customer email']
-
-    const customerName =
-      order?.Customer?.full_name ||
-      order?.customer?.full_name ||
-      body?.customer_full_name ||
-      'Dev'
-
-    const productId =
-      order?.Product?.product_id ||
-      order?.product?.product_id ||
-      body?.product_product_id ||
-      body?.['order product product id']
-
-    const orderStatus =
-      order?.order_status ||
-      body?.order_status
-
-    console.log('[kiwify-webhook] body keys:', Object.keys(body))
-    console.log('[kiwify-webhook] extracted:', { email, customerName, productId, orderStatus })
+    console.log('[kiwify-webhook] FINAL:', { email, productId, orderStatus })
 
     // ── Status — só processa "paid" ─────────────────────────────────────────
     if (orderStatus !== 'paid') {
