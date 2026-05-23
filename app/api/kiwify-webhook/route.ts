@@ -111,6 +111,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const order = body.order
     const email = order?.Customer?.email
+    console.log('[kiwify-webhook] email extraído:', email)
     const customerName = order?.Customer?.full_name || 'Dev'
     const productId = order?.Product?.product_id
     const orderStatus = order?.order_status
