@@ -114,12 +114,19 @@ export async function POST(request: NextRequest) {
 
     try {
       const firstParse = JSON.parse(rawBody)
+      console.log('[kiwify-webhook] firstParse type:', typeof firstParse)
+      console.log('[kiwify-webhook] firstParse keys:', Object.keys(firstParse))
+      console.log('[kiwify-webhook] chave vazia tipo:', typeof firstParse[''])
+      console.log('[kiwify-webhook] chave vazia preview:', String(firstParse['']).substring(0, 300))
+
       if (typeof firstParse[''] === 'string') {
         body = JSON.parse(firstParse[''])
+        console.log('[kiwify-webhook] body após parse chave vazia:', JSON.stringify(body).substring(0, 200))
       } else {
         body = firstParse
       }
-    } catch {
+    } catch (e) {
+      console.log('[kiwify-webhook] parse error:', e)
       body = {}
     }
 
