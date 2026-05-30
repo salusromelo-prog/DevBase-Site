@@ -1,87 +1,47 @@
-import Link from 'next/link'
+﻿import type { Metadata } from 'next'
+import HomeHero from '@/components/home-hero'
 import Reveal from '@/components/reveal'
-import SectionLabel from '@/components/section-label'
-import StatCard from '@/components/stat-card'
-import Marquee from '@/components/marquee'
-import PainChips from '@/components/pain-chips'
-import NewsletterForm from '@/components/newsletter-form'
+import HeroCanvas from '@/components/hero-canvas'
+
+export const metadata: Metadata = {
+  title: 'DevBase — Ferramentas para devs brasileiros',
+}
+
+const CHECK = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+    <path d="M20 6L9 17l-5-5" />
+  </svg>
+)
 
 export default function Home() {
   return (
     <>
-      {/* ===== Hero ===== */}
-      <section className="hero">
-        <div className="hero-aurora" aria-hidden="true">
-          <span className="a1" />
-          <span className="a2" />
-          <span className="a3" />
-        </div>
-        <div className="wrap">
-          <Reveal>
-            <div className="pill" style={{ display: 'inline-flex', marginBottom: 32 }}>
-              <span className="dot" aria-hidden="true" />
-              devbase — v1 · 2025
-            </div>
-          </Reveal>
-          <Reveal>
-            <h1>
-              Ferramentas para
-              <br />
-              <span className="accent">devs brasileiros.</span>
-            </h1>
-          </Reveal>
-          <Reveal>
-            <p className="sub">
-              Construímos o que o dev BR precisa — sem documentação em inglês, sem preço em dólar, sem suporte que ignora.
-            </p>
-          </Reveal>
-          <Reveal>
-            <div className="cta-row">
-              <Link href="/produtos" className="btn btn-primary">
-                Conhecer produtos <span className="arrow">→</span>
-              </Link>
-              <a href="https://devbase.jobs" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
-                DevBase Jobs
-              </a>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div className="stats">
-              <div className="stat">
-                <div className="k">2</div>
-                <div className="v">produtos ativos</div>
-              </div>
-              <div className="stat">
-                <div className="k">BR</div>
-                <div className="v">feito por devs BR</div>
-              </div>
-              <div className="stat">
-                <div className="k">100%</div>
-                <div className="v">em português</div>
-              </div>
-            </div>
-          </Reveal>
+      <HomeHero />
+
+      {/* ===== STACK STRIP ===== */}
+      <section className="strip">
+        <div className="wrap"><div className="strip-lbl">A stack que já vem configurada</div></div>
+        <div className="strip-track">
+          {['Next.js 14', 'TypeScript 5.4', 'Supabase', 'Pagar.me PIX', 'Tailwind CSS', 'Resend', 'Vercel', 'Boleto · Cartão',
+            'Next.js 14', 'TypeScript 5.4', 'Supabase', 'Pagar.me PIX', 'Tailwind CSS', 'Resend', 'Vercel', 'Boleto · Cartão'].map((item, i) => (
+            <span key={i} className="strip-item">{item}</span>
+          ))}
         </div>
       </section>
 
-      {/* ===== Tech marquee ===== */}
-      <Marquee />
-
-      {/* ===== Por que existimos ===== */}
-      <section className="section">
+      {/* ===== POR QUE EXISTIMOS ===== */}
+      <section className="sec">
         <div className="wrap">
-          <Reveal>
-            <div className="section-head">
-              <SectionLabel>// por que existimos</SectionLabel>
-              <h2>O dev brasileiro merece ferramentas feitas pra ele.</h2>
-              <p>Não adaptações mal traduzidas. Produtos que entendem nossa realidade.</p>
-            </div>
+          <Reveal className="sec-head">
+            <span className="eyebrow">Por que existimos</span>
+            <h2>O dev brasileiro merece ferramentas feitas pra ele.</h2>
+            <p>Não adaptações mal traduzidas. Produtos que entendem a nossa realidade — do pagamento à documentação.</p>
           </Reveal>
-          <div className="grid-3 stagger">
-            <Reveal>
-              <div className="feat">
-                <div className="ico" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <div className="values">
+            <Reveal delay={0}>
+              <div className="vcard">
+                <div className="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <circle cx="12" cy="12" r="9" />
                     <path d="M9 9c0-1.1.9-2 2-2h2a2 2 0 0 1 0 4h-2a2 2 0 0 0 0 4h2c1.1 0 2-.9 2-2" />
                     <path d="M12 6v1M12 17v1" />
@@ -91,150 +51,177 @@ export default function Home() {
                 <p>Sem conversão de dólar, sem IOF, sem surpresa no cartão. Pagamento único em PIX, boleto ou cartão.</p>
               </div>
             </Reveal>
-            <Reveal>
-              <div className="feat">
-                <div className="ico" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <Reveal delay={80}>
+              <div className="vcard">
+                <div className="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
                   </svg>
                 </div>
                 <h3>Docs em português</h3>
-                <p>Tutoriais, exemplos e suporte 100% em PT-BR. Você não precisa traduzir nada pra começar.</p>
+                <p>Tutoriais, exemplos e suporte 100% em PT-BR. Você não precisa traduzir nada pra começar a construir.</p>
               </div>
             </Reveal>
-            <Reveal>
-              <div className="feat">
-                <div className="ico" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <Reveal delay={160}>
+              <div className="vcard">
+                <div className="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <polyline points="16 18 22 12 16 6" />
                     <polyline points="8 6 2 12 8 18" />
                   </svg>
                 </div>
                 <h3>Feito pra nossa stack</h3>
-                <p>Pagar.me, Asaas, Mercado Pago, Next.js e Supabase já integrados. Nada de gambiarra pra fazer funcionar no Brasil.</p>
+                <p>Pagar.me, Mercado Pago, Next.js e Supabase já integrados. Nada de gambiarra pra funcionar no Brasil.</p>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ===== Nossos produtos ===== */}
-      <section className="section">
+      {/* ===== SHOWCASE — Boilerplate ===== */}
+      <section className="sec soft">
         <div className="wrap">
-          <Reveal>
-            <div className="section-head">
-              <SectionLabel>// nossos produtos</SectionLabel>
-              <h2>O que construímos até agora.</h2>
-              <p>Dois produtos no ar. Mais chegando.</p>
-            </div>
-          </Reveal>
-          <div className="products-grid">
-            <Reveal>
-              <article className="product">
-                <div><span className="badge badge-live">● ao vivo</span></div>
-                <h3>DevBase Boilerplate</h3>
-                <p className="desc">Boilerplate SaaS pronto pro mercado brasileiro. Auth, pagamentos em PIX/boleto/cartão, dashboard e deploy — tudo configurado.</p>
-                <ul>
-                  <li>Next.js 14 + TypeScript + Tailwind</li>
-                  <li>Auth com Supabase</li>
-                  <li>Pagar.me · PIX · boleto · cartão</li>
-                  <li>Dashboard e painel admin</li>
-                </ul>
-                <div className="ft">
-                  <div className="price">
-                    <span className="big green">R$ 297</span>
-                    <span className="small">pagamento único · vitalício</span>
-                  </div>
-                  <Link href="/produtos" className="btn btn-primary">
-                    Comprar <span className="arrow">→</span>
-                  </Link>
-                </div>
-              </article>
+          <div className="showcase">
+            <Reveal className="sc-copy">
+              <span className="eyebrow">Produto em destaque</span>
+              <h2>Do repositório ao mercado, em dias.</h2>
+              <p className="lead">O DevBase Boilerplate entrega a parte chata já pronta — auth, pagamentos, dashboard e deploy. Você foca no que torna o seu produto único.</p>
+              <ul className="sc-list">
+                <li><span className="ck">{CHECK}</span>Auth completo com Supabase + magic link</li>
+                <li><span className="ck">{CHECK}</span>Pagar.me integrado — PIX, boleto e cartão</li>
+                <li><span className="ck">{CHECK}</span>Dashboard, painel admin e billing portal</li>
+              </ul>
+              <a href="/produtos" className="btn btn-dark">Ver o boilerplate <span className="arr">→</span></a>
             </Reveal>
-            <Reveal>
-              <article className="product">
-                <div><span className="badge badge-beta">◉ beta</span></div>
-                <h3>DevBase Jobs</h3>
-                <p className="desc">Job board para devs brasileiros. Salário obrigatório em toda vaga, stack real e remoto verificado.</p>
-                <ul>
-                  <li>Salário sempre visível</li>
-                  <li>Stack real do dia a dia</li>
-                  <li>Remoto verificado</li>
-                  <li>Alertas por e-mail</li>
-                </ul>
-                <div className="ft">
-                  <div className="price">
-                    <span className="big indigo">Grátis</span>
-                    <span className="small">em beta · sempre gratuito</span>
-                  </div>
-                  <a href="https://devbase.jobs" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                    Acessar <span className="arrow">→</span>
-                  </a>
+            <Reveal className="blur">
+              <div className="codecard">
+                <div className="browser-bar">
+                  <i /><i /><i />
+                  <span className="url">~/meu-saas — zsh</span>
                 </div>
-              </article>
+                <div className="cc-body">
+                  <div><span className="p">~</span> <span className="d">$</span> npx create-devbase-app meu-saas</div>
+                  <div className="ok">✓ clonando template</div>
+                  <div className="ok">✓ instalando dependências (1.2k)</div>
+                  <div className="ok">✓ configurando .env · supabase · pagar.me</div>
+                  <div><span className="p">~/meu-saas</span> <span className="d">$</span> pnpm dev</div>
+                  <div className="k">▲ next.js 14.2.0 — ready in 1.4s</div>
+                  <div className="d">&nbsp;&nbsp;➜ auth ✓ &nbsp; payments ✓ &nbsp; db ✓</div>
+                  <div><span className="p">~/meu-saas</span> <span className="d">$</span> <span className="cc-caret" /></div>
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ===== Quem somos ===== */}
-      <section className="section">
-        <div className="wrap">
-          <Reveal>
-            <div className="section-head">
-              <SectionLabel>// quem somos</SectionLabel>
-              <h2>Três devs de Goiânia. Construindo do zero.</h2>
-              <p>Sem investidor, sem escritório, sem frescura.</p>
-            </div>
+      {/* ===== PRODUCT CATALOG OVERVIEW ===== */}
+      <section className="sec">
+        <div className="wrap wrap-wide">
+          <Reveal className="sec-head center">
+            <span className="eyebrow center">O catálogo</span>
+            <h2>Tudo que a DevBase construiu.</h2>
+            <p>Produtos avulsos que resolvem problemas reais. Pagamento único ou gratuito — sem assinatura.</p>
           </Reveal>
-          <div className="two-col">
-            <div className="text">
-              <Reveal>
-                <p>
-                  A DevBase nasceu da frustração de quem vive o mercado tech brasileiro. Boilerplate genérico que ignora pagamento em real. Vagas sem salário. Ferramentas em inglês com suporte que demora 3 dias pra responder.
-                </p>
-                <p>
-                  Decidimos construir o que gostaríamos de ter. Produto por produto. Do zero. Em português.{' '}
-                  <strong style={{ color: '#fff' }}>Samuel</strong>,{' '}
-                  <strong style={{ color: '#fff' }}>Isaque</strong> e{' '}
-                  <strong style={{ color: '#fff' }}>Daniel</strong> tocam tudo — código, design, suporte, conteúdo.
-                </p>
-                <p>
-                  Começamos em 2025 com dois produtos no ar e uma promessa simples: lançamos coisa pronta. Não vendemos promessa.
-                </p>
-              </Reveal>
-            </div>
-            <div className="stats-col">
-              <Reveal delay={0}><StatCard label="Fundada em" value="2025" meta="Goiânia · GO" /></Reveal>
-              <Reveal delay={80}><StatCard label="Time" value="3 fundadores" meta="Samuel · Isaque · Daniel" /></Reveal>
-              <Reveal delay={160}><StatCard label="Foco" value="Devs BR" meta="Ferramentas para o mercado brasileiro" /></Reveal>
-            </div>
+          <div className="cards">
+            <Reveal delay={0} className="pcard span6">
+              <div className="ptop"><span className="pchip live"><span className="d" />ao vivo · novo</span></div>
+              <h3>100 Micro SaaS + 25 Automações</h3>
+              <p className="pdesc">100 ideias validadas com problema, público, monetização, stack e MVP — prontas pra executar.</p>
+              <div className="pfoot">
+                <div className="price"><span className="now green">R$ 29,90</span><span className="s">pagamento único · vitalício</span></div>
+                <a href="/produtos" className="btn btn-primary btn-sm">Detalhes <span className="arr">→</span></a>
+              </div>
+            </Reveal>
+            <Reveal delay={80} className="pcard span6">
+              <div className="ptop"><span className="pchip live"><span className="d" />ao vivo</span></div>
+              <h3>DevBase Boilerplate</h3>
+              <p className="pdesc">Kit Next.js completo pra lançar SaaS no Brasil. Auth, pagamentos, dashboard e deploy configurados.</p>
+              <div className="pfoot">
+                <div className="price"><span className="old">R$ 297</span><span className="now green">R$ 147</span><span className="s">acesso vitalício</span></div>
+                <a href="/produtos" className="btn btn-primary btn-sm">Detalhes <span className="arr">→</span></a>
+              </div>
+            </Reveal>
+            <Reveal delay={0} className="pcard span4">
+              <div className="ptop"><span className="pchip live"><span className="d" />ao vivo</span></div>
+              <h3>DevBase Components</h3>
+              <p className="pdesc">8 componentes React pro mercado BR: CPF, CNPJ, CEP, PIX e cartão.</p>
+              <div className="pfoot">
+                <div className="price"><span className="now indigo">R$ 67</span><span className="s">vitalício</span></div>
+                <a href="/produtos" className="btn btn-line btn-sm">Detalhes</a>
+              </div>
+            </Reveal>
+            <Reveal delay={80} className="pcard span4">
+              <div className="ptop"><span className="pchip"><span className="d" style={{ background: 'var(--violet)' }} />✦ combo</span></div>
+              <h3>Boilerplate + Components</h3>
+              <p className="pdesc">Os dois produtos juntos, com desconto. Tudo pra lançar do zero.</p>
+              <div className="pfoot">
+                <div className="price"><span className="old">R$ 214</span><span className="now green">R$ 197</span><span className="s">economia de R$ 17</span></div>
+                <a href="/produtos" className="btn btn-line btn-sm">Detalhes</a>
+              </div>
+            </Reveal>
+            <Reveal delay={160} className="pcard span4">
+              <div className="ptop"><span className="pchip free"><span className="d" />beta gratuito</span></div>
+              <h3>DevBase Jobs</h3>
+              <p className="pdesc">Job board com salário obrigatório, stack real e remoto verificado.</p>
+              <div className="pfoot">
+                <div className="price"><span className="now indigo">Grátis</span><span className="s">sempre, pra devs</span></div>
+                <a href="/jobs" className="btn btn-line btn-sm">Conhecer</a>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ===== Sua dor como dev ===== */}
-      <section className="section">
+      {/* ===== FIGURES ===== */}
+      <section className="sec tight soft">
+        <div className="wrap wrap-wide">
+          <div className="figs">
+            <Reveal delay={0} className="fig">
+              <div className="n">5</div>
+              <div className="l">produtos no ar</div>
+            </Reveal>
+            <Reveal delay={80} className="fig">
+              <div className="n">2025</div>
+              <div className="l">fundada em Goiânia</div>
+            </Reveal>
+            <Reveal delay={160} className="fig">
+              <div className="n">100<span className="u">%</span></div>
+              <div className="l">em português</div>
+            </Reveal>
+            <Reveal delay={240} className="fig">
+              <div className="n">3</div>
+              <div className="l">devs construindo</div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== MANIFESTO ===== */}
+      <section className="sec">
         <div className="wrap">
-          <Reveal>
-            <div className="section-head centered">
-              <SectionLabel>// sua dor como dev</SectionLabel>
-              <h2>Qual é o seu maior problema como dev brasileiro?</h2>
-              <p>Sua resposta vira o nosso próximo produto.</p>
-            </div>
-          </Reveal>
-          <Reveal>
-            <PainChips />
+          <Reveal className="manifesto blur">
+            <span className="eyebrow center" style={{ marginBottom: 28 }}>Manifesto</span>
+            <p>A internet brasileira não precisa de mais <span className="ac">tutoriais</span>. Precisa de devs <span className="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>
           </Reveal>
         </div>
       </section>
 
-      {/* ===== Newsletter ===== */}
-      <section className="section">
-        <div className="wrap">
-          <Reveal>
-            <NewsletterForm />
+      {/* ===== CTA BAND ===== */}
+      <section className="sec tight">
+        <div className="wrap wrap-wide">
+          <Reveal className="ctaband">
+            <HeroCanvas variant="silk" className="ctaband-canvas" />
+            <div className="ctaband-veil" />
+            <div className="ctaband-in">
+              <h2>Construa em cima de uma base que já funciona.</h2>
+              <p>Ferramentas feitas por devs brasileiros, pro mercado brasileiro. Comece pelo que faz sentido pra você.</p>
+              <div className="hero-cta">
+                <a href="/produtos" className="btn btn-primary btn-lg">Ver todos os produtos <span className="arr">→</span></a>
+                <a href="/empresa" className="btn btn-glass btn-lg">Conhecer a DevBase</a>
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>

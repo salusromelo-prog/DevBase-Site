@@ -3,18 +3,6 @@ import localFont from 'next/font/local'
 import './globals.css'
 import Nav from '@/components/nav'
 import Footer from '@/components/footer'
-import FxLayer from '@/components/fx-layer'
-
-const inter = localFont({
-  src: [
-    { path: '../public/fonts/inter-400.woff2', weight: '400', style: 'normal' },
-    { path: '../public/fonts/inter-500.woff2', weight: '500', style: 'normal' },
-    { path: '../public/fonts/inter-600.woff2', weight: '600', style: 'normal' },
-    { path: '../public/fonts/inter-700.woff2', weight: '700', style: 'normal' },
-  ],
-  variable: '--font-inter',
-  display: 'swap',
-})
 
 const jetbrainsMono = localFont({
   src: [
@@ -30,8 +18,8 @@ const jetbrainsMono = localFont({
 export const metadata: Metadata = {
   title: 'DevBase — Ferramentas para devs brasileiros',
   description:
-    'DevBase constrói ferramentas para desenvolvedores brasileiros: boilerplate SaaS pronto e job board com salário obrigatório.',
-  metadataBase: new URL('https://devbase.tools'),
+    'A DevBase constrói ferramentas para desenvolvedores brasileiros: boilerplate SaaS, componentes React BR, 100 ideias de micro SaaS e um job board com salário obrigatório. Feito em Goiânia.',
+  metadataBase: new URL('https://www.devbase.tools'),
   openGraph: {
     title: 'DevBase',
     description: 'Ferramentas para devs brasileiros.',
@@ -44,11 +32,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="pt-BR" className={jetbrainsMono.variable}>
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
-        <FxLayer />
         <Nav />
-        <main className="page-transition">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

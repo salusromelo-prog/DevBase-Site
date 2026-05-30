@@ -2,49 +2,106 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import Logo from './logo'
 
 const HIDDEN_ROUTES = ['/microsaas', '/acesso']
 
+const LINKS = [
+  { label: 'Produtos', href: '/produtos', key: 'produtos' },
+  { label: 'Empresa', href: '/empresa', key: 'empresa' },
+  { label: 'Jobs', href: '/jobs', key: 'jobs' },
+]
+
 export default function Nav() {
   const pathname = usePathname()
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const isHome = pathname === '/'
+
+  useEffect(() => {
+    function onScroll() {
+      const y = window.scrollY || document.documentElement.scrollTop
+      setScrolled(isHome ? y > window.innerHeight - 120 : y > 20)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [isHome])
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [pathname])
 
   if (HIDDEN_ROUTES.some(r => pathname.startsWith(r))) return null
 
+  const dark = isHome && !scrolled
+
   return (
-    <nav className="nav">
-      <div className="wrap nav-inner">
-        <Link href="/" aria-label="dev/base">
-          <Logo size="md" />
+    <>
+      <nav className={`nav${dark ? ' dark' : ''}${scrolled ? ' scrolled' : ''}`}>
+        <div className="wrap wrap-wide">
+          <Link href="/" aria-label="dev/base">
+            <Logo size="md" />
+          </Link>
+          <div className="nav-mid">
+            {LINKS.map(l => (
+              <Link
+                key={l.key}
+                href={l.href}
+                className={`nav-link${pathname === l.href ? ' active' : ''}`}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+          <div className="nav-cta">
+            <a
+              href="https://dev-base-jobs.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`btn ${dark ? 'btn-glass' : 'btn-line'} btn-sm`}
+            >
+              Entrar
+            </a>
+            <Link href="/produtos" className="btn btn-primary btn-sm">
+              Ver produtos <span className="arr">→</span>
+            </Link>
+            <button
+              className="nav-toggle"
+              aria-label="menu"
+              onClick={() => setMenuOpen(o => !o)}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                {menuOpen ? (
+                  <>
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </>
+                ) : (
+                  <>
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                  </>
+                )}
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+      <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
+        {LINKS.map(l => (
+          <Link key={l.key} href={l.href}>{l.label}</Link>
+        ))}
+        <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener noreferrer">
+          Entrar no Jobs
+        </a>
+        <Link href="/produtos" className="btn btn-primary">
+          Ver produtos →
         </Link>
-        <div className="nav-links">
-          <Link
-            href="/produtos"
-            className={`nav-link${pathname === '/produtos' ? ' active' : ''}`}
-          >
-            Produtos
-          </Link>
-          <Link
-            href="/sobre"
-            className={`nav-link${pathname === '/sobre' ? ' active' : ''}`}
-          >
-            Sobre
-          </Link>
-        </div>
-        <div className="nav-cta">
-          <a
-            href="https://devbase.jobs"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-ghost"
-          >
-            DevBase Jobs
-          </a>
-          <Link href="/produtos" className="btn btn-primary">
-            Ver produtos <span className="arrow">→</span>
-          </Link>
-        </div>
       </div>
-    </nav>
+    </>
   )
 }

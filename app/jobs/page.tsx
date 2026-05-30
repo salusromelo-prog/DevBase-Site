@@ -1,110 +1,144 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
-import SectionLabel from '@/components/section-label'
+import HeroCanvas from '@/components/hero-canvas'
 
-export const metadata: Metadata = { title: 'Jobs · DevBase' }
+export const metadata: Metadata = { title: 'DevBase Jobs · DevBase' }
 
 export default function Jobs() {
   return (
     <>
-      <header className="page-head">
+      {/* ===== PAGE HEADER ===== */}
+      <header className="phead">
+        <HeroCanvas variant="silk" className="phead-canvas" />
+        <div className="phead-veil" />
         <div className="wrap">
-          <Reveal>
-            <SectionLabel>// devbase jobs</SectionLabel>
-          </Reveal>
-          <Reveal>
-            <h1>O job board para devs brasileiros.</h1>
-          </Reveal>
-          <Reveal>
-            <p className="sub">Salário obrigatório. Stack real. Remoto verificado. Sem enrolação.</p>
-          </Reveal>
+          <span className="eyebrow on-dark">DevBase Jobs · beta gratuito</span>
+          <h1>Salário obrigatório. Sempre.</h1>
+          <p>O job board honesto pra dev brasileiro. Sem &quot;salário a combinar&quot;, sem vaga fantasma, sem stack inflada. Transparência por padrão.</p>
+          <div className="hero-cta" style={{ marginTop: 32 }}>
+            <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+              Ver vagas <span className="arr">→</span>
+            </a>
+            <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener noreferrer" className="btn btn-glass btn-lg">
+              Publicar vaga grátis
+            </a>
+          </div>
         </div>
       </header>
 
-      <section className="section" style={{ paddingTop: 0 }}>
+      {/* ===== POR QUE É DIFERENTE ===== */}
+      <section className="sec">
         <div className="wrap">
-
-          {/* Card principal */}
-          <Reveal>
-            <article className="product" style={{ maxWidth: 680 }}>
-              <div><span className="badge badge-beta">◉ beta gratuito</span></div>
-              <h3>DevBase Jobs</h3>
-              <p className="desc">
-                Job board pra dev brasileiro. Sem vaga fake, sem &ldquo;salário a combinar&rdquo;, sem stack inflada. Transparência por padrão.
-              </p>
-              <ul>
-                <li>Salário obrigatório em toda vaga</li>
-                <li>Stack real do dia a dia</li>
-                <li>Remoto verificado</li>
-                <li>Alertas por e-mail da sua stack</li>
-                <li>Publicação de vaga grátis pra empresas</li>
-              </ul>
-              <div className="ft">
-                <div className="price">
-                  <span className="big indigo">Grátis</span>
-                  <span className="small">em beta · sempre gratuito pra devs</span>
-                </div>
-                <a
-                  href="https://devbase.jobs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                >
-                  Acessar vagas <span className="arrow">→</span>
-                </a>
-              </div>
-            </article>
+          <Reveal className="sec-head">
+            <span className="eyebrow">Por que é diferente</span>
+            <h2>Tudo que um job board deveria ter.</h2>
           </Reveal>
-
-          {/* Por que criamos */}
-          <Reveal>
-            <div className="section-head" style={{ marginTop: 72 }}>
-              <SectionLabel>// por que criamos</SectionLabel>
-              <h2>Porque &ldquo;salário a combinar&rdquo; é desrespeito.</h2>
-              <p>Dev BR merece saber o salário antes de fazer entrevista. Simples assim.</p>
-            </div>
-          </Reveal>
-
-          <div className="grid-3 stagger" style={{ marginTop: 0 }}>
-            <Reveal>
-              <div className="feat">
-                <div className="ico" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <div className="values">
+            <Reveal delay={0}>
+              <div className="vcard">
+                <div className="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <circle cx="12" cy="12" r="9" />
                     <path d="M9 9c0-1.1.9-2 2-2h2a2 2 0 0 1 0 4h-2a2 2 0 0 0 0 4h2c1.1 0 2-.9 2-2" />
                     <path d="M12 6v1M12 17v1" />
                   </svg>
                 </div>
-                <h3>Salário obrigatório</h3>
-                <p>Toda vaga precisa informar a faixa salarial. Sem exceção. Sem &ldquo;a combinar&rdquo;.</p>
+                <h3>Salário visível</h3>
+                <p>Toda vaga mostra a faixa salarial. É regra, não opção. Você não perde tempo com proposta abaixo do esperado.</p>
               </div>
             </Reveal>
-            <Reveal>
-              <div className="feat">
-                <div className="ico" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <Reveal delay={80}>
+              <div className="vcard">
+                <div className="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <polyline points="16 18 22 12 16 6" />
                     <polyline points="8 6 2 12 8 18" />
                   </svg>
                 </div>
                 <h3>Stack real</h3>
-                <p>Listamos o que você vai usar de verdade, não a buzzword word do deck do investidor.</p>
+                <p>A stack que aparece na vaga é a que você vai usar. Sem lista inflada de 20 tecnologias que ninguém toca.</p>
               </div>
             </Reveal>
-            <Reveal>
-              <div className="feat">
-                <div className="ico" aria-hidden="true">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                    <circle cx="12" cy="10" r="3" />
+            <Reveal delay={160}>
+              <div className="vcard">
+                <div className="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M12 2a10 10 0 1 0 10 10" />
+                    <path d="M12 6v6l4 2" />
                   </svg>
                 </div>
                 <h3>Remoto verificado</h3>
-                <p>Remoto real: sem &ldquo;híbrido obrigatório&rdquo;, sem &ldquo;remoto mas na cidade X&rdquo;.</p>
+                <p>Remoto é remoto. A gente verifica antes de publicar — nada de &quot;remoto&quot; que vira presencial depois.</p>
               </div>
             </Reveal>
           </div>
+        </div>
+      </section>
 
+      {/* ===== VAGAS ILUSTRATIVAS ===== */}
+      <section className="sec tight soft">
+        <div className="wrap">
+          <Reveal className="sec-head">
+            <span className="eyebrow">Exemplo de vagas</span>
+            <h2>Transparência logo na lista.</h2>
+          </Reveal>
+          <Reveal className="joblist">
+            <div className="jrow">
+              <div className="jl" style={{ background: 'linear-gradient(135deg,#6366f1,#8b5cf6)' }}>N</div>
+              <div>
+                <div className="jt">Dev Full-stack Pleno</div>
+                <div className="jm">Nubank · remoto · React + Node</div>
+              </div>
+              <div className="js">R$ 12–16k</div>
+            </div>
+            <div className="jrow">
+              <div className="jl" style={{ background: 'linear-gradient(135deg,#a78bfa,#c084fc)' }}>Q</div>
+              <div>
+                <div className="jt">Eng. Backend Sênior</div>
+                <div className="jm">QuintoAndar · híbrido · Go</div>
+              </div>
+              <div className="js">R$ 18–24k</div>
+            </div>
+            <div className="jrow">
+              <div className="jl" style={{ background: 'linear-gradient(135deg,#4338ca,#6366f1)' }}>I</div>
+              <div>
+                <div className="jt">Front-end Júnior</div>
+                <div className="jm">iFood · remoto · Next.js</div>
+              </div>
+              <div className="js">R$ 6–8k</div>
+            </div>
+            <div className="jrow">
+              <div className="jl" style={{ background: 'linear-gradient(135deg,#7c3aed,#a78bfa)' }}>S</div>
+              <div>
+                <div className="jt">Dev Mobile Flutter</div>
+                <div className="jm">Stone · remoto · Flutter</div>
+              </div>
+              <div className="js">R$ 10–14k</div>
+            </div>
+          </Reveal>
+          <p style={{ textAlign: 'center', marginTop: 24, fontSize: 13, color: 'var(--muted)' }}>
+            Vagas ilustrativas. Veja as reais no DevBase Jobs.
+          </p>
+        </div>
+      </section>
+
+      {/* ===== CTA BAND ===== */}
+      <section className="sec tight">
+        <div className="wrap wrap-wide">
+          <Reveal className="ctaband">
+            <HeroCanvas variant="silk" className="ctaband-canvas" />
+            <div className="ctaband-veil" />
+            <div className="ctaband-in">
+              <h2>Encontre uma vaga que respeita o seu tempo.</h2>
+              <p>Gratuito pra devs, sempre. Empresas publicam vagas sem custo durante o beta.</p>
+              <div className="hero-cta">
+                <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+                  Acessar o DevBase Jobs <span className="arr">→</span>
+                </a>
+                <a href="/produtos" className="btn btn-glass btn-lg">Ver outros produtos</a>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import SectionLabel from './section-label'
 
 export default function NewsletterForm() {
   const [email, setEmail] = useState('')
@@ -21,30 +20,24 @@ export default function NewsletterForm() {
       // silent
     }
     setStatus('done')
-    setTimeout(() => {
-      setStatus('idle')
-      setEmail('')
-    }, 1600)
+    setTimeout(() => { setStatus('idle'); setEmail('') }, 1600)
   }
 
   return (
-    <div className="newsletter">
-      <SectionLabel>// fique por dentro</SectionLabel>
-      <h2>Novos produtos em breve.</h2>
-      <p>Deixa seu e-mail e avisamos quando lançarmos algo novo. Sem spam.</p>
-      <form className="inline-input" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <div className="field">
         <input
           type="email"
           placeholder="seu@email.com"
           required
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           disabled={status !== 'idle'}
         />
-        <button type="submit" disabled={status === 'sending'}>
-          {status === 'done' ? '✓ Recebido' : status === 'sending' ? 'Enviando…' : <>Me avisar <span className="arrow">→</span></>}
+        <button type="submit" className="btn btn-primary" disabled={status === 'sending'}>
+          {status === 'done' ? '✓ Recebido' : status === 'sending' ? 'Enviando…' : <>Me avisar <span className="arr">→</span></>}
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   )
 }

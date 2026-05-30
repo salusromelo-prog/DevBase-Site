@@ -1,103 +1,226 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
-import SectionLabel from '@/components/section-label'
-import TeamMember from '@/components/team-member'
-import ValueCard from '@/components/value-card'
+import HeroCanvas from '@/components/hero-canvas'
+import PainChips from '@/components/pain-chips'
+import NewsletterForm from '@/components/newsletter-form'
 
 export const metadata: Metadata = { title: 'Empresa · DevBase' }
 
 export default function Empresa() {
   return (
     <>
-      <header className="page-head">
+      {/* ===== PAGE HEADER ===== */}
+      <header className="phead">
+        <HeroCanvas variant="silk" className="phead-canvas" />
+        <div className="phead-veil" />
         <div className="wrap">
-          <Reveal>
-            <SectionLabel>// sobre a DevBase</SectionLabel>
-          </Reveal>
-          <Reveal>
-            <h1>Três devs de Goiânia. Construindo do zero.</h1>
-          </Reveal>
-          <Reveal>
-            <p className="sub">Sem investidor, sem escritório, sem frescura.</p>
-          </Reveal>
+          <span className="eyebrow on-dark">Quem somos</span>
+          <h1>Três devs de Goiânia. Construindo do zero.</h1>
+          <p>Sem investidor, sem escritório, sem frescura. Código, design, suporte e conteúdo — tudo na mão.</p>
         </div>
       </header>
 
-      {/* Nossa história */}
-      <section className="section" style={{ paddingTop: 0 }}>
+      {/* ===== HISTÓRIA ===== */}
+      <section className="sec">
         <div className="wrap">
-          <div className="two-col">
-            <div>
-              <Reveal>
-                <SectionLabel>// nossa história</SectionLabel>
-              </Reveal>
-            </div>
-            <div className="text" style={{ marginTop: 0 }}>
-              <Reveal>
-                <p>
-                  Nascemos da frustração de quem vive o mercado tech brasileiro. Boilerplate genérico que assume Stripe. Vagas com &ldquo;salário a combinar&rdquo;. Ferramentas em inglês com docs que ninguém traduz. Suporte que demora 3 dias pra responder uma issue.
+          <div className="showcase">
+            <Reveal className="sc-copy">
+              <span className="eyebrow">Nossa história</span>
+              <h2>Nasceu da frustração de quem vive o mercado tech BR.</h2>
+            </Reveal>
+            <Reveal>
+              <div style={{ fontSize: 18, color: 'var(--body)', lineHeight: 1.8 }}>
+                <p style={{ marginBottom: 18 }}>
+                  Boilerplate genérico que assume Stripe. Vagas com &quot;salário a combinar&quot;. Ferramentas em inglês com docs que ninguém traduz. Suporte que demora 3 dias pra responder uma issue.
+                </p>
+                <p style={{ marginBottom: 18 }}>
+                  Decidimos construir o que gostaríamos de ter. Produto por produto. Do zero. Em português. <strong style={{ color: 'var(--ink)' }}>Samuel</strong>, <strong style={{ color: 'var(--ink)' }}>Isaque</strong> e <strong style={{ color: 'var(--ink)' }}>Daniel</strong> tocam tudo.
                 </p>
                 <p>
-                  Decidimos construir o que gostaríamos de ter. Produto por produto. Do zero. Em português. Cada lançamento é uma resposta a uma dor real que a gente também sentiu como dev.
+                  Começamos em 2025 com produtos no ar e uma promessa simples: <strong style={{ color: 'var(--ink)' }}>lançamos coisa pronta. Não vendemos promessa.</strong>
                 </p>
-                <p>
-                  Começamos em 2025 com dois produtos no ar: um boilerplate SaaS feito pra mercado brasileiro e um job board onde salário é obrigatório. Mais chegando — sem promessa, sem data, só quando estiver pronto.
-                </p>
-              </Reveal>
-            </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* O time */}
-      <section className="section">
+      {/* ===== TIMELINE ===== */}
+      <section className="sec tight soft">
         <div className="wrap">
-          <Reveal>
-            <div className="section-head" style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto' }}>
-              <SectionLabel>// o time</SectionLabel>
-              <h2>Quem está construindo.</h2>
+          <Reveal className="sec-head">
+            <span className="eyebrow">A linha do tempo</span>
+            <h2>Do incômodo ao produto.</h2>
+          </Reveal>
+          <Reveal className="timeline">
+            <div className="tl-row">
+              <div className="yr">2025</div>
+              <div>
+                <h3>A DevBase nasce</h3>
+                <p>Três devs decidem parar de reclamar e começar a construir as ferramentas que faltavam pro mercado brasileiro.</p>
+              </div>
+            </div>
+            <div className="tl-row">
+              <div className="yr">2025</div>
+              <div>
+                <h3>Boilerplate + Components</h3>
+                <p>Os primeiros produtos no ar: um kit SaaS pronto pro Brasil e uma biblioteca de componentes React com CPF, CNPJ, CEP, PIX e cartão.</p>
+              </div>
+            </div>
+            <div className="tl-row">
+              <div className="yr">2025</div>
+              <div>
+                <h3>DevBase Jobs (beta)</h3>
+                <p>Um job board honesto: salário obrigatório, stack real, remoto verificado. Gratuito pra devs.</p>
+              </div>
+            </div>
+            <div className="tl-row">
+              <div className="yr">2026</div>
+              <div>
+                <h3>100 Micro SaaS</h3>
+                <p>100 ideias validadas + 25 automações — a entrada perfeita pra quem quer lançar o primeiro produto.</p>
+              </div>
             </div>
           </Reveal>
-          <div className="team-grid">
-            <Reveal><TeamMember initials="SL" name="Samuel Lustosa Rodrigues Melo" role="founder · dev" /></Reveal>
-            <Reveal><TeamMember initials="IL" name="Isaque Lustosa Rodrigues Melo" role="co-founder" /></Reveal>
-            <Reveal><TeamMember initials="DO" name="Daniel de Oliveira Pimenta Melo" role="co-founder" /></Reveal>
+        </div>
+      </section>
+
+      {/* ===== VALORES ===== */}
+      <section className="sec">
+        <div className="wrap">
+          <Reveal className="sec-head">
+            <span className="eyebrow">Nossos valores</span>
+            <h2>Três regras. Nenhuma negociável.</h2>
+          </Reveal>
+          <div className="values">
+            <Reveal delay={0}>
+              <div className="vcard">
+                <div className="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <h3>Transparência acima de tudo</h3>
+                <p>Preço visível, stack real, salário obrigatório. Nenhum produto nosso esconde o que importa.</p>
+              </div>
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="vcard">
+                <div className="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                  </svg>
+                </div>
+                <h3>Português primeiro</h3>
+                <p>Documentação, suporte e produto em PT-BR. O dev br não precisa traduzir pra usar ferramenta boa.</p>
+              </div>
+            </Reveal>
+            <Reveal delay={160}>
+              <div className="vcard">
+                <div className="ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9z" />
+                  </svg>
+                </div>
+                <h3>Real antes de escala</h3>
+                <p>Não lançamos promessa, lançamos produto. Sem &quot;em breve&quot; sem data marcada.</p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Nossos valores */}
-      <section className="section">
+      {/* ===== MANIFESTO ===== */}
+      <section className="sec soft" id="manifesto">
         <div className="wrap">
-          <Reveal>
-            <div className="section-head">
-              <SectionLabel>// nossos valores</SectionLabel>
-              <h2>Três regras. Nenhuma negociável.</h2>
-            </div>
+          <Reveal className="manifesto blur">
+            <span className="eyebrow center" style={{ marginBottom: 28 }}>Manifesto</span>
+            <p>A internet brasileira não precisa de mais <span className="ac">tutoriais</span>. Precisa de devs <span className="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>
           </Reveal>
-          <div className="values-grid">
-            <Reveal>
-              <ValueCard
-                num="01"
-                title="Transparência acima de tudo"
-                desc="Preço visível, stack real, salário obrigatório. Nenhum produto nosso esconde o que importa."
-              />
+        </div>
+      </section>
+
+      {/* ===== TIME ===== */}
+      <section className="sec" id="time">
+        <div className="wrap">
+          <Reveal className="sec-head">
+            <span className="eyebrow">O time</span>
+            <h2>Quem está construindo.</h2>
+          </Reveal>
+          <div className="team">
+            <Reveal delay={0}>
+              <div className="member">
+                <div className="av">SL</div>
+                <div className="nm">Samuel Lustosa Rodrigues Melo</div>
+                <div className="rl">founder · dev</div>
+              </div>
             </Reveal>
-            <Reveal>
-              <ValueCard
-                num="02"
-                title="Português primeiro"
-                desc="Documentação, suporte e produto em PT-BR. O dev BR não precisa traduzir pra usar ferramenta boa."
-              />
+            <Reveal delay={80}>
+              <div className="member">
+                <div className="av">IL</div>
+                <div className="nm">Isaque Lustosa Rodrigues Melo</div>
+                <div className="rl">co-founder</div>
+              </div>
             </Reveal>
-            <Reveal>
-              <ValueCard
-                num="03"
-                title="Real antes de escala"
-                desc='Não lançamos promessa. Lançamos produto. Sem "em breve" sem data.'
-              />
+            <Reveal delay={160}>
+              <div className="member">
+                <div className="av">DO</div>
+                <div className="nm">Daniel de Oliveira Pimenta Melo</div>
+                <div className="rl">co-founder</div>
+              </div>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* ===== PARTICIPE ===== */}
+      <section className="sec tight soft">
+        <div className="wrap wrap-wide">
+          <Reveal className="sec-head">
+            <span className="eyebrow">Participe</span>
+            <h2>Sua voz vira o próximo produto.</h2>
+          </Reveal>
+          <div className="panels">
+            <Reveal className="panel">
+              <span className="eyebrow">Sua dor como dev</span>
+              <h3>Qual é o seu maior problema?</h3>
+              <p>Marca o que mais te incomoda — ou escreve com suas palavras.</p>
+              <PainChips />
+            </Reveal>
+            <Reveal delay={80} className="panel">
+              <span className="eyebrow">Fique por dentro</span>
+              <h3>Novos produtos em breve.</h3>
+              <p>Deixa seu e-mail e a gente avisa quando lançar algo novo. Sem spam.</p>
+              <NewsletterForm />
+              <div style={{ marginTop: 26, borderTop: '1px solid var(--line)', paddingTop: 22 }}>
+                <div className="eyebrow" style={{ marginBottom: 14 }}>Roadmap aberto</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 14.5, color: 'var(--body)' }}>
+                  <div><span style={{ color: 'var(--signal)', fontWeight: 700 }}>✓</span>&nbsp; 100 Micro SaaS <span style={{ color: 'var(--muted)' }}>· lançado</span></div>
+                  <div><span style={{ color: 'var(--signal)', fontWeight: 700 }}>✓</span>&nbsp; Components BR <span style={{ color: 'var(--muted)' }}>· lançado</span></div>
+                  <div><span style={{ color: 'var(--primary)', fontWeight: 700 }}>▸</span>&nbsp; próximo produto <span style={{ color: 'var(--muted)' }}>· quando estiver pronto</span></div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== CTA BAND ===== */}
+      <section className="sec tight">
+        <div className="wrap wrap-wide">
+          <Reveal className="ctaband">
+            <HeroCanvas variant="silk" className="ctaband-canvas" />
+            <div className="ctaband-veil" />
+            <div className="ctaband-in">
+              <h2>Feito por devs BR, pra devs BR.</h2>
+              <p>Conheça as ferramentas que a gente construiu pra deixar a vida do dev brasileiro mais fácil.</p>
+              <div className="hero-cta">
+                <a href="/produtos" className="btn btn-primary btn-lg">Ver produtos <span className="arr">→</span></a>
+                <a href="/jobs" className="btn btn-glass btn-lg">Conhecer o Jobs</a>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
     </>
