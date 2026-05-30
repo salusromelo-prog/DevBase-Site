@@ -1,30 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import HeroCanvas, { type HeroVariant } from './hero-canvas'
-
-const VARIANTS: { v: HeroVariant; label: string }[] = [
-  { v: 'silk', label: 'ondas' },
-  { v: 'aurora', label: 'aurora' },
-  { v: 'flow', label: 'fluxo' },
-]
+import HeroCanvas from './hero-canvas'
 
 export default function HomeHero() {
-  const [variant, setVariant] = useState<HeroVariant>('silk')
-
-  useEffect(() => {
-    const saved = localStorage.getItem('db-hero') as HeroVariant | null
-    if (saved && ['silk', 'aurora', 'flow'].includes(saved)) setVariant(saved)
-  }, [])
-
-  function switchVariant(v: HeroVariant) {
-    setVariant(v)
-    localStorage.setItem('db-hero', v)
-  }
-
   return (
     <header className="hero">
-      <HeroCanvas variant={variant} className="hero-canvas" />
+      <HeroCanvas variant="silk" className="hero-canvas" />
       <div className="hero-veil" />
       <div className="wrap hero-inner">
         <h1>
@@ -44,19 +25,6 @@ export default function HomeHero() {
       <div className="scrollcue">
         <span className="ln" />
         scroll
-      </div>
-      <div className="hero-switch" aria-label="estilo da animação">
-        <div className="pills">
-          {VARIANTS.map(({ v, label }) => (
-            <button
-              key={v}
-              className={variant === v ? 'on' : ''}
-              onClick={() => switchVariant(v)}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
       </div>
     </header>
   )
