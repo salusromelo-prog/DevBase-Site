@@ -1,8 +1,6 @@
 ﻿import { NextRequest } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const BOILERPLATE_HTML = `
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -323,6 +321,7 @@ const COMBO_HTML = `
 `
 
 export async function POST(request: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   const body = await request.json() as { email: string; produto: string }
   const { email, produto } = body
 

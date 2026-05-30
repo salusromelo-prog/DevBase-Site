@@ -18,6 +18,12 @@ export default function Home() {
         </div>
         <div className="wrap">
           <Reveal>
+            <div className="pill" style={{ display: 'inline-flex', marginBottom: 32 }}>
+              <span className="dot" aria-hidden="true" />
+              devbase — v1 · 2025
+            </div>
+          </Reveal>
+          <Reveal>
             <h1>
               Ferramentas para
               <br />
@@ -34,7 +40,7 @@ export default function Home() {
               <Link href="/produtos" className="btn btn-primary">
                 Conhecer produtos <span className="arrow">→</span>
               </Link>
-              <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+              <a href="https://devbase.jobs" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
                 DevBase Jobs
               </a>
             </div>
@@ -119,68 +125,56 @@ export default function Home() {
           <Reveal>
             <div className="section-head">
               <SectionLabel>// nossos produtos</SectionLabel>
-              <h2>Ferramentas para devs brasileiros.</h2>
-              <p>Produtos que resolvem problemas reais. Sem assinatura, sem enrolação.</p>
+              <h2>O que construímos até agora.</h2>
+              <p>Dois produtos no ar. Mais chegando.</p>
             </div>
           </Reveal>
-          <Reveal>
-            <div className="product-list">
-              <div className="product-list-item">
-                <span className="badge badge-live">● ao vivo</span>
-                <div className="pli-meta">
-                  <span className="pli-name">DevBase Boilerplate</span>
-                  <span className="pli-desc">Kit Next.js para lançar SaaS no Brasil</span>
+          <div className="products-grid">
+            <Reveal>
+              <article className="product">
+                <div><span className="badge badge-live">● ao vivo</span></div>
+                <h3>DevBase Boilerplate</h3>
+                <p className="desc">Boilerplate SaaS pronto pro mercado brasileiro. Auth, pagamentos em PIX/boleto/cartão, dashboard e deploy — tudo configurado.</p>
+                <ul>
+                  <li>Next.js 14 + TypeScript + Tailwind</li>
+                  <li>Auth com Supabase</li>
+                  <li>Pagar.me · PIX · boleto · cartão</li>
+                  <li>Dashboard e painel admin</li>
+                </ul>
+                <div className="ft">
+                  <div className="price">
+                    <span className="big green">R$ 297</span>
+                    <span className="small">pagamento único · vitalício</span>
+                  </div>
+                  <Link href="/produtos" className="btn btn-primary">
+                    Comprar <span className="arrow">→</span>
+                  </Link>
                 </div>
-                <span className="pli-price">R$ 147</span>
-                <a href="https://saas-kit-br-salusromelo-progs-projects.vercel.app" target="_blank" rel="noopener noreferrer" className="pli-btn">Comprar <span className="arrow">→</span></a>
-              </div>
-              <div className="product-list-item">
-                <span className="badge badge-live">● ao vivo</span>
-                <div className="pli-meta">
-                  <span className="pli-name">DevBase Components</span>
-                  <span className="pli-desc">8 componentes React prontos para o BR</span>
+              </article>
+            </Reveal>
+            <Reveal>
+              <article className="product">
+                <div><span className="badge badge-beta">◉ beta</span></div>
+                <h3>DevBase Jobs</h3>
+                <p className="desc">Job board para devs brasileiros. Salário obrigatório em toda vaga, stack real e remoto verificado.</p>
+                <ul>
+                  <li>Salário sempre visível</li>
+                  <li>Stack real do dia a dia</li>
+                  <li>Remoto verificado</li>
+                  <li>Alertas por e-mail</li>
+                </ul>
+                <div className="ft">
+                  <div className="price">
+                    <span className="big indigo">Grátis</span>
+                    <span className="small">em beta · sempre gratuito</span>
+                  </div>
+                  <a href="https://devbase.jobs" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                    Acessar <span className="arrow">→</span>
+                  </a>
                 </div>
-                <span className="pli-price">R$ 67</span>
-                <a href="https://pay.kiwify.com.br/7OQNJ1C" target="_blank" rel="noopener noreferrer" className="pli-btn">Comprar <span className="arrow">→</span></a>
-              </div>
-              <div className="product-list-item">
-                <span className="badge badge-combo">◈ combo</span>
-                <div className="pli-meta">
-                  <span className="pli-name">Boilerplate + Components</span>
-                  <span className="pli-desc">Os dois juntos com desconto</span>
-                </div>
-                <span className="pli-price">R$ 197</span>
-                <Link href="/produtos#combo" className="pli-btn">Ver <span className="arrow">→</span></Link>
-              </div>
-              <div className="product-list-item">
-                <span className="badge badge-live">● ao vivo</span>
-                <div className="pli-meta">
-                  <span className="pli-name">100 Micro SaaS</span>
-                  <span className="pli-desc">100 ideias + 25 automações prontas</span>
-                </div>
-                <span className="pli-price">R$ 29,90</span>
-                <a href="https://pay.kiwify.com.br/5cyFrhr" target="_blank" rel="noopener noreferrer" className="pli-btn">Comprar <span className="arrow">→</span></a>
-              </div>
-              <div className="product-list-item">
-                <span className="badge badge-beta">◉ beta gratuito</span>
-                <div className="pli-meta">
-                  <span className="pli-name">DevBase Jobs</span>
-                  <span className="pli-desc">Job board para devs BR com salário obrigatório</span>
-                </div>
-                <span className="pli-price">Grátis</span>
-                <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener noreferrer" className="pli-btn">Acessar <span className="arrow">→</span></a>
-              </div>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div className="produtos-cta" style={{ marginTop: '24px' }}>
-              <h2>Não sabe por onde começar?</h2>
-              <p>Compra o 100 Micro SaaS por R$29,90 e escolhe sua próxima ideia.</p>
-              <a href="https://pay.kiwify.com.br/5cyFrhr" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                Ver 100 ideias <span className="arrow">→</span>
-              </a>
-            </div>
-          </Reveal>
+              </article>
+            </Reveal>
+          </div>
         </div>
       </section>
 

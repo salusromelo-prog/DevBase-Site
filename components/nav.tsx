@@ -33,7 +33,7 @@ export default function Nav() {
         </div>
         <div className="nav-cta">
           <a
-            href="https://dev-base-jobs.vercel.app"
+            href="https://devbase.jobs"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-ghost"
