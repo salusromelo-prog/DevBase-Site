@@ -30,15 +30,15 @@ export default function Home() {
       </section>
 
       {/* ===== POR QUE EXISTIMOS ===== */}
-      <section className="sec">
+      <section className="sec" data-rail="por-que">
         <div className="wrap">
           <Reveal className="sec-head">
             <span className="eyebrow">Por que existimos</span>
-            <h2>O dev brasileiro merece ferramentas feitas pra ele.</h2>
+            <h2 data-split>O dev brasileiro merece ferramentas feitas pra ele.</h2>
             <p>Não adaptações mal traduzidas. Produtos que entendem a nossa realidade — do pagamento à documentação.</p>
           </Reveal>
           <div className="values">
-            <Reveal delay={0}>
+            <Reveal delay={0} className="depth">
               <div className="vcard">
                 <div className="ic">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -51,7 +51,7 @@ export default function Home() {
                 <p>Sem conversão de dólar, sem IOF, sem surpresa no cartão. Pagamento único em PIX, boleto ou cartão.</p>
               </div>
             </Reveal>
-            <Reveal delay={80}>
+            <Reveal delay={80} className="depth">
               <div className="vcard">
                 <div className="ic">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -63,7 +63,7 @@ export default function Home() {
                 <p>Tutoriais, exemplos e suporte 100% em PT-BR. Você não precisa traduzir nada pra começar a construir.</p>
               </div>
             </Reveal>
-            <Reveal delay={160}>
+            <Reveal delay={160} className="depth">
               <div className="vcard">
                 <div className="ic">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -80,12 +80,12 @@ export default function Home() {
       </section>
 
       {/* ===== SHOWCASE — Boilerplate ===== */}
-      <section className="sec soft">
+      <section className="sec soft" data-rail="boilerplate">
         <div className="wrap">
           <div className="showcase">
             <Reveal className="sc-copy">
               <span className="eyebrow">Produto em destaque</span>
-              <h2>Do repositório ao mercado, em dias.</h2>
+              <h2 data-split>Do repositório ao mercado, em dias.</h2>
               <p className="lead">O DevBase Boilerplate entrega a parte chata já pronta — auth, pagamentos, dashboard e deploy. Você foca no que torna o seu produto único.</p>
               <ul className="sc-list">
                 <li><span className="ck">{CHECK}</span>Auth completo com Supabase + magic link</li>
@@ -117,11 +117,11 @@ export default function Home() {
       </section>
 
       {/* ===== PRODUCT CATALOG OVERVIEW ===== */}
-      <section className="sec">
+      <section className="sec" data-rail="catalogo">
         <div className="wrap wrap-wide">
           <Reveal className="sec-head center">
             <span className="eyebrow center">O catálogo</span>
-            <h2>Tudo que a DevBase construiu.</h2>
+            <h2 data-split>Tudo que a DevBase construiu.</h2>
             <p>Produtos avulsos que resolvem problemas reais. Pagamento único ou gratuito — sem assinatura.</p>
           </Reveal>
           <div className="cards">
@@ -199,9 +199,9 @@ export default function Home() {
       </section>
 
       {/* ===== MANIFESTO ===== */}
-      <section className="sec">
+      <section className="sec" data-rail="manifesto">
         <div className="wrap">
-          <Reveal className="manifesto blur">
+          <Reveal className="manifesto blur depth">
             <span className="eyebrow center" style={{ marginBottom: 28 }}>Manifesto</span>
             <p>A internet brasileira não precisa de mais <span className="ac">tutoriais</span>. Precisa de devs <span className="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>
           </Reveal>
@@ -209,13 +209,13 @@ export default function Home() {
       </section>
 
       {/* ===== CTA BAND ===== */}
-      <section className="sec tight">
+      <section className="sec tight" data-rail="comecar">
         <div className="wrap wrap-wide">
           <Reveal className="ctaband">
             <HeroCanvas variant="silk" className="ctaband-canvas" />
             <div className="ctaband-veil" />
             <div className="ctaband-in">
-              <h2>Construa em cima de uma base que já funciona.</h2>
+              <h2 data-split>Construa em cima de uma base que já funciona.</h2>
               <p>Ferramentas feitas por devs brasileiros, pro mercado brasileiro. Comece pelo que faz sentido pra você.</p>
               <div className="hero-cta">
                 <a href="/produtos" className="btn btn-primary btn-lg">Ver todos os produtos <span className="arr">→</span></a>

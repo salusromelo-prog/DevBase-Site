@@ -13,13 +13,13 @@ export default function Produtos() {
         <div className="phead-veil" />
         <div className="wrap">
           <span className="eyebrow on-dark">Produtos</span>
-          <h1>Construir, lançar e crescer no Brasil.</h1>
+          <h1 data-split>Construir, lançar e crescer no Brasil.</h1>
           <p>Produtos avulsos que resolvem problemas reais do dev brasileiro. Pagamento único ou gratuito — sem assinatura, sem enrolação.</p>
         </div>
       </header>
 
       {/* ===== CATALOG ===== */}
-      <section className="sec">
+      <section className="sec" data-rail="catalogo">
         <div className="wrap wrap-wide">
           <div className="cards">
 
@@ -182,7 +182,7 @@ export default function Produtos() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section className="sec tight soft">
+      <section className="sec tight soft" data-rail="faq">
         <div className="wrap">
           <Reveal className="sec-head">
             <span className="eyebrow">Perguntas frequentes</span>
@@ -214,13 +214,13 @@ export default function Produtos() {
       </section>
 
       {/* ===== CTA BAND ===== */}
-      <section className="sec tight">
+      <section className="sec tight" data-rail="comecar">
         <div className="wrap wrap-wide">
           <Reveal className="ctaband">
             <HeroCanvas variant="silk" className="ctaband-canvas" />
             <div className="ctaband-veil" />
             <div className="ctaband-in">
-              <h2>Comece pelo que faz sentido pra você.</h2>
+              <h2 data-split>Comece pelo que faz sentido pra você.</h2>
               <p>Da primeira ideia ao deploy do seu SaaS — a DevBase tem a ferramenta certa pra cada etapa.</p>
               <div className="hero-cta">
                 <a

@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import Nav from '@/components/nav'
 import Footer from '@/components/footer'
+import ScrollFx from '@/components/scroll-fx'
 
 const jetbrainsMono = localFont({
   src: [
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main>{children}</main>
         <Footer />
+        <ScrollFx />
       </body>
     </html>
   )

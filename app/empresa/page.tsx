@@ -15,13 +15,13 @@ export default function Empresa() {
         <div className="phead-veil" />
         <div className="wrap">
           <span className="eyebrow on-dark">Quem somos</span>
-          <h1>Três devs de Goiânia. Construindo do zero.</h1>
+          <h1 data-split>Três devs de Goiânia. Construindo do zero.</h1>
           <p>Sem investidor, sem escritório, sem frescura. Código, design, suporte e conteúdo — tudo na mão.</p>
         </div>
       </header>
 
       {/* ===== HISTÓRIA ===== */}
-      <section className="sec">
+      <section className="sec" data-rail="historia">
         <div className="wrap">
           <div className="showcase">
             <Reveal className="sc-copy">
@@ -46,7 +46,7 @@ export default function Empresa() {
       </section>
 
       {/* ===== TIMELINE ===== */}
-      <section className="sec tight soft">
+      <section className="sec tight soft" data-rail="timeline">
         <div className="wrap">
           <Reveal className="sec-head">
             <span className="eyebrow">A linha do tempo</span>
@@ -86,14 +86,14 @@ export default function Empresa() {
       </section>
 
       {/* ===== VALORES ===== */}
-      <section className="sec">
+      <section className="sec" data-rail="valores">
         <div className="wrap">
           <Reveal className="sec-head">
             <span className="eyebrow">Nossos valores</span>
-            <h2>Três regras. Nenhuma negociável.</h2>
+            <h2 data-split>Três regras. Nenhuma negociável.</h2>
           </Reveal>
           <div className="values">
-            <Reveal delay={0}>
+            <Reveal delay={0} className="depth">
               <div className="vcard">
                 <div className="ic">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -104,7 +104,7 @@ export default function Empresa() {
                 <p>Preço visível, stack real, salário obrigatório. Nenhum produto nosso esconde o que importa.</p>
               </div>
             </Reveal>
-            <Reveal delay={80}>
+            <Reveal delay={80} className="depth">
               <div className="vcard">
                 <div className="ic">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -116,7 +116,7 @@ export default function Empresa() {
                 <p>Documentação, suporte e produto em PT-BR. O dev br não precisa traduzir pra usar ferramenta boa.</p>
               </div>
             </Reveal>
-            <Reveal delay={160}>
+            <Reveal delay={160} className="depth">
               <div className="vcard">
                 <div className="ic">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -132,9 +132,9 @@ export default function Empresa() {
       </section>
 
       {/* ===== MANIFESTO ===== */}
-      <section className="sec soft" id="manifesto">
+      <section className="sec soft" id="manifesto" data-rail="manifesto">
         <div className="wrap">
-          <Reveal className="manifesto blur">
+          <Reveal className="manifesto blur depth">
             <span className="eyebrow center" style={{ marginBottom: 28 }}>Manifesto</span>
             <p>A internet brasileira não precisa de mais <span className="ac">tutoriais</span>. Precisa de devs <span className="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>
           </Reveal>
@@ -175,7 +175,7 @@ export default function Empresa() {
       </section>
 
       {/* ===== PARTICIPE ===== */}
-      <section className="sec tight soft">
+      <section className="sec tight soft" data-rail="participe">
         <div className="wrap wrap-wide">
           <Reveal className="sec-head">
             <span className="eyebrow">Participe</span>
