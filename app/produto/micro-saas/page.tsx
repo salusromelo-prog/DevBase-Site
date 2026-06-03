@@ -169,18 +169,18 @@ export default function ProdutoMicroSaas() {
       </section>
 
       <style>{`
-        .p-micro .eyebrow { color: #d97706; font-size: 14px; letter-spacing: 0.12em; }
+        .p-micro .eyebrow { color: #0d9488; font-size: 14px; letter-spacing: 0.12em; }
         .p-micro .phead .wrap { text-align: center; }
         .p-micro .phead h1 { margin-left: auto; margin-right: auto; }
         .p-micro .phead > .wrap > p { margin-left: auto; margin-right: auto; max-width: 56ch; }
         .p-micro .phead .prod-stats { justify-content: center; }
-        .p-micro .btn-primary { background: #d97706; box-shadow: 0 8px 24px -10px rgba(217,119,6,0.5); }
-        .p-micro .btn-primary:hover { background: #b45309; }
+        .p-micro .btn-primary { background: #0d9488; box-shadow: 0 8px 24px -10px rgba(217,119,6,0.5); }
+        .p-micro .btn-primary:hover { background: #0f766e; }
         .p-micro .phead h1 .grad {
           background: linear-gradient(110deg, #fde68a, #fbbf24 40%, #fde68a);
           -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .p-micro .offer-now { color: #d97706; }
+        .p-micro .offer-now { color: #0d9488; }
         .prod-stats { display: flex; gap: 48px; margin-top: 52px; flex-wrap: wrap; }
         .ps-item { display: flex; flex-direction: column; gap: 4px; align-items: center; }
         .ps-n { font-size: 38px; font-weight: 700; letter-spacing: -0.04em; color: #fff; line-height: 1; }
@@ -204,7 +204,7 @@ export default function ProdutoMicroSaas() {
         .p-micro .sec:nth-child(even) { background: #f5f5f7; }
         .p-micro .sec { border-top: 2px solid #e2e8f0; counter-increment: p-sec; }
         .p-micro .sec.tight { padding-top: 96px; padding-bottom: 96px; }
-        .p-micro .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(217,119,6,0.18) 0%, transparent 65%); }
+        .p-micro .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(13,148,136,0.18) 0%, transparent 65%); }
         .p-micro .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(217,119,6,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
         .p-micro .ctaband { border-top: 1px solid rgba(255,255,255,0.08); }
         /* section numbers */
