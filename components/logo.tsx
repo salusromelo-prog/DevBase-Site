@@ -13,7 +13,7 @@ export default function Logo({ size = 'md' }: { size?: LogoSize }) {
         </svg>
       </span>
       <span className="logo-text">
-        dev<span className="slash">/</span>base
+        dev<span className="s">/</span>base
       </span>
     </span>
   )
