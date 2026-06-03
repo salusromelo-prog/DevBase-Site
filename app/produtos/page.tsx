@@ -46,13 +46,11 @@ export default function Produtos() {
                 <div className="big">R$ 29,90</div>
                 <div className="bs">acesso vitalício · dashboard exclusivo</div>
                 <a
-                  href="https://pay.kiwify.com.br/5cyFrhr"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/produto/micro-saas"
                   className="btn btn-primary"
                   style={{ marginTop: 22, width: '100%', justifyContent: 'center' }}
                 >
-                  Comprar agora <span className="arr">→</span>
+                  Ver detalhes <span className="arr">→</span>
                 </a>
               </div>
             </Reveal>
@@ -78,9 +76,7 @@ export default function Produtos() {
               <div className="pfoot">
                 <div className="price"><span className="s">lançamento · acesso vitalício</span></div>
                 <a
-                  href="https://saas-kit-br-salusromelo-progs-projects.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/produto/boilerplate"
                   className="btn btn-dark btn-sm"
                 >
                   Comprar <span className="arr">→</span>
@@ -109,9 +105,7 @@ export default function Produtos() {
               <div className="pfoot">
                 <div className="price"><span className="s">acesso vitalício</span></div>
                 <a
-                  href="https://pay.kiwify.com.br/7OQNJ1C"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/produto/components"
                   className="btn btn-dark btn-sm"
                 >
                   Comprar <span className="arr">→</span>
@@ -138,9 +132,7 @@ export default function Produtos() {
               <div className="pfoot">
                 <div className="price"><span className="s">economia de R$ 17 · vitalício</span></div>
                 <a
-                  href="https://pay.kiwify.com.br/Y6jViIR"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/produto/combo"
                   className="btn btn-dark btn-sm"
                 >
                   Comprar combo <span className="arr">→</span>
@@ -224,9 +216,7 @@ export default function Produtos() {
               <p>Da primeira ideia ao deploy do seu SaaS — a DevBase tem a ferramenta certa pra cada etapa.</p>
               <div className="hero-cta">
                 <a
-                  href="https://pay.kiwify.com.br/5cyFrhr"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/produto/micro-saas"
                   className="btn btn-primary btn-lg"
                 >
                   Começar com R$ 29,90 <span className="arr">→</span>

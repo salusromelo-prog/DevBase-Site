@@ -92,7 +92,7 @@ export default function Home() {
                 <li><span className="ck">{CHECK}</span>Pagar.me integrado — PIX, boleto e cartão</li>
                 <li><span className="ck">{CHECK}</span>Dashboard, painel admin e billing portal</li>
               </ul>
-              <a href="/produtos" className="btn btn-dark">Ver o boilerplate <span className="arr">→</span></a>
+              <a href="/produto/boilerplate" className="btn btn-dark">Ver o boilerplate <span className="arr">→</span></a>
             </Reveal>
             <Reveal className="blur">
               <div className="codecard">
@@ -131,7 +131,7 @@ export default function Home() {
               <p className="pdesc">100 ideias validadas com problema, público, monetização, stack e MVP — prontas pra executar.</p>
               <div className="pfoot">
                 <div className="price"><span className="now green">R$ 29,90</span><span className="s">pagamento único · vitalício</span></div>
-                <a href="/produtos" className="btn btn-primary btn-sm">Detalhes <span className="arr">→</span></a>
+                <a href="/produto/micro-saas" className="btn btn-primary btn-sm">Detalhes <span className="arr">→</span></a>
               </div>
             </Reveal>
             <Reveal delay={80} className="pcard span6">
@@ -140,7 +140,7 @@ export default function Home() {
               <p className="pdesc">Kit Next.js completo pra lançar SaaS no Brasil. Auth, pagamentos, dashboard e deploy configurados.</p>
               <div className="pfoot">
                 <div className="price"><span className="old">R$ 297</span><span className="now green">R$ 147</span><span className="s">acesso vitalício</span></div>
-                <a href="/produtos" className="btn btn-primary btn-sm">Detalhes <span className="arr">→</span></a>
+                <a href="/produto/boilerplate" className="btn btn-primary btn-sm">Detalhes <span className="arr">→</span></a>
               </div>
             </Reveal>
             <Reveal delay={0} className="pcard span4">
@@ -149,7 +149,7 @@ export default function Home() {
               <p className="pdesc">8 componentes React pro mercado BR: CPF, CNPJ, CEP, PIX e cartão.</p>
               <div className="pfoot">
                 <div className="price"><span className="now indigo">R$ 67</span><span className="s">vitalício</span></div>
-                <a href="/produtos" className="btn btn-line btn-sm">Detalhes</a>
+                <a href="/produto/components" className="btn btn-line btn-sm">Detalhes</a>
               </div>
             </Reveal>
             <Reveal delay={80} className="pcard span4">
@@ -158,7 +158,7 @@ export default function Home() {
               <p className="pdesc">Os dois produtos juntos, com desconto. Tudo pra lançar do zero.</p>
               <div className="pfoot">
                 <div className="price"><span className="old">R$ 214</span><span className="now green">R$ 197</span><span className="s">economia de R$ 17</span></div>
-                <a href="/produtos" className="btn btn-line btn-sm">Detalhes</a>
+                <a href="/produto/combo" className="btn btn-line btn-sm">Detalhes</a>
               </div>
             </Reveal>
             <Reveal delay={160} className="pcard span4">
