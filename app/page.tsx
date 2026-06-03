@@ -1,7 +1,9 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import HomeHero from '@/components/home-hero'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
+import SectionShell from '@/components/visual/section-shell'
+import SectionTransition from '@/components/visual/section-transition'
 
 export const metadata: Metadata = {
   title: 'DevBase — Ferramentas para devs brasileiros',
@@ -17,9 +19,10 @@ export default function Home() {
   return (
     <>
       <HomeHero />
+      <SectionTransition />
 
       {/* ===== STACK STRIP ===== */}
-      <section className="strip">
+      <section className="strip sx-curtain">
         <div className="wrap"><div className="strip-lbl">A stack que já vem configurada</div></div>
         <div className="strip-track">
           {['Next.js 14', 'TypeScript 5.4', 'Supabase', 'Pagar.me PIX', 'Tailwind CSS', 'Resend', 'Vercel', 'Boleto · Cartão',
@@ -30,7 +33,7 @@ export default function Home() {
       </section>
 
       {/* ===== POR QUE EXISTIMOS ===== */}
-      <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="por-que">
+      <SectionShell rail="por-que" bleed="tr" style={{ borderTop: '2px solid #e2e8f0' }}>
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// por que existimos</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
@@ -78,10 +81,10 @@ export default function Home() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== SHOWCASE — Boilerplate ===== */}
-      <section className="sec soft" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="boilerplate">
+      <SectionShell rail="boilerplate" soft style={{ borderTop: '2px solid #e2e8f0' }}>
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// produto em destaque</span><span className="sec-rule__line" /></div>
           <div className="showcase">
@@ -116,10 +119,10 @@ export default function Home() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== PRODUCT CATALOG OVERVIEW ===== */}
-      <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="catalogo">
+      <SectionShell rail="catalogo" bleed="bl" style={{ borderTop: '2px solid #e2e8f0' }}>
         <div className="wrap wrap-wide">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// o catálogo</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head center">
@@ -175,10 +178,10 @@ export default function Home() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== FIGURES ===== */}
-      <section className="sec tight soft" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }}>
+      <SectionShell tight soft style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }}>
         <div className="wrap wrap-wide">
           <div className="figs">
             <Reveal delay={0} className="fig">
@@ -199,10 +202,10 @@ export default function Home() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== MANIFESTO ===== */}
-      <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="manifesto">
+      <SectionShell rail="manifesto" bleed="center" style={{ borderTop: '2px solid #e2e8f0' }}>
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// manifesto</span><span className="sec-rule__line" /></div>
           <Reveal className="manifesto blur depth">
@@ -210,10 +213,10 @@ export default function Home() {
             <p>A internet brasileira não precisa de mais <span className="ac">tutoriais</span>. Precisa de devs <span className="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>
           </Reveal>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== CTA BAND ===== */}
-      <section className="sec tight" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }} data-rail="comecar">
+      <SectionShell rail="comecar" tight style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }}>
         <div className="wrap wrap-wide">
           <Reveal className="ctaband">
             <HeroCanvas variant="silk" className="ctaband-canvas" />
@@ -228,7 +231,7 @@ export default function Home() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </SectionShell>
     </>
   )
 }
