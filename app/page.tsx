@@ -32,6 +32,7 @@ export default function Home() {
       {/* ===== POR QUE EXISTIMOS ===== */}
       <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="por-que">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// por que existimos</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">Por que existimos</span>
             <h2 data-split>O dev brasileiro merece ferramentas feitas pra ele.</h2>
@@ -82,6 +83,7 @@ export default function Home() {
       {/* ===== SHOWCASE — Boilerplate ===== */}
       <section className="sec soft" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="boilerplate">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// produto em destaque</span><span className="sec-rule__line" /></div>
           <div className="showcase">
             <Reveal className="sc-copy">
               <span className="eyebrow">Produto em destaque</span>
@@ -119,6 +121,7 @@ export default function Home() {
       {/* ===== PRODUCT CATALOG OVERVIEW ===== */}
       <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="catalogo">
         <div className="wrap wrap-wide">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// o catálogo</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head center">
             <span className="eyebrow center">O catálogo</span>
             <h2 data-split>Tudo que a DevBase construiu.</h2>
@@ -201,6 +204,7 @@ export default function Home() {
       {/* ===== MANIFESTO ===== */}
       <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="manifesto">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// manifesto</span><span className="sec-rule__line" /></div>
           <Reveal className="manifesto blur depth">
             <span className="eyebrow center" style={{ marginBottom: 28 }}>Manifesto</span>
             <p>A internet brasileira não precisa de mais <span className="ac">tutoriais</span>. Precisa de devs <span className="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>

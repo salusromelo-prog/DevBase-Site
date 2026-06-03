@@ -29,6 +29,7 @@ export default function Jobs() {
       {/* ===== POR QUE É DIFERENTE ===== */}
       <section className="sec">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// por que é diferente</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">Por que é diferente</span>
             <h2>Tudo que um job board deveria ter.</h2>
@@ -78,6 +79,7 @@ export default function Jobs() {
       {/* ===== VAGAS ILUSTRATIVAS ===== */}
       <section className="sec tight soft">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// exemplo de vagas</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">Exemplo de vagas</span>
             <h2>Transparência logo na lista.</h2>

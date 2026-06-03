@@ -38,6 +38,7 @@ export default function ProdutoMicroSaas() {
       {/* ===== DOR ===== */}
       <section className="sec" data-rail="dor">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// sexta de noite</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// sexta de noite</span>
             <h2 data-split>Você sabe construir qualquer coisa. Não sabe o quê.</h2>
@@ -52,6 +53,7 @@ export default function ProdutoMicroSaas() {
       {/* ===== CUSTO ===== */}
       <section className="sec soft" data-rail="custo">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// o ciclo</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// o ciclo</span>
             <h2 data-split>O problema nunca foi sua capacidade técnica.</h2>
@@ -66,6 +68,7 @@ export default function ProdutoMicroSaas() {
       {/* ===== COMO FUNCIONA ===== */}
       <section id="como-funciona" className="sec" data-rail="conteudo">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// o acervo</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head center">
             <span className="eyebrow">// o acervo</span>
             <h2 data-split>100 ideias que já passaram pelo filtro difícil.</h2>
@@ -100,6 +103,7 @@ export default function ProdutoMicroSaas() {
       {/* ===== DIFERENCIAL ===== */}
       <section className="sec soft" data-rail="diferencial">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// não é lista de blog</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// não é lista de blog</span>
             <h2 data-split>"50 ideias de SaaS" do Google é lixo reciclado.</h2>
@@ -114,6 +118,7 @@ export default function ProdutoMicroSaas() {
       {/* ===== OBJEÇÃO ===== */}
       <section className="sec" data-rail="objecao">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// "ideia é o de menos"</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// "ideia é o de menos"</span>
             <h2 data-split>Pra quem já começou, sim. Pra quem está parado, é tudo.</h2>
@@ -128,6 +133,7 @@ export default function ProdutoMicroSaas() {
       {/* ===== OFERTA ===== */}
       <section className="sec soft" data-rail="oferta">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// oferta</span><span className="sec-rule__line" /></div>
           <Reveal className="offer-block">
             <span className="eyebrow">// oferta</span>
             <div className="offer-price">
@@ -163,18 +169,18 @@ export default function ProdutoMicroSaas() {
       </section>
 
       <style>{`
-        .p-micro .eyebrow { color: #7c3aed; font-size: 14px; letter-spacing: 0.12em; }
+        .p-micro .eyebrow { color: #d97706; font-size: 14px; letter-spacing: 0.12em; }
         .p-micro .phead .wrap { text-align: center; }
         .p-micro .phead h1 { margin-left: auto; margin-right: auto; }
         .p-micro .phead > .wrap > p { margin-left: auto; margin-right: auto; max-width: 56ch; }
         .p-micro .phead .prod-stats { justify-content: center; }
-        .p-micro .btn-primary { background: #7c3aed; box-shadow: 0 8px 24px -10px rgba(124,58,237,0.5); }
-        .p-micro .btn-primary:hover { background: #6d28d9; }
+        .p-micro .btn-primary { background: #d97706; box-shadow: 0 8px 24px -10px rgba(217,119,6,0.5); }
+        .p-micro .btn-primary:hover { background: #b45309; }
         .p-micro .phead h1 .grad {
-          background: linear-gradient(110deg, #c4b5fd, #a78bfa 40%, #c4b5fd);
+          background: linear-gradient(110deg, #fde68a, #fbbf24 40%, #fde68a);
           -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .p-micro .offer-now { color: #7c3aed; }
+        .p-micro .offer-now { color: #d97706; }
         .prod-stats { display: flex; gap: 48px; margin-top: 52px; flex-wrap: wrap; }
         .ps-item { display: flex; flex-direction: column; gap: 4px; align-items: center; }
         .ps-n { font-size: 38px; font-weight: 700; letter-spacing: -0.04em; color: #fff; line-height: 1; }
@@ -186,9 +192,9 @@ export default function ProdutoMicroSaas() {
         .fcard { border-radius: var(--r); border: 1px solid var(--line); background: var(--bg); padding: 26px; height: 100%; }
         .fcard h3 { font-size: 16px; letter-spacing: -0.02em; margin-bottom: 9px; }
         .fcard p { font-size: 14px; color: var(--body); line-height: 1.6; }
-        .bonus-card { border-radius: var(--r); border: 1px solid rgba(124,58,237,0.25); background: rgba(124,58,237,0.06); padding: 28px; }
+        .bonus-card { border-radius: var(--r); border: 1px solid rgba(217,119,6,0.25); background: rgba(217,119,6,0.06); padding: 28px; }
         .bonus-card p { font-size: 17px; color: var(--body); margin-top: 12px; }
-        .offer-block { max-width: 560px; }
+        .p-micro .offer-block { max-width: 560px; border: 1px solid var(--line-2); border-radius: 16px; padding: 48px; background: var(--bg-soft); box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
         .offer-price { display: flex; align-items: baseline; gap: 16px; margin: 20px 0 16px; }
         .offer-old { font-size: 22px; color: var(--muted); text-decoration: line-through; }
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: var(--primary); line-height: 1; }
@@ -196,11 +202,14 @@ export default function ProdutoMicroSaas() {
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
         .p-micro .sec:nth-child(even) { background: #f5f5f7; }
-        .p-micro .sec { border-top: 2px solid #e2e8f0; }
+        .p-micro .sec { border-top: 2px solid #e2e8f0; counter-increment: p-sec; }
         .p-micro .sec.tight { padding-top: 96px; padding-bottom: 96px; }
-        .p-micro .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(124,58,237,0.18) 0%, transparent 65%); }
-        .p-micro .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(124,58,237,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
+        .p-micro .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(217,119,6,0.18) 0%, transparent 65%); }
+        .p-micro .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(217,119,6,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
         .p-micro .ctaband { border-top: 1px solid rgba(255,255,255,0.08); }
+        /* section numbers */
+        .p-micro { counter-reset: p-sec; }
+        .p-micro .sec::before { content: counter(p-sec, decimal-leading-zero); position: absolute; top: -20px; left: -10px; font-size: 120px; font-weight: 900; font-family: var(--mono); color: currentColor; opacity: 0.04; pointer-events: none; user-select: none; z-index: 0; line-height: 1; }
       `}</style>
     </div>
   )

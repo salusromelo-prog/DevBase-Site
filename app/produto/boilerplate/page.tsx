@@ -38,6 +38,7 @@ export default function ProdutoBoilerplate() {
       {/* ===== DOR ===== */}
       <section className="sec" data-rail="dor">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// domingo, 23h</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// domingo, 23h</span>
             <h2 data-split>Você abriu o projeto sexta. É domingo e o PIX ainda não confirma.</h2>
@@ -53,6 +54,7 @@ export default function ProdutoBoilerplate() {
       {/* ===== CUSTO REAL ===== */}
       <section className="sec soft" data-rail="custo">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a conta que ninguém faz</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// a conta que ninguém faz</span>
             <h2 data-split>Toda semana remontando a base custa mais que R$ 147.</h2>
@@ -67,6 +69,7 @@ export default function ProdutoBoilerplate() {
       {/* ===== FEATURES ===== */}
       <section id="features" className="sec" data-rail="features">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a base</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head center">
             <span className="eyebrow">// a base</span>
             <h2 data-split>Tudo que todo SaaS precisa, já resolvido e testado.</h2>
@@ -97,6 +100,7 @@ export default function ProdutoBoilerplate() {
       {/* ===== DIFERENCIAL BR ===== */}
       <section className="sec soft" data-rail="diferencial">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// feito aqui, pra cá</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// feito aqui, pra cá</span>
             <h2 data-split>Tutorial gringo não fala de PIX.</h2>
@@ -111,6 +115,7 @@ export default function ProdutoBoilerplate() {
       {/* ===== OBJEÇÃO ===== */}
       <section className="sec" data-rail="objecao">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// "mas eu faria sozinho"</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// "mas eu faria sozinho"</span>
             <h2 data-split>Faria. A pergunta é se vale a pena.</h2>
@@ -125,6 +130,7 @@ export default function ProdutoBoilerplate() {
       {/* ===== OFERTA ===== */}
       <section className="sec soft" data-rail="oferta">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// oferta de lançamento</span><span className="sec-rule__line" /></div>
           <Reveal className="offer-block">
             <span className="eyebrow">// oferta de lançamento</span>
             <div className="offer-price">
@@ -183,7 +189,7 @@ export default function ProdutoBoilerplate() {
         .fcard { border-radius: var(--r); border: 1px solid var(--line); background: var(--bg); padding: 26px; height: 100%; }
         .fcard h3 { font-size: 16px; letter-spacing: -0.02em; margin-bottom: 9px; }
         .fcard p { font-size: 14px; color: var(--body); line-height: 1.6; }
-        .offer-block { max-width: 560px; }
+        .p-boiler .offer-block { max-width: 560px; border: 1px solid var(--line-2); border-radius: 16px; padding: 48px; background: var(--bg-soft); box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
         .offer-price { display: flex; align-items: baseline; gap: 16px; margin: 20px 0 16px; }
         .offer-old { font-size: 22px; color: var(--muted); text-decoration: line-through; }
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: #6366f1; line-height: 1; }
@@ -191,11 +197,14 @@ export default function ProdutoBoilerplate() {
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
         .p-boiler .sec:nth-child(even) { background: #f5f5f7; }
-        .p-boiler .sec { border-top: 2px solid #e2e8f0; }
+        .p-boiler .sec { border-top: 2px solid #e2e8f0; counter-increment: p-sec; }
         .p-boiler .sec.tight { padding-top: 96px; padding-bottom: 96px; }
         .p-boiler .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(99,102,241,0.18) 0%, transparent 65%); }
         .p-boiler .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(99,102,241,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
         .p-boiler .ctaband { border-top: 1px solid rgba(255,255,255,0.08); }
+        /* section numbers */
+        .p-boiler { counter-reset: p-sec; }
+        .p-boiler .sec::before { content: counter(p-sec, decimal-leading-zero); position: absolute; top: -20px; left: -10px; font-size: 120px; font-weight: 900; font-family: var(--mono); color: currentColor; opacity: 0.04; pointer-events: none; user-select: none; z-index: 0; line-height: 1; }
       `}</style>
     </div>
   )

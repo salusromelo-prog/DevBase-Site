@@ -23,6 +23,7 @@ export default function Empresa() {
       {/* ===== HISTÓRIA ===== */}
       <section className="sec" data-rail="historia">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// nossa história</span><span className="sec-rule__line" /></div>
           <div className="showcase">
             <Reveal className="sc-copy">
               <span className="eyebrow">Nossa história</span>
@@ -48,6 +49,7 @@ export default function Empresa() {
       {/* ===== TIMELINE ===== */}
       <section className="sec tight soft" data-rail="timeline">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a linha do tempo</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">A linha do tempo</span>
             <h2>Do incômodo ao produto.</h2>
@@ -88,6 +90,7 @@ export default function Empresa() {
       {/* ===== VALORES ===== */}
       <section className="sec" data-rail="valores">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// nossos valores</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">Nossos valores</span>
             <h2 data-split>Três regras. Nenhuma negociável.</h2>
@@ -144,6 +147,7 @@ export default function Empresa() {
       {/* ===== TIME ===== */}
       <section className="sec" id="time">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// o time</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">O time</span>
             <h2>Quem está construindo.</h2>

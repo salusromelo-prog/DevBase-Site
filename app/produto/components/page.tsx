@@ -38,6 +38,7 @@ export default function ProdutoComponents() {
       {/* ===== DOR ===== */}
       <section className="sec" data-rail="dor">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// de novo isso</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// de novo isso</span>
             <h2 data-split>Todo projeto BR começa com o mesmo input de CPF.</h2>
@@ -52,6 +53,7 @@ export default function ProdutoComponents() {
       {/* ===== CUSTO ===== */}
       <section className="sec soft" data-rail="custo">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a soma dos pequenos</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// a soma dos pequenos</span>
             <h2 data-split>Não é um componente. São oito, em todo projeto, pra sempre.</h2>
@@ -66,6 +68,7 @@ export default function ProdutoComponents() {
       {/* ===== COMPONENTES ===== */}
       <section id="componentes" className="sec" data-rail="componentes">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a caixa de ferramentas</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head center">
             <span className="eyebrow">// a caixa de ferramentas</span>
             <h2 data-split>Os 8 que todo SaaS brasileiro precisa. Resolvidos.</h2>
@@ -95,6 +98,7 @@ export default function ProdutoComponents() {
       {/* ===== DIFERENCIAL ===== */}
       <section className="sec soft" data-rail="diferencial">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// porque importa</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// porque importa</span>
             <h2 data-split>Validação errada de CPF é cliente perdido no checkout.</h2>
@@ -109,6 +113,7 @@ export default function ProdutoComponents() {
       {/* ===== OBJEÇÃO ===== */}
       <section className="sec" data-rail="objecao">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// "acho um no npm"</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// "acho um no npm"</span>
             <h2 data-split>Acha. Cinco, na verdade — todos abandonados.</h2>
@@ -123,6 +128,7 @@ export default function ProdutoComponents() {
       {/* ===== OFERTA ===== */}
       <section className="sec soft" data-rail="oferta">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// oferta</span><span className="sec-rule__line" /></div>
           <Reveal className="offer-block">
             <span className="eyebrow">// oferta</span>
             <div className="offer-price">
@@ -180,7 +186,7 @@ export default function ProdutoComponents() {
         .fcard { border-radius: var(--r); border: 1px solid var(--line); background: var(--bg); padding: 26px; height: 100%; }
         .fcard h3 { font-size: 16px; letter-spacing: -0.02em; margin-bottom: 9px; }
         .fcard p { font-size: 14px; color: var(--body); line-height: 1.6; }
-        .offer-block { max-width: 560px; }
+        .p-comp .offer-block { max-width: 560px; border: 1px solid var(--line-2); border-radius: 16px; padding: 48px; background: var(--bg-soft); box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
         .offer-price { display: flex; align-items: baseline; gap: 16px; margin: 20px 0 16px; }
         .offer-old { font-size: 22px; color: var(--muted); text-decoration: line-through; }
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: var(--primary); line-height: 1; }
@@ -188,11 +194,14 @@ export default function ProdutoComponents() {
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
         .p-comp .sec:nth-child(even) { background: #f5f5f7; }
-        .p-comp .sec { border-top: 2px solid #e2e8f0; }
+        .p-comp .sec { border-top: 2px solid #e2e8f0; counter-increment: p-sec; }
         .p-comp .sec.tight { padding-top: 96px; padding-bottom: 96px; }
         .p-comp .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(139,92,246,0.18) 0%, transparent 65%); }
         .p-comp .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(139,92,246,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
         .p-comp .ctaband { border-top: 1px solid rgba(255,255,255,0.08); }
+        /* section numbers */
+        .p-comp { counter-reset: p-sec; }
+        .p-comp .sec::before { content: counter(p-sec, decimal-leading-zero); position: absolute; top: -20px; left: -10px; font-size: 120px; font-weight: 900; font-family: var(--mono); color: currentColor; opacity: 0.04; pointer-events: none; user-select: none; z-index: 0; line-height: 1; }
       `}</style>
     </div>
   )

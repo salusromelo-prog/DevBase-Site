@@ -38,6 +38,7 @@ export default function ProdutoCombo() {
       {/* ===== ARGUMENTO ===== */}
       <section className="sec" data-rail="argumento">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// faz sentido junto</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// faz sentido junto</span>
             <h2 data-split>O Boilerplate te dá a estrutura. Os Components, os detalhes.</h2>
@@ -52,6 +53,7 @@ export default function ProdutoCombo() {
       {/* ===== O QUE INCLUI ===== */}
       <section id="inclui" className="sec soft" data-rail="inclui">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// dois produtos, um preço</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head center">
             <span className="eyebrow">// dois produtos, um preço</span>
             <h2 data-split>Tudo do Boilerplate. Tudo dos Components.</h2>
@@ -114,6 +116,7 @@ export default function ProdutoCombo() {
       {/* ===== A CONTA ===== */}
       <section className="sec" data-rail="conta">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a matemática</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">// a matemática</span>
             <h2 data-split>R$ 147 + R$ 67 = R$ 214. No combo, R$ 197.</h2>
@@ -127,6 +130,7 @@ export default function ProdutoCombo() {
       {/* ===== OFERTA ===== */}
       <section className="sec soft" data-rail="oferta">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// oferta</span><span className="sec-rule__line" /></div>
           <Reveal className="offer-block">
             <span className="eyebrow">// oferta</span>
             <div className="offer-price">
@@ -192,7 +196,7 @@ export default function ProdutoCombo() {
         .combo-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
         .combo-list li { font-size: 14px; color: var(--ink-2); display: grid; grid-template-columns: 16px 1fr; gap: 9px; }
         .combo-list li .b { color: #818cf8; }
-        .offer-block { max-width: 560px; }
+        .p-combo .offer-block { max-width: 560px; border: 1px solid var(--line-2); border-radius: 16px; padding: 48px; background: var(--bg-soft); box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
         .offer-price { display: flex; align-items: baseline; gap: 16px; margin: 20px 0 16px; }
         .offer-old { font-size: 22px; color: var(--muted); text-decoration: line-through; }
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; background: linear-gradient(110deg, #6366f1, #8b5cf6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
@@ -200,11 +204,14 @@ export default function ProdutoCombo() {
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
         .p-combo .sec:nth-child(even) { background: #f5f5f7; }
-        .p-combo .sec { border-top: 2px solid #e2e8f0; }
+        .p-combo .sec { border-top: 2px solid #e2e8f0; counter-increment: p-sec; }
         .p-combo .sec.tight { padding-top: 96px; padding-bottom: 96px; }
         .p-combo .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(99,102,241,0.15) 0%, transparent 65%); }
         .p-combo .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(99,102,241,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
         .p-combo .ctaband { border-top: 1px solid rgba(255,255,255,0.08); }
+        /* section numbers */
+        .p-combo { counter-reset: p-sec; }
+        .p-combo .sec::before { content: counter(p-sec, decimal-leading-zero); position: absolute; top: -20px; left: -10px; font-size: 120px; font-weight: 900; font-family: var(--mono); color: currentColor; opacity: 0.04; pointer-events: none; user-select: none; z-index: 0; line-height: 1; }
       `}</style>
     </div>
   )

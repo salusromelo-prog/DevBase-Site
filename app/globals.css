@@ -613,3 +613,15 @@ p { margin: 0; }
   .depth { opacity: 1 !important; transform: none !important; filter: none !important; }
   [data-parallax], [data-skew-item] { transform: none !important; }
 }
+
+/* ================================================================
+   SEC-RULE (horizontal section divider with label)
+   ================================================================ */
+.sec-rule { display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+.sec-rule__line { flex: 1; height: 1px; background: var(--line); }
+.sec-rule__label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--muted); white-space: nowrap; text-transform: uppercase; }
+
+/* ================================================================
+   SEC-NUM (decorative large section counter — used via CSS counter)
+   ================================================================ */
+.sec-num { position: absolute; top: -20px; left: -10px; font-size: 120px; font-weight: 900; font-family: var(--mono); color: currentColor; opacity: 0.04; pointer-events: none; user-select: none; z-index: 0; line-height: 1; }

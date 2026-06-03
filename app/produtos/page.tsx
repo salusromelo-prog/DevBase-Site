@@ -21,6 +21,7 @@ export default function Produtos() {
       {/* ===== CATALOG ===== */}
       <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="catalogo">
         <div className="wrap wrap-wide">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// nossos produtos</span><span className="sec-rule__line" /></div>
           <div className="cards">
 
             {/* Featured */}
@@ -176,6 +177,7 @@ export default function Produtos() {
       {/* ===== FAQ ===== */}
       <section className="sec tight soft" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }} data-rail="faq">
         <div className="wrap">
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// perguntas frequentes</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
             <span className="eyebrow">Perguntas frequentes</span>
             <h2>Antes de comprar.</h2>
