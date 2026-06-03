@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
+import Nav from '@/components/nav'
 
 export const metadata: Metadata = {
   title: 'DevBase Boilerplate — Do repositório ao mercado em dias',
@@ -12,6 +13,7 @@ const CHECKOUT = 'https://pay.kiwify.com.br/d4yYNFy'
 export default function ProdutoBoilerplate() {
   return (
     <div className="p-boiler">
+      <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="silk" className="phead-canvas" />
@@ -189,8 +191,9 @@ export default function ProdutoBoilerplate() {
         .offer-sub { font-size: 16px; color: var(--body); margin-bottom: 28px; max-width: 50ch; }
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
-        .p-boiler .sec { border-top: 1px solid var(--line); }
-        .p-boiler .phead-veil { background: radial-gradient(ellipse 80% 45% at 50% -5%, rgba(99,102,241,0.08) 0%, transparent 65%), linear-gradient(180deg, rgba(10,9,19,0.3), transparent 40%, rgba(10,9,19,0.92)); }
+        .p-boiler .sec:nth-child(even) { background: #f5f5f7; }
+        .p-boiler .sec { border-top: 1px solid #e5e5e5; }
+        .p-boiler .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(99,102,241,0.18) 0%, transparent 65%); }
         .p-boiler .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(99,102,241,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
       `}</style>
     </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
+import Nav from '@/components/nav'
 
 export const metadata: Metadata = {
   title: 'DevBase Components — Os componentes BR que você sempre reescreve',
@@ -12,6 +13,7 @@ const CHECKOUT = 'https://pay.kiwify.com.br/7OQNJ1C'
 export default function ProdutoComponents() {
   return (
     <div className="p-comp">
+      <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="silk" className="phead-canvas" />
@@ -186,8 +188,9 @@ export default function ProdutoComponents() {
         .offer-sub { font-size: 16px; color: var(--body); margin-bottom: 28px; max-width: 50ch; }
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
-        .p-comp .sec { border-top: 1px solid var(--line); }
-        .p-comp .phead-veil { background: radial-gradient(ellipse 80% 45% at 50% -5%, rgba(139,92,246,0.08) 0%, transparent 65%), linear-gradient(180deg, rgba(10,9,19,0.3), transparent 40%, rgba(10,9,19,0.92)); }
+        .p-comp .sec:nth-child(even) { background: #f5f5f7; }
+        .p-comp .sec { border-top: 1px solid #e5e5e5; }
+        .p-comp .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(139,92,246,0.18) 0%, transparent 65%); }
         .p-comp .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(139,92,246,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
       `}</style>
     </div>

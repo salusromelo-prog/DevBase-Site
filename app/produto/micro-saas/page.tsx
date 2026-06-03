@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
+import Nav from '@/components/nav'
 
 export const metadata: Metadata = {
   title: '100 Micro SaaS — Você não tem falta de skill, tem falta de ideia validada',
@@ -12,6 +13,7 @@ const CHECKOUT = 'https://pay.kiwify.com.br/5cyFrhr'
 export default function ProdutoMicroSaas() {
   return (
     <div className="p-micro">
+      <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="aurora" className="phead-canvas" />
@@ -194,8 +196,9 @@ export default function ProdutoMicroSaas() {
         .offer-sub { font-size: 16px; color: var(--body); margin-bottom: 28px; max-width: 50ch; }
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
-        .p-micro .sec { border-top: 1px solid var(--line); }
-        .p-micro .phead-veil { background: radial-gradient(ellipse 80% 45% at 50% -5%, rgba(22,163,74,0.08) 0%, transparent 65%), linear-gradient(180deg, rgba(10,9,19,0.3), transparent 40%, rgba(10,9,19,0.92)); }
+        .p-micro .sec:nth-child(even) { background: #f5f5f7; }
+        .p-micro .sec { border-top: 1px solid #e5e5e5; }
+        .p-micro .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(22,163,74,0.18) 0%, transparent 65%); }
         .p-micro .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(22,163,74,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
       `}</style>
     </div>
