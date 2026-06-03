@@ -19,7 +19,6 @@ export default function ProdutoCombo() {
         <HeroCanvas variant="silk" className="phead-canvas" />
         <div className="phead-veil" />
         <div className="wrap">
-          <span className="eyebrow center on-dark">// combo · R$ 197</span>
           <h1 data-split>a base <span className="grad">e</span> as peças. o kit completo pra lançar.</h1>
           <p>Boilerplate + Components juntos. A fundação do SaaS e os 8 componentes brasileiros — tudo que você precisa do login ao checkout, com desconto.</p>
           <div className="combo-badge">
@@ -201,9 +200,11 @@ export default function ProdutoCombo() {
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
         .p-combo .sec:nth-child(even) { background: #f5f5f7; }
-        .p-combo .sec { border-top: 1px solid #e5e5e5; }
+        .p-combo .sec { border-top: 2px solid #e2e8f0; }
+        .p-combo .sec.tight { padding-top: 96px; padding-bottom: 96px; }
         .p-combo .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(99,102,241,0.15) 0%, transparent 65%); }
         .p-combo .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(99,102,241,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
+        .p-combo .ctaband { border-top: 1px solid rgba(255,255,255,0.08); }
       `}</style>
     </div>
   )

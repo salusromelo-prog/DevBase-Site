@@ -30,7 +30,7 @@ export default function Home() {
       </section>
 
       {/* ===== POR QUE EXISTIMOS ===== */}
-      <section className="sec" data-rail="por-que">
+      <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="por-que">
         <div className="wrap">
           <Reveal className="sec-head">
             <span className="eyebrow">Por que existimos</span>
@@ -80,7 +80,7 @@ export default function Home() {
       </section>
 
       {/* ===== SHOWCASE — Boilerplate ===== */}
-      <section className="sec soft" data-rail="boilerplate">
+      <section className="sec soft" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="boilerplate">
         <div className="wrap">
           <div className="showcase">
             <Reveal className="sc-copy">
@@ -117,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* ===== PRODUCT CATALOG OVERVIEW ===== */}
-      <section className="sec" data-rail="catalogo">
+      <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="catalogo">
         <div className="wrap wrap-wide">
           <Reveal className="sec-head center">
             <span className="eyebrow center">O catálogo</span>
@@ -175,7 +175,7 @@ export default function Home() {
       </section>
 
       {/* ===== FIGURES ===== */}
-      <section className="sec tight soft">
+      <section className="sec tight soft" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }}>
         <div className="wrap wrap-wide">
           <div className="figs">
             <Reveal delay={0} className="fig">
@@ -199,7 +199,7 @@ export default function Home() {
       </section>
 
       {/* ===== MANIFESTO ===== */}
-      <section className="sec" data-rail="manifesto">
+      <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="manifesto">
         <div className="wrap">
           <Reveal className="manifesto blur depth">
             <span className="eyebrow center" style={{ marginBottom: 28 }}>Manifesto</span>
@@ -209,7 +209,7 @@ export default function Home() {
       </section>
 
       {/* ===== CTA BAND ===== */}
-      <section className="sec tight" data-rail="comecar">
+      <section className="sec tight" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }} data-rail="comecar">
         <div className="wrap wrap-wide">
           <Reveal className="ctaband">
             <HeroCanvas variant="silk" className="ctaband-canvas" />

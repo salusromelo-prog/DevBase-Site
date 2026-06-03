@@ -19,7 +19,6 @@ export default function ProdutoComponents() {
         <HeroCanvas variant="silk" className="phead-canvas" />
         <div className="phead-veil" />
         <div className="wrap">
-          <span className="eyebrow center on-dark">// components · R$ 67</span>
           <h1 data-split>os componentes BR que você <span className="grad">sempre reescreve.</span></h1>
           <p>8 componentes React prontos pro mercado brasileiro. CPF, CNPJ, CEP, PIX, banco — com validação, máscara e TypeScript. Copia, cola, funciona.</p>
           <div className="hero-cta" style={{ marginTop: 36 }}>
@@ -189,9 +188,11 @@ export default function ProdutoComponents() {
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
         .p-comp .sec:nth-child(even) { background: #f5f5f7; }
-        .p-comp .sec { border-top: 1px solid #e5e5e5; }
+        .p-comp .sec { border-top: 2px solid #e2e8f0; }
+        .p-comp .sec.tight { padding-top: 96px; padding-bottom: 96px; }
         .p-comp .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(139,92,246,0.18) 0%, transparent 65%); }
         .p-comp .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(139,92,246,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
+        .p-comp .ctaband { border-top: 1px solid rgba(255,255,255,0.08); }
       `}</style>
     </div>
   )

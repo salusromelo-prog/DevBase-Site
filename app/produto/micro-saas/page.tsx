@@ -19,7 +19,6 @@ export default function ProdutoMicroSaas() {
         <HeroCanvas variant="aurora" className="phead-canvas" />
         <div className="phead-veil" />
         <div className="wrap">
-          <span className="eyebrow center on-dark">// 100 micro saas · R$ 29,90</span>
           <h1 data-split>você não tem falta de skill. tem falta de <span className="grad">ideia validada.</span></h1>
           <p>100 ideias de micro SaaS com problema, público, monetização, stack e escopo de MVP. Mais 25 automações prontas pra vender. O ponto de partida pra quem sabe codar mas não sabe o quê.</p>
           <div className="hero-cta" style={{ marginTop: 36 }}>
@@ -164,18 +163,18 @@ export default function ProdutoMicroSaas() {
       </section>
 
       <style>{`
-        .p-micro .eyebrow { color: #16a34a; font-size: 14px; letter-spacing: 0.12em; }
+        .p-micro .eyebrow { color: #7c3aed; font-size: 14px; letter-spacing: 0.12em; }
         .p-micro .phead .wrap { text-align: center; }
         .p-micro .phead h1 { margin-left: auto; margin-right: auto; }
         .p-micro .phead > .wrap > p { margin-left: auto; margin-right: auto; max-width: 56ch; }
         .p-micro .phead .prod-stats { justify-content: center; }
-        .p-micro .btn-primary { background: #16a34a; box-shadow: 0 8px 24px -10px rgba(22,163,74,0.5); }
-        .p-micro .btn-primary:hover { background: #15803d; }
+        .p-micro .btn-primary { background: #7c3aed; box-shadow: 0 8px 24px -10px rgba(124,58,237,0.5); }
+        .p-micro .btn-primary:hover { background: #6d28d9; }
         .p-micro .phead h1 .grad {
-          background: linear-gradient(110deg, #86efac, #4ade80 40%, #86efac);
+          background: linear-gradient(110deg, #c4b5fd, #a78bfa 40%, #c4b5fd);
           -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .p-micro .offer-now { color: #16a34a; }
+        .p-micro .offer-now { color: #7c3aed; }
         .prod-stats { display: flex; gap: 48px; margin-top: 52px; flex-wrap: wrap; }
         .ps-item { display: flex; flex-direction: column; gap: 4px; align-items: center; }
         .ps-n { font-size: 38px; font-weight: 700; letter-spacing: -0.04em; color: #fff; line-height: 1; }
@@ -187,7 +186,7 @@ export default function ProdutoMicroSaas() {
         .fcard { border-radius: var(--r); border: 1px solid var(--line); background: var(--bg); padding: 26px; height: 100%; }
         .fcard h3 { font-size: 16px; letter-spacing: -0.02em; margin-bottom: 9px; }
         .fcard p { font-size: 14px; color: var(--body); line-height: 1.6; }
-        .bonus-card { border-radius: var(--r); border: 1px solid rgba(22,163,74,0.25); background: rgba(22,163,74,0.06); padding: 28px; }
+        .bonus-card { border-radius: var(--r); border: 1px solid rgba(124,58,237,0.25); background: rgba(124,58,237,0.06); padding: 28px; }
         .bonus-card p { font-size: 17px; color: var(--body); margin-top: 12px; }
         .offer-block { max-width: 560px; }
         .offer-price { display: flex; align-items: baseline; gap: 16px; margin: 20px 0 16px; }
@@ -197,9 +196,11 @@ export default function ProdutoMicroSaas() {
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
         .p-micro .sec:nth-child(even) { background: #f5f5f7; }
-        .p-micro .sec { border-top: 1px solid #e5e5e5; }
-        .p-micro .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(22,163,74,0.18) 0%, transparent 65%); }
-        .p-micro .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(22,163,74,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
+        .p-micro .sec { border-top: 2px solid #e2e8f0; }
+        .p-micro .sec.tight { padding-top: 96px; padding-bottom: 96px; }
+        .p-micro .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(124,58,237,0.18) 0%, transparent 65%); }
+        .p-micro .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(124,58,237,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
+        .p-micro .ctaband { border-top: 1px solid rgba(255,255,255,0.08); }
       `}</style>
     </div>
   )

@@ -19,7 +19,7 @@ export default function Produtos() {
       </header>
 
       {/* ===== CATALOG ===== */}
-      <section className="sec" data-rail="catalogo">
+      <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="catalogo">
         <div className="wrap wrap-wide">
           <div className="cards">
 
@@ -174,7 +174,7 @@ export default function Produtos() {
       </section>
 
       {/* ===== FAQ ===== */}
-      <section className="sec tight soft" data-rail="faq">
+      <section className="sec tight soft" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }} data-rail="faq">
         <div className="wrap">
           <Reveal className="sec-head">
             <span className="eyebrow">Perguntas frequentes</span>
@@ -206,7 +206,7 @@ export default function Produtos() {
       </section>
 
       {/* ===== CTA BAND ===== */}
-      <section className="sec tight" data-rail="comecar">
+      <section className="sec tight" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }} data-rail="comecar">
         <div className="wrap wrap-wide">
           <Reveal className="ctaband">
             <HeroCanvas variant="silk" className="ctaband-canvas" />

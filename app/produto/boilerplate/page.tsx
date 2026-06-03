@@ -19,7 +19,6 @@ export default function ProdutoBoilerplate() {
         <HeroCanvas variant="silk" className="phead-canvas" />
         <div className="phead-veil" />
         <div className="wrap">
-          <span className="eyebrow center on-dark">// boilerplate · R$ 147</span>
           <h1 data-split>do repositório ao mercado. <span className="grad">em dias, não meses.</span></h1>
           <p>O único boilerplate Next.js feito pro Brasil. PIX, boleto e Pagar.me nativos. Auth, billing, dashboard e deploy — documentação 100% em português.</p>
           <div className="hero-cta" style={{ marginTop: 36 }}>
@@ -192,9 +191,11 @@ export default function ProdutoBoilerplate() {
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         /* depth */
         .p-boiler .sec:nth-child(even) { background: #f5f5f7; }
-        .p-boiler .sec { border-top: 1px solid #e5e5e5; }
+        .p-boiler .sec { border-top: 2px solid #e2e8f0; }
+        .p-boiler .sec.tight { padding-top: 96px; padding-bottom: 96px; }
         .p-boiler .phead-veil { background: radial-gradient(ellipse at 50% 60%, rgba(99,102,241,0.18) 0%, transparent 65%); }
         .p-boiler .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(99,102,241,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
+        .p-boiler .ctaband { border-top: 1px solid rgba(255,255,255,0.08); }
       `}</style>
     </div>
   )
