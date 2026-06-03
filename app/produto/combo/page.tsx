@@ -197,6 +197,10 @@ export default function ProdutoCombo() {
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; background: linear-gradient(110deg, #6366f1, #8b5cf6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
         .offer-sub { font-size: 16px; color: var(--body); margin-bottom: 28px; max-width: 50ch; }
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
+        /* depth */
+        .p-combo .sec { border-top: 1px solid var(--line); }
+        .p-combo .phead-veil { background: radial-gradient(ellipse 80% 45% at 50% -5%, rgba(99,102,241,0.08) 0%, transparent 65%), linear-gradient(180deg, rgba(10,9,19,0.3), transparent 40%, rgba(10,9,19,0.92)); }
+        .p-combo .ctaband-veil { background: radial-gradient(ellipse 70% 50% at 50% -5%, rgba(99,102,241,0.08) 0%, transparent 60%), linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
       `}</style>
     </div>
   )
