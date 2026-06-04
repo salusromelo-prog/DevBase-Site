@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>DevBase Jobs — vagas com salário obrigatório</title>
+<meta name="description" content="O job board honesto pra dev brasileiro. Salário obrigatório, stack real, remoto verificado. Gratuito pra devs." />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="scroll-fx.css" />
+<style>
+  .joblist { display: flex; flex-direction: column; gap: 12px; }
+  .jrow { display: grid; grid-template-columns: 48px 1fr auto; gap: 16px; align-items: center; padding: 18px 22px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg); transition: transform .3s var(--ease), box-shadow .3s, border-color .3s; }
+  .jrow:hover { transform: translateX(5px); box-shadow: 0 16px 36px -24px rgba(13,13,18,0.22); border-color: var(--line-2); }
+  .jrow .jl { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; font-weight: 700; color: #fff; }
+  .jrow .jt { font-size: 16px; font-weight: 600; letter-spacing: -0.02em; }
+  .jrow .jm { font-size: 13.5px; color: var(--muted); margin-top: 2px; }
+  .jrow .js { font-family: var(--mono); font-size: 15px; color: var(--signal); font-weight: 500; white-space: nowrap; }
+  @media (max-width:600px){ .jrow { grid-template-columns: 40px 1fr; } .jrow .js { grid-column: 2; } }
+</style>
+</head>
+<body data-page="jobs">
+
+<div id="nav"></div>
+
+<main class="pagefade">
+
+  <header class="phead">
+    <canvas class="phead-canvas" data-hero="fixed" data-variant="silk" aria-hidden="true"></canvas>
+    <div class="phead-veil"></div>
+    <div class="wrap">
+      <span class="eyebrow on-dark">DevBase Jobs · beta gratuito</span>
+      <h1 data-split>Salário obrigatório. Sempre.</h1>
+      <p>O job board honesto pra dev brasileiro. Sem "salário a combinar", sem vaga fantasma, sem stack inflada. Transparência por padrão.</p>
+      <div class="hero-cta" style="margin-top:32px">
+        <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Ver vagas <span class="arr">→</span></a>
+        <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener" class="btn btn-glass btn-lg">Publicar vaga grátis</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- valor -->
+  <section class="sec" data-rail="diferença">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow">Por que é diferente</span><h2 data-split>Tudo que um job board deveria ter.</h2></div>
+      <div class="values" data-depth-stagger>
+        <div class="vcard depth"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 9c0-1.1.9-2 2-2h2a2 2 0 0 1 0 4h-2a2 2 0 0 0 0 4h2c1.1 0 2-.9 2-2"/><path d="M12 6v1M12 17v1"/></svg></div><h3>Salário visível</h3><p>Toda vaga mostra a faixa salarial. É regra, não opção. Você não perde tempo com proposta abaixo do esperado.</p></div>
+        <div class="vcard depth"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><h3>Stack real</h3><p>A stack que aparece na vaga é a que você vai usar. Sem lista inflada de 20 tecnologias que ninguém toca.</p></div>
+        <div class="vcard depth"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg></div><h3>Remoto verificado</h3><p>Remoto é remoto. A gente verifica antes de publicar — nada de "remoto" que vira presencial depois.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- vagas mock -->
+  <section class="sec tight soft" data-rail="vagas">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow">Exemplo de vagas</span><h2 data-split>Transparência logo na lista.</h2></div>
+      <div class="joblist" data-depth-stagger>
+        <div class="jrow depth"><div class="jl" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">N</div><div><div class="jt">Dev Full-stack Pleno</div><div class="jm">Nubank · remoto · React + Node</div></div><div class="js">R$ 12–16k</div></div>
+        <div class="jrow depth"><div class="jl" style="background:linear-gradient(135deg,#a78bfa,#c084fc)">Q</div><div><div class="jt">Eng. Backend Sênior</div><div class="jm">QuintoAndar · híbrido · Go</div></div><div class="js">R$ 18–24k</div></div>
+        <div class="jrow depth"><div class="jl" style="background:linear-gradient(135deg,#4338ca,#6366f1)">I</div><div><div class="jt">Front-end Júnior</div><div class="jm">iFood · remoto · Next.js</div></div><div class="js">R$ 6–8k</div></div>
+        <div class="jrow depth"><div class="jl" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">S</div><div><div class="jt">Dev Mobile Flutter</div><div class="jm">Stone · remoto · Flutter</div></div><div class="js">R$ 10–14k</div></div>
+      </div>
+      <p style="text-align:center;margin-top:24px;font-size:13px;color:var(--muted)">Vagas ilustrativas. Veja as reais no DevBase Jobs.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sec tight">
+    <div class="wrap wrap-wide">
+      <div class="ctaband reveal">
+        <canvas class="ctaband-canvas" data-hero="fixed" data-variant="silk" aria-hidden="true"></canvas>
+        <div class="ctaband-veil"></div>
+        <div class="ctaband-in">
+          <h2>Encontre uma vaga que respeita o seu tempo.</h2>
+          <p>Gratuito pra devs, sempre. Empresas publicam vagas sem custo durante o beta.</p>
+          <div class="hero-cta">
+            <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Acessar o DevBase Jobs <span class="arr">→</span></a>
+            <a href="produtos.html" class="btn btn-glass btn-lg">Ver outros produtos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="hero.js"></script>
+<script src="site.js"></script>
+<script src="scroll-fx.js"></script>
+</body>
+</html>

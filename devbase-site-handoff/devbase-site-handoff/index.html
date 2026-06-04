@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>DevBase — Ferramentas para devs brasileiros</title>
+<meta name="description" content="A DevBase constrói ferramentas para desenvolvedores brasileiros: boilerplate SaaS, componentes React BR, 100 ideias de micro SaaS e um job board com salário obrigatório. Feito em Goiânia." />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="scroll-fx.css" />
+</head>
+<body data-page="home">
+
+<div id="nav"></div>
+
+<main class="pagefade">
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero" data-rail="início">
+    <canvas class="hero-canvas" data-hero aria-hidden="true"></canvas>
+    <div class="hero-veil"></div>
+    <div class="wrap hero-inner">
+      <h1 data-split>Ferramentas para <span class="grad">devs brasileiros.</span></h1>
+      <p class="hero-sub">Construímos o que o dev BR sempre precisou — sem documentação em inglês, sem preço em dólar, sem suporte que ignora. Produto por produto, do zero, em português.</p>
+      <div class="hero-cta">
+        <a href="produtos.html" class="btn btn-primary btn-lg">Conhecer produtos <span class="arr">→</span></a>
+        <a href="empresa.html" class="btn btn-glass btn-lg">Quem somos</a>
+      </div>
+    </div>
+    <div class="scrollcue"><span class="ln"></span> scroll</div>
+    <div class="hero-switch" aria-label="estilo da animação">
+      <div class="pills">
+        <button data-v="silk" class="on">ondas</button>
+        <button data-v="aurora">aurora</button>
+        <button data-v="flow">fluxo</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== STACK STRIP ===================== -->
+  <section class="strip sx-curtain">
+    <div class="wrap"><div class="strip-lbl">A stack que já vem configurada</div></div>
+    <div class="strip-track">
+      <span class="strip-item">Next.js <span class="v">14</span></span>
+      <span class="strip-item">TypeScript <span class="v">5.4</span></span>
+      <span class="strip-item">Supabase</span>
+      <span class="strip-item">Pagar.me <span class="v">PIX</span></span>
+      <span class="strip-item">Tailwind CSS</span>
+      <span class="strip-item">Resend</span>
+      <span class="strip-item">Vercel</span>
+      <span class="strip-item">Boleto · Cartão</span>
+      <span class="strip-item">Next.js <span class="v">14</span></span>
+      <span class="strip-item">TypeScript <span class="v">5.4</span></span>
+      <span class="strip-item">Supabase</span>
+      <span class="strip-item">Pagar.me <span class="v">PIX</span></span>
+      <span class="strip-item">Tailwind CSS</span>
+      <span class="strip-item">Resend</span>
+      <span class="strip-item">Vercel</span>
+      <span class="strip-item">Boleto · Cartão</span>
+    </div>
+  </section>
+
+  <!-- ===================== POR QUE EXISTIMOS ===================== -->
+  <section class="sec" data-rail="por que">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Por que existimos</span>
+        <h2 data-split>O dev brasileiro merece ferramentas feitas pra ele.</h2>
+        <p>Não adaptações mal traduzidas. Produtos que entendem a nossa realidade — do pagamento à documentação.</p>
+      </div>
+      <div class="values" data-depth-stagger>
+        <div class="vcard depth">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9 9c0-1.1.9-2 2-2h2a2 2 0 0 1 0 4h-2a2 2 0 0 0 0 4h2c1.1 0 2-.9 2-2"/><path d="M12 6v1M12 17v1"/></svg></div>
+          <h3>Preço em real</h3>
+          <p>Sem conversão de dólar, sem IOF, sem surpresa no cartão. Pagamento único em PIX, boleto ou cartão.</p>
+        </div>
+        <div class="vcard depth">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <h3>Docs em português</h3>
+          <p>Tutoriais, exemplos e suporte 100% em PT-BR. Você não precisa traduzir nada pra começar a construir.</p>
+        </div>
+        <div class="vcard depth">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <h3>Feito pra nossa stack</h3>
+          <p>Pagar.me, Mercado Pago, Next.js e Supabase já integrados. Nada de gambiarra pra funcionar no Brasil.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SHOWCASE — Boilerplate ===================== -->
+  <section class="sec soft" data-rail="destaque">
+    <div class="wrap">
+      <div class="showcase">
+        <div class="sc-copy reveal">
+          <span class="eyebrow">Produto em destaque</span>
+          <h2 data-split>Do repositório ao mercado, em dias.</h2>
+          <p class="lead">O DevBase Boilerplate entrega a parte chata já pronta — auth, pagamentos, dashboard e deploy. Você foca no que torna o seu produto único.</p>
+          <ul class="sc-list">
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Auth completo com Supabase + magic link</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Pagar.me integrado — PIX, boleto e cartão</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Dashboard, painel admin e billing portal</li>
+          </ul>
+          <a href="produtos.html" class="btn btn-dark">Ver o boilerplate <span class="arr">→</span></a>
+        </div>
+        <div class="sc-visual reveal blur" data-parallax="0.08">
+          <div class="codecard">
+            <div class="browser-bar"><i></i><i></i><i></i><span class="url">~/meu-saas — zsh</span></div>
+            <div class="cc-body">
+              <div><span class="p">~</span> <span class="d">$</span> npx create-devbase-app meu-saas</div>
+              <div class="ok">✓ clonando template</div>
+              <div class="ok">✓ instalando dependências (1.2k)</div>
+              <div class="ok">✓ configurando .env · supabase · pagar.me</div>
+              <div><span class="p">~/meu-saas</span> <span class="d">$</span> pnpm dev</div>
+              <div class="k">▲ next.js 14.2.0 — ready in 1.4s</div>
+              <div class="d">&nbsp;&nbsp;➜ auth ✓ &nbsp; payments ✓ &nbsp; db ✓</div>
+              <div><span class="p">~/meu-saas</span> <span class="d">$</span> <span class="cc-caret"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRODUCTS OVERVIEW ===================== -->
+  <section class="sec" data-rail="produtos">
+    <div class="wrap wrap-wide">
+      <div class="sec-head center reveal">
+        <span class="eyebrow center">O catálogo</span>
+        <h2 data-split>Tudo que a DevBase construiu.</h2>
+        <p>Produtos avulsos que resolvem problemas reais. Pagamento único ou gratuito — sem assinatura.</p>
+      </div>
+      <div class="cards" data-depth-stagger>
+        <article class="pcard span6 depth">
+          <div class="ptop"><span class="pchip live"><span class="d"></span>ao vivo · novo</span></div>
+          <h3>100 Micro SaaS + 25 Automações</h3>
+          <p class="pdesc">100 ideias validadas com problema, público, monetização, stack e MVP — prontas pra executar.</p>
+          <div class="pfoot">
+            <div class="price"><span class="now green">R$ 29,90</span><span class="s">pagamento único · vitalício</span></div>
+            <a href="produtos.html" class="btn btn-primary btn-sm">Detalhes <span class="arr">→</span></a>
+          </div>
+        </article>
+        <article class="pcard span6 depth">
+          <div class="ptop"><span class="pchip live"><span class="d"></span>ao vivo</span></div>
+          <h3>DevBase Boilerplate</h3>
+          <p class="pdesc">Kit Next.js completo pra lançar SaaS no Brasil. Auth, pagamentos, dashboard e deploy configurados.</p>
+          <div class="pfoot">
+            <div class="price"><span class="old">R$ 297</span><span class="now green">R$ 147</span><span class="s">acesso vitalício</span></div>
+            <a href="produtos.html" class="btn btn-primary btn-sm">Detalhes <span class="arr">→</span></a>
+          </div>
+        </article>
+        <article class="pcard span4 depth">
+          <div class="ptop"><span class="pchip live"><span class="d"></span>ao vivo</span></div>
+          <h3>DevBase Components</h3>
+          <p class="pdesc">8 componentes React pro mercado BR: CPF, CNPJ, CEP, PIX e cartão.</p>
+          <div class="pfoot">
+            <div class="price"><span class="now indigo">R$ 67</span><span class="s">vitalício</span></div>
+            <a href="produtos.html" class="btn btn-line btn-sm">Detalhes</a>
+          </div>
+        </article>
+        <article class="pcard span4 depth">
+          <div class="ptop"><span class="pchip"><span class="d" style="background:var(--violet)"></span>✦ combo</span></div>
+          <h3>Boilerplate + Components</h3>
+          <p class="pdesc">Os dois produtos juntos, com desconto. Tudo pra lançar do zero.</p>
+          <div class="pfoot">
+            <div class="price"><span class="old">R$ 214</span><span class="now green">R$ 197</span><span class="s">economia de R$ 17</span></div>
+            <a href="produtos.html" class="btn btn-line btn-sm">Detalhes</a>
+          </div>
+        </article>
+        <article class="pcard span4 depth">
+          <div class="ptop"><span class="pchip free"><span class="d"></span>beta gratuito</span></div>
+          <h3>DevBase Jobs</h3>
+          <p class="pdesc">Job board com salário obrigatório, stack real e remoto verificado.</p>
+          <div class="pfoot">
+            <div class="price"><span class="now indigo">Grátis</span><span class="s">sempre, pra devs</span></div>
+            <a href="jobs.html" class="btn btn-line btn-sm">Conhecer</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FIGURES ===================== -->
+  <section class="sec tight soft" data-rail="números">
+    <div class="wrap wrap-wide">
+      <div class="figs reveal" data-depth-stagger>
+        <div class="fig depth"><div class="n"><span data-count="5">0</span></div><div class="l">produtos no ar</div></div>
+        <div class="fig depth"><div class="n"><span data-count="2025">0</span></div><div class="l">fundada em Goiânia</div></div>
+        <div class="fig depth"><div class="n"><span data-count="100">0</span><span class="u">%</span></div><div class="l">em português</div></div>
+        <div class="fig depth"><div class="n"><span data-count="3">0</span></div><div class="l">devs construindo</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MANIFESTO ===================== -->
+  <section class="sec" data-rail="manifesto">
+    <div class="wrap">
+      <div class="manifesto reveal blur">
+        <span class="eyebrow center" style="margin-bottom:28px">Manifesto</span>
+        <p data-split>A internet brasileira não precisa de mais <span class="ac">tutoriais</span>. Precisa de devs <span class="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="sec tight" data-rail="começar">
+    <div class="wrap wrap-wide">
+      <div class="ctaband reveal">
+        <canvas class="ctaband-canvas" data-hero="fixed" data-variant="silk" aria-hidden="true"></canvas>
+        <div class="ctaband-veil"></div>
+        <div class="ctaband-in">
+          <h2>Construa em cima de uma base que já funciona.</h2>
+          <p>Ferramentas feitas por devs brasileiros, pro mercado brasileiro. Comece pelo que faz sentido pra você.</p>
+          <div class="hero-cta">
+            <a href="produtos.html" class="btn btn-primary btn-lg">Ver todos os produtos <span class="arr">→</span></a>
+            <a href="empresa.html" class="btn btn-glass btn-lg">Conhecer a DevBase</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="hero.js"></script>
+<script src="site.js"></script>
+<script src="scroll-fx.js"></script>
+</body>
+</html>
