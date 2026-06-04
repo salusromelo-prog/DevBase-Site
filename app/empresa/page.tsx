@@ -3,6 +3,8 @@ import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import PainChips from '@/components/pain-chips'
 import NewsletterForm from '@/components/newsletter-form'
+import SectionShell from '@/components/visual/section-shell'
+import SectionTransition from '@/components/visual/section-transition'
 
 export const metadata: Metadata = { title: 'Empresa · DevBase' }
 
@@ -19,9 +21,10 @@ export default function Empresa() {
           <p>Sem investidor, sem escritório, sem frescura. Código, design, suporte e conteúdo — tudo na mão.</p>
         </div>
       </header>
+      <SectionTransition />
 
       {/* ===== HISTÓRIA ===== */}
-      <section className="sec" data-rail="historia">
+      <SectionShell rail="historia" bleed="tr" className="sx-curtain">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// nossa história</span><span className="sec-rule__line" /></div>
           <div className="showcase">
@@ -44,10 +47,10 @@ export default function Empresa() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== TIMELINE ===== */}
-      <section className="sec tight soft" data-rail="timeline">
+      <SectionShell rail="timeline" tight soft>
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a linha do tempo</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
@@ -86,10 +89,10 @@ export default function Empresa() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== VALORES ===== */}
-      <section className="sec" data-rail="valores">
+      <SectionShell rail="valores" bleed="bl">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// nossos valores</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
@@ -133,20 +136,20 @@ export default function Empresa() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== MANIFESTO ===== */}
-      <section className="sec soft" id="manifesto" data-rail="manifesto">
+      <SectionShell id="manifesto" rail="manifesto" soft bleed="center">
         <div className="wrap">
           <Reveal className="manifesto blur depth">
             <span className="eyebrow center" style={{ marginBottom: 28 }}>Manifesto</span>
             <p>A internet brasileira não precisa de mais <span className="ac">tutoriais</span>. Precisa de devs <span className="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>
           </Reveal>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== TIME ===== */}
-      <section className="sec" id="time">
+      <SectionShell id="time">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// o time</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
@@ -177,10 +180,10 @@ export default function Empresa() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== PARTICIPE ===== */}
-      <section className="sec tight soft" data-rail="participe">
+      <SectionShell rail="participe" tight soft>
         <div className="wrap wrap-wide">
           <Reveal className="sec-head">
             <span className="eyebrow">Participe</span>
@@ -209,10 +212,10 @@ export default function Empresa() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== CTA BAND ===== */}
-      <section className="sec tight">
+      <SectionShell tight>
         <div className="wrap wrap-wide">
           <Reveal className="ctaband">
             <HeroCanvas variant="silk" className="ctaband-canvas" />
@@ -227,7 +230,7 @@ export default function Empresa() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </SectionShell>
     </>
   )
 }

@@ -1,6 +1,8 @@
 ﻿import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
+import SectionShell from '@/components/visual/section-shell'
+import SectionTransition from '@/components/visual/section-transition'
 
 export const metadata: Metadata = { title: 'Produtos · DevBase' }
 
@@ -17,9 +19,10 @@ export default function Produtos() {
           <p>Produtos avulsos que resolvem problemas reais do dev brasileiro. Pagamento único ou gratuito — sem assinatura, sem enrolação.</p>
         </div>
       </header>
+      <SectionTransition />
 
       {/* ===== CATALOG ===== */}
-      <section className="sec" style={{ borderTop: '2px solid #e2e8f0' }} data-rail="catalogo">
+      <SectionShell rail="catalogo" bleed="tr" className="sx-curtain" style={{ borderTop: '2px solid #e2e8f0' }}>
         <div className="wrap wrap-wide">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// nossos produtos</span><span className="sec-rule__line" /></div>
           <div className="cards">
@@ -172,10 +175,10 @@ export default function Produtos() {
 
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== FAQ ===== */}
-      <section className="sec tight soft" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }} data-rail="faq">
+      <SectionShell rail="faq" tight soft style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }}>
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// perguntas frequentes</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
@@ -205,10 +208,10 @@ export default function Produtos() {
             </details>
           </Reveal>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== CTA BAND ===== */}
-      <section className="sec tight" style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }} data-rail="comecar">
+      <SectionShell rail="comecar" tight style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }}>
         <div className="wrap wrap-wide">
           <Reveal className="ctaband">
             <HeroCanvas variant="silk" className="ctaband-canvas" />
@@ -228,7 +231,7 @@ export default function Produtos() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </SectionShell>
     </>
   )
 }

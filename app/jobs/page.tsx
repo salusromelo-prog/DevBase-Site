@@ -1,6 +1,8 @@
 ﻿import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
+import SectionShell from '@/components/visual/section-shell'
+import SectionTransition from '@/components/visual/section-transition'
 
 export const metadata: Metadata = { title: 'DevBase Jobs · DevBase' }
 
@@ -25,9 +27,10 @@ export default function Jobs() {
           </div>
         </div>
       </header>
+      <SectionTransition />
 
       {/* ===== POR QUE É DIFERENTE ===== */}
-      <section className="sec">
+      <SectionShell bleed="tr" className="sx-curtain">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// por que é diferente</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
@@ -74,10 +77,10 @@ export default function Jobs() {
             </Reveal>
           </div>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== VAGAS ILUSTRATIVAS ===== */}
-      <section className="sec tight soft">
+      <SectionShell tight soft>
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// exemplo de vagas</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
@@ -122,10 +125,10 @@ export default function Jobs() {
             Vagas ilustrativas. Veja as reais no DevBase Jobs.
           </p>
         </div>
-      </section>
+      </SectionShell>
 
       {/* ===== CTA BAND ===== */}
-      <section className="sec tight">
+      <SectionShell tight>
         <div className="wrap wrap-wide">
           <Reveal className="ctaband">
             <HeroCanvas variant="silk" className="ctaband-canvas" />
@@ -142,7 +145,7 @@ export default function Jobs() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </SectionShell>
     </div>
   )
 }
