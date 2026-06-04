@@ -29,6 +29,7 @@ function makeEngine(canvas: HTMLCanvasElement, initialVariant: HeroVariant) {
   const dpr = Math.min(devicePixelRatio || 1, 2)
   let mainRaf = 0, easeRaf = 0, resizeTimer: ReturnType<typeof setTimeout> | null = null
   let variant = initialVariant
+  let paused = false
   const mouse = { x: 0.5, y: 0.5, tx: 0.5, ty: 0.5 }
   let blobs: Blob[] = []
   let parts: Particle[] = []
@@ -185,6 +186,16 @@ function makeEngine(canvas: HTMLCanvasElement, initialVariant: HeroVariant) {
   }
 
   return {
+    pause() {
+      if (paused || reduced) return
+      paused = true
+      cancelAnimationFrame(mainRaf)
+    },
+    resume() {
+      if (!paused || reduced) return
+      paused = false
+      mainRaf = requestAnimationFrame(loop)
+    },
     setVariant(v: HeroVariant) {
       cancelAnimationFrame(mainRaf)
       variant = v
@@ -215,7 +226,12 @@ export default function HeroCanvas({
     const canvas = canvasRef.current
     if (!canvas) return
     const engine = makeEngine(canvas, variant)
-    return () => engine.destroy()
+    const io = new IntersectionObserver(
+      ([entry]) => { entry.isIntersecting ? engine.resume() : engine.pause() },
+      { threshold: 0 }
+    )
+    io.observe(canvas)
+    return () => { engine.destroy(); io.disconnect() }
   }, [variant])
 
   return <canvas ref={canvasRef} className={className} aria-hidden="true" />

@@ -335,7 +335,7 @@ p { margin: 0; }
   padding: 30px; transition: transform .35s var(--ease), box-shadow .35s, border-color .35s;
   position: relative; overflow: hidden;
 }
-.pcard:hover { transform: translateY(-5px); box-shadow: 0 30px 60px -34px rgba(13,13,18,0.22); border-color: var(--line-2); }
+.pcard:hover { transform: translateY(-5px); box-shadow: 0 30px 60px -34px rgba(13,13,18,0.22), 0 0 28px -8px rgba(99,102,241,0.10) inset; border-color: var(--soft-2); }
 .pcard.span6 { grid-column: span 6; }
 .pcard.span8 { grid-column: span 8; }
 .pcard.feat {
@@ -673,3 +673,39 @@ p { margin: 0; }
 
 /* SectionShell — inner content sits above decorative layers */
 .sec-shell-inner { position: relative; z-index: 1; }
+
+/* ================================================================
+   CODE DISSOLVE (Fase 1 — "Por que existimos")
+   ================================================================ */
+.cd-term { background: #0d0c16; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; overflow: hidden; max-width: 460px; margin-top: 48px; }
+.cd-bar { background: #14121f; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 12px 16px; display: flex; align-items: center; gap: 7px; }
+.cd-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.12); }
+.cd-body { padding: 20px 24px; font-family: var(--mono); font-size: 13.5px; line-height: 1.95; }
+.cd-line { display: flex; gap: 8px; }
+.cd-err { color: #f87171; text-decoration: line-through; text-decoration-color: rgba(248,113,113,0.55); transition: opacity 0.3s ease calc(1000ms + var(--d, 0ms)); }
+.cd-ok { color: var(--signal); opacity: 0; transition: opacity 0.5s ease calc(1400ms + var(--d, 0ms)); }
+.code-dissolve.in .cd-err { opacity: 0; }
+.code-dissolve.in .cd-ok  { opacity: 1; }
+@media (max-width: 760px) { .cd-term { max-width: 100%; } }
+
+/* ================================================================
+   TERMINAL TYPE (Fase 1 — showcase boilerplate)
+   ================================================================ */
+.js .cc-body > div { opacity: 0; transform: translateX(-8px); animation: cc-line-in 0.28s ease forwards; animation-play-state: paused; }
+@keyframes cc-line-in { to { opacity: 1; transform: none; } }
+.reveal.in .cc-body > div { animation-play-state: running; }
+.cc-body > div:nth-child(1) { animation-delay: 0.10s; }
+.cc-body > div:nth-child(2) { animation-delay: 0.55s; }
+.cc-body > div:nth-child(3) { animation-delay: 0.95s; }
+.cc-body > div:nth-child(4) { animation-delay: 1.35s; }
+.cc-body > div:nth-child(5) { animation-delay: 1.75s; }
+.cc-body > div:nth-child(6) { animation-delay: 2.15s; }
+.cc-body > div:nth-child(7) { animation-delay: 2.55s; }
+.cc-body > div:nth-child(8) { animation-delay: 3.00s; }
+
+/* ================================================================
+   COUNTUP BAR (Fase 1 — figures)
+   ================================================================ */
+.fig-bar { width: 100%; height: 2px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 10px 0 10px; }
+.fig-bar__fill { display: block; height: 100%; background: linear-gradient(90deg, var(--primary), var(--violet)); transform: scaleX(0); transform-origin: left; transition: transform 1.5s cubic-bezier(.22,.61,.36,1); transition-delay: var(--d, 0ms); }
+.reveal.in .fig-bar__fill { transform: scaleX(1); }

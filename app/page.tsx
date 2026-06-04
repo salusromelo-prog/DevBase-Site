@@ -4,6 +4,8 @@ import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import SectionShell from '@/components/visual/section-shell'
 import SectionTransition from '@/components/visual/section-transition'
+import CodeDissolve from '@/components/visual/code-dissolve'
+import AccentBleed from '@/components/visual/accent-bleed'
 
 export const metadata: Metadata = {
   title: 'DevBase — Ferramentas para devs brasileiros',
@@ -80,6 +82,9 @@ export default function Home() {
               </div>
             </Reveal>
           </div>
+          <Reveal className="code-dissolve">
+            <CodeDissolve />
+          </Reveal>
         </div>
       </SectionShell>
 
@@ -185,19 +190,23 @@ export default function Home() {
         <div className="wrap wrap-wide">
           <div className="figs">
             <Reveal delay={0} className="fig">
-              <div className="n">5</div>
+              <div className="n" data-count="5">0</div>
+              <div className="fig-bar"><span className="fig-bar__fill" /></div>
               <div className="l">produtos no ar</div>
             </Reveal>
             <Reveal delay={80} className="fig">
               <div className="n">2025</div>
+              <div className="fig-bar"><span className="fig-bar__fill" /></div>
               <div className="l">fundada em Goiânia</div>
             </Reveal>
             <Reveal delay={160} className="fig">
               <div className="n">100<span className="u">%</span></div>
+              <div className="fig-bar"><span className="fig-bar__fill" /></div>
               <div className="l">em português</div>
             </Reveal>
             <Reveal delay={240} className="fig">
-              <div className="n">3</div>
+              <div className="n" data-count="3">0</div>
+              <div className="fig-bar"><span className="fig-bar__fill" /></div>
               <div className="l">devs construindo</div>
             </Reveal>
           </div>
@@ -220,6 +229,7 @@ export default function Home() {
         <div className="wrap wrap-wide">
           <Reveal className="ctaband">
             <HeroCanvas variant="silk" className="ctaband-canvas" />
+            <AccentBleed corner="center" size={70} intensity={0.12} />
             <div className="ctaband-veil" />
             <div className="ctaband-in">
               <h2 data-split>Construa em cima de uma base que já funciona.</h2>
