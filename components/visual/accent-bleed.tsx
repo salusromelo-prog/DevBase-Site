@@ -8,8 +8,8 @@ const POS: Record<string, string> = {
 
 export default function AccentBleed({
   corner = 'tr',
-  size = 50,
-  intensity = 0.07,
+  size = 60,
+  intensity = 0.16,
 }: {
   corner?: 'tl' | 'tr' | 'bl' | 'br' | 'center'
   size?: number

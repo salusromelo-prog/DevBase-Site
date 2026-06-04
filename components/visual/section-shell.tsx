@@ -33,7 +33,7 @@ export default function SectionShell({
 
   return (
     <section className={cls} data-rail={rail} id={id} style={style}>
-      {dots && <SectionDots tone={tone} />}
+      {dots && <SectionDots tone={tone} soft={soft} />}
       {bleed && <AccentBleed corner={bleed} />}
       <div className="sec-shell-inner">{children}</div>
     </section>
