@@ -55,6 +55,7 @@ export default function Empresa() {
             <h2>Do incômodo ao produto.</h2>
           </Reveal>
           <Reveal className="timeline">
+            <span className="tl-spine" aria-hidden="true" />
             <div className="tl-row">
               <div className="yr">2025</div>
               <div>

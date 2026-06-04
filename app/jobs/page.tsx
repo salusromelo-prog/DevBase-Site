@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: 'DevBase Jobs · DevBase' }
 
 export default function Jobs() {
   return (
-    <>
+    <div className="p-jobs">
       {/* ===== PAGE HEADER ===== */}
       <header className="phead">
         <HeroCanvas variant="silk" className="phead-canvas" />
@@ -34,8 +34,8 @@ export default function Jobs() {
             <span className="eyebrow">Por que é diferente</span>
             <h2>Tudo que um job board deveria ter.</h2>
           </Reveal>
-          <div className="values">
-            <Reveal delay={0}>
+          <div className="values" data-depth-stagger>
+            <Reveal delay={0} className="depth">
               <div className="vcard">
                 <div className="ic">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -48,7 +48,7 @@ export default function Jobs() {
                 <p>Toda vaga mostra a faixa salarial. É regra, não opção. Você não perde tempo com proposta abaixo do esperado.</p>
               </div>
             </Reveal>
-            <Reveal delay={80}>
+            <Reveal delay={80} className="depth">
               <div className="vcard">
                 <div className="ic">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -60,7 +60,7 @@ export default function Jobs() {
                 <p>A stack que aparece na vaga é a que você vai usar. Sem lista inflada de 20 tecnologias que ninguém toca.</p>
               </div>
             </Reveal>
-            <Reveal delay={160}>
+            <Reveal delay={160} className="depth">
               <div className="vcard">
                 <div className="ic">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -143,6 +143,6 @@ export default function Jobs() {
           </Reveal>
         </div>
       </section>
-    </>
+    </div>
   )
 }

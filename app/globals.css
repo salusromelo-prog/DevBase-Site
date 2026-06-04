@@ -793,3 +793,59 @@ p { margin: 0; }
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-2px); }
 }
+
+/* ================================================================
+   TIMELINE ANIMADA (Fase 3 — empresa)
+   ================================================================ */
+.reveal.timeline { position: relative; padding-left: 22px; }
+.tl-spine { position: absolute; left: 4px; top: 8px; bottom: 8px; width: 2px; border-radius: 999px; background: linear-gradient(180deg, var(--primary) 0%, var(--violet) 65%, transparent 100%); transform: scaleY(0); transform-origin: top; transition: transform 1.4s cubic-bezier(.22,.61,.36,1) 0.15s; pointer-events: none; }
+.reveal.timeline.in .tl-spine { transform: scaleY(1); }
+.tl-row { position: relative; }
+.tl-row::before { content: ''; position: absolute; left: -21px; top: 32px; width: 8px; height: 8px; border-radius: 50%; background: var(--bg); border: 2px solid var(--primary); z-index: 1; transform: scale(0); transition: transform 0.25s var(--ease); }
+.tl-row:nth-child(2)::before { transition-delay: 0.35s; }
+.tl-row:nth-child(3)::before { transition-delay: 0.65s; }
+.tl-row:nth-child(4)::before { transition-delay: 0.95s; }
+.tl-row:nth-child(5)::before { transition-delay: 1.25s; }
+.reveal.timeline.in .tl-row::before { transform: scale(1); }
+.js .tl-row { opacity: 0; transform: translateX(10px); animation: tl-in 0.35s ease forwards; animation-play-state: paused; }
+.reveal.timeline.in .tl-row { animation-play-state: running; }
+.tl-row:nth-child(2) { animation-delay: 0.30s; }
+.tl-row:nth-child(3) { animation-delay: 0.60s; }
+.tl-row:nth-child(4) { animation-delay: 0.90s; }
+.tl-row:nth-child(5) { animation-delay: 1.20s; }
+@keyframes tl-in { to { opacity: 1; transform: none; } }
+@media (max-width: 620px) { .tl-spine { display: none; } .reveal.timeline { padding-left: 0; } }
+
+/* ================================================================
+   VALUE CARD — ícone anima ao revelar (global, Fase 3)
+   ================================================================ */
+.js .depth .ic { transform: scale(0.7) rotate(-12deg); transition: transform 0.5s var(--ease) calc(var(--d, 0ms) + 300ms); }
+.depth.in .ic { transform: none; }
+
+/* ================================================================
+   MEMBER CARD HOVER (Fase 3 — empresa)
+   ================================================================ */
+.member:hover { border-color: var(--soft-2); }
+.member .av { transition: box-shadow 0.35s ease; }
+.member:hover .av { box-shadow: 0 0 24px rgba(99,102,241,0.28); }
+
+/* ================================================================
+   PANEL FOCUS GLOW (Fase 3 — empresa participe)
+   ================================================================ */
+.panel { transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.panel:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.06); }
+
+/* ================================================================
+   JOBS — salary badge · jrow stagger · seal · icon (Fase 3)
+   ================================================================ */
+.p-jobs .jrow .js { background: rgba(22,163,74,0.07); border: 1px solid rgba(22,163,74,0.2); border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+.js .p-jobs .jrow { opacity: 0; transform: translateX(-8px); animation: jrow-in 0.3s ease forwards; animation-play-state: paused; }
+.reveal.in .p-jobs .jrow { animation-play-state: running; }
+.p-jobs .jrow:nth-child(1) { animation-delay: 0.10s; }
+.p-jobs .jrow:nth-child(2) { animation-delay: 0.30s; }
+.p-jobs .jrow:nth-child(3) { animation-delay: 0.50s; }
+.p-jobs .jrow:nth-child(4) { animation-delay: 0.70s; }
+@keyframes jrow-in { to { opacity: 1; transform: none; } }
+.p-jobs .values .vcard .ic { background: rgba(22,163,74,0.08); color: var(--signal); }
+.p-jobs .values .vcard h3::after { content: '✓'; display: inline-block; width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 50%; background: var(--signal); color: #fff; font-size: 10px; font-weight: 700; margin-left: 10px; vertical-align: middle; opacity: 0; transform: scale(0.5); transition: opacity 0.3s ease 0.4s, transform 0.3s var(--ease) 0.4s; }
+.p-jobs .values .reveal.in .vcard h3::after { opacity: 1; transform: scale(1); }
