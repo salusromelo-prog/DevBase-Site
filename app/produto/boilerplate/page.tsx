@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
+import PainTerminal from '@/components/visual/pain-terminal'
+import CostMeter from '@/components/visual/cost-meter'
 
 export const metadata: Metadata = {
   title: 'DevBase Boilerplate — Do repositório ao mercado em dias',
@@ -48,6 +50,18 @@ export default function ProdutoBoilerplate() {
               Domingo virou madrugada de segunda. O produto que importava não recebeu <strong>uma linha de código.</strong>
             </p>
           </Reveal>
+          <Reveal className="pain-terminal">
+            <PainTerminal
+              label="// domingo, 23h"
+              lines={[
+                'webhook do gateway — status desconhecido',
+                'e-mail de confirmação — caiu no spam',
+                'magic link expirou às 2h da manhã',
+                'RLS do Supabase — bug em produção',
+                'dashboard admin — ainda não existe',
+              ]}
+            />
+          </Reveal>
         </div>
       </section>
 
@@ -62,6 +76,14 @@ export default function ProdutoBoilerplate() {
               Faz a conta. Auth completo, com refresh token e RLS: 2 a 3 dias. Pagamento com PIX, boleto e cartão que realmente confirma: mais 3 a 4 dias. Dashboard, admin e e-mail transacional: outra semana.<br /><br />
               São <strong>duas semanas</strong> que você repete em todo projeto novo. E o pior nem é o tempo — é que metade dos projetos morre exausta na fase de encanamento, antes de chegar no produto.
             </p>
+          </Reveal>
+          <Reveal>
+            <CostMeter
+              value={14}
+              unit="dias"
+              label="re-fazendo a base em cada projeto novo"
+              contrast="R$ 147 — uma vez, código seu pra sempre"
+            />
           </Reveal>
         </div>
       </section>

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
+import PainTerminal from '@/components/visual/pain-terminal'
+import CostMeter from '@/components/visual/cost-meter'
 
 export const metadata: Metadata = {
   title: 'Combo DevBase — A base e as peças. O kit completo pra lançar.',
@@ -46,6 +48,16 @@ export default function ProdutoCombo() {
               O Boilerplate resolve auth, pagamento, dashboard e deploy — o esqueleto do SaaS. Mas todo formulário brasileiro ainda precisa de CPF validado, CEP que preenche, botão PIX que funciona. É aí que entram os Components.<br /><br />
               Sozinhos, cada um resolve uma parte. Juntos, cobrem do login ao checkout sem buraco.
             </p>
+          </Reveal>
+          <Reveal className="pain-terminal">
+            <PainTerminal
+              label="// antes do combo"
+              lines={[
+                'sem boilerplate — 2 semanas antes do primeiro commit útil',
+                'sem components — CPF e CEP reescritos de novo',
+                'total — 3 semanas antes de lançar qualquer coisa',
+              ]}
+            />
           </Reveal>
         </div>
       </section>
@@ -123,6 +135,14 @@ export default function ProdutoCombo() {
             <p>
               Você leva os dois por menos do que custam separados. Não é muito desconto — é honesto. Mas se você vai usar os dois (e vai, se está lançando um SaaS pro Brasil), não faz sentido pagar mais caro comprando avulso.
             </p>
+          </Reveal>
+          <Reveal>
+            <CostMeter
+              value={18}
+              unit="dias"
+              label="de setup economizados com o combo"
+              contrast="R$ 197 — os dois produtos, uma vez"
+            />
           </Reveal>
         </div>
       </section>

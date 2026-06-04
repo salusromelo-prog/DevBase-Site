@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
+import PainTerminal from '@/components/visual/pain-terminal'
+import CostMeter from '@/components/visual/cost-meter'
+import CpfDemo from '@/components/visual/cpf-demo'
 
 export const metadata: Metadata = {
   title: 'DevBase Components — Os componentes BR que você sempre reescreve',
@@ -47,6 +50,17 @@ export default function ProdutoComponents() {
               São componentes pequenos. Mas somados, é um dia inteiro de trabalho que não diferencia nada — todo mundo precisa, ninguém quer fazer.
             </p>
           </Reveal>
+          <Reveal className="pain-terminal">
+            <PainTerminal
+              label="// projeto novo, mesmo problema"
+              lines={[
+                "CPF '111.111.111-11' — passou na validação",
+                'CEP sem resposta — cliente desistiu do checkout',
+                'telefone — regex rejeita celular com 9 dígitos',
+                'cartão — Luhn não implementado',
+              ]}
+            />
+          </Reveal>
         </div>
       </section>
 
@@ -61,6 +75,14 @@ export default function ProdutoComponents() {
               Um input de CPF com validação você resolve em 20 minutos. Mas é CPF, CNPJ, CEP, telefone, seletor de banco, botão PIX, cartão com Luhn... E aí você descobre que o dígito verificador do CNPJ tem um caso de borda que você esqueceu, e o cliente reclama que o CEP da cidade dele não preenche.<br /><br />
               Manutenção infinita de código que devia ser commodity.
             </p>
+          </Reveal>
+          <Reveal>
+            <CostMeter
+              value={8}
+              unit="h"
+              label="por projeto, reescrevendo os mesmos inputs"
+              contrast="R$ 67 — uma vez, use em quantos projetos quiser"
+            />
           </Reveal>
         </div>
       </section>
@@ -92,6 +114,9 @@ export default function ProdutoComponents() {
               </Reveal>
             ))}
           </div>
+          <Reveal style={{ marginTop: 56 }}>
+            <CpfDemo />
+          </Reveal>
         </div>
       </section>
 

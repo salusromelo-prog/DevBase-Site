@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
+import PainTerminal from '@/components/visual/pain-terminal'
+import CostMeter from '@/components/visual/cost-meter'
+import IdeaDeck from '@/components/visual/idea-deck'
 
 export const metadata: Metadata = {
   title: '100 Micro SaaS — Você não tem falta de skill, tem falta de ideia validada',
@@ -47,6 +50,17 @@ export default function ProdutoMicroSaas() {
               Vai pro Twitter "buscar inspiração". Duas horas depois fechou o editor sem escrever nada. A ideia que parecia boa na cabeça não tem público, ou já existe, ou você não faz ideia de como cobraria por ela. A página em branco venceu de novo.
             </p>
           </Reveal>
+          <Reveal className="pain-terminal">
+            <PainTerminal
+              label="// sexta de noite, de novo"
+              lines={[
+                'npx create-next-app ideia-saas',
+                '// o que eu faço com isso?',
+                'abre Twitter pra buscar inspiração',
+                '2h depois — fecha o editor sem escrever nada',
+              ]}
+            />
+          </Reveal>
         </div>
       </section>
 
@@ -61,6 +75,14 @@ export default function ProdutoMicroSaas() {
               Você tem o skill pra construir um SaaS inteiro. O que falta é a faísca certa — uma ideia que tenha problema real, público que paga, e escopo pequeno o suficiente pra sair em um fim de semana.<br /><br />
               Sem isso, o talento fica parado. Mês após mês, "vou começar um projeto" que nunca começa.
             </p>
+          </Reveal>
+          <Reveal>
+            <CostMeter
+              value={6}
+              unit="meses"
+              label="procurando a ideia certa sem método"
+              contrast="R$ 29,90 — 100 ideias filtradas, problema e público documentados"
+            />
           </Reveal>
         </div>
       </section>
@@ -95,6 +117,13 @@ export default function ProdutoMicroSaas() {
             <div className="bonus-card">
               <span className="eyebrow">// bônus</span>
               <p>E mais <strong>25 automações</strong> prontas — fluxos que você empacota e vende como serviço, sem nem precisar de um SaaS completo.</p>
+            </div>
+          </Reveal>
+          <Reveal style={{ marginTop: 56 }}>
+            <div className="idea-deck-wrap">
+              <p className="idea-deck-eyebrow">// exemplo de ideia do acervo</p>
+              <IdeaDeck />
+              <p className="idea-deck-sub">→ 100 cards como esse, com problema, público, monetização, stack e MVP</p>
             </div>
           </Reveal>
         </div>
