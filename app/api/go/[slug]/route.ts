@@ -7,7 +7,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   const curso = cursos.find(c => c.slug === slug)
 
   if (!curso) {
-    return NextResponse.redirect(new URL('/cursos', request.url))
+    return NextResponse.redirect(new URL('/cursos', request.url), 307)
   }
 
   try {
