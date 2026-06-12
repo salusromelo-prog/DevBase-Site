@@ -9,6 +9,7 @@ const HIDDEN_ROUTES = ['/microsaas', '/acesso']
 
 const LINKS = [
   { label: 'Produtos', href: '/produtos', key: 'produtos' },
+  { label: 'Cursos', href: '/cursos', key: 'cursos' },
   { label: 'Empresa', href: '/empresa', key: 'empresa' },
   { label: 'Jobs', href: '/jobs', key: 'jobs' },
 ]
