@@ -78,21 +78,6 @@ export default function Cursos() {
         </div>
       </SectionShell>
 
-      {/* ===== LANÇAR PRODUTO ===== */}
-      <SectionShell rail="produto" bleed="bl">
-        <div className="wrap wrap-wide">
-          <Reveal className="sec-head">
-            <span className="eyebrow">// lançar produto</span>
-            <p>Você já sabe programar. Agora aprende a transformar isso em receita.</p>
-          </Reveal>
-          <div className="cursos-grid" data-depth-stagger>
-            {cursos.filter(c => c.secao === 'produto').map((curso, i) => (
-              <CursoCard key={curso.slug} curso={curso} delay={i * 60} />
-            ))}
-          </div>
-        </div>
-      </SectionShell>
-
       {/* ===== JÁ DESENVOLVE ===== */}
       <SectionShell rail="dev" soft bleed="tr">
         <div className="wrap wrap-wide">
