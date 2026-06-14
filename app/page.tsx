@@ -9,6 +9,15 @@ import AccentBleed from '@/components/visual/accent-bleed'
 
 export const metadata: Metadata = {
   title: 'DevBase — Ferramentas para devs brasileiros',
+  description:
+    'A DevBase constrói ferramentas para desenvolvedores brasileiros: boilerplate SaaS, componentes React BR, 100 ideias de micro SaaS e um job board com salário obrigatório. Feito em Goiânia.',
+  openGraph: {
+    title: 'DevBase — Ferramentas para devs brasileiros',
+    description:
+      'Boilerplate Next.js com PIX, componentes React BR, 100 ideias de micro SaaS. Tudo em português, feito pro Brasil.',
+    url: 'https://devbase.tools',
+    images: [{ url: '/og.png' }],
+  },
 }
 
 const CHECK = (

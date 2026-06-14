@@ -8,6 +8,13 @@ import CostMeter from '@/components/visual/cost-meter'
 export const metadata: Metadata = {
   title: 'Combo DevBase — A base e as peças. O kit completo pra lançar.',
   description: 'Boilerplate + Components juntos. A fundação do SaaS e os 8 componentes brasileiros — tudo que você precisa do login ao checkout, com desconto.',
+  openGraph: {
+    title: 'Combo DevBase — Boilerplate + Components com desconto',
+    description:
+      'A fundação do SaaS e os 8 componentes brasileiros juntos. Do login ao checkout, tudo pronto pra lançar.',
+    url: 'https://devbase.tools/produto/combo',
+    images: [{ url: '/og.png' }],
+  },
 }
 
 const CHECKOUT = 'https://pay.kiwify.com.br/Y6jViIR'

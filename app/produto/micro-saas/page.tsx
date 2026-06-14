@@ -9,6 +9,13 @@ import IdeaDeck from '@/components/visual/idea-deck'
 export const metadata: Metadata = {
   title: '100 Micro SaaS — Você não tem falta de skill, tem falta de ideia validada',
   description: '100 ideias de micro SaaS com problema, público, monetização, stack e escopo de MVP. Mais 25 automações prontas pra vender.',
+  openGraph: {
+    title: '100 Micro SaaS + 25 Automações — DevBase',
+    description:
+      '100 ideias validadas com problema, público, monetização e stack. Mais 25 automações prontas pra vender.',
+    url: 'https://devbase.tools/produto/micro-saas',
+    images: [{ url: '/og.png' }],
+  },
 }
 
 const CHECKOUT = 'https://pay.kiwify.com.br/5cyFrhr'

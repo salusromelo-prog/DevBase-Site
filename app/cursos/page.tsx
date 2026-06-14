@@ -8,6 +8,13 @@ import { cursos, type CursoIndicado } from '@/data/cursos'
 export const metadata: Metadata = {
   title: 'Cursos indicados | DevBase',
   description: 'Cursos selecionados pela DevBase para devs brasileiros que querem parar de consumir tutorial e começar a construir produto real.',
+  openGraph: {
+    title: 'Cursos indicados para devs brasileiros — DevBase',
+    description:
+      'Cursos selecionados pela DevBase para devs que querem parar de consumir tutorial e começar a construir produto.',
+    url: 'https://devbase.tools/cursos',
+    images: [{ url: '/og.png' }],
+  },
 }
 
 function CursoCard({ curso, delay }: { curso: CursoIndicado; delay: number }) {

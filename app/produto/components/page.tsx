@@ -9,6 +9,13 @@ import CpfDemo from '@/components/visual/cpf-demo'
 export const metadata: Metadata = {
   title: 'DevBase Components — Os componentes BR que você sempre reescreve',
   description: '8 componentes React prontos pro mercado brasileiro. CPF, CNPJ, CEP, PIX, banco — com validação, máscara e TypeScript. Copia, cola, funciona.',
+  openGraph: {
+    title: 'DevBase Components — Componentes React para o mercado BR',
+    description:
+      'CPF, CNPJ, CEP, PIX, banco — 8 componentes prontos com validação, máscara e TypeScript. Copia, cola, funciona.',
+    url: 'https://devbase.tools/produto/components',
+    images: [{ url: '/og.png' }],
+  },
 }
 
 const CHECKOUT = 'https://pay.kiwify.com.br/7OQNJ1C'

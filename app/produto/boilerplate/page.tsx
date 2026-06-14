@@ -8,6 +8,13 @@ import CostMeter from '@/components/visual/cost-meter'
 export const metadata: Metadata = {
   title: 'DevBase Boilerplate — Do repositório ao mercado em dias',
   description: 'O único boilerplate Next.js feito pro Brasil. PIX, boleto e Pagar.me nativos. Auth, billing, dashboard e deploy — documentação 100% em português.',
+  openGraph: {
+    title: 'DevBase Boilerplate — Kit Next.js SaaS para o Brasil',
+    description:
+      'PIX, boleto e Pagar.me nativos. Auth, dashboard e deploy em 1 clique. Documentação 100% em português.',
+    url: 'https://devbase.tools/produto/boilerplate',
+    images: [{ url: '/og.png' }],
+  },
 }
 
 const CHECKOUT = 'https://pay.kiwify.com.br/d4yYNFy'
