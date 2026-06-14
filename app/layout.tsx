@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   description:
     'A DevBase constrói ferramentas para desenvolvedores brasileiros: boilerplate SaaS, componentes React BR, 100 ideias de micro SaaS e um job board com salário obrigatório. Feito em Goiânia.',
   metadataBase: new URL('https://www.devbase.tools'),
+  icons: {
+    icon: '/icon.png',
+  },
   openGraph: {
     title: 'DevBase',
     description: 'Ferramentas para devs brasileiros.',
