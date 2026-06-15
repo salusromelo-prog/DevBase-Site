@@ -169,6 +169,7 @@ export default function ProdutoCombo() {
               Comprar o combo — R$ 197 <span className="arr">→</span>
             </a>
             <p className="offer-note">acesso imediato aos dois após a compra</p>
+            <p className="delivery-note">Acesso entregue por e-mail em até 15 minutos após a confirmação do pagamento.</p>
           </Reveal>
         </div>
       </section>
@@ -229,6 +230,7 @@ export default function ProdutoCombo() {
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; background: linear-gradient(110deg, #6366f1, #8b5cf6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
         .offer-sub { font-size: 16px; color: var(--body); margin-bottom: 28px; max-width: 50ch; }
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
+        .delivery-note { font-family: var(--mono); font-size: 12px; color: var(--muted); opacity: 0.7; text-align: center; margin-top: 8px; }
         /* depth */
         .p-combo .sec:nth-child(even) { background: #f5f5f7; }
         .p-combo .sec { border-top: 2px solid #e2e8f0; counter-increment: p-sec; }

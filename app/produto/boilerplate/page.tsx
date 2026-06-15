@@ -171,6 +171,7 @@ export default function ProdutoBoilerplate() {
               Comprar agora — R$ 147 <span className="arr">→</span>
             </a>
             <p className="offer-note">pagamento 100% seguro · acesso imediato após a compra</p>
+            <p className="delivery-note">Acesso entregue por e-mail em até 15 minutos após a confirmação do pagamento.</p>
           </Reveal>
         </div>
       </section>
@@ -224,6 +225,7 @@ export default function ProdutoBoilerplate() {
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: #6366f1; line-height: 1; }
         .offer-sub { font-size: 16px; color: var(--body); margin-bottom: 28px; max-width: 50ch; }
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
+        .delivery-note { font-family: var(--mono); font-size: 12px; color: var(--muted); opacity: 0.7; text-align: center; margin-top: 8px; }
         /* depth */
         .p-boiler .sec:nth-child(even) { background: #f5f5f7; }
         .p-boiler .sec { border-top: 2px solid #e2e8f0; counter-increment: p-sec; }

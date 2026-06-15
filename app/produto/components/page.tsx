@@ -171,6 +171,7 @@ export default function ProdutoComponents() {
               Comprar agora — R$ 67 <span className="arr">→</span>
             </a>
             <p className="offer-note">acesso imediato após a compra · combina com o Boilerplate — <a href="/produto/combo" style={{ color: 'var(--primary)' }}>veja o combo</a></p>
+            <p className="delivery-note">Acesso entregue por e-mail em até 15 minutos após a confirmação do pagamento.</p>
           </Reveal>
         </div>
       </section>
@@ -224,6 +225,7 @@ export default function ProdutoComponents() {
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: var(--primary); line-height: 1; }
         .offer-sub { font-size: 16px; color: var(--body); margin-bottom: 28px; max-width: 50ch; }
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
+        .delivery-note { font-family: var(--mono); font-size: 12px; color: var(--muted); opacity: 0.7; text-align: center; margin-top: 8px; }
         /* depth */
         .p-comp .sec:nth-child(even) { background: #f5f5f7; }
         .p-comp .sec { border-top: 2px solid #e2e8f0; counter-increment: p-sec; }
