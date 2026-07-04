@@ -194,7 +194,7 @@ export default function Produtos() {
                 >
                   Começar com R$ 29,90 <span className="arr">→</span>
                 </a>
-                <a href="/empresa" className="btn btn-glass btn-lg">Conhecer a empresa</a>
+                <a href="/sobre" className="btn btn-glass btn-lg">Conhecer a DevBase</a>
               </div>
             </div>
           </Reveal>

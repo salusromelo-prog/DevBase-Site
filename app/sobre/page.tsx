@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Sobre() {
   return (
-    <>
+    <div className="page-dark">
       <header className="page-head">
         <div className="wrap">
           <Reveal>
@@ -27,7 +27,7 @@ export default function Sobre() {
       </header>
 
       {/* Quem somos */}
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section">
         <div className="wrap">
           <Reveal>
             <SectionLabel>// quem somos</SectionLabel>
@@ -105,6 +105,6 @@ export default function Sobre() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

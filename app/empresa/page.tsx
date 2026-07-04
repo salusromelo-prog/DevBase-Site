@@ -214,11 +214,11 @@ export default function Empresa() {
             <HeroCanvas variant="silk" className="ctaband-canvas" />
             <div className="ctaband-veil" />
             <div className="ctaband-in">
-              <h2>Feito por devs BR, pra devs BR.</h2>
+              <h2>Feito em Goiânia, para o Brasil.</h2>
               <p>Conheça as ferramentas que a gente construiu pra deixar a vida do dev brasileiro mais fácil.</p>
               <div className="hero-cta">
                 <a href="/produtos" className="btn btn-primary btn-lg">Ver produtos <span className="arr">→</span></a>
-                <a href="/#empresas" className="btn btn-glass btn-lg">Sites para empresas</a>
+                <a href="/empresas" className="btn btn-glass btn-lg">Sites para empresas</a>
               </div>
             </div>
           </Reveal>

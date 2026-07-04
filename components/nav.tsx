@@ -7,9 +7,12 @@ import Logo from './logo'
 
 const HIDDEN_ROUTES = ['/microsaas', '/acesso']
 
+/* rotas de registro claro — o wordmark precisa escurecer sobre elas */
+const LIGHT_ROUTES = ['/empresas']
+
 const LINKS = [
   { label: 'Produtos', href: '/produtos', key: 'produtos' },
-  { label: 'Para empresas', href: '/#empresas', key: 'empresas' },
+  { label: 'Para empresas', href: '/empresas', key: 'empresas' },
   { label: 'Sobre', href: '/sobre', key: 'sobre' },
 ]
 
@@ -36,11 +39,12 @@ export default function Nav() {
 
   if (HIDDEN_ROUTES.some(r => pathname.startsWith(r))) return null
 
-  const dark = isHome && !scrolled
+  const light = LIGHT_ROUTES.some(r => pathname.startsWith(r))
+  const dark = !light && !scrolled
 
   return (
     <>
-      <nav className={`nav${dark ? ' dark' : ''}${scrolled ? ' scrolled' : ''}`}>
+      <nav className={`nav${dark ? ' dark' : ''}${light && !scrolled ? ' light' : ''}${scrolled ? ' scrolled' : ''}`}>
         <div className="wrap wrap-wide">
           <Link href="/" aria-label="dev/base">
             <Logo size="md" />

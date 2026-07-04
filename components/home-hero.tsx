@@ -19,7 +19,7 @@ export default function HomeHero() {
           <a href="/produtos" className="btn btn-primary btn-lg">
             Ver produtos <span className="arr">→</span>
           </a>
-          <a href="#empresas" className="btn btn-glass btn-lg">Quero um site para minha empresa</a>
+          <a href="/empresas" className="btn btn-glass btn-lg">Quero um site para minha empresa</a>
         </div>
       </div>
       <div className="scrollcue">

@@ -9,9 +9,9 @@ export default function TeamMember({
 }) {
   return (
     <div className="member">
-      <div className="avatar">{initials}</div>
-      <div className="name">{name}</div>
-      <div className="role">{role}</div>
+      <div className="av">{initials}</div>
+      <div className="nm">{name}</div>
+      <div className="rl">{role}</div>
     </div>
   )
 }
