@@ -19,7 +19,7 @@ export default function Footer() {
             <Link href="/" aria-label="dev/base">
               <Logo size="sm" />
             </Link>
-            <p>Ferramentas para desenvolvedores brasileiros. Feito em Goiânia, pro Brasil inteiro.</p>
+            <p>Empresa brasileira de tecnologia. Produtos para devs e sites para empresas. Feito em Goiânia, pro Brasil inteiro.</p>
             <div className="foot-soc">
               <a href="#" aria-label="GitHub">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -43,11 +43,11 @@ export default function Footer() {
             <Link href="/produtos">100 Micro SaaS</Link>
             <Link href="/produtos">Boilerplate</Link>
             <Link href="/produtos">Components</Link>
-            <Link href="/jobs">Jobs</Link>
+            <Link href="/#empresas">Para empresas</Link>
           </div>
           <div className="foot-col">
             <h4>Empresa</h4>
-            <Link href="/empresa">Quem somos</Link>
+            <Link href="/sobre">Quem somos</Link>
             <Link href="/empresa#manifesto">Manifesto</Link>
             <Link href="/empresa#time">O time</Link>
           </div>

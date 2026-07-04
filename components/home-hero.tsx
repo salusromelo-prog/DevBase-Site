@@ -9,17 +9,17 @@ export default function HomeHero() {
       <div className="hero-veil" />
       <div className="wrap hero-inner">
         <h1>
-          Ferramentas para{' '}
-          <span className="grad">devs brasileiros.</span>
+          <span className="grad">Construa. Lance. Cresça.</span>
         </h1>
         <p className="hero-sub">
-          Construímos o que o dev BR sempre precisou — sem documentação em inglês, sem preço em dólar, sem suporte que ignora. Produto por produto, do zero, em português.
+          Ferramentas para quem desenvolve. Sites para quem empreende.{' '}
+          Software feito em Goiânia, para o Brasil.
         </p>
         <div className="hero-cta">
           <a href="/produtos" className="btn btn-primary btn-lg">
-            Conhecer produtos <span className="arr">→</span>
+            Ver produtos <span className="arr">→</span>
           </a>
-          <a href="/empresa" className="btn btn-glass btn-lg">Quem somos</a>
+          <a href="#empresas" className="btn btn-glass btn-lg">Quero um site para minha empresa</a>
         </div>
       </div>
       <div className="scrollcue">

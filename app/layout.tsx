@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import { Fraunces } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/nav'
 import Footer from '@/components/footer'
@@ -16,17 +17,24 @@ const jetbrainsMono = localFont({
   display: 'swap',
 })
 
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  display: 'swap',
+  variable: '--font-fraunces',
+})
+
 export const metadata: Metadata = {
-  title: 'DevBase — Ferramentas para devs brasileiros',
+  title: 'DevBase — Construa. Lance. Cresça.',
   description:
-    'A DevBase constrói ferramentas para desenvolvedores brasileiros: boilerplate SaaS, componentes React BR, 100 ideias de micro SaaS e um job board com salário obrigatório. Feito em Goiânia.',
+    'Empresa brasileira de tecnologia. Produtos para desenvolvedores e sites profissionais para empresas. Feito em Goiânia, para o Brasil.',
   metadataBase: new URL('https://www.devbase.tools'),
   icons: {
     icon: '/icon.png',
   },
   openGraph: {
-    title: 'DevBase',
-    description: 'Ferramentas para devs brasileiros.',
+    title: 'DevBase — Construa. Lance. Cresça.',
+    description: 'Empresa brasileira de tecnologia. Produtos para desenvolvedores e sites profissionais para empresas. Feito em Goiânia, para o Brasil.',
     locale: 'pt_BR',
     type: 'website',
     images: ['/og.png'],
@@ -36,7 +44,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={jetbrainsMono.variable}>
+    <html lang="pt-BR" className={`${jetbrainsMono.variable} ${fraunces.variable}`}>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link

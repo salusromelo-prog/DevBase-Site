@@ -8,13 +8,13 @@ import CodeDissolve from '@/components/visual/code-dissolve'
 import AccentBleed from '@/components/visual/accent-bleed'
 
 export const metadata: Metadata = {
-  title: 'DevBase — Ferramentas para devs brasileiros',
+  title: 'DevBase — Construa. Lance. Cresça.',
   description:
-    'A DevBase constrói ferramentas para desenvolvedores brasileiros: boilerplate SaaS, componentes React BR, 100 ideias de micro SaaS e um job board com salário obrigatório. Feito em Goiânia.',
+    'Empresa brasileira de tecnologia. Produtos para desenvolvedores e sites profissionais para empresas. Feito em Goiânia, para o Brasil.',
   openGraph: {
-    title: 'DevBase — Ferramentas para devs brasileiros',
+    title: 'DevBase — Construa. Lance. Cresça.',
     description:
-      'Boilerplate Next.js com PIX, componentes React BR, 100 ideias de micro SaaS. Tudo em português, feito pro Brasil.',
+      'Empresa brasileira de tecnologia. Produtos para desenvolvedores e sites profissionais para empresas. Feito em Goiânia, para o Brasil.',
     url: 'https://devbase.tools',
     images: [{ url: '/og.png' }],
   },
@@ -138,7 +138,7 @@ export default function Home() {
       {/* ===== PRODUCT CATALOG OVERVIEW ===== */}
       <SectionShell rail="catalogo" bleed="bl" style={{ borderTop: '2px solid #e2e8f0' }}>
         <div className="wrap wrap-wide">
-          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// o catálogo</span><span className="sec-rule__line" /></div>
+          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// para devs — pagamento único, sem assinatura</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head center">
             <span className="eyebrow center">O catálogo</span>
             <h2 data-split>Tudo que a DevBase construiu.</h2>
@@ -181,15 +181,6 @@ export default function Home() {
                 <a href="/produto/combo" className="btn btn-line btn-sm">Detalhes</a>
               </div>
             </Reveal>
-            <Reveal delay={160} className="pcard span4">
-              <div className="ptop"><span className="pchip free"><span className="d" />beta gratuito</span></div>
-              <h3>DevBase Jobs</h3>
-              <p className="pdesc">Job board com salário obrigatório, stack real e remoto verificado.</p>
-              <div className="pfoot">
-                <div className="price"><span className="now indigo">Grátis</span><span className="s">sempre, pra devs</span></div>
-                <a href="/jobs" className="btn btn-line btn-sm">Conhecer</a>
-              </div>
-            </Reveal>
           </div>
         </div>
       </SectionShell>
@@ -222,13 +213,106 @@ export default function Home() {
         </div>
       </SectionShell>
 
+      {/* ===== PARA EMPRESAS ===== */}
+      <section id="empresas" style={{
+        background: '#f5f5f7',
+        padding: '120px 0',
+      }}>
+        <div className="wrap" style={{ maxWidth: 680, margin: '0 auto', padding: '0 24px' }}>
+          <Reveal>
+            <span style={{
+              display: 'block',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '13px',
+              color: '#6366f1',
+              letterSpacing: '0.05em',
+              marginBottom: '40px',
+            }}>// para empresas</span>
+            <h2 style={{
+              fontFamily: 'var(--font-fraunces)',
+              fontWeight: 400,
+              fontSize: 'clamp(32px, 5vw, 52px)',
+              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+              color: '#1a1a1a',
+              marginBottom: '48px',
+            }}>
+              Seu cliente já procurou você no Google hoje.{' '}
+              O que ele encontrou?
+            </h2>
+            <p style={{ fontSize: '18px', lineHeight: 1.8, color: '#444', marginBottom: '24px' }}>
+              Se a resposta é &quot;nada&quot; — ou pior, o concorrente — você está perdendo
+              cliente sem nem ficar sabendo. Cartão de visita fica na gaveta.
+              Instagram sozinho não convence quem vai gastar dinheiro de verdade.
+            </p>
+            <p style={{ fontSize: '18px', lineHeight: 1.8, color: '#444', marginBottom: '24px' }}>
+              Um site profissional trabalha por você o dia inteiro: aparece quando
+              procuram pelo seu serviço, responde as perguntas de sempre e passa
+              confiança antes mesmo da primeira conversa. Inclusive às onze da noite
+              de um domingo.
+            </p>
+            <p style={{ fontSize: '18px', lineHeight: 1.8, color: '#444', marginBottom: '56px' }}>
+              A DevBase constrói sites com a mesma engenharia dos produtos que
+              programadores pagam para usar. Rápido de abrir, seguro, e desenhado
+              para o seu negócio — não um modelo pronto com o seu logo em cima.
+            </p>
+            <h3 style={{
+              fontFamily: 'var(--font-fraunces)',
+              fontWeight: 600,
+              fontSize: 'clamp(22px, 3vw, 30px)',
+              color: '#1a1a1a',
+              marginBottom: '28px',
+            }}>Como funciona</h3>
+            <ol style={{
+              listStyle: 'none',
+              padding: 0,
+              margin: '0 0 56px 0',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px',
+            }}>
+              {[
+                'Conversa — você conta o que precisa. Sem compromisso.',
+                'Proposta — escopo e valor claros, sem surpresa no meio do caminho.',
+                'Site no ar — você acompanha tudo até a publicação.',
+              ].map((step, i) => (
+                <li key={i} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start', fontSize: '18px', color: '#444', lineHeight: 1.6 }}>
+                  <span style={{ fontWeight: 700, color: '#1a1a1a', minWidth: '24px' }}>{i + 1}.</span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+            <a
+              href="https://wa.me/5562999071814?text=Ol%C3%A1!%20Quero%20um%20site%20para%20minha%20empresa."
+              target="_blank"
+              rel="noopener"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                background: '#25D366',
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: '17px',
+                padding: '16px 32px',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              Chamar no WhatsApp
+            </a>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ===== MANIFESTO ===== */}
       <SectionShell rail="manifesto" bleed="center" style={{ borderTop: '2px solid #e2e8f0' }}>
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// manifesto</span><span className="sec-rule__line" /></div>
           <Reveal className="manifesto blur depth">
             <span className="eyebrow center" style={{ marginBottom: 28 }}>Manifesto</span>
-            <p>A internet brasileira não precisa de mais <span className="ac">tutoriais</span>. Precisa de devs <span className="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>
+            <p>A internet brasileira não precisa de mais <span className="ac">promessa</span>. Precisa de <span className="on">coisa no ar</span>. A DevBase é a base que você constrói em cima.</p>
           </Reveal>
         </div>
       </SectionShell>

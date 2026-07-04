@@ -4,7 +4,10 @@ import SectionLabel from '@/components/section-label'
 import TeamMember from '@/components/team-member'
 import ValueCard from '@/components/value-card'
 
-export const metadata: Metadata = { title: 'Sobre · DevBase' }
+export const metadata: Metadata = {
+  title: 'Sobre · DevBase',
+  description: 'A DevBase é uma empresa de tecnologia de Goiânia que constrói produtos para desenvolvedores e sites para empresas.',
+}
 
 export default function Sobre() {
   return (
@@ -15,30 +18,36 @@ export default function Sobre() {
             <SectionLabel>// sobre a DevBase</SectionLabel>
           </Reveal>
           <Reveal>
-            <h1>Três devs de Goiânia. Construindo do zero.</h1>
+            <h1>Uma empresa de tecnologia de Goiânia.</h1>
           </Reveal>
           <Reveal>
-            <p className="sub">Sem investidor, sem escritório, sem frescura.</p>
+            <p className="sub">Construímos produtos para quem desenvolve e sites para quem empreende.</p>
           </Reveal>
         </div>
       </header>
 
-      {/* Nossa história */}
+      {/* Quem somos */}
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <Reveal>
-            <SectionLabel>// nossa história</SectionLabel>
+            <SectionLabel>// quem somos</SectionLabel>
           </Reveal>
           <div className="text" style={{ marginTop: 24, maxWidth: 720 }}>
             <Reveal>
               <p>
-                Nascemos da frustração de quem vive o mercado tech brasileiro. Boilerplate genérico que assume Stripe. Vagas com &quot;salário a combinar&quot;. Ferramentas em inglês com docs que ninguém traduz. Suporte que demora 3 dias pra responder uma issue.
+                A DevBase nasceu em Goiânia em 2025. Somos três: Samuel, Isaque e Daniel.
+                Começamos construindo ferramentas para desenvolvedores brasileiros — coisas que
+                a gente mesmo precisava e não encontrava prontas, em português, com preço em real.
               </p>
               <p>
-                Decidimos construir o que gostaríamos de ter. Produto por produto. Do zero. Em português. Cada lançamento é uma resposta a uma dor real que a gente também sentiu como dev.
+                Com o tempo, percebemos que a mesma engenharia que entrega qualidade para
+                programadores pode entregar qualidade para empresas. Um site bem feito, rápido
+                e seguro — não um template com o logo trocado.
               </p>
               <p>
-                Começamos em 2025 com dois produtos no ar: um boilerplate SaaS feito pra mercado brasileiro e um job board onde salário é obrigatório. Mais chegando — sem promessa, sem data, só quando estiver pronto.
+                A internet brasileira não precisa de mais promessa. Precisa de coisa no ar.
+                É assim que trabalhamos: sem &quot;em breve&quot; sem data, sem promessa vazia.
+                Produto pronto, código funcionando, site no ar.
               </p>
             </Reveal>
           </div>
@@ -76,7 +85,7 @@ export default function Sobre() {
               <ValueCard
                 num="01"
                 title="Transparência acima de tudo"
-                desc="Preço visível, stack real, salário obrigatório. Nenhum produto nosso esconde o que importa."
+                desc="Preço visível, stack real, escopo claro. Nenhum produto e nenhum projeto nosso esconde o que importa."
               />
             </Reveal>
             <Reveal>

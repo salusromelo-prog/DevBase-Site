@@ -74,13 +74,6 @@ export default function Empresa() {
               </div>
             </div>
             <div className="tl-row">
-              <div className="yr">2025</div>
-              <div>
-                <h3>DevBase Jobs (beta)</h3>
-                <p>Um job board honesto: salário obrigatório, stack real, remoto verificado. Gratuito pra devs.</p>
-              </div>
-            </div>
-            <div className="tl-row">
               <div className="yr">2026</div>
               <div>
                 <h3>100 Micro SaaS</h3>
@@ -143,7 +136,7 @@ export default function Empresa() {
         <div className="wrap">
           <Reveal className="manifesto blur depth">
             <span className="eyebrow center" style={{ marginBottom: 28 }}>Manifesto</span>
-            <p>A internet brasileira não precisa de mais <span className="ac">tutoriais</span>. Precisa de devs <span className="on">enviando produto</span>. A DevBase é a base que você constrói em cima.</p>
+            <p>A internet brasileira não precisa de mais <span className="ac">promessa</span>. Precisa de <span className="on">coisa no ar</span>. A DevBase é a base que você constrói em cima.</p>
           </Reveal>
         </div>
       </SectionShell>
@@ -225,7 +218,7 @@ export default function Empresa() {
               <p>Conheça as ferramentas que a gente construiu pra deixar a vida do dev brasileiro mais fácil.</p>
               <div className="hero-cta">
                 <a href="/produtos" className="btn btn-primary btn-lg">Ver produtos <span className="arr">→</span></a>
-                <a href="/jobs" className="btn btn-glass btn-lg">Conhecer o Jobs</a>
+                <a href="/#empresas" className="btn btn-glass btn-lg">Sites para empresas</a>
               </div>
             </div>
           </Reveal>

@@ -9,9 +9,8 @@ const HIDDEN_ROUTES = ['/microsaas', '/acesso']
 
 const LINKS = [
   { label: 'Produtos', href: '/produtos', key: 'produtos' },
-  { label: 'Cursos', href: '/cursos', key: 'cursos' },
-  { label: 'Empresa', href: '/empresa', key: 'empresa' },
-  { label: 'Jobs', href: '/jobs', key: 'jobs' },
+  { label: 'Para empresas', href: '/#empresas', key: 'empresas' },
+  { label: 'Sobre', href: '/sobre', key: 'sobre' },
 ]
 
 export default function Nav() {
@@ -58,14 +57,6 @@ export default function Nav() {
             ))}
           </div>
           <div className="nav-cta">
-            <a
-              href="https://dev-base-jobs.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`btn ${dark ? 'btn-glass' : 'btn-line'} btn-sm`}
-            >
-              Entrar
-            </a>
             <Link href="/produtos" className="btn btn-primary btn-sm">
               Ver produtos <span className="arr">→</span>
             </Link>
@@ -96,9 +87,6 @@ export default function Nav() {
         {LINKS.map(l => (
           <Link key={l.key} href={l.href}>{l.label}</Link>
         ))}
-        <a href="https://dev-base-jobs.vercel.app" target="_blank" rel="noopener noreferrer">
-          Entrar no Jobs
-        </a>
         <Link href="/produtos" className="btn btn-primary">
           Ver produtos →
         </Link>

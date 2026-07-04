@@ -144,34 +144,6 @@ export default function Produtos() {
               </div>
             </Reveal>
 
-            {/* Jobs */}
-            <Reveal delay={80} className="pcard span6">
-              <div className="ptop">
-                <span className="pchip free"><span className="d" />beta gratuito</span>
-                <div className="price" style={{ textAlign: 'right' }}>
-                  <span className="now indigo">Grátis</span>
-                </div>
-              </div>
-              <h3>DevBase Jobs</h3>
-              <p className="pdesc">Job board pra dev brasileiro. Sem vaga fake, sem &quot;salário a combinar&quot;, sem stack inflada. Transparência por padrão.</p>
-              <ul className="plist">
-                <li><span className="b">+</span> salário obrigatório em toda vaga</li>
-                <li><span className="b">+</span> stack real do dia a dia</li>
-                <li><span className="b">+</span> remoto verificado</li>
-                <li><span className="b">+</span> alertas por e-mail da sua stack</li>
-              </ul>
-              <div className="pfoot">
-                <div className="price"><span className="s">sempre gratuito pra devs</span></div>
-                <a
-                  href="https://dev-base-jobs.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-line btn-sm"
-                >
-                  Acessar <span className="arr">→</span>
-                </a>
-              </div>
-            </Reveal>
 
           </div>
         </div>
@@ -197,10 +169,6 @@ export default function Produtos() {
             <details>
               <summary>Quais formas de pagamento? <span className="pl">+</span></summary>
               <div className="ans">PIX, boleto e cartão de crédito — tudo em real, sem conversão de dólar nem IOF.</div>
-            </details>
-            <details>
-              <summary>O DevBase Jobs é pago? <span className="pl">+</span></summary>
-              <div className="ans">Não. O Jobs é gratuito pra devs e segue gratuito. Empresas também publicam vagas sem custo durante o beta.</div>
             </details>
             <details>
               <summary>Tem garantia? <span className="pl">+</span></summary>
