@@ -152,23 +152,23 @@ export default function Empresa() {
           <div className="team">
             <Reveal delay={0}>
               <div className="member">
-                <div className="av">SL</div>
-                <div className="nm">Samuel Lustosa Rodrigues Melo</div>
-                <div className="rl">founder · dev</div>
+                <div className="av">S</div>
+                <div className="nm">Samuel</div>
+                <div className="rl">founder · produto e dev</div>
               </div>
             </Reveal>
             <Reveal delay={80}>
               <div className="member">
-                <div className="av">IL</div>
-                <div className="nm">Isaque Lustosa Rodrigues Melo</div>
-                <div className="rl">co-founder</div>
+                <div className="av">I</div>
+                <div className="nm">Isaque</div>
+                <div className="rl">co-founder · marketing</div>
               </div>
             </Reveal>
             <Reveal delay={160}>
               <div className="member">
-                <div className="av">DO</div>
-                <div className="nm">Daniel de Oliveira Pimenta Melo</div>
-                <div className="rl">co-founder</div>
+                <div className="av">D</div>
+                <div className="nm">Daniel</div>
+                <div className="rl">co-founder · marketing</div>
               </div>
             </Reveal>
           </div>

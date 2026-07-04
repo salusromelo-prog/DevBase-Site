@@ -64,9 +64,9 @@ export default function Sobre() {
             </div>
           </Reveal>
           <div className="team-grid">
-            <Reveal><TeamMember initials="SL" name="Samuel Lustosa Rodrigues Melo" role="founder · dev" /></Reveal>
-            <Reveal><TeamMember initials="IL" name="Isaque Lustosa Rodrigues Melo" role="co-founder" /></Reveal>
-            <Reveal><TeamMember initials="DO" name="Daniel de Oliveira Pimenta Melo" role="co-founder" /></Reveal>
+            <Reveal><TeamMember initials="S" name="Samuel" role="founder · produto e dev" /></Reveal>
+            <Reveal><TeamMember initials="I" name="Isaque" role="co-founder · marketing" /></Reveal>
+            <Reveal><TeamMember initials="D" name="Daniel" role="co-founder · marketing" /></Reveal>
           </div>
         </div>
       </section>

@@ -108,7 +108,7 @@ Sugestão React (sem framer-motion):
 > As listas de features de cada produto estão exatas no protótipo (`produtos.html`). Copie de lá.
 
 **Empresa:** fundada em **2025**, **Goiânia · GO**. Pagamento único, sem assinatura.
-**Fundadores:** Samuel Lustosa Rodrigues Melo (founder · dev) · Isaque Lustosa Rodrigues Melo (co-founder) · Daniel de Oliveira Pimenta Melo (co-founder).
+**Fundadores:** Samuel (founder · dev) · Isaque (co-founder) · Daniel (co-founder).
 **Valores:** Transparência acima de tudo · Português primeiro · Real antes de escala.
 **Manifesto:** "A internet brasileira não precisa de mais tutoriais. Precisa de devs enviando produto. A DevBase é a base que você constrói em cima."
 

@@ -178,9 +178,9 @@ Criar em `components/`:
 - Sub: `Sem investidor, sem escritório, sem frescura.`
 - **// nossa história** — 3 parágrafos (copiar exato do `index.html`)
 - **// o time** — 3 cards:
-  - **Samuel Lustosa Rodrigues Melo** — `founder · dev` — avatar `SL`
-  - **Isaque Lustosa Rodrigues Melo** — `co-founder` — avatar `IL`
-  - **Daniel de Oliveira Pimenta Melo** — `co-founder` — avatar `DO`
+  - **Samuel** — `founder · dev` — avatar `S`
+  - **Isaque** — `co-founder` — avatar `I`
+  - **Daniel** — `co-founder` — avatar `D`
 - **// nossos valores** — 3 cards:
   - **01 · Transparência acima de tudo** — `Preço visível, stack real, salário obrigatório. Nenhum produto nosso esconde o que importa.`
   - **02 · Português primeiro** — `Documentação, suporte e produto em PT-BR. O dev BR não precisa traduzir pra usar ferramenta boa.`
