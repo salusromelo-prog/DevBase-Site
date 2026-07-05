@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import BizFaq from '@/components/biz-faq'
+import BizArt from '@/components/biz-art'
 
 const WHATSAPP =
   'https://wa.me/5562999071814?text=Ol%C3%A1!%20Quero%20conversar%20sobre%20um%20projeto%20para%20minha%20empresa.'
@@ -92,33 +93,7 @@ export default function Empresas() {
               </a>
             </Reveal>
             <Reveal delay={120}>
-              <div className="biz-art" aria-hidden="true">
-                <div className="biz-art__bar"><i /><i /><i /></div>
-                <div className="biz-art__body">
-                  <div className="biz-art__nav">
-                    <span className="sq" />
-                    <span className="biz-line" style={{ width: 56 }} />
-                    <span className="biz-line" style={{ width: 36, marginLeft: 'auto' }} />
-                    <span className="biz-line" style={{ width: 36 }} />
-                    <span className="biz-line ac" style={{ width: 48 }} />
-                  </div>
-                  <div className="biz-art__hero">
-                    <span className="biz-line lg" style={{ width: '74%' }} />
-                    <span className="biz-line lg" style={{ width: '52%' }} />
-                    <span className="biz-line" style={{ width: '64%' }} />
-                    <span className="biz-art__btn" />
-                  </div>
-                  <div className="biz-art__cards">
-                    {[0, 1, 2].map(i => (
-                      <div key={i} className="biz-art__card">
-                        <span className="dot" />
-                        <span className="biz-line" style={{ width: '82%' }} />
-                        <span className="biz-line" style={{ width: '56%' }} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <BizArt />
             </Reveal>
           </div>
         </div>
