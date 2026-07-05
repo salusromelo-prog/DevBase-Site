@@ -911,17 +911,75 @@ p { margin: 0; }
    REGISTRO CLARO — conteúdo para empresas (/empresas + teaser home)
    ================================================================ */
 .biz-label { display: block; font-family: var(--mono); font-size: 13px; color: var(--primary); letter-spacing: 0.05em; margin-bottom: 32px; }
-.biz-page { background: #f5f5f7; padding: calc(var(--nav-h) + 96px) 0 128px; }
-.biz-col { max-width: 680px; margin: 0 auto; padding: 0 24px; }
-.biz-h1 { font-family: var(--font-fraunces); font-weight: 400; font-size: clamp(34px, 5vw, 54px); line-height: 1.15; letter-spacing: -0.02em; color: #1a1a1a; margin: 0 0 56px; }
-.biz-h2 { font-family: var(--font-fraunces); font-weight: 600; font-size: clamp(24px, 3vw, 32px); letter-spacing: -0.01em; color: #1a1a1a; margin: 96px 0 28px; }
+.biz-page { background: #f5f5f7; color: #444; }
+.biz-h1 { font-family: var(--font-fraunces); font-weight: 400; font-size: clamp(32px, 4.2vw, 52px); line-height: 1.15; letter-spacing: -0.02em; color: #1a1a1a; margin: 0 0 26px; }
+.biz-h2 { font-family: var(--font-fraunces); font-weight: 600; font-size: clamp(26px, 3.2vw, 38px); letter-spacing: -0.015em; color: #1a1a1a; margin: 0 0 48px; }
 .biz-p { font-size: 18px; line-height: 1.8; color: #444; margin: 0 0 24px; }
-.biz-steps { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; }
-.biz-steps li { display: flex; gap: 18px; align-items: baseline; font-size: 18px; line-height: 1.7; color: #444; }
-.biz-steps .n { font-family: var(--mono); font-size: 15px; font-weight: 600; color: var(--primary); flex-shrink: 0; }
-.biz-cta { margin-top: 96px; text-align: center; }
-.biz-cta a { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff; font-weight: 700; font-size: 17px; padding: 18px 36px; border-radius: 999px; letter-spacing: -0.01em; box-shadow: 0 14px 34px -14px rgba(37,211,102,0.6); transition: transform .25s var(--ease), box-shadow .25s; }
-.biz-cta a:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(37,211,102,0.75); }
+
+/* seções e grids da /empresas — mesmo container .wrap do site */
+.biz-hero { padding: calc(var(--nav-h) + 80px) 0 96px; }
+.biz-sec { padding: 96px 0; border-top: 1px solid rgba(26,26,26,0.08); }
+.biz-grid2 { display: grid; grid-template-columns: 1.08fr 1fr; gap: 72px; align-items: center; }
+@media (max-width: 920px) { .biz-grid2 { grid-template-columns: 1fr; gap: 48px; } }
+
+/* botão whatsapp */
+.btn-wa { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff; font-weight: 700; font-size: 17px; padding: 17px 34px; border-radius: 999px; letter-spacing: -0.01em; box-shadow: 0 14px 34px -14px rgba(37,211,102,0.6); transition: transform .25s var(--ease), box-shadow .25s; }
+.btn-wa:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -14px rgba(37,211,102,0.75); }
+
+/* ilustração abstrata — moldura de navegador com wireframe */
+.biz-art { background: #fff; border: 1px solid rgba(26,26,26,0.10); border-radius: 16px; box-shadow: 0 34px 70px -34px rgba(26,26,26,0.28); transform: rotate(2.5deg); overflow: hidden; max-width: 480px; margin: 0 auto; }
+.biz-art--flow { transform: rotate(-2deg); padding: 26px; }
+.biz-art__bar { display: flex; gap: 6px; padding: 12px 14px; border-bottom: 1px solid rgba(26,26,26,0.08); background: #fafafa; }
+.biz-art__bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(26,26,26,0.12); }
+.biz-art__body { padding: 24px; display: flex; flex-direction: column; gap: 22px; }
+.biz-art__nav { display: flex; align-items: center; gap: 10px; }
+.biz-art__nav .sq { width: 15px; height: 15px; border-radius: 4px; background: var(--primary); flex-shrink: 0; }
+.biz-art__hero { display: flex; flex-direction: column; gap: 11px; padding: 6px 0 2px; }
+.biz-line { display: block; height: 8px; border-radius: 999px; background: rgba(26,26,26,0.10); }
+.biz-line.lg { height: 13px; background: rgba(26,26,26,0.16); }
+.biz-line.ac { background: rgba(99,102,241,0.75); }
+.biz-art__btn { width: 92px; height: 26px; border-radius: 999px; background: var(--primary); margin-top: 8px; }
+.biz-art__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.biz-art__card { border: 1px solid rgba(26,26,26,0.08); border-radius: 10px; padding: 13px; display: flex; flex-direction: column; gap: 9px; }
+.biz-art__card .dot { width: 16px; height: 16px; border-radius: 5px; background: rgba(99,102,241,0.16); border: 1px solid rgba(99,102,241,0.35); margin-bottom: 3px; }
+
+/* mini-blocos "o que um site resolve" */
+.biz-points { display: flex; flex-direction: column; gap: 36px; }
+.biz-point { display: flex; gap: 18px; align-items: flex-start; }
+.biz-point .ic { flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; background: rgba(99,102,241,0.10); color: var(--primary); display: grid; place-items: center; }
+.biz-point .ic svg { width: 20px; height: 20px; }
+.biz-point h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; color: #1a1a1a; margin: 0 0 6px; }
+.biz-point p { font-size: 16px; line-height: 1.7; color: #444; }
+
+/* como funciona — 3 colunas */
+.biz-steps3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px; }
+.biz-step .num { display: block; font-family: var(--mono); font-size: clamp(26px, 2.8vw, 34px); font-weight: 600; color: var(--primary); letter-spacing: -0.02em; margin-bottom: 18px; }
+.biz-step h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: #1a1a1a; margin: 0 0 10px; }
+.biz-step p { font-size: 16px; line-height: 1.7; color: #444; }
+@media (max-width: 920px) { .biz-steps3 { grid-template-columns: 1fr; gap: 36px; } }
+
+/* o que sempre está por nossa conta */
+.biz-checks { list-style: none; padding: 0; margin: 0 0 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px 44px; }
+.biz-checks li { display: flex; gap: 14px; align-items: flex-start; font-size: 17px; line-height: 1.6; color: #1a1a1a; }
+.biz-checks .ck { flex-shrink: 0; width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; background: rgba(99,102,241,0.10); color: var(--primary); margin-top: 2px; }
+.biz-checks .ck svg { width: 13px; height: 13px; }
+@media (max-width: 760px) { .biz-checks { grid-template-columns: 1fr; } }
+
+/* FAQ accordion */
+.biz-faq { max-width: 820px; border-top: 1px solid rgba(26,26,26,0.10); }
+.biz-faq__item { border-bottom: 1px solid rgba(26,26,26,0.10); }
+.biz-faq__q { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: #1a1a1a; text-align: left; }
+.biz-faq__q .pl { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(26,26,26,0.2); display: grid; place-items: center; font-size: 16px; font-weight: 400; color: #444; transition: transform .3s var(--ease), background .3s, color .3s, border-color .3s; }
+.biz-faq__item.open .pl { transform: rotate(45deg); background: var(--primary); border-color: var(--primary); color: #fff; }
+.biz-faq__ans { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s var(--ease); }
+.biz-faq__item.open .biz-faq__ans { grid-template-rows: 1fr; }
+.biz-faq__ans > div { overflow: hidden; }
+.biz-faq__ans p { padding: 0 0 24px; font-size: 16.5px; line-height: 1.8; color: #444; max-width: 70ch; }
+
+/* faixa de CTA final — full-width dark */
+.biz-band { background: #0a0a0a; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 96px 0; text-align: center; }
+.biz-band h2 { font-family: var(--font-fraunces); font-weight: 400; font-size: clamp(30px, 4vw, 46px); letter-spacing: -0.02em; color: #fff; margin: 0 0 18px; }
+.biz-band p { font-size: 17px; line-height: 1.7; color: rgba(244,243,251,0.6); max-width: 52ch; margin: 0 auto 40px; }
 
 /* teaser "para empresas" na home */
 .biz-teaser { background: #f5f5f7; border-top: 0.5px solid rgba(26,26,26,0.14); padding: 96px 0; }

@@ -164,8 +164,8 @@ export default function Home() {
               <h2>Sua empresa também precisa estar no ar.</h2>
               <p>
                 A mesma engenharia dos nossos produtos, a serviço do seu negócio.
-                Sites profissionais que aparecem no Google e passam confiança antes
-                da primeira conversa.
+                Sites profissionais e sistemas sob medida — do jeito que a sua
+                empresa precisa.
               </p>
               <a href="/empresas" className="btn btn-dark">Conhecer <span className="arr">→</span></a>
             </Reveal>
