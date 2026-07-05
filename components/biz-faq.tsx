@@ -33,7 +33,7 @@ export default function BizFaq() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <div className="biz-faq">
+    <div className="biz-faq stg">
       {ITEMS.map((item, i) => (
         <div key={i} className={`biz-faq__item${open === i ? ' open' : ''}`}>
           <button

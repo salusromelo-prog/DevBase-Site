@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import Reveal from '@/components/reveal'
+import BizReveal from '@/components/biz-reveal'
+import BizTilt from '@/components/biz-tilt'
 import BizFaq from '@/components/biz-faq'
 import BizArt from '@/components/biz-art'
 
@@ -77,10 +78,10 @@ export default function Empresas() {
       <section className="biz-hero">
         <div className="wrap">
           <div className="biz-grid2">
-            <Reveal>
+            <BizReveal>
               <span className="biz-label">// para empresas</span>
               <h1 className="biz-h1">
-                Seu cliente já procurou você no Google hoje.{' '}
+                Seu cliente já procurou você no <em>Google</em> hoje.{' '}
                 O que ele encontrou?
               </h1>
               <p className="biz-p" style={{ marginBottom: 36 }}>
@@ -89,12 +90,14 @@ export default function Empresas() {
                 Instagram sozinho não convence quem vai gastar dinheiro de verdade.
               </p>
               <a href={WHATSAPP} target="_blank" rel="noopener" className="btn-wa">
-                Chamar no WhatsApp
+                Chamar no WhatsApp <span className="arr">→</span>
               </a>
-            </Reveal>
-            <Reveal delay={120}>
-              <BizArt />
-            </Reveal>
+            </BizReveal>
+            <BizReveal delay={150}>
+              <BizTilt>
+                <BizArt />
+              </BizTilt>
+            </BizReveal>
           </div>
         </div>
       </section>
@@ -103,18 +106,20 @@ export default function Empresas() {
       <section className="biz-sec">
         <div className="wrap">
           <div className="biz-grid2">
-            <Reveal className="biz-points">
-              {POINTS.map(p => (
-                <div key={p.title} className="biz-point">
-                  <span className="ic">{p.icon}</span>
-                  <div>
-                    <h3>{p.title}</h3>
-                    <p>{p.text}</p>
+            <div className="biz-points">
+              {POINTS.map((p, i) => (
+                <BizReveal key={p.title} delay={i * 100}>
+                  <div className="biz-point">
+                    <span className="ic">{p.icon}</span>
+                    <div>
+                      <h3>{p.title}</h3>
+                      <p>{p.text}</p>
+                    </div>
                   </div>
-                </div>
+                </BizReveal>
               ))}
-            </Reveal>
-            <Reveal delay={100}>
+            </div>
+            <BizReveal delay={150}>
               <p className="biz-p">
                 Um site profissional trabalha por você o dia inteiro: aparece quando
                 procuram pelo seu serviço, responde as perguntas de sempre e passa
@@ -126,7 +131,7 @@ export default function Empresas() {
                 programadores pagam para usar. Rápido de abrir, seguro, e desenhado
                 para o seu negócio — não um modelo pronto com o seu logo em cima.
               </p>
-            </Reveal>
+            </BizReveal>
           </div>
         </div>
       </section>
@@ -134,16 +139,16 @@ export default function Empresas() {
       {/* ===== COMO FUNCIONA ===== */}
       <section className="biz-sec">
         <div className="wrap">
-          <Reveal>
+          <BizReveal>
             <h2 className="biz-h2">Como funciona</h2>
-          </Reveal>
+          </BizReveal>
           <div className="biz-steps3">
             {STEPS.map((s, i) => (
-              <Reveal key={s.num} delay={i * 80} className="biz-step">
+              <BizReveal key={s.num} delay={i * 100} className="biz-step">
                 <span className="num">{s.num}</span>
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
-              </Reveal>
+              </BizReveal>
             ))}
           </div>
         </div>
@@ -153,8 +158,8 @@ export default function Empresas() {
       <section className="biz-sec">
         <div className="wrap">
           <div className="biz-grid2">
-            <Reveal>
-              <h2 className="biz-h2">E quando o problema não é o site</h2>
+            <BizReveal>
+              <h2 className="biz-h2">E quando o problema <em>não é</em> o site</h2>
               <p className="biz-p">
                 Toda empresa tem aquela tarefa que rouba tempo: a planilha que só uma
                 pessoa entende, o agendamento pelo WhatsApp que vive dando conflito,
@@ -167,8 +172,8 @@ export default function Empresas() {
                 funciona. Sob medida, sob demanda: você conta o problema, a gente desenha
                 a solução junto e você só fecha sabendo exatamente o que vai receber.
               </p>
-            </Reveal>
-            <Reveal delay={120}>
+            </BizReveal>
+            <BizReveal delay={150}>
               <div className="biz-art biz-art--flow" aria-hidden="true">
                 <svg viewBox="0 0 320 240" fill="none">
                   <path d="M142 50 C 164 50, 158 84, 178 84" stroke="#c7c8d4" strokeWidth="1.5" strokeDasharray="4 5" />
@@ -189,7 +194,7 @@ export default function Empresas() {
                   <circle cx="160" cy="160" r="4" fill="#6366f1" />
                 </svg>
               </div>
-            </Reveal>
+            </BizReveal>
           </div>
         </div>
       </section>
@@ -197,53 +202,56 @@ export default function Empresas() {
       {/* ===== SEMPRE POR NOSSA CONTA ===== */}
       <section className="biz-sec">
         <div className="wrap">
-          <Reveal>
+          <BizReveal>
             <h2 className="biz-h2">O que sempre está por nossa conta</h2>
-          </Reveal>
-          <Reveal>
-            <ul className="biz-checks">
-              {INCLUDED.map(item => (
-                <li key={item}>
+          </BizReveal>
+          <ul className="biz-checks">
+            {INCLUDED.map((item, i) => (
+              <BizReveal as="li" key={item} delay={i * 100}>
+                <div className="biz-check">
                   <span className="ck">{CHECK}</span>
                   {item}
-                </li>
-              ))}
-            </ul>
+                </div>
+              </BizReveal>
+            ))}
+          </ul>
+          <BizReveal delay={200}>
             <p className="biz-p" style={{ maxWidth: '68ch', marginBottom: 0 }}>
               O que cada projeto inclui além disso — páginas, funcionalidades,
               acompanhamento mensal — é definido junto com você na proposta.
               Transparência é regra aqui: você fecha sabendo exatamente o que
               vai receber e quanto custa.
             </p>
-          </Reveal>
+          </BizReveal>
         </div>
       </section>
 
       {/* ===== PERGUNTAS FREQUENTES ===== */}
-      <section className="biz-sec">
+      <section className="biz-sec biz-sec--faq">
+        <span className="biz-watermark" aria-hidden="true">&rdquo;</span>
         <div className="wrap">
-          <Reveal>
+          <BizReveal>
             <h2 className="biz-h2">Perguntas frequentes</h2>
-          </Reveal>
-          <Reveal>
+          </BizReveal>
+          <BizReveal still>
             <BizFaq />
-          </Reveal>
+          </BizReveal>
         </div>
       </section>
 
       {/* ===== CTA FINAL ===== */}
       <section className="biz-band">
         <div className="wrap">
-          <Reveal>
-            <h2>Vamos conversar sobre o seu projeto?</h2>
+          <BizReveal>
+            <h2>Vamos conversar sobre o seu <em>projeto</em>?</h2>
             <p>
               Primeira conversa de graça, sem compromisso. Você sai com clareza —
               mesmo que não feche com a gente.
             </p>
             <a href={WHATSAPP} target="_blank" rel="noopener" className="btn btn-primary btn-lg">
-              Chamar no WhatsApp
+              Chamar no WhatsApp <span className="arr">→</span>
             </a>
-          </Reveal>
+          </BizReveal>
         </div>
       </section>
     </div>

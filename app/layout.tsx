@@ -20,6 +20,7 @@ const jetbrainsMono = localFont({
 const fraunces = Fraunces({
   subsets: ['latin'],
   weight: ['400', '600'],
+  style: ['normal', 'italic'],
   display: 'swap',
   variable: '--font-fraunces',
 })

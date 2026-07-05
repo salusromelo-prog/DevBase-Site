@@ -5,6 +5,7 @@ import HeroCanvas from '@/components/hero-canvas'
 import SectionShell from '@/components/visual/section-shell'
 import AccentBleed from '@/components/visual/accent-bleed'
 import BizArt from '@/components/biz-art'
+import BizReveal from '@/components/biz-reveal'
 
 export const metadata: Metadata = {
   title: 'DevBase — Construa. Lance. Cresça.',
@@ -160,19 +161,19 @@ export default function Home() {
       <section id="empresas" className="biz-teaser">
         <div className="wrap">
           <div className="biz-grid2">
-            <Reveal>
+            <BizReveal>
               <span className="biz-label">// para empresas</span>
-              <h2>Seu negócio precisa estar no ar.</h2>
+              <h2>Seu negócio precisa estar <em>no ar</em>.</h2>
               <p>
                 A mesma engenharia dos nossos produtos, a serviço do seu negócio.
                 Sites profissionais e sistemas sob medida — do jeito que a sua
                 empresa precisa.
               </p>
               <a href="/empresas" className="btn btn-dark">Conhecer <span className="arr">→</span></a>
-            </Reveal>
-            <Reveal delay={120}>
+            </BizReveal>
+            <BizReveal delay={150}>
               <BizArt className="biz-art--sm" />
-            </Reveal>
+            </BizReveal>
           </div>
         </div>
       </section>
