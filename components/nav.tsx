@@ -44,7 +44,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav className={`nav${dark ? ' dark' : ''}${light && !scrolled ? ' light' : ''}${scrolled ? ' scrolled' : ''}`}>
+      <nav className={`nav${dark ? ' dark' : ''}${light ? ' light' : ''}${scrolled ? ' scrolled' : ''}`}>
         <div className="wrap wrap-wide">
           <Link href="/" aria-label="dev/base">
             <Logo size="md" />

@@ -103,8 +103,11 @@ export default function Empresas() {
       </section>
 
       {/* ===== O QUE UM SITE RESOLVE ===== */}
-      <section className="biz-sec">
+      <section className="biz-sec biz-sec--gray">
         <div className="wrap">
+          <BizReveal>
+            <span className="biz-label">// benefícios</span>
+          </BizReveal>
           <div className="biz-grid2">
             <div className="biz-points">
               {POINTS.map((p, i) => (
@@ -137,9 +140,10 @@ export default function Empresas() {
       </section>
 
       {/* ===== COMO FUNCIONA ===== */}
-      <section className="biz-sec">
+      <section className="biz-sec biz-sec--tint">
         <div className="wrap">
           <BizReveal>
+            <span className="biz-label">// como funciona</span>
             <h2 className="biz-h2">Como funciona</h2>
           </BizReveal>
           <div className="biz-steps3">
@@ -159,6 +163,7 @@ export default function Empresas() {
         <div className="wrap">
           <div className="biz-grid2">
             <BizReveal>
+              <span className="biz-label">// sob medida</span>
               <h2 className="biz-h2">E quando o problema <em>não é</em> o site</h2>
               <p className="biz-p">
                 Toda empresa tem aquela tarefa que rouba tempo: a planilha que só uma
@@ -199,38 +204,42 @@ export default function Empresas() {
         </div>
       </section>
 
-      {/* ===== SEMPRE POR NOSSA CONTA ===== */}
+      {/* ===== SEMPRE POR NOSSA CONTA — card dark ===== */}
       <section className="biz-sec">
         <div className="wrap">
-          <BizReveal>
-            <h2 className="biz-h2">O que sempre está por nossa conta</h2>
-          </BizReveal>
-          <ul className="biz-checks">
-            {INCLUDED.map((item, i) => (
-              <BizReveal as="li" key={item} delay={i * 100}>
-                <div className="biz-check">
-                  <span className="ck">{CHECK}</span>
-                  {item}
-                </div>
-              </BizReveal>
-            ))}
-          </ul>
-          <BizReveal delay={200}>
-            <p className="biz-p" style={{ maxWidth: '68ch', marginBottom: 0 }}>
-              O que cada projeto inclui além disso — páginas, funcionalidades,
-              acompanhamento mensal — é definido junto com você na proposta.
-              Transparência é regra aqui: você fecha sabendo exatamente o que
-              vai receber e quanto custa.
-            </p>
-          </BizReveal>
+          <div className="biz-included">
+            <BizReveal>
+              <span className="biz-label">// o que está incluso</span>
+              <h2 className="biz-h2">O que sempre está por nossa conta</h2>
+            </BizReveal>
+            <ul className="biz-checks">
+              {INCLUDED.map((item, i) => (
+                <BizReveal as="li" key={item} delay={i * 100}>
+                  <div className="biz-check">
+                    <span className="ck">{CHECK}</span>
+                    {item}
+                  </div>
+                </BizReveal>
+              ))}
+            </ul>
+            <BizReveal delay={200}>
+              <p className="biz-p" style={{ maxWidth: '68ch', marginBottom: 0 }}>
+                O que cada projeto inclui além disso — páginas, funcionalidades,
+                acompanhamento mensal — é definido junto com você na proposta.
+                Transparência é regra aqui: você fecha sabendo exatamente o que
+                vai receber e quanto custa.
+              </p>
+            </BizReveal>
+          </div>
         </div>
       </section>
 
       {/* ===== PERGUNTAS FREQUENTES ===== */}
-      <section className="biz-sec biz-sec--faq">
-        <span className="biz-watermark" aria-hidden="true">&rdquo;</span>
+      <section className="biz-sec biz-sec--gray biz-sec--faq">
         <div className="wrap">
+          <span className="biz-watermark" aria-hidden="true">&rdquo;</span>
           <BizReveal>
+            <span className="biz-label">// perguntas frequentes</span>
             <h2 className="biz-h2">Perguntas frequentes</h2>
           </BizReveal>
           <BizReveal still>
@@ -248,7 +257,7 @@ export default function Empresas() {
               Primeira conversa de graça, sem compromisso. Você sai com clareza —
               mesmo que não feche com a gente.
             </p>
-            <a href={WHATSAPP} target="_blank" rel="noopener" className="btn btn-primary btn-lg">
+            <a href={WHATSAPP} target="_blank" rel="noopener" className="btn-wa">
               Chamar no WhatsApp <span className="arr">→</span>
             </a>
           </BizReveal>
