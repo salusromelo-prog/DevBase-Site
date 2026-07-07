@@ -2,12 +2,51 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import SectionLabel from '@/components/section-label'
 import TeamMember from '@/components/team-member'
-import ValueCard from '@/components/value-card'
 
 export const metadata: Metadata = {
   title: 'Sobre · DevBase',
   description: 'A DevBase é uma empresa de tecnologia de Goiânia que constrói produtos para desenvolvedores e sites para empresas.',
 }
+
+// Datas verificadas no git history do repo (hashes reais, exceto o init,
+// que antecede o repositório — fato fornecido pelo founder: fundação mai/2025).
+const LOG = [
+  {
+    hash: 'e0f2b81',
+    date: 'mai 2025',
+    type: 'init',
+    msg: '',
+    desc: 'DevBase é fundada em Goiânia. Três pessoas, zero promessa, uma regra: só conta o que está no ar.',
+  },
+  {
+    hash: '5f42a3c',
+    date: 'mai 2026',
+    type: 'feat:',
+    msg: 'devbase.tools',
+    desc: 'O site entra no ar — já vendendo o DevBase Boilerplate desde o primeiro commit.',
+  },
+  {
+    hash: '2ca1110',
+    date: 'mai 2026',
+    type: 'feat:',
+    msg: 'components + combo',
+    desc: 'O kit de componentes em PT-BR entra no catálogo, junto do combo com o Boilerplate.',
+  },
+  {
+    hash: 'b463e25',
+    date: 'mai 2026',
+    type: 'feat:',
+    msg: 'micro-saas',
+    desc: '100 ideias validadas e 25 automações — problema, público, monetização e stack, prontas pra executar.',
+  },
+  {
+    hash: '829aaa6',
+    date: 'jul 2026',
+    type: 'refactor:',
+    msg: 'dois públicos',
+    desc: 'A DevBase passa a construir também para empresas. Mesma engenharia, nova frente.',
+  },
+]
 
 export default function Sobre() {
   return (
@@ -26,52 +65,64 @@ export default function Sobre() {
         </div>
       </header>
 
-      {/* Quem somos */}
+      {/* git log — a história */}
       <section className="section">
         <div className="wrap">
           <Reveal>
-            <SectionLabel>// quem somos</SectionLabel>
+            <div className="section-head">
+              <SectionLabel>// git log — a história</SectionLabel>
+              <h2>Um repositório vivo.</h2>
+            </div>
           </Reveal>
-          <div className="text" style={{ marginTop: 24, maxWidth: 720 }}>
-            <Reveal>
-              <p>
-                A DevBase nasceu em Goiânia em 2025. Somos três: Samuel, Isaque e Daniel.
-                Começamos construindo ferramentas para desenvolvedores brasileiros — coisas que
-                a gente mesmo precisava e não encontrava prontas, em português, com preço em real.
-              </p>
-              <p>
-                Com o tempo, percebemos que a mesma engenharia que entrega qualidade para
-                programadores pode entregar qualidade para empresas. Um site bem feito, rápido
-                e seguro — não um template com o logo trocado.
-              </p>
-              <p>
-                A internet brasileira não precisa de mais promessa. Precisa de coisa no ar.
-                É assim que trabalhamos: sem &quot;em breve&quot; sem data, sem promessa vazia.
-                Produto pronto, código funcionando, site no ar.
-              </p>
+          <div className="gitlog">
+            {LOG.map((entry, i) => (
+              <Reveal key={entry.hash} delay={i * 90}>
+                <div className="glog-entry">
+                  <div className="glog-meta">
+                    <span className="glog-hash">{entry.hash}</span>
+                    <span className="glog-date">{entry.date}</span>
+                  </div>
+                  <div className="glog-msg">
+                    <span className="glog-type">{entry.type}</span>
+                    {entry.msg && <> {entry.msg}</>}
+                  </div>
+                  <p className="glog-desc">{entry.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+            <Reveal delay={LOG.length * 90}>
+              <div className="glog-entry glog-wip">
+                <div className="glog-meta">
+                  <span className="glog-hash">-------</span>
+                </div>
+                <div className="glog-msg">
+                  <span className="glog-wip-txt">// próximo commit em andamento</span>
+                  <span className="cc-caret" />
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* O time */}
+      {/* Contributors */}
       <section className="section">
         <div className="wrap">
           <Reveal>
             <div className="section-head" style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto' }}>
-              <SectionLabel>// o time</SectionLabel>
+              <SectionLabel>// contributors</SectionLabel>
               <h2>Quem está construindo.</h2>
             </div>
           </Reveal>
           <div className="team-grid">
-            <Reveal><TeamMember initials="S" name="Samuel" role="founder · produto e dev" /></Reveal>
-            <Reveal><TeamMember initials="I" name="Isaque" role="co-founder · marketing" /></Reveal>
-            <Reveal><TeamMember initials="D" name="Daniel" role="co-founder · marketing" /></Reveal>
+            <Reveal><TeamMember initials="S" name="Samuel" role="founder · produto e dev" sig="Samuel <produto·dev>" /></Reveal>
+            <Reveal><TeamMember initials="I" name="Isaque" role="co-founder · marketing" sig="Isaque <marketing>" /></Reveal>
+            <Reveal><TeamMember initials="D" name="Daniel" role="co-founder · marketing" sig="Daniel <marketing>" /></Reveal>
           </div>
         </div>
       </section>
 
-      {/* Nossos valores */}
+      {/* Valores como config */}
       <section className="section">
         <div className="wrap">
           <Reveal>
@@ -80,30 +131,36 @@ export default function Sobre() {
               <h2>Três regras. Nenhuma negociável.</h2>
             </div>
           </Reveal>
-          <div className="values-grid">
-            <Reveal>
-              <ValueCard
-                num="01"
-                title="Transparência acima de tudo"
-                desc="Preço visível, stack real, escopo claro. Nenhum produto e nenhum projeto nosso esconde o que importa."
-              />
-            </Reveal>
-            <Reveal>
-              <ValueCard
-                num="02"
-                title="Português primeiro"
-                desc="Documentação, suporte e produto em PT-BR. O dev BR não precisa traduzir pra usar ferramenta boa."
-              />
-            </Reveal>
-            <Reveal>
-              <ValueCard
-                num="03"
-                title="Real antes de escala"
-                desc='Não lançamos promessa. Lançamos produto. Sem "em breve" sem data.'
-              />
-            </Reveal>
-          </div>
+          <Reveal className="blur">
+            <div className="codecard cfg-card">
+              <div className="browser-bar">
+                <i /><i /><i />
+                <span className="url">devbase.config</span>
+              </div>
+              <div className="cc-body">
+                <div><span className="cm">{'// três regras. nenhuma negociável.'}</span></div>
+                <div><span className="ky">transparencia</span> <span className="eq">=</span> <span className="st">{'"acima de tudo"'}</span></div>
+                <div className="cfg-ind"><span className="cm">{'// preço visível, escopo claro. nenhum projeto esconde o que importa.'}</span></div>
+                <div><span className="ky">idioma</span> <span className="eq">=</span> <span className="st">{'"português primeiro"'}</span></div>
+                <div className="cfg-ind"><span className="cm">{'// docs, suporte e produto em PT-BR. sem tradução pela metade.'}</span></div>
+                <div><span className="ky">regra</span> <span className="eq">=</span> <span className="st">{'"real antes de escala"'}</span></div>
+                <div className="cfg-ind"><span className="cm">{'// não lançamos promessa. lançamos produto. sem "em breve", sem data.'}</span></div>
+              </div>
+            </div>
+          </Reveal>
         </div>
+      </section>
+
+      {/* Fecho em duas vozes */}
+      <section className="sobre-split">
+        <a href="/produtos" className="split-half split-dev">
+          <span className="split-q">Constrói produtos?</span>
+          <span className="split-link">Ver o catálogo <span className="split-arr">→</span></span>
+        </a>
+        <a href="/empresas" className="split-half split-biz">
+          <span className="split-q">Tem uma empresa?</span>
+          <span className="split-link">Conhecer as soluções <span className="split-arr">→</span></span>
+        </a>
       </section>
     </div>
   )

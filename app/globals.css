@@ -1260,3 +1260,64 @@ main { isolation: isolate; }
   0% { transform: scale(1); opacity: .6; }
   70%, 100% { transform: scale(1.4); opacity: 0; }
 }
+
+/* ================================================================
+   /sobre — repositório vivo
+   git log timeline · config de valores · fecho em duas vozes
+   ================================================================ */
+
+/* timeline estilo git log */
+.gitlog { position: relative; max-width: 720px; margin-top: 48px; padding-left: 34px; }
+.gitlog::before {
+  content: ''; position: absolute; left: 3px; top: 8px; bottom: 24px; width: 1px;
+  background: linear-gradient(to bottom, rgba(99,102,241,0.45), rgba(99,102,241,0.10));
+}
+.glog-entry { position: relative; padding-bottom: 48px; }
+.gitlog > :last-child .glog-entry { padding-bottom: 0; }
+.glog-entry::before {
+  content: ''; position: absolute; left: -34px; top: 5px; width: 7px; height: 7px;
+  border-radius: 50%; background: #0a0a0a; border: 1.5px solid var(--primary);
+}
+.glog-wip::before { background: var(--primary); box-shadow: 0 0 12px rgba(99,102,241,0.55); }
+.glog-meta { display: flex; align-items: baseline; gap: 14px; font-family: var(--mono); font-size: 12.5px; margin-bottom: 8px; }
+.glog-hash { color: rgba(244,243,251,0.35); letter-spacing: 0.02em; }
+.glog-date { color: var(--violet-2); }
+.glog-msg { font-family: var(--mono); font-size: 15.5px; color: var(--d-ink); letter-spacing: -0.01em; }
+.glog-type { color: var(--primary); }
+.glog-desc { margin: 8px 0 0; font-size: 14.5px; line-height: 1.7; color: var(--d-body); max-width: 560px; }
+.glog-wip .glog-msg { display: flex; align-items: center; gap: 8px; }
+.glog-wip-txt { color: rgba(244,243,251,0.45); }
+
+/* contributors — linha de autoria estilo commit */
+.member .sig { font-family: var(--mono); font-size: 12px; color: var(--violet-2); margin-top: 10px; opacity: 0.85; }
+
+/* devbase.config — syntax highlighting sutil */
+.cfg-card { max-width: 720px; margin-top: 40px; }
+.cfg-card .cc-body { font-size: 13.5px; }
+.cfg-card .cfg-ind { padding-left: 2ch; margin-bottom: 6px; }
+.cc-body .ky { color: var(--d-ink); }
+.cc-body .eq { color: var(--primary); }
+.cc-body .st { color: var(--signal); }
+.cc-body .cm { color: rgba(255,255,255,0.34); }
+
+/* fecho em duas vozes — corte seco, sem transição */
+.sobre-split { display: grid; grid-template-columns: 1fr 1fr; border-top: 0.5px solid #1e1e1e; }
+.split-half {
+  display: flex; flex-direction: column; justify-content: center; gap: 16px;
+  padding: clamp(64px, 9vw, 110px) clamp(28px, 6vw, 90px);
+  text-decoration: none; min-height: 280px;
+}
+.split-dev { background: #0a0a0a; }
+.split-dev .split-q { font-family: var(--mono); font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 500; color: var(--d-ink); letter-spacing: -0.01em; }
+.split-dev .split-link { font-family: var(--mono); font-size: 14px; color: var(--violet-2); }
+.split-biz { background: #f5f5f7; }
+.split-biz .split-q { font-family: var(--font-fraunces); font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 2.1rem); color: #1a1a1a; letter-spacing: -0.02em; }
+.split-biz .split-link { font-size: 14.5px; font-weight: 600; color: #1a1a1a; }
+.split-arr { display: inline-block; transition: transform 0.3s var(--ease); }
+@media (hover: hover) {
+  .split-half:hover .split-arr { transform: translateX(5px); }
+}
+@media (max-width: 780px) {
+  .sobre-split { grid-template-columns: 1fr; }
+  .split-half { min-height: 220px; }
+}
