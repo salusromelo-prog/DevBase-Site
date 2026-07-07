@@ -7,8 +7,11 @@ import Logo from './logo'
 
 const HIDDEN_ROUTES = ['/microsaas', '/acesso']
 
-/* rotas de registro claro — o wordmark precisa escurecer sobre elas */
-const LIGHT_ROUTES = ['/empresas']
+/* rotas claras do topo ao fim — tema inicial antes da 1ª medição no cliente */
+const LIGHT_ROUTES = ['/empresas', '/obrigado']
+
+/* blocos de registro dark — a navbar sonda o que está sob ela a cada scroll */
+const DARK_BLOCKS = '.hero, .phead, .sec-dark, .who, .page-dark, .biz-band, .footer'
 
 const LINKS = [
   { label: 'Produtos', href: '/produtos', key: 'produtos' },
@@ -18,20 +21,38 @@ const LINKS = [
 
 export default function Nav() {
   const pathname = usePathname()
+  const lightRoute = LIGHT_ROUTES.some(r => pathname.startsWith(r))
   const [scrolled, setScrolled] = useState(false)
+  const [theme, setTheme] = useState<'dark' | 'light'>(lightRoute ? 'light' : 'dark')
   const [menuOpen, setMenuOpen] = useState(false)
 
-  const isHome = pathname === '/'
-
   useEffect(() => {
+    const blocks = Array.from(document.querySelectorAll<HTMLElement>(DARK_BLOCKS))
+    let raf = 0
+
+    function measure() {
+      raf = 0
+      const probe = 36 // meio da navbar
+      let dark = false
+      for (const b of blocks) {
+        const r = b.getBoundingClientRect()
+        if (r.height > 0 && r.top <= probe && r.bottom >= probe) { dark = true; break }
+      }
+      setTheme(dark ? 'dark' : 'light')
+      setScrolled((window.scrollY || document.documentElement.scrollTop) > 8)
+    }
     function onScroll() {
-      const y = window.scrollY || document.documentElement.scrollTop
-      setScrolled(isHome ? y > window.innerHeight - 120 : y > 20)
+      if (!raf) raf = requestAnimationFrame(measure)
     }
     window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [isHome])
+    window.addEventListener('resize', onScroll)
+    measure()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [pathname])
 
   useEffect(() => {
     setMenuOpen(false)
@@ -39,12 +60,9 @@ export default function Nav() {
 
   if (HIDDEN_ROUTES.some(r => pathname.startsWith(r))) return null
 
-  const light = LIGHT_ROUTES.some(r => pathname.startsWith(r))
-  const dark = !light && !scrolled
-
   return (
     <>
-      <nav className={`nav${dark ? ' dark' : ''}${light ? ' light' : ''}${scrolled ? ' scrolled' : ''}`}>
+      <nav className={`nav ${theme}${scrolled ? ' scrolled' : ''}`}>
         <div className="wrap wrap-wide">
           <Link href="/" aria-label="dev/base">
             <Logo size="md" />

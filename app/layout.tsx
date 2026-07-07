@@ -5,6 +5,7 @@ import './globals.css'
 import Nav from '@/components/nav'
 import Footer from '@/components/footer'
 import ScrollFx from '@/components/scroll-fx'
+import CursorFx from '@/components/cursor-fx'
 
 const jetbrainsMono = localFont({
   src: [
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main>{children}</main>
         <Footer />
+        <CursorFx />
         <ScrollFx />
       </body>
     </html>

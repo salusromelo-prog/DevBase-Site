@@ -28,7 +28,7 @@ export default function Produtos() {
           <div className="cards">
 
             {/* Featured */}
-            <Reveal className="pcard feat">
+            <Reveal className="pcard feat glow-teal">
               <div>
                 <div className="ptop">
                   <span className="pchip onfeat"><span className="d" />ao vivo · novo</span>
@@ -89,7 +89,7 @@ export default function Produtos() {
             </Reveal>
 
             {/* Components */}
-            <Reveal delay={80} className="pcard span6">
+            <Reveal delay={80} className="pcard span6 glow-violet">
               <div className="ptop">
                 <span className="pchip live"><span className="d" />ao vivo</span>
                 <div className="price" style={{ textAlign: 'right' }}>

@@ -114,7 +114,7 @@ export default function Home() {
             <p>Produtos avulsos que resolvem problemas reais. Pagamento único ou gratuito — sem assinatura.</p>
           </Reveal>
           <div className="cards">
-            <Reveal delay={0} className="pcard span6">
+            <Reveal delay={0} className="pcard span6 glow-teal">
               <div className="ptop"><span className="pchip live"><span className="d" />ao vivo · novo</span></div>
               <h3>100 Micro SaaS + 25 Automações</h3>
               <p className="pdesc">100 ideias validadas com problema, público, monetização, stack e MVP — prontas pra executar.</p>
@@ -132,7 +132,7 @@ export default function Home() {
                 <a href="/produto/boilerplate" className="btn btn-primary btn-sm">Detalhes <span className="arr">→</span></a>
               </div>
             </Reveal>
-            <Reveal delay={0} className="pcard span4">
+            <Reveal delay={0} className="pcard span4 glow-violet">
               <div className="ptop"><span className="pchip live"><span className="d" />ao vivo</span></div>
               <h3>DevBase Components</h3>
               <p className="pdesc">8 componentes React pro mercado BR: CPF, CNPJ, CEP, PIX e cartão.</p>
