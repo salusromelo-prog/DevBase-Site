@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import HomeHero from '@/components/home-hero'
+import LivingSystem from '@/components/LivingSystem'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import SectionShell from '@/components/visual/section-shell'
@@ -29,6 +30,7 @@ const CHECK = (
 export default function Home() {
   return (
     <>
+      <LivingSystem mode="home" />
       <HomeHero />
 
       {/* ===== A DEVBASE — faixa institucional ===== */}

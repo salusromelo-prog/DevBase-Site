@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
+import LivingSystem from '@/components/LivingSystem'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
 import CpfDemo from '@/components/visual/cpf-demo'
@@ -23,6 +24,7 @@ const CHECKOUT = 'https://pay.kiwify.com.br/7OQNJ1C'
 export default function ProdutoComponents() {
   return (
     <div className="p-comp">
+      <LivingSystem mode="produto" accent="#8b5cf6" fragments={['<InputCPF />', 'CEP → autocomplete', 'validado ✓']} />
       <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">

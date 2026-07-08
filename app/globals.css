@@ -1321,3 +1321,33 @@ main { isolation: isolate; }
   .sobre-split { grid-template-columns: 1fr; }
   .split-half { min-height: 220px; }
 }
+
+/* ================================================================
+   VIDA AMBIENTE — o sistema vivo (canvas assinatura)
+   Um canvas fixo atrás de todo o conteúdo desenha a malha, os traços
+   e os pulsos de deploy. body.ls-on = sistema montado na página:
+   as seções dark ficam translúcidas pra malha aparecer; as claras
+   ganham fundo explícito (o body deixa de ser o fundo delas).
+   ================================================================ */
+.living-system {
+  position: fixed; inset: 0; z-index: -1;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+}
+/* seções claras cobrem o canvas (antes herdavam o branco do body) */
+body.ls-on .sec { background: var(--bg); }
+body.ls-on .sec.soft { background: var(--bg-soft); }
+body.ls-on .biz-teaser { background: var(--bg); }
+/* seções dark deixam a malha atravessar; o tom alternado vira véu */
+body.ls-on .sec-dark { background: transparent; }
+body.ls-on .sec-dark--alt,
+body.ls-on .who { background: rgba(255, 255, 255, 0.02); }
+body.ls-on .page-dark,
+body.ls-on .page-dark .page-head { background: transparent; }
+body.ls-on .page-dark .section:nth-of-type(even) { background: rgba(255, 255, 255, 0.02); }
+/* hero de produto: o silk convive — screen deixa a malha atravessar o preto */
+body.ls-on .phead { background: transparent; }
+body.ls-on .phead-canvas { mix-blend-mode: screen; }
+/* o canvas desenha a própria malha — o dot grid CSS dark sai de cena.
+   Sem .ls-on (canvas não montado), ele permanece como fallback estático. */
+body.ls-on .sdots--dark { display: none; }

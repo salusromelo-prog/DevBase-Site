@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
+import LivingSystem from '@/components/LivingSystem'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
 
@@ -22,6 +23,7 @@ const CHECKOUT = 'https://pay.kiwify.com.br/Y6jViIR'
 export default function ProdutoCombo() {
   return (
     <div className="p-combo">
+      <LivingSystem mode="produto" accent="#6366f1" fragments={['boilerplate + components', 'acesso vitalício ✓']} />
       <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">

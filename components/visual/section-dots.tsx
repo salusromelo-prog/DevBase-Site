@@ -18,6 +18,7 @@ export default function SectionDots({
   return (
     <span
       aria-hidden="true"
+      className={`sdots sdots--${tone}`}
       style={{
         position: 'absolute',
         inset: 0,

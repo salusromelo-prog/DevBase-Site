@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
+import LivingSystem from '@/components/LivingSystem'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
 import IdeaDeck from '@/components/visual/idea-deck'
@@ -23,6 +24,7 @@ const CHECKOUT = 'https://pay.kiwify.com.br/5cyFrhr'
 export default function ProdutoMicroSaas() {
   return (
     <div className="p-micro">
+      <LivingSystem mode="produto" accent="#0d9488" fragments={['ideia #042', 'problema → mvp', 'stack sugerida']} />
       <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
