@@ -2,21 +2,22 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import SectionLabel from '@/components/section-label'
 import TeamMember from '@/components/team-member'
-import LivingSystem from '@/components/LivingSystem'
-import { GITLOG, GITLOG_FRAGMENTS } from '@/data/gitlog'
+import Aurora from '@/components/Aurora'
+import { GITLOG } from '@/data/gitlog'
 
 export const metadata: Metadata = {
   title: 'Sobre · DevBase',
   description: 'A DevBase é uma empresa de tecnologia de Goiânia que constrói produtos para desenvolvedores e sites para empresas.',
 }
 
-// história em data/gitlog.ts — mesma fonte dos fragmentos do fundo vivo
+// história em data/gitlog.ts — fonte única da timeline
 const LOG = GITLOG
 
 export default function Sobre() {
   return (
     <div className="page-dark">
-      <LivingSystem mode="sobre" fragments={GITLOG_FRAGMENTS} />
+      {/* modo memória: mais lenta e mais fria que a home (ordem invertida) */}
+      <Aurora intensity={0.6} speed={0.6} colors={['#6366f1', '#1e40af', '#8b5cf6']} />
       <header className="page-head">
         <div className="wrap">
           <Reveal>

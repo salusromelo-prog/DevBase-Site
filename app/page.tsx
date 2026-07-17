@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import HomeHero from '@/components/home-hero'
-import LivingSystem from '@/components/LivingSystem'
+import Aurora from '@/components/Aurora'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import SectionShell from '@/components/visual/section-shell'
@@ -30,8 +30,12 @@ const CHECK = (
 export default function Home() {
   return (
     <>
-      <LivingSystem mode="home" />
       <HomeHero />
+
+      {/* faixa dark contínua: UMA aurora por trás de todas as seções
+          (não uma por seção); a máscara esmaece nas bordas claras */}
+      <div className="dark-zone">
+      <Aurora className="aurora-fx--mask" intensity={0.55} />
 
       {/* ===== A DEVBASE — faixa institucional ===== */}
       <section className="who">
@@ -158,8 +162,9 @@ export default function Home() {
           </Reveal>
         </div>
       </SectionShell>
+      </div>{/* /dark-zone */}
 
-      {/* ===== PARA EMPRESAS — teaser ===== */}
+      {/* ===== PARA EMPRESAS — teaser (claro: aurora não entra) ===== */}
       <section id="empresas" className="biz-teaser">
         <div className="wrap">
           <div className="biz-grid2">

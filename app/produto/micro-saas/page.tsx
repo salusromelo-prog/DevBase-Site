@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
-import LivingSystem from '@/components/LivingSystem'
+import Aurora from '@/components/Aurora'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
 import IdeaDeck from '@/components/visual/idea-deck'
@@ -24,11 +24,11 @@ const CHECKOUT = 'https://pay.kiwify.com.br/5cyFrhr'
 export default function ProdutoMicroSaas() {
   return (
     <div className="p-micro">
-      <LivingSystem mode="produto" accent="#0d9488" fragments={['ideia #042', 'problema → mvp', 'stack sugerida']} />
       <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="aurora" className="phead-canvas" />
+        <Aurora intensity={0.4} speed={0.8} layers={2} colors={['#0d9488', '#6366f1']} />
         <div className="phead-veil" />
         <div className="wrap">
           <h1 data-split>você não tem falta de skill. tem falta de <span className="grad">ideia validada.</span></h1>

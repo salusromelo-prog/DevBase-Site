@@ -1118,9 +1118,11 @@ main { isolation: isolate; }
   --soft:     rgba(99,102,241,0.16);
   --soft-2:   rgba(99,102,241,0.30);
 }
-.page-dark .page-head { background: #0a0a0a; }
+/* head e tom alternado translúcidos: o #0a0a0a base é do .page-dark,
+   e a aurora (quando montada) desenha entre ele e as seções */
+.page-dark .page-head { background: transparent; }
 .page-dark .section { padding: 96px 0; border-top: 0.5px solid #1e1e1e; }
-.page-dark .section:nth-of-type(even) { background: #0f0f0f; }
+.page-dark .section:nth-of-type(even) { background: rgba(255, 255, 255, 0.02); }
 .p-jobs .values .vcard h3::after { content: '✓'; display: inline-block; width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 50%; background: var(--signal); color: #fff; font-size: 10px; font-weight: 700; margin-left: 10px; vertical-align: middle; opacity: 0; transform: scale(0.5); transition: opacity 0.3s ease 0.4s, transform 0.3s var(--ease) 0.4s; }
 .p-jobs .values .reveal.in .vcard h3::after { opacity: 1; transform: scale(1); }
 
@@ -1351,3 +1353,74 @@ body.ls-on .phead-canvas { mix-blend-mode: screen; }
 /* o canvas desenha a própria malha — o dot grid CSS dark sai de cena.
    Sem .ls-on (canvas não montado), ele permanece como fallback estático. */
 body.ls-on .sdots--dark { display: none; }
+
+/* ================================================================
+   AURORA — luz profunda das superfícies dark
+   .aurora-fx vive DENTRO da seção host: acima do background dela e
+   abaixo do conteúdo (nunca atrás do fundo sólido). Hosts: .hero e
+   .phead (z0, entre canvas e veil), .dark-zone (home pós-hero) e
+   .page-dark (/sobre) — regras de empilhamento abaixo.
+   ================================================================ */
+.aurora-fx {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden; pointer-events: none;
+}
+.aurora-l {
+  position: absolute; border-radius: 50%;
+  filter: blur(var(--ab, 80px));
+  will-change: transform;
+  animation: aurora-d1 26s ease-in-out infinite alternate;
+}
+/* tamanhos em vw/vh (sãos em qualquer altura de host); posição em %
+   do host (num host alto, as poças de luz se distribuem na descida) */
+.aurora-l1 { width: 58vw; height: 62vh; left: -12vw; top: 0; animation-name: aurora-d1; }
+.aurora-l2 { width: 50vw; height: 56vh; right: -10vw; top: 38%; animation-name: aurora-d2; }
+.aurora-l3 { width: 44vw; height: 50vh; left: 24vw; top: 68%; animation-name: aurora-d3; }
+@keyframes aurora-d1 {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(9vw, 7vh, 0) scale(1.18); }
+}
+@keyframes aurora-d2 {
+  from { transform: translate3d(0, 0, 0) scale(1.1); }
+  to   { transform: translate3d(-8vw, -6vh, 0) scale(0.94); }
+}
+@keyframes aurora-d3 {
+  from { transform: translate3d(-5vw, 4vh, 0) scale(0.96); }
+  to   { transform: translate3d(6vw, -6vh, 0) scale(1.14); }
+}
+/* grão sutil contra banding do blur */
+.aurora-noise {
+  position: absolute; inset: 0; opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* disciplina */
+.aurora-fx.is-paused .aurora-l { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .aurora-l { animation: none; } /* luz estática, sem movimento */
+}
+@media (pointer: coarse), (max-width: 768px) {
+  .aurora-fx { --ab: var(--ab-m, 60px); }
+  .aurora-l3 { display: none; } /* mobile: 2 camadas */
+}
+/* máscara de borda — esmaece onde a aurora encosta em seção clara */
+.aurora-fx--mask {
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 140px, #000 calc(100% - 140px), transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 140px, #000 calc(100% - 140px), transparent);
+}
+
+/* home: UMA aurora contínua atrás de todas as seções dark pós-hero.
+   O wrapper assume o fundo; as seções ficam translúcidas (o tom
+   alternado vira véu) e o conteúdo sobe pra z1. */
+.dark-zone { position: relative; isolation: isolate; background: var(--d-bg); }
+.dark-zone > section { position: relative; z-index: 1; }
+.dark-zone .sec-dark { background: transparent; }
+.dark-zone .sec-dark--alt,
+.dark-zone .who { background: rgba(255, 255, 255, 0.02); }
+
+/* /sobre: aurora atrás da página inteira.
+   position: absolute repetido de propósito — a regra genérica acima
+   (.page-dark > *) vem depois de .aurora-fx no arquivo e venceria o
+   empate de especificidade, colapsando a aurora pra altura zero. */
+.page-dark { position: relative; }
+.page-dark > * { position: relative; z-index: 1; }
+.page-dark > .aurora-fx { position: absolute; z-index: 0; }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
-import LivingSystem from '@/components/LivingSystem'
+import Aurora from '@/components/Aurora'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
 
@@ -23,11 +23,11 @@ const CHECKOUT = 'https://pay.kiwify.com.br/Y6jViIR'
 export default function ProdutoCombo() {
   return (
     <div className="p-combo">
-      <LivingSystem mode="produto" accent="#6366f1" fragments={['boilerplate + components', 'acesso vitalício ✓']} />
       <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="silk" className="phead-canvas" />
+        <Aurora intensity={0.4} speed={0.8} layers={2} colors={['#6366f1', '#8b5cf6']} />
         <div className="phead-veil" />
         <div className="wrap">
           <h1 data-split>a base <span className="grad">e</span> as peças. o kit completo pra lançar.</h1>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
 import Nav from '@/components/nav'
-import LivingSystem from '@/components/LivingSystem'
+import Aurora from '@/components/Aurora'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
 import CpfDemo from '@/components/visual/cpf-demo'
@@ -24,11 +24,11 @@ const CHECKOUT = 'https://pay.kiwify.com.br/7OQNJ1C'
 export default function ProdutoComponents() {
   return (
     <div className="p-comp">
-      <LivingSystem mode="produto" accent="#8b5cf6" fragments={['<InputCPF />', 'CEP → autocomplete', 'validado ✓']} />
       <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="silk" className="phead-canvas" />
+        <Aurora intensity={0.4} speed={0.8} layers={2} colors={['#8b5cf6', '#6366f1']} />
         <div className="phead-veil" />
         <div className="wrap">
           <h1 data-split>os componentes BR que você <span className="grad">sempre reescreve.</span></h1>

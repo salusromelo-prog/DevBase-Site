@@ -7,9 +7,6 @@ import { usePathname } from 'next/navigation'
    light = índigo ~4%, sem dots. Demais rotas: nada. */
 const DARK_PAGES = ['/', '/sobre', '/produtos']
 const LIGHT_PAGES = ['/empresas']
-/* páginas onde o sistema vivo (canvas LivingSystem) absorve o spotlight
-   e os dots — aqui só mantemos o tracking da borda viva dos cards */
-const CANVAS_PAGES = ['/', '/sobre']
 
 export default function CursorFx() {
   const pathname = usePathname()
@@ -75,14 +72,10 @@ export default function CursorFx() {
 
   if (!mode) return null
 
-  /* nas páginas do sistema vivo a malha do canvas reage ao cursor —
-     não rodamos dois sistemas de cursor em paralelo */
-  const absorbed = CANVAS_PAGES.includes(pathname)
-
   return (
     <div ref={ref} className={`cfx cfx--${mode}`} aria-hidden="true">
-      {!absorbed && <div className="cfx-glow" />}
-      {mode === 'dark' && !absorbed && (
+      <div className="cfx-glow" />
+      {mode === 'dark' && (
         <div className="cfx-dots-win">
           <div className="cfx-dots" />
         </div>
