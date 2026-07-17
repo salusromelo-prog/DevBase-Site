@@ -35,7 +35,7 @@ export default function Empresa() {
             <Reveal>
               <div style={{ fontSize: 18, color: 'var(--body)', lineHeight: 1.8 }}>
                 <p style={{ marginBottom: 18 }}>
-                  Boilerplate genérico que assume Stripe. Vagas com &quot;salário a combinar&quot;. Ferramentas em inglês com docs que ninguém traduz. Suporte que demora 3 dias pra responder uma issue.
+                  Boilerplate genérico que assume Stripe. Ferramentas em inglês com docs que ninguém traduz. Suporte que demora 3 dias pra responder uma issue.
                 </p>
                 <p style={{ marginBottom: 18 }}>
                   Decidimos construir o que gostaríamos de ter. Produto por produto. Do zero. Em português. <strong style={{ color: 'var(--ink)' }}>Samuel</strong>, <strong style={{ color: 'var(--ink)' }}>Isaque</strong> e <strong style={{ color: 'var(--ink)' }}>Daniel</strong> tocam tudo.
