@@ -7,7 +7,7 @@ import { GITLOG } from '@/data/gitlog'
 
 export const metadata: Metadata = {
   title: 'Sobre · DevBase',
-  description: 'A DevBase é uma empresa de tecnologia de Goiânia que constrói produtos para desenvolvedores e sites para empresas.',
+  description: 'Empresa de tecnologia de Goiânia. Produtos para devs, sites e sistemas para empresas. Fundada em 2025.',
 }
 
 // história em data/gitlog.ts — fonte única da timeline

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
-import Nav from '@/components/nav'
 import Aurora from '@/components/Aurora'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
@@ -23,7 +22,6 @@ const CHECKOUT = 'https://pay.kiwify.com.br/Y6jViIR'
 export default function ProdutoCombo() {
   return (
     <div className="p-combo">
-      <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="silk" className="phead-canvas" />
@@ -50,9 +48,7 @@ export default function ProdutoCombo() {
       <section className="sec" data-rail="argumento">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// faz sentido junto</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// faz sentido junto</span>
-            <h2 data-split>O Boilerplate te dá a estrutura. Os Components, os detalhes.</h2>
+          <Reveal className="sec-head">            <h2 data-split>O Boilerplate te dá a estrutura. Os Components, os detalhes.</h2>
             <p>
               O Boilerplate resolve auth, pagamento, dashboard e deploy — o esqueleto do SaaS. Mas todo formulário brasileiro ainda precisa de CPF validado, CEP que preenche, botão PIX que funciona. É aí que entram os Components.<br /><br />
               Sozinhos, cada um resolve uma parte. Juntos, cobrem do login ao checkout sem buraco.
@@ -75,9 +71,7 @@ export default function ProdutoCombo() {
       <section id="inclui" className="sec soft" data-rail="inclui">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// dois produtos, um preço</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head center">
-            <span className="eyebrow">// dois produtos, um preço</span>
-            <h2 data-split>Tudo do Boilerplate. Tudo dos Components.</h2>
+          <Reveal className="sec-head center">            <h2 data-split>Tudo do Boilerplate. Tudo dos Components.</h2>
           </Reveal>
           <div className="combo-cols" data-depth-stagger>
             <Reveal className="depth">
@@ -138,9 +132,7 @@ export default function ProdutoCombo() {
       <section className="sec" data-rail="conta">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a matemática</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// a matemática</span>
-            <h2 data-split>R$ 147 + R$ 67 = R$ 214. No combo, R$ 197.</h2>
+          <Reveal className="sec-head">            <h2 data-split>R$ 147 + R$ 67 = R$ 214. No combo, R$ 197.</h2>
             <p>
               Você leva os dois por menos do que custam separados. Não é muito desconto — é honesto. Mas se você vai usar os dois (e vai, se está lançando um SaaS pro Brasil), não faz sentido pagar mais caro comprando avulso.
             </p>
@@ -160,9 +152,7 @@ export default function ProdutoCombo() {
       <section className="sec soft" data-rail="oferta">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// oferta</span><span className="sec-rule__line" /></div>
-          <Reveal className="offer-block">
-            <span className="eyebrow">// oferta</span>
-            <div className="offer-price">
+          <Reveal className="offer-block">            <div className="offer-price">
               <span className="offer-old">R$ 214</span>
               <span className="offer-now">R$ 197</span>
             </div>

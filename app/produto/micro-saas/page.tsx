@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
-import Nav from '@/components/nav'
 import Aurora from '@/components/Aurora'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
@@ -24,7 +23,6 @@ const CHECKOUT = 'https://pay.kiwify.com.br/5cyFrhr'
 export default function ProdutoMicroSaas() {
   return (
     <div className="p-micro">
-      <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="aurora" className="phead-canvas" />
@@ -40,8 +38,8 @@ export default function ProdutoMicroSaas() {
             <a href="#como-funciona" className="btn btn-glass btn-lg">Como funciona ↓</a>
           </div>
           <div className="prod-stats">
-            <div className="ps-item"><span className="ps-n" data-count="100">0</span><span className="ps-l">ideias</span></div>
-            <div className="ps-item"><span className="ps-n" data-count="25">0</span><span className="ps-l">automações</span></div>
+            <div className="ps-item"><span className="ps-n">100</span><span className="ps-l">ideias</span></div>
+            <div className="ps-item"><span className="ps-n">25</span><span className="ps-l">automações</span></div>
             <div className="ps-item"><span className="ps-n">R$29,90</span><span className="ps-l">uma vez</span></div>
           </div>
         </div>
@@ -51,9 +49,7 @@ export default function ProdutoMicroSaas() {
       <section className="sec" data-rail="dor">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// sexta de noite</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// sexta de noite</span>
-            <h2 data-split>Você sabe construir qualquer coisa. Não sabe o quê.</h2>
+          <Reveal className="sec-head">            <h2 data-split>Você sabe construir qualquer coisa. Não sabe o quê.</h2>
             <p>
               Abre o editor com a melhor das intenções. Cria a pasta do projeto. <code>npx create-next-app</code>. E aí... trava. Não no código — na pergunta. <em>O que eu faço?</em><br /><br />
               Vai pro Twitter "buscar inspiração". Duas horas depois fechou o editor sem escrever nada. A ideia que parecia boa na cabeça não tem público, ou já existe, ou você não faz ideia de como cobraria por ela. A página em branco venceu de novo.
@@ -77,9 +73,7 @@ export default function ProdutoMicroSaas() {
       <section className="sec soft" data-rail="custo">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// o ciclo</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// o ciclo</span>
-            <h2 data-split>O problema nunca foi sua capacidade técnica.</h2>
+          <Reveal className="sec-head">            <h2 data-split>O problema nunca foi sua capacidade técnica.</h2>
             <p>
               Você tem o skill pra construir um SaaS inteiro. O que falta é a faísca certa — uma ideia que tenha problema real, público que paga, e escopo pequeno o suficiente pra sair em um fim de semana.<br /><br />
               Sem isso, o talento fica parado. Mês após mês, "vou começar um projeto" que nunca começa.
@@ -100,9 +94,7 @@ export default function ProdutoMicroSaas() {
       <section id="como-funciona" className="sec" data-rail="conteudo">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// o acervo</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head center">
-            <span className="eyebrow">// o acervo</span>
-            <h2 data-split>100 ideias que já passaram pelo filtro difícil.</h2>
+          <Reveal className="sec-head center">            <h2 data-split>100 ideias que já passaram pelo filtro difícil.</h2>
             <p>Cada uma com o que importa pra decidir em 5 minutos se vale construir:</p>
           </Reveal>
           <div className="feat-grid" data-depth-stagger>
@@ -142,9 +134,7 @@ export default function ProdutoMicroSaas() {
       <section className="sec soft" data-rail="diferencial">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// não é lista de blog</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// não é lista de blog</span>
-            <h2 data-split>"50 ideias de SaaS" do Google é lixo reciclado.</h2>
+          <Reveal className="sec-head">            <h2 data-split>"50 ideias de SaaS" do Google é lixo reciclado.</h2>
             <p>
               Você já viu as listas: "app de delivery", "clone do Uber", "rede social pra nicho X". Genéricas, sem público definido, sem modelo de cobrança, copiadas de site gringo.<br /><br />
               Aqui cada ideia foi pensada pro mercado brasileiro, com o caminho de monetização explícito. Não é inspiração vaga — é um plano de partida.
@@ -157,9 +147,7 @@ export default function ProdutoMicroSaas() {
       <section className="sec" data-rail="objecao">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// "ideia é o de menos"</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// "ideia é o de menos"</span>
-            <h2 data-split>Pra quem já começou, sim. Pra quem está parado, é tudo.</h2>
+          <Reveal className="sec-head">            <h2 data-split>Pra quem já começou, sim. Pra quem está parado, é tudo.</h2>
             <p>
               Execução vale mais que ideia — quando você já está executando. Mas se faz seis meses que você "vai começar um projeto" e não saiu do lugar, o que te trava não é execução: é não saber em cima do quê executar.<br /><br />
               R$ 29,90 pra destravar isso é o melhor custo-benefício do seu ano.
@@ -172,9 +160,7 @@ export default function ProdutoMicroSaas() {
       <section className="sec soft" data-rail="oferta">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// oferta</span><span className="sec-rule__line" /></div>
-          <Reveal className="offer-block">
-            <span className="eyebrow">// oferta</span>
-            <div className="offer-price">
+          <Reveal className="offer-block">            <div className="offer-price">
               <span className="offer-now">R$ 29,90</span>
             </div>
             <p className="offer-sub">100 ideias + 25 automações. Pagamento único. Acesso vitalício ao dashboard, com novas ideias adicionadas.</p>

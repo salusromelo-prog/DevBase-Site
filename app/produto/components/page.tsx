@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
-import Nav from '@/components/nav'
 import Aurora from '@/components/Aurora'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
@@ -24,7 +23,6 @@ const CHECKOUT = 'https://pay.kiwify.com.br/7OQNJ1C'
 export default function ProdutoComponents() {
   return (
     <div className="p-comp">
-      <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="silk" className="phead-canvas" />
@@ -40,9 +38,9 @@ export default function ProdutoComponents() {
             <a href="#componentes" className="btn btn-glass btn-lg">Ver os componentes ↓</a>
           </div>
           <div className="prod-stats">
-            <div className="ps-item"><span className="ps-n" data-count="8">0</span><span className="ps-l">componentes</span></div>
-            <div className="ps-item"><span className="ps-n" data-count="0">0</span><span className="ps-l">deps pesadas</span></div>
-            <div className="ps-item"><span className="ps-n" data-count="100">0</span><span className="ps-u">%</span><span className="ps-l">TypeScript</span></div>
+            <div className="ps-item"><span className="ps-n">8</span><span className="ps-l">componentes</span></div>
+            <div className="ps-item"><span className="ps-n">0</span><span className="ps-l">deps pesadas</span></div>
+            <div className="ps-item"><span className="ps-n">100</span><span className="ps-u">%</span><span className="ps-l">TypeScript</span></div>
           </div>
         </div>
       </header>
@@ -51,9 +49,7 @@ export default function ProdutoComponents() {
       <section className="sec" data-rail="dor">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// de novo isso</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// de novo isso</span>
-            <h2 data-split>Todo projeto BR começa com o mesmo input de CPF.</h2>
+          <Reveal className="sec-head">            <h2 data-split>Todo projeto BR começa com o mesmo input de CPF.</h2>
             <p>
               Você já escreveu validação de CPF umas trinta vezes. E de CNPJ. E a máscara de telefone. E aquele autocomplete de CEP que chama a ViaCEP. Cada projeto novo, a mesma meia hora copiando de um projeto velho, ajustando o regex, testando o dígito verificador de novo.<br /><br />
               São componentes pequenos. Mas somados, é um dia inteiro de trabalho que não diferencia nada — todo mundo precisa, ninguém quer fazer.
@@ -77,9 +73,7 @@ export default function ProdutoComponents() {
       <section className="sec soft" data-rail="custo">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a soma dos pequenos</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// a soma dos pequenos</span>
-            <h2 data-split>Não é um componente. São oito, em todo projeto, pra sempre.</h2>
+          <Reveal className="sec-head">            <h2 data-split>Não é um componente. São oito, em todo projeto, pra sempre.</h2>
             <p>
               Um input de CPF com validação você resolve em 20 minutos. Mas é CPF, CNPJ, CEP, telefone, seletor de banco, botão PIX, cartão com Luhn... E aí você descobre que o dígito verificador do CNPJ tem um caso de borda que você esqueceu, e o cliente reclama que o CEP da cidade dele não preenche.<br /><br />
               Manutenção infinita de código que devia ser commodity.
@@ -100,9 +94,7 @@ export default function ProdutoComponents() {
       <section id="componentes" className="sec" data-rail="componentes">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a caixa de ferramentas</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head center">
-            <span className="eyebrow">// a caixa de ferramentas</span>
-            <h2 data-split>Os 8 que todo SaaS brasileiro precisa. Resolvidos.</h2>
+          <Reveal className="sec-head center">            <h2 data-split>Os 8 que todo SaaS brasileiro precisa. Resolvidos.</h2>
           </Reveal>
           <div className="feat-grid" data-depth-stagger>
             {[
@@ -133,9 +125,7 @@ export default function ProdutoComponents() {
       <section className="sec soft" data-rail="diferencial">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// porque importa</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// porque importa</span>
-            <h2 data-split>Validação errada de CPF é cliente perdido no checkout.</h2>
+          <Reveal className="sec-head">            <h2 data-split>Validação errada de CPF é cliente perdido no checkout.</h2>
             <p>
               Um regex de CPF que aceita <code>111.111.111-11</code> deixa fraude passar. Um CEP que não preenche faz o cliente desistir da compra. Esses componentes não são enfeite — são a diferença entre um formulário que converte e um que trava na hora de pagar.<br /><br />
               Testados com os casos de borda que você só descobre em produção.
@@ -148,9 +138,7 @@ export default function ProdutoComponents() {
       <section className="sec" data-rail="objecao">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// "acho um no npm"</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">// "acho um no npm"</span>
-            <h2 data-split>Acha. Cinco, na verdade — todos abandonados.</h2>
+          <Reveal className="sec-head">            <h2 data-split>Acha. Cinco, na verdade — todos abandonados.</h2>
             <p>
               A maioria das libs BR do npm tem o último commit de 2021, dependências quebradas e zero suporte a TypeScript moderno. Aqui é código limpo, atual, que você lê e entende.<br /><br />
               Pagamento único, seu pra sempre, use em quantos projetos quiser.
@@ -163,9 +151,7 @@ export default function ProdutoComponents() {
       <section className="sec soft" data-rail="oferta">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// oferta</span><span className="sec-rule__line" /></div>
-          <Reveal className="offer-block">
-            <span className="eyebrow">// oferta</span>
-            <div className="offer-price">
+          <Reveal className="offer-block">            <div className="offer-price">
               <span className="offer-now">R$ 67</span>
             </div>
             <p className="offer-sub">Pagamento único. Acesso vitalício. Os 8 componentes, atualizações incluídas.</p>

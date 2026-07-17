@@ -12,7 +12,7 @@ export default function CostMeter({
   return (
     <div className="cm-wrap">
       <div className="cm-meter">
-        <span className="cm-n" data-count={value}>0</span>
+        <span className="cm-n">{value}</span>
         <span className="cm-u">{unit}</span>
       </div>
       <div className="cm-bar"><span className="cm-fill" /></div>

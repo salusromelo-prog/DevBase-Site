@@ -50,21 +50,11 @@ export default function ScrollFx() {
     /* ---------- reveal targets (position-driven, bulletproof) ---------- */
     const revealEls = $$('.reveal, .depth')
     const splitEls  = $$('[data-split]')
-    const counters  = $$('[data-count]')
 
     function inView(el: HTMLElement, frac?: number) {
       const r = el.getBoundingClientRect()
       if (r.height === 0 && r.width === 0) return false
       return r.top < innerHeight * (frac || 0.88) && r.bottom > 0
-    }
-
-    function animateCount(el: HTMLElement) {
-      const raw = el.dataset.count || '0'; const target = parseFloat(raw)
-      const dec = (raw.split('.')[1] || '').length; const suf = el.dataset.suffix || ''; const pre = el.dataset.prefix || ''
-      const dur = 1500, s = performance.now();
-      (function t(n: number) { const k = Math.min(1, (n - s) / dur); const e = 1 - Math.pow(1 - k, 3)
-        el.textContent = pre + (target * e).toFixed(dec) + suf
-        if (k < 1) requestAnimationFrame(t); else el.textContent = pre + target.toFixed(dec) + suf })(s)
     }
 
     function scanReveals() {
@@ -75,11 +65,6 @@ export default function ScrollFx() {
       for (let i = splitEls.length - 1; i >= 0; i--) {
         const h = splitEls[i]
         if (inView(h, 0.94)) { ((h as HTMLElement & { _sws?: HTMLElement[] })._sws || []).forEach(sw => sw.classList.add('lit')); splitEls.splice(i, 1) }
-      }
-      for (let i = counters.length - 1; i >= 0; i--) {
-        const el = counters[i]
-        if (el.dataset.done) { counters.splice(i, 1); continue }
-        if (inView(el, 0.95)) { el.dataset.done = '1'; animateCount(el); counters.splice(i, 1) }
       }
     }
 

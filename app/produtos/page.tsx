@@ -1,205 +1,149 @@
-﻿import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
-import HeroCanvas from '@/components/hero-canvas'
-import SectionShell from '@/components/visual/section-shell'
-import SectionTransition from '@/components/visual/section-transition'
+import SectionLabel from '@/components/section-label'
+import Aurora from '@/components/Aurora'
 
-export const metadata: Metadata = { title: 'Produtos · DevBase' }
+export const metadata: Metadata = {
+  title: 'Produtos · DevBase',
+  description:
+    'Boilerplate Next.js, componentes brasileiros e 100 ideias de Micro SaaS. Pagamento único, sem assinatura. Feito pro mercado BR.',
+  openGraph: {
+    title: 'Produtos · DevBase',
+    description:
+      'Boilerplate Next.js, componentes brasileiros e 100 ideias de Micro SaaS. Pagamento único, sem assinatura. Feito pro mercado BR.',
+    url: 'https://devbase.tools/produtos',
+    images: [{ url: '/og.png' }],
+  },
+}
+
+const CHECKOUT = {
+  microSaas: 'https://pay.kiwify.com.br/5cyFrhr',
+  boilerplate: 'https://pay.kiwify.com.br/d4yYNFy',
+  components: 'https://pay.kiwify.com.br/7OQNJ1C',
+  combo: 'https://pay.kiwify.com.br/Y6jViIR',
+}
 
 export default function Produtos() {
   return (
-    <>
-      {/* ===== PAGE HEADER ===== */}
-      <header className="phead">
-        <HeroCanvas variant="silk" className="phead-canvas" />
-        <div className="phead-veil" />
+    <div className="page-dark p-produtos">
+      {/* catálogo: presença discreta — o produto é o protagonista */}
+      <Aurora intensity={0.4} />
+
+      {/* ===== HERO ===== */}
+      <header className="page-head">
         <div className="wrap">
-          <span className="eyebrow on-dark">Produtos</span>
-          <h1 data-split>Construir, lançar e crescer no Brasil.</h1>
-          <p>Produtos avulsos que resolvem problemas reais do dev brasileiro. Pagamento único ou gratuito — sem assinatura, sem enrolação.</p>
+          <Reveal>
+            <SectionLabel>// produtos</SectionLabel>
+          </Reveal>
+          <Reveal>
+            <h1>Tudo que a DevBase construiu.</h1>
+          </Reveal>
+          <Reveal>
+            <p className="sub">Pagamento único, sem assinatura. Feito pro mercado brasileiro.</p>
+          </Reveal>
         </div>
       </header>
-      <SectionTransition />
 
-      {/* ===== CATALOG ===== */}
-      <SectionShell rail="catalogo" bleed="tr" className="sx-curtain" style={{ borderTop: '2px solid #e2e8f0' }}>
+      {/* ===== CATÁLOGO ===== */}
+      <section className="section">
         <div className="wrap wrap-wide">
-          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// nossos produtos</span><span className="sec-rule__line" /></div>
           <div className="cards">
-
-            {/* Featured */}
-            <Reveal className="pcard feat glow-teal">
-              <div>
-                <div className="ptop">
-                  <span className="pchip onfeat"><span className="d" />ao vivo · novo</span>
-                  <span className="eyebrow on-dark">entrada perfeita</span>
+            {/* Micro SaaS — produto de entrada, em destaque */}
+            <Reveal delay={0} className="pcard span6 glow-teal">
+              <div className="ptop"><span className="pchip live"><span className="d" />ao vivo · novo</span></div>
+              <h3>100 Micro SaaS + 25 Automações</h3>
+              <p className="pdesc">O ponto de partida pra qualquer dev que quer lançar um produto. 100 ideias validadas, prontas pra executar.</p>
+              <ul className="plist">
+                <li><span className="b">+</span>100 ideias com problema e MVP</li>
+                <li><span className="b">+</span>25 automações pra monetizar</li>
+                <li><span className="b">+</span>público, monetização e stack de cada uma</li>
+                <li><span className="b">+</span>dashboard exclusivo de acesso</li>
+                <li><span className="b">+</span>acesso vitalício + atualizações</li>
+              </ul>
+              <div className="pfoot">
+                <div className="price"><span className="now green">R$ 29,90</span><span className="s">pagamento único</span></div>
+                <div className="pbtns">
+                  <a href="/produto/micro-saas" className="btn btn-line btn-sm">Detalhes</a>
+                  <a href={CHECKOUT.microSaas} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">Comprar <span className="arr">→</span></a>
                 </div>
-                <h3>100 Micro SaaS + 25 Automações</h3>
-                <p className="pdesc">O ponto de partida pra qualquer dev que quer lançar um produto. 100 ideias validadas — com problema, público, monetização, stack e MVP — prontas pra executar.</p>
-                <ul className="plist">
-                  <li><span className="b">+</span> 100 ideias com problema e MVP</li>
-                  <li><span className="b">+</span> 25 automações pra monetizar</li>
-                  <li><span className="b">+</span> BR e global, qualquer mercado</li>
-                  <li><span className="b">+</span> dashboard exclusivo de acesso</li>
-                  <li><span className="b">+</span> acesso vitalício + atualizações</li>
-                  <li><span className="b">+</span> pagamento único, sem assinatura</li>
-                </ul>
-              </div>
-              <div className="feat-panel">
-                <div className="pl">// entrada · pagamento único</div>
-                <div className="big">R$ 29,90</div>
-                <div className="bs">acesso vitalício · dashboard exclusivo</div>
-                <a
-                  href="/produto/micro-saas"
-                  className="btn btn-primary"
-                  style={{ marginTop: 22, width: '100%', justifyContent: 'center' }}
-                >
-                  Ver detalhes <span className="arr">→</span>
-                </a>
               </div>
             </Reveal>
 
             {/* Boilerplate */}
-            <Reveal delay={0} className="pcard span6">
-              <div className="ptop">
-                <span className="pchip live"><span className="d" />ao vivo</span>
-                <div className="price" style={{ textAlign: 'right' }}>
-                  <span className="old">R$ 297</span><span className="now green">R$ 147</span>
-                </div>
-              </div>
+            <Reveal delay={80} className="pcard span6">
+              <div className="ptop"><span className="pchip live"><span className="d" />ao vivo</span></div>
               <h3>DevBase Boilerplate</h3>
-              <p className="pdesc">Kit Next.js completo pra lançar SaaS no mercado brasileiro. Auth, pagamentos, dashboard e deploy — tudo configurado.</p>
+              <p className="pdesc">Kit Next.js completo pra lançar SaaS no Brasil. A parte chata já resolvida — você foca no produto.</p>
               <ul className="plist">
-                <li><span className="b">+</span> Next.js 14 + TypeScript + Tailwind</li>
-                <li><span className="b">+</span> auth completo com Supabase</li>
-                <li><span className="b">+</span> Pagar.me: PIX, boleto e cartão</li>
-                <li><span className="b">+</span> dashboard com métricas e admin</li>
-                <li><span className="b">+</span> e-mail transacional com Resend</li>
-                <li><span className="b">+</span> documentação 100% em PT-BR</li>
+                <li><span className="b">+</span>Next.js 14 + TypeScript + Tailwind</li>
+                <li><span className="b">+</span>auth completo com Supabase</li>
+                <li><span className="b">+</span>Pagar.me: PIX, boleto e cartão</li>
+                <li><span className="b">+</span>dashboard com métricas e admin</li>
+                <li><span className="b">+</span>e-mail transacional com Resend</li>
+                <li><span className="b">+</span>documentação 100% em PT-BR</li>
               </ul>
               <div className="pfoot">
-                <div className="price"><span className="s">lançamento · acesso vitalício</span></div>
-                <a
-                  href="/produto/boilerplate"
-                  className="btn btn-dark btn-sm"
-                >
-                  Comprar <span className="arr">→</span>
-                </a>
+                <div className="price"><span className="old">R$ 297</span><span className="now green">R$ 147</span><span className="s">vitalício</span></div>
+                <div className="pbtns">
+                  <a href="/produto/boilerplate" className="btn btn-line btn-sm">Detalhes</a>
+                  <a href={CHECKOUT.boilerplate} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">Comprar <span className="arr">→</span></a>
+                </div>
               </div>
             </Reveal>
 
             {/* Components */}
-            <Reveal delay={80} className="pcard span6 glow-violet">
-              <div className="ptop">
-                <span className="pchip live"><span className="d" />ao vivo</span>
-                <div className="price" style={{ textAlign: 'right' }}>
-                  <span className="now indigo">R$ 67</span>
-                </div>
-              </div>
+            <Reveal delay={0} className="pcard span6 glow-violet">
+              <div className="ptop"><span className="pchip live"><span className="d" />ao vivo</span></div>
               <h3>DevBase Components</h3>
-              <p className="pdesc">8 componentes React prontos pro mercado brasileiro. Sem dependências pesadas, com TypeScript e Tailwind.</p>
+              <p className="pdesc">8 componentes React pro mercado BR. Com validação, máscara e TypeScript — copia, cola, funciona.</p>
               <ul className="plist">
-                <li><span className="b">+</span> CPF/CNPJ com validação automática</li>
-                <li><span className="b">+</span> CEP com busca via ViaCEP</li>
-                <li><span className="b">+</span> telefone com máscara BR</li>
-                <li><span className="b">+</span> seletor de banco (20 bancos)</li>
-                <li><span className="b">+</span> PIX Button com QR Code</li>
-                <li><span className="b">+</span> cartão com validação Luhn</li>
+                <li><span className="b">+</span>CPF/CNPJ com validação automática</li>
+                <li><span className="b">+</span>CEP com busca via ViaCEP</li>
+                <li><span className="b">+</span>telefone com máscara BR</li>
+                <li><span className="b">+</span>seletor de banco (20 bancos)</li>
+                <li><span className="b">+</span>PIX Button com QR Code</li>
+                <li><span className="b">+</span>cartão com validação Luhn</li>
               </ul>
               <div className="pfoot">
-                <div className="price"><span className="s">acesso vitalício</span></div>
-                <a
-                  href="/produto/components"
-                  className="btn btn-dark btn-sm"
-                >
-                  Comprar <span className="arr">→</span>
-                </a>
+                <div className="price"><span className="now indigo">R$ 67</span><span className="s">vitalício</span></div>
+                <div className="pbtns">
+                  <a href="/produto/components" className="btn btn-line btn-sm">Detalhes</a>
+                  <a href={CHECKOUT.components} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">Comprar <span className="arr">→</span></a>
+                </div>
               </div>
             </Reveal>
 
             {/* Combo */}
-            <Reveal delay={0} className="pcard span6">
-              <div className="ptop">
-                <span className="pchip"><span className="d" style={{ background: 'var(--violet)' }} />✦ combo</span>
-                <div className="price" style={{ textAlign: 'right' }}>
-                  <span className="old">R$ 214</span><span className="now green">R$ 197</span>
-                </div>
-              </div>
+            <Reveal delay={80} className="pcard span6">
+              <div className="ptop"><span className="pchip"><span className="d" style={{ background: 'var(--violet)' }} />✦ combo</span></div>
               <h3>Boilerplate + Components</h3>
-              <p className="pdesc">Os dois produtos juntos, com desconto. Tudo que você precisa pra lançar um SaaS brasileiro do zero.</p>
+              <p className="pdesc">Os dois produtos juntos, com desconto. Do login ao checkout, tudo pra lançar um SaaS brasileiro do zero.</p>
               <ul className="plist">
-                <li><span className="b">+</span> tudo do DevBase Boilerplate</li>
-                <li><span className="b">+</span> tudo do DevBase Components</li>
-                <li><span className="b">+</span> auth, pagamentos e dashboard</li>
-                <li><span className="b">+</span> CPF, CNPJ, CEP, PIX e cartão</li>
+                <li><span className="b">+</span>tudo do DevBase Boilerplate</li>
+                <li><span className="b">+</span>tudo do DevBase Components</li>
+                <li><span className="b">+</span>auth, pagamentos e dashboard</li>
+                <li><span className="b">+</span>CPF, CNPJ, CEP, PIX e cartão</li>
               </ul>
               <div className="pfoot">
-                <div className="price"><span className="s">economia de R$ 17 · vitalício</span></div>
-                <a
-                  href="/produto/combo"
-                  className="btn btn-dark btn-sm"
-                >
-                  Comprar combo <span className="arr">→</span>
-                </a>
+                <div className="price"><span className="old">R$ 214</span><span className="now green">R$ 197</span><span className="s">economia de R$ 17</span></div>
+                <div className="pbtns">
+                  <a href="/produto/combo" className="btn btn-line btn-sm">Detalhes</a>
+                  <a href={CHECKOUT.combo} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">Comprar <span className="arr">→</span></a>
+                </div>
               </div>
             </Reveal>
-
-
           </div>
-        </div>
-      </SectionShell>
 
-      {/* ===== FAQ ===== */}
-      <SectionShell rail="faq" tight soft style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }}>
-        <div className="wrap">
-          <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// perguntas frequentes</span><span className="sec-rule__line" /></div>
-          <Reveal className="sec-head">
-            <span className="eyebrow">Perguntas frequentes</span>
-            <h2>Antes de comprar.</h2>
-          </Reveal>
-          <Reveal className="faq">
-            <details open>
-              <summary>É pagamento único mesmo? <span className="pl">+</span></summary>
-              <div className="ans">Sim. Todos os produtos pagos da DevBase são pagamento único com acesso vitalício. Sem assinatura, sem cobrança recorrente.</div>
-            </details>
-            <details>
-              <summary>Recebo atualizações? <span className="pl">+</span></summary>
-              <div className="ans">Sim. As atualizações dos produtos são incluídas no acesso vitalício, sem custo adicional.</div>
-            </details>
-            <details>
-              <summary>Quais formas de pagamento? <span className="pl">+</span></summary>
-              <div className="ans">PIX, boleto e cartão de crédito — tudo em real, sem conversão de dólar nem IOF.</div>
-            </details>
-            <details>
-              <summary>Tem garantia? <span className="pl">+</span></summary>
-              <div className="ans">Sim. Os produtos têm garantia incondicional — se não for pra você, devolvemos o valor.</div>
-            </details>
+          <Reveal>
+            <div className="catalog-note">pagamento único via PIX, boleto ou cartão · garantia incondicional · acesso imediato</div>
           </Reveal>
         </div>
-      </SectionShell>
+      </section>
 
-      {/* ===== CTA BAND ===== */}
-      <SectionShell rail="comecar" tight style={{ borderTop: '2px solid #e2e8f0', paddingTop: '96px', paddingBottom: '96px' }}>
-        <div className="wrap wrap-wide">
-          <Reveal className="ctaband">
-            <HeroCanvas variant="silk" className="ctaband-canvas" />
-            <div className="ctaband-veil" />
-            <div className="ctaband-in">
-              <h2 data-split>Comece pelo que faz sentido pra você.</h2>
-              <p>Da primeira ideia ao deploy do seu SaaS — a DevBase tem a ferramenta certa pra cada etapa.</p>
-              <div className="hero-cta">
-                <a
-                  href="/produto/micro-saas"
-                  className="btn btn-primary btn-lg"
-                >
-                  Começar com R$ 29,90 <span className="arr">→</span>
-                </a>
-                <a href="/sobre" className="btn btn-glass btn-lg">Conhecer a DevBase</a>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </SectionShell>
-    </>
+      <style>{`
+        .p-produtos .pbtns { display: flex; gap: 10px; flex-wrap: wrap; }
+        .p-produtos .pfoot { align-items: center; }
+      `}</style>
+    </div>
   )
 }

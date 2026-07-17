@@ -478,22 +478,6 @@ main { isolation: isolate; }
 .faq .ans { padding: 0 0 24px; font-size: 16px; color: var(--body); max-width: 70ch; }
 
 /* ================================================================
-   JOBS LIST
-   ================================================================ */
-.joblist { display: flex; flex-direction: column; gap: 12px; }
-.jrow {
-  display: grid; grid-template-columns: 48px 1fr auto; gap: 16px; align-items: center;
-  padding: 18px 22px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg);
-  transition: transform .3s var(--ease), box-shadow .3s, border-color .3s;
-}
-.jrow:hover { transform: translateX(5px); box-shadow: 0 16px 36px -24px rgba(13,13,18,0.22); border-color: var(--line-2); }
-.jrow .jl { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; font-weight: 700; color: #fff; }
-.jrow .jt { font-size: 16px; font-weight: 600; letter-spacing: -0.02em; }
-.jrow .jm { font-size: 13.5px; color: var(--muted); margin-top: 2px; }
-.jrow .js { font-family: var(--mono); font-size: 15px; color: var(--signal); font-weight: 500; white-space: nowrap; }
-@media (max-width: 600px) { .jrow { grid-template-columns: 40px 1fr; } .jrow .js { grid-column: 2; } }
-
-/* ================================================================
    FOOTER
    ================================================================ */
 .footer { background: var(--d-bg); color: var(--d-ink); padding: 84px 0 40px; }
@@ -861,19 +845,6 @@ main { isolation: isolate; }
 .panel:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,0.06); }
 
 /* ================================================================
-   JOBS — salary badge · jrow stagger · seal · icon (Fase 3)
-   ================================================================ */
-.p-jobs .jrow .js { background: rgba(22,163,74,0.07); border: 1px solid rgba(22,163,74,0.2); border-radius: 999px; padding: 4px 12px; font-size: 13px; }
-.js .p-jobs .jrow { opacity: 0; transform: translateX(-8px); animation: jrow-in 0.3s ease forwards; animation-play-state: paused; }
-.reveal.in .p-jobs .jrow { animation-play-state: running; }
-.p-jobs .jrow:nth-child(1) { animation-delay: 0.10s; }
-.p-jobs .jrow:nth-child(2) { animation-delay: 0.30s; }
-.p-jobs .jrow:nth-child(3) { animation-delay: 0.50s; }
-.p-jobs .jrow:nth-child(4) { animation-delay: 0.70s; }
-@keyframes jrow-in { to { opacity: 1; transform: none; } }
-.p-jobs .values .vcard .ic { background: rgba(22,163,74,0.08); color: var(--signal); }
-
-/* ================================================================
    REGISTRO DARK — seções dev (home / sobre)
    ================================================================ */
 .sec-dark {
@@ -1123,8 +1094,6 @@ main { isolation: isolate; }
 .page-dark .page-head { background: transparent; }
 .page-dark .section { padding: 96px 0; border-top: 0.5px solid #1e1e1e; }
 .page-dark .section:nth-of-type(even) { background: rgba(255, 255, 255, 0.02); }
-.p-jobs .values .vcard h3::after { content: '✓'; display: inline-block; width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 50%; background: var(--signal); color: #fff; font-size: 10px; font-weight: 700; margin-left: 10px; vertical-align: middle; opacity: 0; transform: scale(0.5); transition: opacity 0.3s ease 0.4s, transform 0.3s var(--ease) 0.4s; }
-.p-jobs .values .reveal.in .vcard h3::after { opacity: 1; transform: scale(1); }
 
 /* ================================================================
    VIDA AMBIENTE — spotlight de cursor (camada fixa, só desktop)

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
-import Nav from '@/components/nav'
 import Aurora from '@/components/Aurora'
 import PainTerminal from '@/components/visual/pain-terminal'
 import CostMeter from '@/components/visual/cost-meter'
@@ -23,7 +22,6 @@ const CHECKOUT = 'https://pay.kiwify.com.br/d4yYNFy'
 export default function ProdutoBoilerplate() {
   return (
     <div className="p-boiler">
-      <Nav />
       {/* ===== HERO ===== */}
       <header className="phead">
         <HeroCanvas variant="silk" className="phead-canvas" />
@@ -39,9 +37,9 @@ export default function ProdutoBoilerplate() {
             <a href="#features" className="btn btn-glass btn-lg">Ver o que vem dentro ↓</a>
           </div>
           <div className="prod-stats">
-            <div className="ps-item"><span className="ps-n" data-count="2">0</span><span className="ps-u">h</span><span className="ps-l">de setup</span></div>
-            <div className="ps-item"><span className="ps-n" data-count="8">0</span><span className="ps-l">integrações</span></div>
-            <div className="ps-item"><span className="ps-n" data-count="100">0</span><span className="ps-u">%</span><span className="ps-l">PT-BR</span></div>
+            <div className="ps-item"><span className="ps-n">2</span><span className="ps-u">h</span><span className="ps-l">de setup</span></div>
+            <div className="ps-item"><span className="ps-n">7</span><span className="ps-l">integrações</span></div>
+            <div className="ps-item"><span className="ps-n">100</span><span className="ps-u">%</span><span className="ps-l">PT-BR</span></div>
           </div>
         </div>
       </header>
@@ -51,7 +49,6 @@ export default function ProdutoBoilerplate() {
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// domingo, 23h</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
-            <span className="eyebrow">// domingo, 23h</span>
             <h2 data-split>Você abriu o projeto sexta. É domingo e o PIX ainda não confirma.</h2>
             <p>
               Era pra ser simples. Você teve a ideia na segunda, prototipou a tela na quarta, e no fim de semana ia "só plugar o pagamento e subir".<br /><br />
@@ -61,7 +58,7 @@ export default function ProdutoBoilerplate() {
           </Reveal>
           <Reveal className="pain-terminal">
             <PainTerminal
-              label="// domingo, 23h"
+              label="~/meu-saas — 23:47"
               lines={[
                 'webhook do gateway — status desconhecido',
                 'e-mail de confirmação — caiu no spam',
@@ -79,7 +76,6 @@ export default function ProdutoBoilerplate() {
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a conta que ninguém faz</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
-            <span className="eyebrow">// a conta que ninguém faz</span>
             <h2 data-split>Toda semana remontando a base custa mais que R$ 147.</h2>
             <p>
               Faz a conta. Auth completo, com refresh token e RLS: 2 a 3 dias. Pagamento com PIX, boleto e cartão que realmente confirma: mais 3 a 4 dias. Dashboard, admin e e-mail transacional: outra semana.<br /><br />
@@ -88,8 +84,8 @@ export default function ProdutoBoilerplate() {
           </Reveal>
           <Reveal>
             <CostMeter
-              value={14}
-              unit="dias"
+              value={2}
+              unit="semanas"
               label="re-fazendo a base em cada projeto novo"
               contrast="R$ 147 — uma vez, código seu pra sempre"
             />
@@ -102,7 +98,6 @@ export default function ProdutoBoilerplate() {
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// a base</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head center">
-            <span className="eyebrow">// a base</span>
             <h2 data-split>Tudo que todo SaaS precisa, já resolvido e testado.</h2>
             <p>Você clona, configura as variáveis, e em ~2 horas tem rodando: login, pagamento brasileiro que confirma de verdade, dashboard e admin. Aí você finalmente trabalha no que diferencia o seu produto.</p>
           </Reveal>
@@ -133,7 +128,6 @@ export default function ProdutoBoilerplate() {
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// feito aqui, pra cá</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
-            <span className="eyebrow">// feito aqui, pra cá</span>
             <h2 data-split>Tutorial gringo não fala de PIX.</h2>
             <p>
               Todo boilerplate do Gumroad assume Stripe e cartão internacional. Nenhum resolve boleto, documenta Pagar.me ou fala a sua língua. Quando trava às 2h, a resposta no Stack Overflow está em inglês, pra um problema que não é o seu.<br /><br />
@@ -148,7 +142,6 @@ export default function ProdutoBoilerplate() {
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// "mas eu faria sozinho"</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head">
-            <span className="eyebrow">// "mas eu faria sozinho"</span>
             <h2 data-split>Faria. A pergunta é se vale a pena.</h2>
             <p>
               Você sabe configurar auth e integrar pagamento. Não é sobre capacidade — é sobre onde seu tempo rende mais. Cada hora no encanamento é uma hora fora do produto que vende.<br /><br />
@@ -163,7 +156,6 @@ export default function ProdutoBoilerplate() {
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// oferta de lançamento</span><span className="sec-rule__line" /></div>
           <Reveal className="offer-block">
-            <span className="eyebrow">// oferta de lançamento</span>
             <div className="offer-price">
               <span className="offer-old">R$ 297</span>
               <span className="offer-now">R$ 147</span>
