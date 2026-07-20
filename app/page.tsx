@@ -7,6 +7,8 @@ import SectionShell from '@/components/visual/section-shell'
 import AccentBleed from '@/components/visual/accent-bleed'
 import BizArt from '@/components/biz-art'
 import BizReveal from '@/components/biz-reveal'
+import Splash from '@/components/splash'
+import { ENTRADA_VARIANTE } from '@/lib/config'
 
 export const metadata: Metadata = {
   title: 'DevBase — Construa. Lance. Cresça.',
@@ -30,6 +32,8 @@ const CHECK = (
 export default function Home() {
   return (
     <>
+      {/* variante B: o splash nem entra no bundle */}
+      {ENTRADA_VARIANTE === 'A' && <Splash />}
       <HomeHero />
 
       {/* faixa dark contínua: UMA aurora por trás de todas as seções
