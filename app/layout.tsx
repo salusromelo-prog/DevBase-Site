@@ -53,6 +53,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap"
           rel="stylesheet"
         />
+        {/* Entrada assinatura: decide ANTES do primeiro paint se a home anima.
+            Só marca; quem anima é o CSS. Qualquer falha aqui (JS bloqueado,
+            sessionStorage negado) cai no site já montado — nunca no invisível.
+            O timeout é a rede de segurança: passado o tempo da coreografia a
+            marca sai, e nada mais pode segurar conteúdo escondido. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{if(location.pathname!=="/")return;if(sessionStorage.getItem("db_entered"))return;sessionStorage.setItem("db_entered","1");var d=document.documentElement;d.classList.add("db-entering");setTimeout(function(){d.classList.remove("db-entering")},2600)}catch(e){}})()`,
+          }}
+        />
       </head>
       <body>
         <Nav />

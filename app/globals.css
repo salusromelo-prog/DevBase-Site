@@ -1393,3 +1393,59 @@ body.ls-on .sdots--dark { display: none; }
 .page-dark { position: relative; }
 .page-dark > * { position: relative; z-index: 1; }
 .page-dark > .aurora-fx { position: absolute; z-index: 0; }
+
+/* ═══ entrada assinatura — o cubo se monta, só na home, só na 1ª visita
+   da sessão. A marca .db-entering vem de um script inline no <head>.
+
+   Regra de ouro deste bloco: o estado inicial invisível existe APENAS
+   dentro de animation-fill-mode. Nada aqui declara opacity: 0 solto.
+   Sem a marca, sem suporte a animação ou com reduced-motion, nenhuma
+   regra chega a esconder nada — a falha cai sempre no site montado. */
+
+@keyframes db-plate      { from { opacity: 0; transform: scale(.86) }            to { opacity: 1;   transform: none } }
+@keyframes db-face-top   { from { opacity: 0; transform: translate(0, -16px) }   to { opacity: 1;   transform: none } }
+@keyframes db-face-left  { from { opacity: 0; transform: translate(-13px, 13px) } to { opacity: .85; transform: none } }
+@keyframes db-face-right { from { opacity: 0; transform: translate(13px, 13px) }  to { opacity: .55; transform: none } }
+@keyframes db-rule       { from { opacity: 0 } to { opacity: .6 } }
+@keyframes db-fade       { from { opacity: 0 } to { opacity: 1 } }
+@keyframes db-rise       { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: none } }
+/* a "/" pisca como cursor antes de ficar acesa */
+@keyframes db-caret { 0% { opacity: 1 } 25% { opacity: 0 } 50% { opacity: 1 } 75% { opacity: 0 } 100% { opacity: 1 } }
+
+/* t=0.06s — a placa índigo aparece; o cubo ainda não existe */
+.db-entering .nav .lm-plate {
+  transform-box: fill-box; transform-origin: center;
+  animation: db-plate .34s var(--ease) .06s both;
+}
+/* t=0.10s — as 3 faces entram de direções distintas, com overshoot */
+.db-entering .nav .lm-face {
+  transform-box: fill-box; /* Safari precisa da caixa explícita p/ transform em <path> */
+  animation-duration: .45s;
+  animation-timing-function: cubic-bezier(.34, 1.56, .64, 1);
+  animation-fill-mode: both;
+}
+.db-entering .nav .lm-top   { animation-name: db-face-top;   animation-delay: .10s }
+.db-entering .nav .lm-left  { animation-name: db-face-left;  animation-delay: .22s }
+.db-entering .nav .lm-right { animation-name: db-face-right; animation-delay: .34s }
+.db-entering .nav .lm-rule  { animation: db-rule .3s var(--ease) .46s both }
+
+/* t=0.5s — wordmark, e a barra piscando */
+.db-entering .nav .logo-text      { animation: db-fade .28s var(--ease) .5s both }
+.db-entering .nav .logo-text .s   { animation: db-caret .4s steps(1) .56s both }
+
+/* t=0.7s em diante — o hero sobe atrás da marca */
+.db-entering .hero h1              { animation: db-rise .5s var(--ease) .70s both }
+.db-entering .hero-sub             { animation: db-rise .5s var(--ease) .90s both }
+.db-entering .hero-cta > :nth-child(1) { animation: db-rise .5s var(--ease) 1.10s both }
+.db-entering .hero-cta > :nth-child(2) { animation: db-rise .5s var(--ease) 1.20s both }
+
+@media (prefers-reduced-motion: reduce) {
+  .db-entering .nav .lm-plate,
+  .db-entering .nav .lm-face,
+  .db-entering .nav .lm-rule,
+  .db-entering .nav .logo-text,
+  .db-entering .nav .logo-text .s,
+  .db-entering .hero h1,
+  .db-entering .hero-sub,
+  .db-entering .hero-cta > * { animation: none }
+}
