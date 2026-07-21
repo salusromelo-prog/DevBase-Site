@@ -1413,13 +1413,29 @@ body.ls-on .sdots--dark { display: none; }
   display: none;
   position: fixed; inset: 0; z-index: 9999;
   align-items: center; justify-content: center;
-  background: #0a0a0a;
+  /* #080808, não #0a0a0a: o arquivo é limited range (color_range=tv) e
+     seus cantos decodificam pra RGB(8,8,8) constante em todo o runtime,
+     medido frame a frame. Contra um overlay #0a0a0a sobrava uma costura
+     de 2 níveis — sutil, mas em borda reta, que é onde o olho pega. Com
+     o fundo igualado, a emenda deixa de existir sem custo nenhum. */
+  background: #080808;
 }
+/* escala de marca, não de tela — a largura vem de SPLASH_WIDTH, no topo
+   de components/video-splash.tsx, pra calibrar sem caçar no JSX */
 .video-splash video {
-  width: 100%; height: 100%;
+  height: auto;
   object-fit: contain;
-  background: #0a0a0a;
+  background: #080808;
 }
+
+/* Se ainda sobrar qualquer emenda visível em algum display, habilitar
+   esta máscara: o vídeo desvanece pro fundo e a costura morre de vez.
+   Desligada de propósito — ela também apaga as bordas do conteúdo, e o
+   fundo igualado acima já deve resolver sozinho. */
+/* .video-splash video {
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at center, black 55%, transparent 78%);
+  mask-image: radial-gradient(ellipse 70% 70% at center, black 55%, transparent 78%);
+} */
 
 @keyframes vs-out     { from { opacity: 1 } to { opacity: 0; visibility: hidden } }
 @keyframes vs-deliver { from { transform: scale(1.01) } to { transform: none } }

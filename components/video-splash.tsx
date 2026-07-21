@@ -7,6 +7,7 @@ const PLAYBACK_RATE = 1.35
 const START_AT = 0.3        // pula o respiro morto inicial
 const END_AT = 4.0          // corta o hold final; daqui dispara a saída
 const READY_TIMEOUT = 600   // não ficou pronto até aqui → cancela a visita
+const SPLASH_WIDTH = 'min(720px, 82vw)' // escala de marca, não de tela
 /* ──────────────────────────────────────────────────────────────── */
 
 /* A entrada do site: o vídeo de intro oficial. Só na home, só na
@@ -125,6 +126,7 @@ export default function VideoSplash() {
       <video
         ref={video}
         src="/intro/devbase-intro.mp4"
+        style={{ width: SPLASH_WIDTH }}
         muted
         playsInline
         autoPlay
