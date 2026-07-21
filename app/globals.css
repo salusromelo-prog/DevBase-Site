@@ -1395,72 +1395,58 @@ body.ls-on .sdots--dark { display: none; }
 .page-dark > .aurora-fx { position: absolute; z-index: 0; }
 
 /* ═══════════════════════════════════════════════════════════════════
-   ENTRADA — vídeo de intro, só na home e só na primeira visita da
-   sessão. O overlay vai no HTML do servidor e só APARECE se o script
-   do <head> tiver marcado <html class="db-splash"> antes do primeiro
-   paint: sem a marca ele nasce display:none, então quem já viu (ou
-   pediu reduced-motion) não vê frame nenhum.
+   ENTRADA — a assinatura da marca se montando, só na home e só na
+   primeira visita da sessão. O overlay vai no HTML do servidor e só
+   APARECE se o script do <head> tiver marcado <html class="db-splash">
+   antes do primeiro paint: sem a marca ele nasce display:none, então
+   quem já viu (ou pediu reduced-motion) não vê frame nenhum.
 
-   Quatro saídas possíveis — fim do vídeo, skip, cancelamento por
-   vídeo não-pronto, e o failsafe — TODAS terminam numa animação CSS
-   que apaga o overlay. O componente só escuta o animationend pra
-   desmontar. Se a hidratação falhar, se o bundle nem carregar, o
-   failsafe ainda derruba o overlay sozinho: falha = site visível,
-   nunca uma tela preta presa.
+   Três saídas possíveis — fim da cena, skip e o failsafe — TODAS
+   terminam numa animação CSS que apaga o overlay. O componente só
+   escuta o animationend pra desmontar. Se a hidratação falhar, se o
+   bundle nem carregar, o failsafe ainda derruba o overlay sozinho:
+   falha = site visível, nunca uma tela preta presa.
    ═══════════════════════════════════════════════════════════════════ */
 
-.video-splash {
+.intro-signature {
   display: none;
   position: fixed; inset: 0; z-index: 9999;
   align-items: center; justify-content: center;
-  /* #080808, não #0a0a0a: o arquivo é limited range (color_range=tv) e
-     seus cantos decodificam pra RGB(8,8,8) constante em todo o runtime,
-     medido frame a frame. Contra um overlay #0a0a0a sobrava uma costura
-     de 2 níveis — sutil, mas em borda reta, que é onde o olho pega. Com
-     o fundo igualado, a emenda deixa de existir sem custo nenhum. */
-  background: #080808;
-}
-/* escala de marca, não de tela — a largura vem de SPLASH_WIDTH, no topo
-   de components/video-splash.tsx, pra calibrar sem caçar no JSX */
-.video-splash video {
-  height: auto;
-  object-fit: contain;
-  background: #080808;
+  background: #0a0a0a;
 }
 
-/* Se ainda sobrar qualquer emenda visível em algum display, habilitar
-   esta máscara: o vídeo desvanece pro fundo e a costura morre de vez.
-   Desligada de propósito — ela também apaga as bordas do conteúdo, e o
-   fundo igualado acima já deve resolver sozinho. */
-/* .video-splash video {
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at center, black 55%, transparent 78%);
-  mask-image: radial-gradient(ellipse 70% 70% at center, black 55%, transparent 78%);
-} */
+/* a cena é pequena e centrada: a caixa dá a largura (INTRO_WIDTH, no
+   topo de components/intro-signature.tsx) e guarda a proporção; o palco
+   dentro dela é autoral em 1280×720 e chega ao tamanho final por um
+   único scale, medido em JS. */
+.intro-signature .is-box {
+  position: relative;
+  aspect-ratio: 1280 / 720;
+}
+.intro-signature .is-stage {
+  position: absolute; left: 0; top: 0;
+  transform-origin: 0 0;
+}
 
-@keyframes vs-out     { from { opacity: 1 } to { opacity: 0; visibility: hidden } }
-@keyframes vs-deliver { from { transform: scale(1.01) } to { transform: none } }
+@keyframes is-out     { from { opacity: 1 } to { opacity: 0; visibility: hidden } }
+@keyframes is-deliver { from { transform: scale(1.01) } to { transform: none } }
 /* failsafe: se nada de JS acontecer, o overlay se apaga sozinho.
-   Dura o suficiente pro vídeo inteiro rodar e ainda sobra folga. */
-@keyframes vs-failsafe {
+   Dura o suficiente pra cena inteira rodar e ainda sobra folga. */
+@keyframes is-failsafe {
   0%, 89% { opacity: 1; visibility: visible }
   100%    { opacity: 0; visibility: hidden }
 }
 
 /* t=0 — overlay no ar, com o failsafe já correndo por baixo */
-.db-splash .video-splash { display: flex; animation: vs-failsafe 4.2s linear forwards }
+.db-splash .intro-signature { display: flex; animation: is-failsafe 5.2s linear forwards }
 
-/* SAÍDA — fim natural do vídeo (.db-out) ou skip (.db-skip): mesmo fade
+/* SAÍDA — fim natural da cena (.db-out) ou skip (.db-skip): mesmo fade
    de 400ms e a mesma entrega da página. O visitante nunca leva corte
    seco. Especificidade maior que a regra do failsafe, então vence. */
-.db-splash.db-out .video-splash,
-.db-splash.db-skip .video-splash { animation: vs-out .4s var(--ease) forwards }
+.db-splash.db-out .intro-signature,
+.db-splash.db-skip .intro-signature { animation: is-out .4s var(--ease) forwards }
 .db-splash.db-out .db-stage,
-.db-splash.db-skip .db-stage { animation: vs-deliver .5s var(--ease) both }
-
-/* CANCELAMENTO — o vídeo não ficou pronto a tempo, ou o autoplay foi
-   recusado. Some rápido e sem entrega: não houve entrada pra entregar,
-   e o que o visitante viu foi só um respiro escuro. */
-.db-splash.db-cancel .video-splash { animation: vs-out .18s linear forwards }
+.db-splash.db-skip .db-stage { animation: is-deliver .5s var(--ease) both }
 
 /* o palco da página: só existe pra receber o scale da entrega. Sem a
    marca do splash não tem transform nenhum — e sem transform ele não
@@ -1471,6 +1457,6 @@ body.ls-on .sdots--dark { display: none; }
 
 /* reduced-motion: o script nem marca, mas nem por acidente. */
 @media (prefers-reduced-motion: reduce) {
-  .video-splash { display: none !important }
+  .intro-signature { display: none !important }
   .db-stage { animation: none !important }
 }

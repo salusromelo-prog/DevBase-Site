@@ -7,7 +7,7 @@ import SectionShell from '@/components/visual/section-shell'
 import AccentBleed from '@/components/visual/accent-bleed'
 import BizArt from '@/components/biz-art'
 import BizReveal from '@/components/biz-reveal'
-import VideoSplash from '@/components/video-splash'
+import IntroSignature from '@/components/intro-signature'
 
 export const metadata: Metadata = {
   title: 'DevBase — Construa. Lance. Cresça.',
@@ -31,7 +31,7 @@ const CHECK = (
 export default function Home() {
   return (
     <>
-      <VideoSplash />
+      <IntroSignature />
       {/* o palco: recebe o scale da entrega na saída do splash. Fica IRMÃO
           do overlay, nunca pai — se o splash estivesse dentro dele, o
           transform viraria containing block e o fixed do overlay passaria
