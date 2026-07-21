@@ -6,7 +6,6 @@ import Nav from '@/components/nav'
 import Footer from '@/components/footer'
 import ScrollFx from '@/components/scroll-fx'
 import CursorFx from '@/components/cursor-fx'
-import { ENTRADA_VARIANTE } from '@/lib/config'
 
 const jetbrainsMono = localFont({
   src: [
@@ -48,9 +47,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     /* suppressHydrationWarning: o script do <head> escreve a marca da entrada
-       (db-splash / db-entering) no className do <html> antes do primeiro paint,
-       então o servidor e o cliente divergem de propósito nesse atributo. React
-       não desfaz a mudança — só reclamaria no console. */
+       (db-splash) no className do <html> antes do primeiro paint, então o
+       servidor e o cliente divergem de propósito nesse atributo. React não
+       desfaz a mudança — só reclamaria no console. */
     <html
       lang="pt-BR"
       className={`${jetbrainsMono.variable} ${fraunces.variable}`}
@@ -62,14 +61,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap"
           rel="stylesheet"
         />
-        {/* Entrada assinatura: decide ANTES do primeiro paint se a home anima,
-            e em qual variante. Só marca o <html> e escuta o skip; quem anima
-            e quem remove o overlay é o CSS. Qualquer falha aqui (JS bloqueado,
-            sessionStorage negado) cai no site já montado — nunca no invisível,
-            nunca preso atrás do splash. Os timeouts são o kill switch. */}
+        {/* Entrada: decide ANTES do primeiro paint se o vídeo de intro roda.
+            Só marca o <html> e escuta o skip; quem apaga o overlay é sempre
+            o CSS. Qualquer falha aqui (JS bloqueado, sessionStorage negado)
+            cai no site normal — nunca preso atrás de uma tela preta.
+
+            Kill switch em 4.5s: (4.5s de vídeo / 1.35 de playbackRate) + 1s
+            de folga. Fica DEPOIS do failsafe do CSS (4.2s) de propósito —
+            se viesse antes, arrancaria o overlay no meio do fade de
+            segurança em vez de deixá-lo terminar. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(location.pathname!=="/")return;if(sessionStorage.getItem("db_entered"))return;sessionStorage.setItem("db_entered","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var d=document.documentElement;if(${JSON.stringify(ENTRADA_VARIANTE)}==="A"){d.classList.add("db-splash");var evs=["pointerdown","keydown","touchstart"],skip=function(){d.classList.add("db-skip");evs.forEach(function(e){document.removeEventListener(e,skip,true)})};evs.forEach(function(e){document.addEventListener(e,skip,{passive:true,capture:true})});setTimeout(function(){d.classList.remove("db-splash","db-skip")},2000)}else{d.classList.add("db-entering");setTimeout(function(){d.classList.remove("db-entering")},2600)}}catch(e){}})()`,
+            __html: `(function(){try{if(location.pathname!=="/")return;if(sessionStorage.getItem("db_entered"))return;sessionStorage.setItem("db_entered","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var d=document.documentElement;d.classList.add("db-splash");var evs=["pointerdown","keydown","touchstart"],skip=function(){d.classList.add("db-skip");evs.forEach(function(e){document.removeEventListener(e,skip,true)})};evs.forEach(function(e){document.addEventListener(e,skip,{passive:true,capture:true})});setTimeout(function(){d.classList.remove("db-splash","db-skip","db-out","db-cancel")},4500)}catch(e){}})()`,
           }}
         />
       </head>

@@ -1394,146 +1394,67 @@ body.ls-on .sdots--dark { display: none; }
 .page-dark > * { position: relative; z-index: 1; }
 .page-dark > .aurora-fx { position: absolute; z-index: 0; }
 
-/* ═══ entrada assinatura — o cubo se monta, só na home, só na 1ª visita
-   da sessão. A marca .db-entering vem de um script inline no <head>.
+/* ═══════════════════════════════════════════════════════════════════
+   ENTRADA — vídeo de intro, só na home e só na primeira visita da
+   sessão. O overlay vai no HTML do servidor e só APARECE se o script
+   do <head> tiver marcado <html class="db-splash"> antes do primeiro
+   paint: sem a marca ele nasce display:none, então quem já viu (ou
+   pediu reduced-motion) não vê frame nenhum.
 
-   Regra de ouro deste bloco: o estado inicial invisível existe APENAS
-   dentro de animation-fill-mode. Nada aqui declara opacity: 0 solto.
-   Sem a marca, sem suporte a animação ou com reduced-motion, nenhuma
-   regra chega a esconder nada — a falha cai sempre no site montado. */
+   Quatro saídas possíveis — fim do vídeo, skip, cancelamento por
+   vídeo não-pronto, e o failsafe — TODAS terminam numa animação CSS
+   que apaga o overlay. O componente só escuta o animationend pra
+   desmontar. Se a hidratação falhar, se o bundle nem carregar, o
+   failsafe ainda derruba o overlay sozinho: falha = site visível,
+   nunca uma tela preta presa.
+   ═══════════════════════════════════════════════════════════════════ */
 
-@keyframes db-plate      { from { opacity: 0; transform: scale(.86) }            to { opacity: 1;   transform: none } }
-@keyframes db-face-top   { from { opacity: 0; transform: translate(0, -16px) }   to { opacity: 1;   transform: none } }
-@keyframes db-face-left  { from { opacity: 0; transform: translate(-13px, 13px) } to { opacity: .85; transform: none } }
-@keyframes db-face-right { from { opacity: 0; transform: translate(13px, 13px) }  to { opacity: .55; transform: none } }
-@keyframes db-rule       { from { opacity: 0 } to { opacity: .6 } }
-@keyframes db-fade       { from { opacity: 0 } to { opacity: 1 } }
-@keyframes db-rise       { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: none } }
-/* a "/" pisca 2x como cursor antes de ficar acesa. Pares de stops em vez
-   de steps(1) pelo mesmo motivo do splash-caret: com steps a barra ficava
-   apagada o último quarto inteiro e só acendia no instante final. */
-@keyframes db-caret {
-  0%,  19%  { opacity: 1 }
-  20%, 39%  { opacity: 0 }
-  40%, 59%  { opacity: 1 }
-  60%, 79%  { opacity: 0 }
-  80%, 100% { opacity: 1 }
-}
-
-/* t=0.06s — a placa índigo aparece; o cubo ainda não existe */
-.db-entering .nav .lm-plate {
-  transform-box: fill-box; transform-origin: center;
-  animation: db-plate .34s var(--ease) .06s both;
-}
-/* t=0.10s — as 3 faces entram de direções distintas, com overshoot */
-.db-entering .nav .lm-face {
-  transform-box: fill-box; /* Safari precisa da caixa explícita p/ transform em <path> */
-  animation-duration: .45s;
-  animation-timing-function: cubic-bezier(.34, 1.56, .64, 1);
-  animation-fill-mode: both;
-}
-.db-entering .nav .lm-top   { animation-name: db-face-top;   animation-delay: .10s }
-.db-entering .nav .lm-left  { animation-name: db-face-left;  animation-delay: .22s }
-.db-entering .nav .lm-right { animation-name: db-face-right; animation-delay: .34s }
-.db-entering .nav .lm-rule  { animation: db-rule .3s var(--ease) .46s both }
-
-/* t=0.5s — wordmark, e a barra piscando */
-.db-entering .nav .logo-text      { animation: db-fade .28s var(--ease) .5s both }
-.db-entering .nav .logo-text .s   { animation: db-caret .4s linear .56s both }
-
-/* t=0.7s em diante — o hero sobe atrás da marca */
-.db-entering .hero h1              { animation: db-rise .5s var(--ease) .70s both }
-.db-entering .hero-sub             { animation: db-rise .5s var(--ease) .90s both }
-.db-entering .hero-cta > :nth-child(1) { animation: db-rise .5s var(--ease) 1.10s both }
-.db-entering .hero-cta > :nth-child(2) { animation: db-rise .5s var(--ease) 1.20s both }
-
-@media (prefers-reduced-motion: reduce) {
-  .db-entering .nav .lm-plate,
-  .db-entering .nav .lm-face,
-  .db-entering .nav .lm-rule,
-  .db-entering .nav .logo-text,
-  .db-entering .nav .logo-text .s,
-  .db-entering .hero h1,
-  .db-entering .hero-sub,
-  .db-entering .hero-cta > * { animation: none }
-}
-
-/* ═══ entrada VARIANTE A — splash: o cubo se monta grande, cobre a
-   página por 1.2s e some. Coexiste com a B; qual roda é decidido pela
-   flag ENTRADA_VARIANTE (lib/config.ts), lida pelo script do <head>.
-
-   Quem tira o overlay da frente é ESTA animação, não o JS: splash-out
-   termina em opacity 0 + visibility hidden com fill forwards. Se a
-   hidratação falhar ou o bundle nem carregar, o fade roda igual e a
-   página fica livre — o splash nunca vira uma porta trancada.
-
-   Sem .db-splash no <html> o overlay é display:none: quem já viu a
-   entrada nesta sessão (ou pediu reduced-motion) não vê frame nenhum. */
-
-.splash {
+.video-splash {
   display: none;
   position: fixed; inset: 0; z-index: 9999;
-  flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+  align-items: center; justify-content: center;
   background: #0a0a0a;
 }
-.splash-cube { width: clamp(96px, 12vw, 120px); height: clamp(96px, 12vw, 120px) }
-.splash-cube svg { width: 100%; height: 100% }
-.splash-word {
-  font-family: var(--font); font-weight: 700; font-size: 26px;
-  letter-spacing: -0.04em; color: #fff;
-}
-.splash-word .s { color: var(--primary) }
-
-@keyframes splash-out  { from { opacity: 1 } to { opacity: 0; visibility: hidden } }
-@keyframes splash-zoom { from { transform: scale(1) } to { transform: scale(1.05) } }
-/* a "/" pisca 1x antes de ficar acesa. Pares de stops em vez de steps():
-   steps(1) segura o valor do INÍCIO de cada intervalo, então a barra
-   ficaria apagada até o último instante e só acenderia junto com o fade.
-   Assim o corte é seco (1% da duração) e o blink fecha aceso. */
-@keyframes splash-caret {
-  0%,  39%  { opacity: 1 }
-  40%, 79%  { opacity: 0 }
-  80%, 100% { opacity: 1 }
+.video-splash video {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  background: #0a0a0a;
 }
 
-/* t=0 overlay já visível (nasce com o body), cubo ainda não */
-.db-splash .splash { display: flex; animation: splash-out .4s var(--ease) .75s forwards }
-.db-splash .splash .lm-plate {
-  transform-box: fill-box; transform-origin: center;
-  animation: db-plate .3s var(--ease) .02s both;
+@keyframes vs-out     { from { opacity: 1 } to { opacity: 0; visibility: hidden } }
+@keyframes vs-deliver { from { transform: scale(1.01) } to { transform: none } }
+/* failsafe: se nada de JS acontecer, o overlay se apaga sozinho.
+   Dura o suficiente pro vídeo inteiro rodar e ainda sobra folga. */
+@keyframes vs-failsafe {
+  0%, 89% { opacity: 1; visibility: visible }
+  100%    { opacity: 0; visibility: hidden }
 }
-/* t=0.05s — as 3 faces encaixam, mesma mecânica da B */
-.db-splash .splash .lm-face {
-  transform-box: fill-box;
-  animation-duration: .4s;
-  animation-timing-function: cubic-bezier(.34, 1.56, .64, 1);
-  animation-fill-mode: both;
-}
-.db-splash .splash .lm-top   { animation-name: db-face-top;   animation-delay: .05s }
-.db-splash .splash .lm-left  { animation-name: db-face-left;  animation-delay: .15s }
-.db-splash .splash .lm-right { animation-name: db-face-right; animation-delay: .25s }
-.db-splash .splash .lm-rule  { animation: db-rule .3s var(--ease) .35s both }
-/* t=0.45s — wordmark e caret */
-.db-splash .splash-word    { animation: db-fade .3s var(--ease) .45s both }
-/* fecha aceso em 0.70s, 50ms antes do fade começar */
-.db-splash .splash-word .s { animation: splash-caret .25s linear .45s both }
-/* t=0.75s — o cubo cresce de leve enquanto o overlay some */
-.db-splash .splash-cube { animation: splash-zoom .4s var(--ease) .75s both }
 
-/* SKIP — clique/toque/tecla marca .db-skip e a saída vira imediata.
-   Especificidade maior que as regras acima, então vence o delay. */
-.db-splash.db-skip .splash      { animation: splash-out .3s var(--ease) forwards }
-.db-splash.db-skip .splash-cube { animation: splash-zoom .3s var(--ease) both }
+/* t=0 — overlay no ar, com o failsafe já correndo por baixo */
+.db-splash .video-splash { display: flex; animation: vs-failsafe 4.2s linear forwards }
 
-/* A e B são mutuamente exclusivas por construção (o script marca uma só).
-   Esta regra é o cinto: se as duas marcas coexistirem, o hero nasce
-   montado em vez de esperar a coreografia da B por trás do overlay. */
-.db-splash.db-entering .hero h1,
-.db-splash.db-entering .hero-sub,
-.db-splash.db-entering .hero-cta > * { animation: none }
+/* SAÍDA — fim natural do vídeo (.db-out) ou skip (.db-skip): mesmo fade
+   de 400ms e a mesma entrega da página. O visitante nunca leva corte
+   seco. Especificidade maior que a regra do failsafe, então vence. */
+.db-splash.db-out .video-splash,
+.db-splash.db-skip .video-splash { animation: vs-out .4s var(--ease) forwards }
+.db-splash.db-out .db-stage,
+.db-splash.db-skip .db-stage { animation: vs-deliver .5s var(--ease) both }
 
-/* reduced-motion: o script nem marca, mas o splash não renderiza nem por
-   acidente — e sem display:flex ele não cobre nada. */
+/* CANCELAMENTO — o vídeo não ficou pronto a tempo, ou o autoplay foi
+   recusado. Some rápido e sem entrega: não houve entrada pra entregar,
+   e o que o visitante viu foi só um respiro escuro. */
+.db-splash.db-cancel .video-splash { animation: vs-out .18s linear forwards }
+
+/* o palco da página: só existe pra receber o scale da entrega. Sem a
+   marca do splash não tem transform nenhum — e sem transform ele não
+   vira containing block de nada (por isso o overlay é IRMÃO dele, e
+   nunca filho: um ancestral transformado sequestraria o position
+   fixed do overlay, que deixaria de se ancorar na viewport). */
+.db-stage { transform-origin: 50% 0 }
+
+/* reduced-motion: o script nem marca, mas nem por acidente. */
 @media (prefers-reduced-motion: reduce) {
-  .splash { display: none !important }
+  .video-splash { display: none !important }
+  .db-stage { animation: none !important }
 }

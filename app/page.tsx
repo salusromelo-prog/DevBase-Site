@@ -7,8 +7,7 @@ import SectionShell from '@/components/visual/section-shell'
 import AccentBleed from '@/components/visual/accent-bleed'
 import BizArt from '@/components/biz-art'
 import BizReveal from '@/components/biz-reveal'
-import Splash from '@/components/splash'
-import { ENTRADA_VARIANTE } from '@/lib/config'
+import VideoSplash from '@/components/video-splash'
 
 export const metadata: Metadata = {
   title: 'DevBase — Construa. Lance. Cresça.',
@@ -32,8 +31,12 @@ const CHECK = (
 export default function Home() {
   return (
     <>
-      {/* variante B: o splash nem entra no bundle */}
-      {ENTRADA_VARIANTE === 'A' && <Splash />}
+      <VideoSplash />
+      {/* o palco: recebe o scale da entrega na saída do splash. Fica IRMÃO
+          do overlay, nunca pai — se o splash estivesse dentro dele, o
+          transform viraria containing block e o fixed do overlay passaria
+          a se ancorar aqui em vez da viewport. */}
+      <div className="db-stage">
       <HomeHero />
 
       {/* faixa dark contínua: UMA aurora por trás de todas as seções
@@ -207,6 +210,7 @@ export default function Home() {
           </Reveal>
         </div>
       </SectionShell>
+      </div>
     </>
   )
 }
