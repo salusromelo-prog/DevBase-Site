@@ -147,7 +147,7 @@ main { isolation: isolate; }
 .nav-link.active { color: var(--primary) !important; }
 .nav-cta { display: flex; align-items: center; gap: 10px; }
 .nav-toggle {
-  display: none; width: 42px; height: 42px; border-radius: var(--r-sm);
+  display: none; width: 44px; height: 44px; border-radius: var(--r-sm);
   align-items: center; justify-content: center; border: 1px solid currentColor; opacity: .8;
 }
 
@@ -209,6 +209,7 @@ main { isolation: isolate; }
 .hero h1 {
   font-size: clamp(42px, 7vw, 88px); letter-spacing: -0.045em; line-height: 0.98;
   max-width: 15ch; margin: 0 auto 26px; color: #fff; font-weight: 700;
+  text-wrap: balance;
 }
 .hero h1 .grad {
   background: linear-gradient(110deg, #c7c9ff, #818cf8 40%, #c4b5fd 65%, #a5b4fc);
@@ -776,6 +777,14 @@ main { isolation: isolate; }
 .js .p-combo .combo-cols > .reveal.depth:nth-child(1) { transform: perspective(1200px) rotateX(12deg) translateY(60px) translateX(-50px) scale(.96); filter: blur(6px); }
 .js .p-combo .combo-cols > .reveal.depth:nth-child(2) { transform: perspective(1200px) rotateX(12deg) translateY(60px) translateX(50px) scale(.96); filter: blur(6px); }
 .js .p-combo .combo-cols > .reveal.depth.in { transform: none; filter: blur(0); }
+/* colunas empilhadas: sem deslocamento horizontal — o estado pré-reveal
+   com translateX(±50px) estourava a viewport à direita antes do .in */
+@media (max-width: 720px) {
+  .js .p-combo .combo-cols > .reveal.depth:nth-child(1),
+  .js .p-combo .combo-cols > .reveal.depth:nth-child(2) {
+    transform: perspective(1200px) rotateX(12deg) translateY(60px) scale(.96);
+  }
+}
 
 /* ================================================================
    OFFER CTA PULSE (Fase 2)
@@ -1459,4 +1468,50 @@ body.ls-on .sdots--dark { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .intro-signature { display: none !important }
   .db-stage { animation: none !important }
+}
+
+/* ================================================================
+   AJUSTE MOBILE — layout em telas estreitas (360 / 390 / 430)
+   Só empilhamento, contenção de overflow e alvos de toque.
+   ================================================================ */
+
+/* celular: o botão inline "Ver produtos" duplica o link do menu
+   hambúrguer e apertava logo+botão+toggle além da viewport. O menu
+   mantém o CTA — aqui fica só logo + hambúrguer. */
+@media (max-width: 560px) {
+  .nav-cta .btn-primary { display: none; }
+}
+
+/* divisor de seção: o rótulo (nowrap) com texto longo furava a direita.
+   No mobile ele pode quebrar linha entre os traços. */
+@media (max-width: 600px) {
+  .sec-rule { gap: 12px; }
+  .sec-rule__label { white-space: normal; }
+}
+
+/* hero: os dois CTAs empilham em largura total */
+@media (max-width: 560px) {
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; justify-content: center; }
+}
+
+/* /sobre — grid de contributors não colapsava (usa .team-grid legado) */
+@media (max-width: 760px) {
+  .team-grid { grid-template-columns: 1fr; }
+}
+
+/* /sobre — timeline git log e devbase.config em telas estreitas */
+@media (max-width: 600px) {
+  .gitlog { padding-left: 26px; margin-top: 36px; }
+  .glog-entry { padding-bottom: 36px; }
+  .gitlog::before { left: 2px; }
+  .glog-entry::before { left: -26px; }
+  .glog-desc { max-width: 100%; }
+  /* config: fonte menor; se ainda estourar, rola só o bloco de código */
+  .cfg-card .cc-body { font-size: 12.5px; overflow-x: auto; }
+}
+
+/* ilustrações abstratas: no máximo 70vw, centralizadas */
+@media (max-width: 640px) {
+  .biz-art { max-width: min(70vw, 480px); }
 }
