@@ -908,6 +908,11 @@ main { isolation: isolate; }
   to   { transform: translateX(-53%) translateY(26px) scale(1.05); }
 }
 .biz-hero .wrap { position: relative; }
+/* link discreto para o portfólio, abaixo do CTA do hero */
+.biz-hero__portfolio { display: flex; width: fit-content; align-items: center; gap: 7px; margin-top: 20px; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: #555; transition: color .2s var(--ease); }
+.biz-hero__portfolio .arr { transition: transform .2s var(--ease); }
+.biz-hero__portfolio:hover { color: var(--primary); }
+.biz-hero__portfolio:hover .arr { transform: translateX(4px); }
 .biz-sec { padding: 96px 0; border-top: 1px solid rgba(0,0,0,0.06); }
 .biz-sec--gray { background: #eef0f4; }
 .biz-sec--tint { background: linear-gradient(180deg, rgba(99,102,241,0.06), rgba(99,102,241,0.03)), #f8f8fc; }
@@ -1017,6 +1022,68 @@ main { isolation: isolate; }
 .biz-teaser { background: #f5f5f7; border-top: 0.5px solid rgba(26,26,26,0.14); padding: 128px 0; }
 .biz-teaser h2 { font-family: var(--font-fraunces); font-weight: 400; font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; letter-spacing: -0.02em; color: #1a1a1a; margin: 0 0 24px; text-wrap: balance; }
 .biz-teaser p { font-size: 1.0625rem; line-height: 1.7; color: #444; margin: 0 0 36px; }
+
+/* ================================================================
+   /portfolio — molduras de navegador com prints reais, badges,
+   lista de destaques. Reaproveita .biz-page / .biz-* do registro.
+   ================================================================ */
+/* moldura de navegador clicável ao redor do print */
+.pf-frame { display: block; background: #fff; border: 1px solid rgba(26,26,26,0.10); border-radius: 16px; box-shadow: 0 34px 70px -34px rgba(26,26,26,0.30); overflow: hidden; max-width: min(600px, 90vw); margin: 0 auto; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+.pf-frame:hover { transform: translateY(-4px); box-shadow: 0 44px 84px -34px rgba(26,26,26,0.40); }
+.pf-frame__bar { display: flex; gap: 7px; padding: 12px 15px; border-bottom: 1px solid rgba(26,26,26,0.08); background: #fafafa; }
+.pf-frame__bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(26,26,26,0.14); }
+.pf-frame__shot { position: relative; display: block; }
+.pf-frame__shot img { display: block; width: 100%; height: auto; }
+/* badge "Demonstração" — sempre legível sobre qualquer print */
+.pf-badge-demo { position: absolute; top: 12px; left: 12px; z-index: 2; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.02em; color: #fff; background: rgba(10,10,10,0.72); backdrop-filter: blur(4px); padding: 6px 12px; border-radius: 999px; box-shadow: 0 4px 14px -4px rgba(0,0,0,0.5); }
+
+/* selo verde "No ar" */
+.pf-live { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; letter-spacing: -0.01em; color: #15803d; background: rgba(22,163,74,0.10); border: 1px solid rgba(22,163,74,0.22); padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; }
+.pf-live i { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 0 rgba(22,163,74,0.5); }
+@media (prefers-reduced-motion: no-preference) { .pf-live i { animation: pf-live-pulse 2.4s ease-out infinite; } }
+@keyframes pf-live-pulse { 0% { box-shadow: 0 0 0 0 rgba(22,163,74,0.5); } 70%,100% { box-shadow: 0 0 0 7px rgba(22,163,74,0); } }
+
+/* ramo / subtítulo cinza */
+.pf-ramo { font-family: var(--mono); font-size: 13.5px; color: #666; letter-spacing: 0.01em; margin: 0 0 20px; }
+
+/* lista de destaques com checks índigo */
+.pf-list { list-style: none; padding: 0; margin: 4px 0 32px; display: flex; flex-direction: column; gap: 14px; }
+.pf-list li { display: flex; gap: 13px; align-items: flex-start; font-size: 16px; line-height: 1.55; color: #1a1a1a; }
+.pf-list .ck { flex-shrink: 0; width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; background: rgba(99,102,241,0.10); color: var(--primary); margin-top: 1px; }
+.pf-list .ck svg { width: 13px; height: 13px; }
+
+/* botão sólido "Visitar o site →" (cliente principal) */
+.pf-btn { display: inline-flex; align-items: center; gap: 9px; background: var(--primary); color: #fff; font-weight: 700; font-size: 16px; letter-spacing: -0.01em; padding: 15px 30px; border-radius: 999px; box-shadow: 0 14px 34px -16px rgba(99,102,241,0.6); transition: transform .2s var(--ease), box-shadow .2s, background .2s; }
+.pf-btn .arr { transition: transform .2s var(--ease); }
+.pf-btn:hover { background: #4f46e5; transform: translateY(-1px); box-shadow: 0 18px 42px -16px rgba(99,102,241,0.72); }
+.pf-btn:hover .arr { transform: translateX(4px); }
+
+/* link de texto "Ver demonstração →" (demos) */
+.pf-visit { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; letter-spacing: -0.01em; color: var(--primary); }
+.pf-visit .arr { transition: transform .2s var(--ease); }
+.pf-visit:hover .arr { transform: translateX(4px); }
+
+/* bloco de depoimento reservado (comentado no JSX) */
+.pf-quote { border-left: 3px solid var(--primary); padding: 4px 0 4px 20px; margin: 0 0 28px; }
+.pf-quote p { font-family: var(--font-fraunces); font-style: italic; font-size: 18px; line-height: 1.6; color: #1a1a1a; margin: 0 0 10px; }
+.pf-quote cite { font-style: normal; font-size: 14px; color: #666; }
+
+/* grade das demonstrações */
+.pf-demos { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.pf-demo .pf-frame { max-width: none; margin: 0 0 24px; }
+.pf-demo__title { font-family: var(--font-fraunces); font-weight: 600; font-size: 1.5rem; letter-spacing: -0.015em; color: #1a1a1a; margin: 0 0 6px; }
+@media (max-width: 920px) { .pf-demos { grid-template-columns: 1fr; gap: 48px; } }
+
+/* label mono centralizada dentro da faixa dark do fecho */
+.biz-band .pf-band-label { justify-content: center; color: #a5b4fc; margin-bottom: 22px; }
+.biz-band .pf-band-label::before { background: #a5b4fc; }
+
+/* mobile: a página é aberta pelo WhatsApp — botões em largura total,
+   altura mínima confortável para o toque. Escopo só na /portfolio. */
+@media (max-width: 560px) {
+  .pf-page .pf-btn,
+  .pf-page .btn-wa { display: flex; width: 100%; justify-content: center; min-height: 52px; box-sizing: border-box; }
+}
 
 /* ================================================================
    REGISTRO EMPRESA — reveals e animações (CSS puro + IO)

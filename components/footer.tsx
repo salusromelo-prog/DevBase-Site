@@ -32,6 +32,7 @@ export default function Footer() {
             <h4>Empresa</h4>
             <Link href="/sobre">Quem somos</Link>
             <Link href="/empresas">Para empresas</Link>
+            <Link href="/portfolio">Portfólio</Link>
             <a href="mailto:devbasebr@gmail.com">Contato</a>
           </div>
         </div>

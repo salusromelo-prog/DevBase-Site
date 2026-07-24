@@ -16,6 +16,7 @@ const DARK_BLOCKS = '.hero, .phead, .sec-dark, .who, .page-dark, .biz-band, .foo
 const LINKS = [
   { label: 'Produtos', href: '/produtos', key: 'produtos' },
   { label: 'Para empresas', href: '/empresas', key: 'empresas' },
+  { label: 'Portfólio', href: '/portfolio', key: 'portfolio' },
   { label: 'Sobre', href: '/sobre', key: 'sobre' },
 ]
 

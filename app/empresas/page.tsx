@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import BizReveal from '@/components/biz-reveal'
 import BizTilt from '@/components/biz-tilt'
 import BizFaq from '@/components/biz-faq'
@@ -92,6 +93,9 @@ export default function Empresas() {
               <a href={WHATSAPP} target="_blank" rel="noopener" className="btn-wa">
                 Chamar no WhatsApp <span className="arr">→</span>
               </a>
+              <Link href="/portfolio" className="biz-hero__portfolio">
+                Ver projetos que já estão no ar <span className="arr">→</span>
+              </Link>
             </BizReveal>
             <BizReveal delay={150}>
               <BizTilt>
