@@ -1582,3 +1582,36 @@ body.ls-on .sdots--dark { display: none; }
 @media (max-width: 640px) {
   .biz-art { max-width: min(70vw, 480px); }
 }
+
+/* ----------------------------------------------------------------
+   Alvos de toque e CTAs em largura total (Passos 1, 2, 8)
+   ---------------------------------------------------------------- */
+
+/* /portfolio — "Ver demonstração" era um link de texto fino: vira um
+   alvo de toque de botão, igual aos demais CTAs da página. */
+@media (max-width: 560px) {
+  .pf-page .pf-visit {
+    display: flex; width: 100%; justify-content: center; align-items: center;
+    min-height: 52px; font-size: 16px; box-sizing: border-box;
+    border: 1px solid rgba(99,102,241,0.35); border-radius: 999px;
+    padding: 0 20px;
+  }
+}
+
+/* páginas de produto — o botão de compra do bloco de oferta acompanha o
+   hero: largura total, para não ficar solto no centro em telas estreitas. */
+@media (max-width: 560px) {
+  .offer-block .btn { width: 100%; justify-content: center; }
+}
+
+/* catálogo (home + /produtos) — os botões do rodapé do card sobem de 40px
+   para um alvo de toque confortável de 44px. */
+@media (max-width: 560px) {
+  .pcard .pfoot .btn { height: 44px; }
+}
+
+/* faixas escuras de fecho — padding vertical reduzido no mobile para não
+   ocuparem uma tela inteira (Passos 1 e 3). */
+@media (max-width: 560px) {
+  .biz-band { padding: 68px 0; }
+}
