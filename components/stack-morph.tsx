@@ -278,6 +278,10 @@ export default function StackMorph() {
 
   return (
     <section ref={wrapRef} className="smorph sec-dark" aria-label="A stack que já vem configurada">
+      {/* pontos de repouso do scroll: círculo formado e arco formado */}
+      <span className="smorph-snap smorph-snap--circle" aria-hidden="true" />
+      <span className="smorph-snap smorph-snap--arc" aria-hidden="true" />
+
       <div ref={stageRef} className="smorph-stage">
         <div ref={introRef} className="smorph-intro">
           <h2 className="smorph-title">A stack que já vem configurada</h2>

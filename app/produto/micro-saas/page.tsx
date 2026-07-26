@@ -220,6 +220,11 @@ export default function ProdutoMicroSaas() {
         .bonus-card { border-radius: var(--r); border: 1px solid rgba(217,119,6,0.25); background: rgba(217,119,6,0.06); padding: 28px; }
         .bonus-card p { font-size: 17px; color: var(--body); margin-top: 12px; }
         .p-micro .offer-block { max-width: 560px; border: 1px solid var(--line-2); border-radius: 16px; padding: 48px; background: var(--bg-soft); box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+        /* 48px de padding no card deixava o CTA com 238px numa tela de 390 */
+        @media (max-width: 560px) {
+          .p-micro .offer-block { padding: 26px 22px; }
+          .p-micro .offer-block .btn { width: 100%; justify-content: center; }
+        }
         .offer-price { display: flex; align-items: baseline; gap: 16px; margin: 20px 0 16px; }
         .offer-old { font-size: 22px; color: var(--muted); text-decoration: line-through; }
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: var(--primary); line-height: 1; }

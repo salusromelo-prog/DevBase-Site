@@ -163,7 +163,9 @@ main { isolation: isolate; }
 /* o link some externamente vira block-level (blockificado como item
    flex da pill) e o baseline default do inline-flex interno o deixava
    um pouco mais alto que os links — flex+center aqui trava o eixo. */
-.logo-link { display: flex; align-items: center; }
+/* min-height leva o alvo de toque a 44px sem crescer a marca (o .logo-mark
+   segue com 30px); o alinhamento central mantém a pill visualmente igual */
+.logo-link { display: flex; align-items: center; min-height: 44px; }
 .logo { display: inline-flex; align-items: center; gap: 10px; line-height: 1; }
 .logo-mark { width: 30px; height: 30px; flex-shrink: 0; transition: transform .4s var(--ease); }
 .logo:hover .logo-mark { transform: rotate(-8deg) scale(1.05); }
@@ -211,7 +213,9 @@ main { isolation: isolate; }
   background: radial-gradient(120% 80% at 50% 0%, transparent 40%, rgba(10,9,19,0.5) 100%),
               linear-gradient(180deg, rgba(10,9,19,0.4), transparent 30%, transparent 70%, rgba(10,9,19,0.95));
 }
-.hero-inner { position: relative; z-index: 2; width: 100%; padding: calc(var(--nav-h) + 60px) 0 90px; text-align: center; }
+/* o shorthand zerava o padding lateral que .wrap dá (0 28px): no mobile o
+   CTA de largura total encostava nas duas bordas da tela */
+.hero-inner { position: relative; z-index: 2; width: 100%; padding: calc(var(--nav-h) + 60px) 28px 90px; text-align: center; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 10px; margin: 0 auto 30px; padding: 7px 8px 7px 14px;
   border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid var(--d-line2);
@@ -280,9 +284,27 @@ main { isolation: isolate; }
    ================================================================ */
 .smorph {
   position: relative;
-  height: 220vh;
+  /* --smorph-travel é a distância de scroll que o morph consome: a altura é
+     uma tela (o trecho preso) mais esse curso. Deixar explícito importa
+     porque os pontos de snap são posicionados como fração dele. */
+  --smorph-travel: 120vh;
+  height: calc(100vh + var(--smorph-travel));
   border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
 }
+@supports (height: 100svh) {
+  .smorph { height: calc(100svh + var(--smorph-travel)); }
+}
+
+/* Marcos de repouso: zero área, só existem como alvo de scroll-snap.
+   `start` (e não `center`) porque o palco preso ocupa a tela inteira — com o
+   topo do marco no topo do scrollport, o progresso cai exatamente na fração
+   pretendida; center-alinhar um marco sem altura pousaria meia tela adiante. */
+.smorph-snap {
+  position: absolute; left: 0; width: 1px; height: 1px;
+  pointer-events: none; scroll-snap-align: start;
+}
+.smorph-snap--circle { top: calc(var(--smorph-travel) * 0.06); }
+.smorph-snap--arc    { top: calc(var(--smorph-travel) * 0.8); }
 .smorph-stage {
   position: sticky; top: 0;
   height: 100vh; height: 100svh;
@@ -360,10 +382,17 @@ main { isolation: isolate; }
 }
 
 @media (max-width: 767px) {
-  .smorph { height: 200vh; }
+  /* No mobile o swipe tem inércia: o mesmo gesto queima muito mais progresso
+     que uma roda de mouse. 1,5x o curso do desktop dá tempo de ler cada
+     estado sem tocar em velocity nem interceptar o toque. */
+  .smorph { --smorph-travel: 180vh; }
   .smorph-card { width: 46px; height: 58px; }
   .smorph-face { border-radius: 9px; }
   .smorph-arctext { top: 9%; }
+
+  /* proximity, nunca mandatory: só puxa quando o dedo já parou perto do
+     ponto de foco, sem brigar com a rolagem nativa */
+  html { scroll-snap-type: y proximity; }
 }
 
 /* ---- estado estático: SSR, sem JS e prefers-reduced-motion ---- */
@@ -549,6 +578,10 @@ main { isolation: isolate; }
 .ctaband-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
 .ctaband-veil { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
 .ctaband-in { position: relative; z-index: 2; padding: 80px 48px; text-align: center; }
+/* 48px de padding interno em tela de 390px deixava só 238px pro CTA */
+@media (max-width: 560px) {
+  .ctaband-in { padding: 56px 22px; }
+}
 .ctaband h2 { font-size: clamp(30px, 4.2vw, 54px); letter-spacing: -0.04em; color: #fff; margin-bottom: 18px; }
 .ctaband p { font-size: 18px; color: var(--d-body); max-width: 50ch; margin: 0 auto 34px; }
 

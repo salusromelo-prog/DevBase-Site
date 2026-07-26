@@ -214,6 +214,11 @@ export default function ProdutoBoilerplate() {
         .fcard h3 { font-size: 16px; letter-spacing: -0.02em; margin-bottom: 9px; }
         .fcard p { font-size: 14px; color: var(--body); line-height: 1.6; }
         .p-boiler .offer-block { max-width: 560px; border: 1px solid var(--line-2); border-radius: 16px; padding: 48px; background: var(--bg-soft); box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+        /* 48px de padding no card deixava o CTA com 238px numa tela de 390 */
+        @media (max-width: 560px) {
+          .p-boiler .offer-block { padding: 26px 22px; }
+          .p-boiler .offer-block .btn { width: 100%; justify-content: center; }
+        }
         .offer-price { display: flex; align-items: baseline; gap: 16px; margin: 20px 0 16px; }
         .offer-old { font-size: 22px; color: var(--muted); text-decoration: line-through; }
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: #6366f1; line-height: 1; }

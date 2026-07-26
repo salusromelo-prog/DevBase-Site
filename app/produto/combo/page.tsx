@@ -217,6 +217,11 @@ export default function ProdutoCombo() {
         .combo-list li { font-size: 14px; color: var(--ink-2); display: grid; grid-template-columns: 16px 1fr; gap: 9px; }
         .combo-list li .b { color: #818cf8; }
         .p-combo .offer-block { max-width: 560px; border: 1px solid var(--line-2); border-radius: 16px; padding: 48px; background: var(--bg-soft); box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+        /* 48px de padding no card deixava o CTA com 238px numa tela de 390 */
+        @media (max-width: 560px) {
+          .p-combo .offer-block { padding: 26px 22px; }
+          .p-combo .offer-block .btn { width: 100%; justify-content: center; }
+        }
         .offer-price { display: flex; align-items: baseline; gap: 16px; margin: 20px 0 16px; }
         .offer-old { font-size: 22px; color: var(--muted); text-decoration: line-through; }
         .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; background: linear-gradient(110deg, #6366f1, #8b5cf6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
