@@ -8,6 +8,7 @@ import AccentBleed from '@/components/visual/accent-bleed'
 import BizArt from '@/components/biz-art'
 import BizReveal from '@/components/biz-reveal'
 import IntroSignature from '@/components/intro-signature'
+import StackMorph from '@/components/stack-morph'
 
 export const metadata: Metadata = {
   title: 'DevBase — Construa. Lance. Cresça.',
@@ -62,18 +63,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== STACK STRIP ===== */}
-      <section className="strip sec-dark">
-        <div className="wrap"><div className="strip-lbl">A stack que já vem configurada</div></div>
-        <div className="strip-mask">
-        <div className="strip-track">
-          {['Next.js 14', 'TypeScript 5.4', 'Supabase', 'Pagar.me PIX', 'Tailwind CSS', 'Resend', 'Vercel', 'Boleto · Cartão',
-            'Next.js 14', 'TypeScript 5.4', 'Supabase', 'Pagar.me PIX', 'Tailwind CSS', 'Resend', 'Vercel', 'Boleto · Cartão'].map((item, i) => (
-            <span key={i} className="strip-item">{item}</span>
-          ))}
-        </div>
-        </div>
-      </section>
+      {/* ===== STACK MORPH ===== */}
+      <StackMorph />
 
       {/* ===== POR QUE EXISTIMOS + PRODUTO EM DESTAQUE (fundidas) ===== */}
       <SectionShell rail="por-que" tone="dark" bleed="tr" className="sec-dark sec-dark--alt">

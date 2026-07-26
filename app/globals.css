@@ -274,24 +274,125 @@ main { isolation: isolate; }
 .sec-head.center p { margin-left: auto; margin-right: auto; }
 
 /* ================================================================
-   STRIP (stack marquee)
+   STACK MORPH (substitui a antiga strip marquee)
+   O wrapper alto existe só para dar curso ao sticky: é ele que
+   converte scroll de página em progresso da animação.
    ================================================================ */
-.strip {
-  padding: 48px 0;
-  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden;
+.smorph {
+  position: relative;
+  height: 220vh;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
 }
-.strip-mask {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+.smorph-stage {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+  overflow: hidden;                 /* segura os cards ampliados no arco */
+  display: flex; align-items: center; justify-content: center;
 }
-.strip-lbl { text-align: center; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 26px; }
-.strip-track { display: flex; gap: 56px; width: max-content; animation: marq 34s linear infinite; }
-.strip-track:hover { animation-play-state: paused; }
-.strip-item { font-size: 18px; font-weight: 600; color: var(--ink-2); white-space: nowrap; display: inline-flex; align-items: center; gap: 9px; opacity: .55; transition: opacity .2s; }
-.strip-item:hover { opacity: 1; }
-.strip-item .v { font-family: var(--mono); font-size: 13px; color: var(--primary); font-weight: 500; }
-@keyframes marq { to { transform: translateX(-50%); } }
+
+.smorph-intro {
+  position: absolute; z-index: 0; inset-inline: 0;
+  text-align: center; pointer-events: none; padding: 0 20px;
+}
+.smorph-title {
+  font-size: clamp(24px, 3.2vw, 40px); letter-spacing: -0.04em;
+  color: var(--text); margin: 0 auto; text-wrap: balance;
+  max-width: 16ch;                  /* quebra em 2 linhas: cabe dentro do anel */
+}
+.smorph-hint {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-3); margin: 18px 0 0;
+}
+
+.smorph-arctext {
+  position: absolute; z-index: 3; top: 12%; inset-inline: 0;
+  text-align: center; pointer-events: none; padding: 0 22px; opacity: 0;
+}
+.smorph-arctext h3 {
+  font-size: clamp(24px, 3.4vw, 42px); letter-spacing: -0.035em;
+  color: var(--text); margin: 0 0 14px;
+}
+.smorph-arctext p {
+  font-size: clamp(14px, 1.4vw, 17px); color: var(--text-2);
+  max-width: 46ch; margin: 0 auto; line-height: 1.6;
+}
+
+.smorph-field {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.smorph-card {
+  position: absolute;
+  width: 68px; height: 84px;
+  opacity: 0;
+  perspective: 800px;
+  will-change: transform, opacity;
+}
+.smorph-flip {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .6s var(--ease);
+}
+.smorph-face {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px; backface-visibility: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+}
+.smorph-face--front {
+  background: var(--card); border: 1px solid var(--border); color: var(--text);
+}
+.smorph-face--front svg { width: 46%; height: 46%; }
+.smorph-face--back {
+  transform: rotateY(180deg);
+  background: linear-gradient(160deg, var(--primary), var(--primary-2));
+  border: 1px solid rgba(255,255,255,.18);
+  padding: 6px;
+}
+.smorph-face--back span {
+  font-size: 9px; font-weight: 600; line-height: 1.25;
+  color: #fff; text-align: center; letter-spacing: -0.01em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .smorph-card:hover .smorph-flip { transform: rotateY(180deg); }
+}
+
+@media (max-width: 767px) {
+  .smorph { height: 200vh; }
+  .smorph-card { width: 46px; height: 58px; }
+  .smorph-face { border-radius: 9px; }
+  .smorph-arctext { top: 9%; }
+}
+
+/* ---- estado estático: SSR, sem JS e prefers-reduced-motion ---- */
+.smorph--static { height: auto; padding: 88px 0; }
+.smorph-lbl {
+  font-family: var(--mono); font-size: 12px; color: var(--text-3);
+  letter-spacing: .06em; text-transform: uppercase; margin: 0 0 14px;
+  text-align: center;
+}
+.smorph--static .smorph-title { text-align: center; margin-bottom: 48px; max-width: 24ch; }
+.smorph-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.smorph-tile {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 24px 12px; border-radius: var(--r-sm);
+  background: var(--card); border: 1px solid var(--border);
+}
+.smorph-mark { color: var(--text); display: flex; }
+.smorph-mark svg { width: 28px; height: 28px; }
+.smorph-name {
+  font-size: 13px; font-weight: 600; color: var(--text-2);
+  text-align: center; letter-spacing: -0.01em;
+}
+@media (max-width: 767px) {
+  .smorph-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 /* ================================================================
    VALUE CARDS
