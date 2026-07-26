@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 
 /* ── calibragem ────────────────────────────────────────────────── */
-const DURATION = 4.5              // duração da cena, em segundos
+const DURATION = 4.5              // duração "de autoria" da coreografia abaixo — não mexer nela isolada, ver PLAY_DURATION
+const PLAY_DURATION = 1.6         // duração REAL da cena, em segundos (+ 0.4s de fade = entrada ~2s)
+const RATE = DURATION / PLAY_DURATION // acelera o relógio virtual pra caber a coreografia inteira em PLAY_DURATION
 const INTRO_WIDTH = 'min(560px, 84vw)' // escala de marca, não de tela
 /* ──────────────────────────────────────────────────────────────── */
 
@@ -452,12 +454,12 @@ export default function IntroSignature() {
     const t0 = performance.now()
     const frame = (now: number) => {
       const elapsed = (now - t0) / 1000
-      if (elapsed >= DURATION) {
+      if (elapsed >= PLAY_DURATION) {
         setT(DURATION)
         sair()
         return
       }
-      setT(elapsed)
+      setT(elapsed * RATE)
       raf = requestAnimationFrame(frame)
     }
     raf = requestAnimationFrame(frame)

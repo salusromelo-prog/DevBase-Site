@@ -66,13 +66,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Qualquer falha aqui (JS bloqueado, sessionStorage negado) cai no
             site normal — nunca preso atrás de uma tela preta.
 
-            Kill switch em 5.6s: 4.5s de cena + 0.4s de fade, e folga. Fica
-            DEPOIS do failsafe do CSS (5.2s) de propósito — se viesse antes,
+            Kill switch em 2.7s: 1.6s de cena + 0.4s de fade, e folga. Fica
+            DEPOIS do failsafe do CSS (2.3s) de propósito — se viesse antes,
             arrancaria o overlay no meio do fade de segurança em vez de
             deixá-lo terminar. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(location.pathname!=="/")return;if(sessionStorage.getItem("db_entered"))return;sessionStorage.setItem("db_entered","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var d=document.documentElement;d.classList.add("db-splash");var evs=["pointerdown","keydown","touchstart"],skip=function(){d.classList.add("db-skip");evs.forEach(function(e){document.removeEventListener(e,skip,true)})};evs.forEach(function(e){document.addEventListener(e,skip,{passive:true,capture:true})});setTimeout(function(){d.classList.remove("db-splash","db-skip","db-out")},5600)}catch(e){}})()`,
+            __html: `(function(){try{if(location.pathname!=="/")return;if(sessionStorage.getItem("db_entered"))return;sessionStorage.setItem("db_entered","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var d=document.documentElement;d.classList.add("db-splash");var evs=["pointerdown","keydown","touchstart"],skip=function(){d.classList.add("db-skip");evs.forEach(function(e){document.removeEventListener(e,skip,true)})};evs.forEach(function(e){document.addEventListener(e,skip,{passive:true,capture:true})});setTimeout(function(){d.classList.remove("db-splash","db-skip","db-out")},2700)}catch(e){}})()`,
           }}
         />
       </head>

@@ -65,7 +65,17 @@ export default function Nav() {
     <>
       <nav className={`nav ${theme}${scrolled ? ' scrolled' : ''}`}>
         <div className="wrap wrap-wide">
-          <Link href="/" aria-label="dev/base">
+          <Link
+            href="/"
+            aria-label="dev/base"
+            className="logo-link"
+            onClick={e => {
+              if (pathname === '/') {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+              }
+            }}
+          >
             <Logo size="md" />
           </Link>
           <div className="nav-mid">
