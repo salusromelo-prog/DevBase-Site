@@ -37,6 +37,7 @@ export default function Home() {
         mediaType="video"
         mediaSrc="/hero/devbase-aurora.mp4"
         posterSrc="/hero/devbase-aurora-poster.jpg"
+        bgImageSrc="/hero/devbase-aurora-bg.jpg"
         title="Construa. Lance. Cresça."
         scrollToExpand="role para explorar"
         textBlend={false}

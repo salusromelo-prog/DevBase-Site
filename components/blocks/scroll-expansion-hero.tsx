@@ -78,6 +78,7 @@ export default function ScrollExpandMedia({
   const [showContent, setShowContent] = useState(false)
 
   const bgRef = useRef<HTMLDivElement>(null)
+  const bloomRef = useRef<HTMLDivElement>(null)
   const mediaRef = useRef<HTMLDivElement>(null)
   const veilRef = useRef<HTMLDivElement>(null)
   const headRef = useRef<HTMLSpanElement>(null)
@@ -106,6 +107,14 @@ export default function ScrollExpandMedia({
     }
     if (bgRef.current) bgRef.current.style.opacity = String(1 - v)
     if (veilRef.current) veilRef.current.style.opacity = String(0.7 - v * 0.3)
+
+    /* o halo que a mídia joga no escuro. Só transform e opacity — as
+       duas propriedades que o compositor resolve sozinho — pra ele
+       poder crescer todo frame sem custar layout. */
+    if (bloomRef.current) {
+      bloomRef.current.style.transform = `translate(-50%, -50%) scale(${0.62 + v * 1.05})`
+      bloomRef.current.style.opacity = String(0.5 + v * 0.42)
+    }
 
     /* em reduced-motion o progresso já nasce em 1: aplicar o
        afastamento jogaria o h1 pra fora da tela e a página ficaria
@@ -272,6 +281,12 @@ export default function ScrollExpandMedia({
             style={bgImageSrc ? { backgroundImage: `url(${bgImageSrc})` } : undefined}
             aria-hidden="true"
           />
+
+          {/* o halo, atrás da mídia: é ele que faz o cartão parecer uma
+              fonte de luz no escuro em vez de um retângulo parado */}
+          <div ref={bloomRef} className="seh-bloom" aria-hidden="true">
+            <span className="seh-bloom__i" />
+          </div>
 
           {/* a mídia que cresce */}
           <div ref={mediaRef} className="seh-media" style={{ width: W0, height: H0 }}>
