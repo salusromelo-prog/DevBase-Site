@@ -1621,70 +1621,152 @@ body.ls-on .sdots--dark { display: none; }
 .page-dark > .aurora-fx { position: absolute; z-index: 0; }
 
 /* ═══════════════════════════════════════════════════════════════════
-   ENTRADA — a assinatura da marca se montando, só na home e só na
-   primeira visita da sessão. O overlay vai no HTML do servidor e só
-   APARECE se o script do <head> tiver marcado <html class="db-splash">
-   antes do primeiro paint: sem a marca ele nasce display:none, então
-   quem já viu (ou pediu reduced-motion) não vê frame nenhum.
+   ENTRADA — o hero de scroll-expansion. A aurora gravada nasce pequena
+   entre as duas metades do título e cresce até tomar a tela; o subtítulo
+   e os CTAs só entram depois que ela abre.
 
-   Três saídas possíveis — fim da cena, skip e o failsafe — TODAS
-   terminam numa animação CSS que apaga o overlay. O componente só
-   escuta o animationend pra desmontar. Se a hidratação falhar, se o
-   bundle nem carregar, o failsafe ainda derruba o overlay sozinho:
-   falha = site visível, nunca uma tela preta presa.
+   São três mecânicas, escolhidas em components/blocks/scroll-expansion-
+   hero.tsx e expostas aqui em [data-mode]:
+
+   · wheel  — desktop de ponteiro fino: a roda é interceptada em JS e a
+              página fica presa no topo até a mídia abrir.
+   · touch  — dedo: NADA é interceptado. O trilho ganha altura a mais e
+              o palco fica sticky dentro dele, então a rolagem é a nativa
+              do sistema e a expansão só acompanha o quanto já rolou.
+   · static — prefers-reduced-motion: mídia já aberta, texto já visível,
+              nenhum curso de scroll.
    ═══════════════════════════════════════════════════════════════════ */
 
-.intro-signature {
-  display: none;
-  position: fixed; inset: 0; z-index: 9999;
-  align-items: center; justify-content: center;
-  background: #0a0a0a;
-}
-
-/* a cena é pequena e centrada: a caixa dá a largura (INTRO_WIDTH, no
-   topo de components/intro-signature.tsx) e guarda a proporção; o palco
-   dentro dela é autoral em 1280×720 e chega ao tamanho final por um
-   único scale, medido em JS. */
-.intro-signature .is-box {
+/* overflow-x: clip, não hidden — as metades do título viajam até 150vw
+   pros lados e precisam ser cortadas, mas `hidden` criaria um contexto
+   de rolagem aqui e o sticky do palco passaria a se ancorar nele (ou
+   seja, pararia de grudar na viewport). `clip` corta sem criar. */
+.seh {
   position: relative;
-  aspect-ratio: 1280 / 720;
+  background: var(--d-bg);
+  color: var(--d-ink);
+  overflow-x: clip;
 }
-.intro-signature .is-stage {
-  position: absolute; left: 0; top: 0;
-  transform-origin: 0 0;
+.seh-track { position: relative; }
+.seh-stage {
+  position: relative;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.seh[data-mode='touch'] .seh-stage { position: sticky; top: 0; }
+
+/* o fundo, que some conforme a mídia toma a tela. Sem bgImageSrc é o
+   #0a0a0a da marca com dois glows — nenhum asset extra pra baixar. */
+.seh-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(120% 78% at 50% 6%,  rgba(99,102,241,0.20), transparent 60%),
+    radial-gradient(88% 66% at 84% 96%,  rgba(139,92,246,0.15), transparent 64%),
+    var(--d-bg);
+  background-size: cover;
+  background-position: center;
 }
 
-@keyframes is-out     { from { opacity: 1 } to { opacity: 0; visibility: hidden } }
-@keyframes is-deliver { from { transform: scale(1.01) } to { transform: none } }
-/* failsafe: se nada de JS acontecer, o overlay se apaga sozinho.
-   Dura o suficiente pra cena inteira rodar e ainda sobra folga. */
-@keyframes is-failsafe {
-  0%, 89% { opacity: 1; visibility: visible }
-  100%    { opacity: 0; visibility: hidden }
+/* a mídia que cresce. width/height mudam a cada frame, mas ela está
+   fora do fluxo e contida, então o relayout não sobe pra página. */
+.seh-media {
+  position: absolute; z-index: 1;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 95vw;
+  max-height: 85dvh;
+  border-radius: 18px;
+  overflow: hidden;
+  contain: layout;
+  will-change: width, height;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.55);
+}
+.seh-media > video,
+.seh-media > img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.seh-veil { position: absolute; inset: 0; background: rgba(6,6,10,0.55); }
+
+.seh-copy {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: var(--nav-h) 24px 0;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 22px;
+  text-align: center;
+  pointer-events: none;
+}
+.seh-copy--blend { mix-blend-mode: difference; }
+
+.seh-title {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px;
+  margin: 0;
+  font-size: clamp(38px, 7vw, 88px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-weight: 700;
+  color: #fff;
+  text-wrap: balance;
+  text-shadow: 0 2px 44px rgba(0,0,0,0.6);
+}
+.seh-title span { display: block; will-change: transform; }
+.seh-title__b {
+  background: linear-gradient(110deg, #c7c9ff, #818cf8 40%, #c4b5fd 65%, #a5b4fc);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }
 
-/* t=0 — overlay no ar, com o failsafe já correndo por baixo */
-.db-splash .intro-signature { display: flex; animation: is-failsafe 2.3s linear forwards }
+.seh-date {
+  margin: 0;
+  font-family: var(--mono); font-size: 13px;
+  color: var(--d-body);
+}
+.seh-cue {
+  margin: 0;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.42);
+}
+.seh-cue__ln {
+  width: 30px; height: 1px; background: rgba(255,255,255,0.3);
+  position: relative; overflow: hidden;
+}
+.seh-cue__ln::after {
+  content: ''; position: absolute; inset: 0; background: #fff;
+  animation: cue 2.4s var(--ease) infinite;
+}
 
-/* SAÍDA — fim natural da cena (.db-out) ou skip (.db-skip): mesmo fade
-   de 400ms e a mesma entrega da página. O visitante nunca leva corte
-   seco. Especificidade maior que a regra do failsafe, então vence. */
-.db-splash.db-out .intro-signature,
-.db-splash.db-skip .intro-signature { animation: is-out .4s var(--ease) forwards }
-.db-splash.db-out .db-stage,
-.db-splash.db-skip .db-stage { animation: is-deliver .5s var(--ease) both }
+.seh-content {
+  position: relative; z-index: 2;
+  padding: 72px 28px 104px;
+  text-align: center;
+}
 
-/* o palco da página: só existe pra receber o scale da entrega. Sem a
-   marca do splash não tem transform nenhum — e sem transform ele não
-   vira containing block de nada (por isso o overlay é IRMÃO dele, e
-   nunca filho: um ancestral transformado sequestraria o position
-   fixed do overlay, que deixaria de se ancorar na viewport). */
-.db-stage { transform-origin: 50% 0 }
-
-/* reduced-motion: o script nem marca, mas nem por acidente. */
+/* reduced-motion: o componente já entrega tudo aberto, mas o primeiro
+   paint acontece antes de ele medir o ambiente — estas regras evitam o
+   flash da mídia pequena e do children invisível nesse intervalo.
+   Os números são os mesmos que o paint() escreve com v = 1 (W0 + WGROW,
+   H0 + HGROW no topo de scroll-expansion-hero.tsx): como !important
+   vence o style inline, os dois PRECISAM concordar. */
 @media (prefers-reduced-motion: reduce) {
-  .intro-signature { display: none !important }
-  .db-stage { animation: none !important }
+  .seh-media {
+    width: 1550px !important;
+    height: 800px !important;
+  }
+  .seh-bg { opacity: 0 !important; }
+  .seh-content { opacity: 1 !important; transform: none !important; }
+  .seh-title span { transform: none !important; }
+  .seh-cue { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 767px) {
+  .seh-media { width: 950px !important; height: 600px !important; }
 }
 
 /* ================================================================

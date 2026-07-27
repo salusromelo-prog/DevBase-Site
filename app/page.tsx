@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import HomeHero from '@/components/home-hero'
+import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero'
 import Aurora from '@/components/Aurora'
 import Reveal from '@/components/reveal'
 import HeroCanvas from '@/components/hero-canvas'
@@ -7,7 +7,6 @@ import SectionShell from '@/components/visual/section-shell'
 import AccentBleed from '@/components/visual/accent-bleed'
 import BizArt from '@/components/biz-art'
 import BizReveal from '@/components/biz-reveal'
-import IntroSignature from '@/components/intro-signature'
 import StackMorph from '@/components/stack-morph'
 
 export const metadata: Metadata = {
@@ -32,13 +31,29 @@ const CHECK = (
 export default function Home() {
   return (
     <>
-      <IntroSignature />
-      {/* o palco: recebe o scale da entrega na saída do splash. Fica IRMÃO
-          do overlay, nunca pai — se o splash estivesse dentro dele, o
-          transform viraria containing block e o fixed do overlay passaria
-          a se ancorar aqui em vez da viewport. */}
-      <div className="db-stage">
-      <HomeHero />
+      {/* A entrada do site: a aurora gravada cresce com o scroll e só
+          então entrega subtítulo + CTAs. Substituiu o splash de intro. */}
+      <ScrollExpandMedia
+        mediaType="video"
+        mediaSrc="/hero/devbase-aurora.mp4"
+        posterSrc="/hero/devbase-aurora-poster.jpg"
+        title="Construa. Lance. Cresça."
+        scrollToExpand="role para explorar"
+        textBlend={false}
+      >
+        <p className="hero-sub">
+          Ferramentas para quem desenvolve. Sites para quem empreende.{' '}
+          Software feito em Goiânia, para o Brasil.
+        </p>
+        <div className="hero-cta">
+          <a href="/produtos" className="btn btn-primary btn-lg">
+            Ver produtos <span className="arr">→</span>
+          </a>
+          <a href="/empresas" className="btn btn-glass btn-lg">
+            Quero um site para minha empresa
+          </a>
+        </div>
+      </ScrollExpandMedia>
 
       {/* faixa dark contínua: UMA aurora por trás de todas as seções
           (não uma por seção); a máscara esmaece nas bordas claras */}
@@ -201,7 +216,6 @@ export default function Home() {
           </Reveal>
         </div>
       </SectionShell>
-      </div>
     </>
   )
 }

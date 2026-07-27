@@ -46,35 +46,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    /* suppressHydrationWarning: o script do <head> escreve a marca da entrada
-       (db-splash) no className do <html> antes do primeiro paint, então o
-       servidor e o cliente divergem de propósito nesse atributo. React não
-       desfaz a mudança — só reclamaria no console. */
-    <html
-      lang="pt-BR"
-      className={`${jetbrainsMono.variable} ${fraunces.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="pt-BR" className={`${jetbrainsMono.variable} ${fraunces.variable}`}>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" />
         <link
           href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap"
           rel="stylesheet"
         />
-        {/* Entrada: decide ANTES do primeiro paint se a intro roda. Só marca
-            o <html> e escuta o skip; quem apaga o overlay é sempre o CSS.
-            Qualquer falha aqui (JS bloqueado, sessionStorage negado) cai no
-            site normal — nunca preso atrás de uma tela preta.
-
-            Kill switch em 2.7s: 1.6s de cena + 0.4s de fade, e folga. Fica
-            DEPOIS do failsafe do CSS (2.3s) de propósito — se viesse antes,
-            arrancaria o overlay no meio do fade de segurança em vez de
-            deixá-lo terminar. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(location.pathname!=="/")return;if(sessionStorage.getItem("db_entered"))return;sessionStorage.setItem("db_entered","1");if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var d=document.documentElement;d.classList.add("db-splash");var evs=["pointerdown","keydown","touchstart"],skip=function(){d.classList.add("db-skip");evs.forEach(function(e){document.removeEventListener(e,skip,true)})};evs.forEach(function(e){document.addEventListener(e,skip,{passive:true,capture:true})});setTimeout(function(){d.classList.remove("db-splash","db-skip","db-out")},2700)}catch(e){}})()`,
-          }}
-        />
+        {/* a entrada da home agora é o hero de scroll-expansion, que é
+            permanente — não há mais splash de primeira visita, então
+            nada precisa ser decidido antes do primeiro paint. */}
       </head>
       <body>
         <Nav />
