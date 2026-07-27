@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
   type ReactNode,
+  type RefObject,
 } from 'react'
 import { motion } from 'framer-motion'
 
@@ -21,6 +22,10 @@ export type ScrollExpandMediaProps = {
   scrollToExpand?: string
   /** mix-blend-difference no título; falso quando o fundo já é colorido */
   textBlend?: boolean
+  /** as três batidas reveladas ao longo do curso. Cada filho direto vira
+      um beat: o 1º entra cedo, o 3º fica na tela junto com os CTAs. São
+      conteúdo da página, não do componente — por isso vêm de fora. */
+  beats?: ReactNode
   children?: ReactNode
 }
 
@@ -30,14 +35,16 @@ export type ScrollExpandMediaProps = {
    (deltaMode 1, ~3 por clique) e alguns modos de página mandam telas
    (deltaMode 2). Sem normalizar, o mesmo gesto rendia 100 aqui e 3 lá,
    e no Firefox o hero pedia ~370 cliques de roda pra abrir. */
-const WHEEL_GAIN = 0.0009
+const WHEEL_GAIN = 0.0006
 /* teto do passo de UM evento, em px. Trackpad com inércia despeja
    centenas de pixels num evento só; sem teto isso vira um salto. Como
    o trackpad compensa em frequência (dezenas de eventos por gesto), o
    curso total continua o mesmo — só deixa de ser dado em degraus. */
 const WHEEL_MAX_STEP = 150
-/* passo por tecla (ArrowDown/PageDown/Space) */
-const KEY_STEP = 0.18
+/* passo por tecla (ArrowDown/PageDown/Space). 0.12 dá 8,3 toques no
+   curso inteiro: o teclado não precisa acompanhar os 17 cliques da
+   roda, mas cada beat ainda ganha ~2 toques pra ser lido. */
+const KEY_STEP = 0.12
 /* constante de tempo da perseguição alvo→pintado, em segundos: quanto
    o valor pintado leva pra cobrir ~63% da distância que falta.
 
@@ -58,11 +65,22 @@ const SETTLE = 0.0004
 /* trilho do toque: fração de viewport que o dedo percorre até a
    expansão fechar. O .seh-track ganha essa altura a mais e o palco fica
    sticky dentro dele — é isso que segura a mídia na tela SEM precisar
-   de preventDefault. */
-const TOUCH_TRACK = 0.85
-/* histerese do children, como no original: liga em 1, desliga abaixo de
-   0.75 — assim ele não pisca perto do fim do curso */
-const CONTENT_OFF = 0.75
+   de preventDefault.
+
+   2.0 porque agora há três beats pra LER. Num aparelho de 844px isso
+   dá 1688px de curso; a faixa de um beat (0.26) vira 439px, que num
+   ritmo de leitura de 500-700 px/s são 0.6-0.9s por batida. Com os
+   0.85 antigos cada beat tinha 187px — menos de um impulso de polegar
+   pros três. Abaixo de 1.5 as batidas viram subliminares. */
+const TOUCH_TRACK = 2.0
+/* histerese do children: liga em 0.88, desliga abaixo de 0.78.
+
+   Antes só ligava em v = 1 e o último quarto do curso não entregava
+   nada; agora os CTAs entram (fade de 0.7s do framer) enquanto a
+   última batida ainda está sendo lida, e pousam junto com o fim do
+   curso. Quem libera a página continua sendo `expanded`, em v >= 1. */
+const CONTENT_ON = 0.88
+const CONTENT_OFF = 0.78
 /* geometria da mídia, do componente original */
 const W0 = 300, H0 = 400
 const WGROW = { narrow: 650, wide: 1250 }
@@ -75,6 +93,37 @@ const HGROW = { narrow: 200, wide: 400 }
    scroll não movia mais nada. */
 const VW_CAP = 0.95, VH_CAP = 0.85
 const SHIFT = { narrow: 180, wide: 150 } /* afastamento do título, em vw */
+
+/* ── o cubo da marca ─────────────────────────────────────────────
+   A coreografia vem do splash desconectado (components/intro-signature
+   .tsx): lá ela já era função pura de um escalar t, sem estado interno,
+   o que é exatamente o que um scrub por scroll precisa. Aqui o eixo de
+   4.5 unidades vira o v de 0 a 1, e as escritas saem de render do React
+   pra refs — o componente não pode reconciliar por quadro.
+
+   Termina cedo, em 0.24: o cubo é a ABERTURA da cena, não a cena. Ele
+   se monta grande no meio, estaciona no slot de fluxo e sai da frente
+   pros beats. Passado CUBE_END o paint() para de escrever nele. */
+const CUBE_END = 0.24
+/* idem pros beats: depois de 0.80 os três estão parados */
+const BEATS_END = 0.80
+/* onde a primeira batida começa a entrar e onde a última acaba de
+   entrar; as do meio saem daí, divididas pelo número de batidas.
+
+   0.12 é escolhido contra o título: com easeCopy(v*3.2) as metades
+   limpam o centro perto de v=0.09, e a primeira batida precisa pegar
+   esse bastão antes que o vão vire tela vazia. Sobra uma respirada
+   curta em que só o cubo, já montado, ocupa o quadro — que é o efeito
+   pretendido, não um buraco.
+
+   0.66 deixa a última inteira em 0.74, com folga pros CTAs (0.88)
+   pousarem enquanto ela ainda está sendo lida. */
+const BEAT_IN0 = 0.12, BEAT_LAST_IN = 0.66
+/* altura do cubo grande como fração da viewport, e o teto de escala —
+   assim o tamanho na tela é fração da tela, não número fixo */
+const CUBE_VH = 0.34, CUBE_SCALE_MAX = 3.0
+/* de quanto ele sobe do slot de fluxo rumo ao centro do palco */
+const CUBE_LIFT = 0.11
 /* ────────────────────────────────────────────────────────────────── */
 
 /* Como a expansão é dirigida:
@@ -109,14 +158,100 @@ const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
    mesmo tato de descer. */
 const soft = (v: number) => 0.3 * v + 0.7 * (v * v * (3 - 2 * v))
 
-/* texto: adiantado. As metades do título precisam ter liberado o meio
-   ANTES de a mídia chegar no tamanho final, senão a última fatia do
-   curso é o card crescendo por cima de letra ainda em trânsito. */
-const easeCopy = (v: number) => soft(clamp01(v * 1.14))
+/* texto: MUITO adiantado. O título deixou de ser o ator do curso — o
+   trabalho dele agora é liberar o centro do palco pro cubo e pros três
+   beats, e liberar rápido. Com o 1.14 de antes o miolo só ficava livre
+   perto de v=0.30 e o primeiro beat (0.14) nasceria por cima de letra
+   ainda em trânsito. Com 3.2 o centro está livre em v≈0.09 e as
+   metades estacionam em 0.3125. */
+const easeCopy = (v: number) => soft(clamp01(v * 3.2))
 /* halo e fundo: atrasados, um fio atrás da mídia — a luz parece reagir
    ao card em vez de ser parte dele, e o fundo não escurece antes de a
    mídia justificar o escuro */
 const easeDepth = (v: number) => soft(v) ** 1.25
+
+/* ── faixas ──────────────────────────────────────────────────────────
+   O mesmo par ramp/seg do intro-signature (linhas 53-55 de lá), que é
+   como aquela coreografia recortava o eixo do tempo em trechos. Aqui o
+   eixo é o progresso. */
+const ramp = (v: number, a: number, d: number) => clamp01((v - a) / d)
+const outCubic = (t: number) => { const u = t - 1; return u * u * u + 1 }
+const outBack = (t: number) => {
+  const c1 = 1.70158, c3 = c1 + 1
+  return 1 + c3 * (t - 1) ** 3 + c1 * (t - 1) ** 2
+}
+const seg = (v: number, a: number, d: number, e = outCubic) => e(ramp(v, a, d))
+
+/* Uma face do cubo entrando: desliza da própria direção e acende. Os
+   deslocamentos (0,-78) / (-70,+40) / (+70,+40) são os do splash.
+   Fora do componente de propósito — closure nova por render seria lixo
+   alocado num caminho que roda a cada quadro. */
+function paintFace(r: RefObject<SVGPathElement | null>, p: number, tx: number, ty: number) {
+  const el = r.current
+  if (!el) return
+  el.style.opacity = String(p)
+  el.style.transform = `translate(${((1 - p) * tx).toFixed(1)}px, ${((1 - p) * ty).toFixed(1)}px)`
+}
+
+/* A troca de uma frase pela outra.
+
+   As duas ocupam exatamente o MESMO lugar, e é isso que torna a troca
+   difícil: cross-fade no mesmo ponto não lê como troca, lê como uma
+   frase vista ATRAVÉS da outra. Duas coisas resolvem, e só juntas.
+
+   1. Quem sai LIDERA. Antes a saída começava depois da entrada, então
+      as duas se cruzavam no auge: medido, chegavam a 0.535 de
+      opacidade simultânea — duas frases sólidas empilhadas. Agora a
+      saída larga BEAT_LEAD antes, e o pico simultâneo cai pra 0.195,
+      dois fantasmas fracos. O preço é uma janela de ~1/3 de clique em
+      que nenhuma das duas está forte; adiantar mais fecharia a papa de
+      vez, mas aí a janela vira buraco visível.
+
+   2. Profundidade. Quem chega vem desfocado de baixo e ganha foco;
+      quem sai perde foco subindo. Com o desfoque, o que sobra de
+      sobreposição lê como fundo contra frente em vez de sujeira.
+
+   Opacidade e movimento correm em spans DIFERENTES de propósito: a
+   opacidade precisa ser decidida (0.05) pra não competir, o movimento
+   precisa ser longo (0.085) pra não parecer um piscar. As duas andam
+   pra cima, nunca em direções opostas — é um painel de embarque
+   virando, não duas coisas se cruzando. */
+const BEAT_LEAD = 0.025
+const BEAT_OP = 0.05, BEAT_MOVE = 0.085
+
+function paintBeat(el: HTMLElement, st: boolean, v: number, inA: number, outA: number) {
+  /* em reduced-motion os três ficam acesos e o CSS os empilha em coluna */
+  if (st) {
+    el.style.opacity = '1'
+    el.style.transform = 'none'
+    el.style.filter = 'none'
+    el.style.setProperty('--a', '1')
+    return
+  }
+
+  const aOp = ramp(v, inA, BEAT_OP) ** 1.15
+  const bOp = outA === Infinity ? 0 : ramp(v, outA, BEAT_OP)
+  el.style.opacity = (aOp * (1 - bOp) ** 1.2).toFixed(3)
+
+  const aMove = outCubic(ramp(v, inA, BEAT_MOVE))
+  const bMove = outA === Infinity ? 0 : ramp(v, outA, BEAT_MOVE)
+  /* escala mínima: 1.5% de aproximação dá o empurrão de profundidade
+     sem virar zoom */
+  const y = (1 - aMove) * 34 - bMove * 30
+  const s = 0.985 + 0.015 * aMove - 0.012 * bMove
+  el.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${s.toFixed(4)})`
+
+  const blur = (1 - aMove) * 10 + bMove * 9
+  /* 'none' quando assentado: desfoque exige re-rasterizar o texto todo
+     quadro, e fora das trocas não há nada a desfocar */
+  el.style.filter = blur > 0.06 ? `blur(${blur.toFixed(2)}px)` : 'none'
+
+  /* o rótulo em mono deriva daqui no CSS e desce de cima enquanto a
+     frase sobe de baixo — o par se fecha em vez de deslizar em bloco.
+     Segue a opacidade, não o movimento: senão ficaria aceso sozinho
+     depois que a frase já apagou. */
+  el.style.setProperty('--a', aOp.toFixed(3))
+}
 
 /* useLayoutEffect avisa no console quando roda no servidor */
 const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
@@ -130,6 +265,7 @@ export default function ScrollExpandMedia({
   date,
   scrollToExpand,
   textBlend = false,
+  beats,
   children,
 }: ScrollExpandMediaProps) {
   const [mode, setMode] = useState<Mode>('idle')
@@ -145,6 +281,21 @@ export default function ScrollExpandMedia({
   const dateRef = useRef<HTMLParagraphElement>(null)
   const cueRef = useRef<HTMLParagraphElement>(null)
 
+  /* o cubo e suas peças */
+  const cubeRef = useRef<HTMLDivElement>(null)
+  const plateRef = useRef<HTMLDivElement>(null)
+  const fTopRef = useRef<SVGPathElement>(null)
+  const fLeftRef = useRef<SVGPathElement>(null)
+  const fRightRef = useRef<SVGPathElement>(null)
+  const barRef = useRef<SVGRectElement>(null)
+  const ringRef = useRef<HTMLSpanElement>(null)
+
+  /* os beats. Vêm de fora como ReactNode, então não dá pra pendurar um
+     ref em cada um — guardamos o contêiner e cacheamos os filhos, que
+     são renderizados uma vez e nunca mudam. */
+  const beatsRef = useRef<HTMLDivElement>(null)
+  const beatEls = useRef<HTMLElement[]>([])
+
   /* alvo (para onde o input mandou ir) e pintado (onde a cena está
      agora). Manter os dois separados é o que dá continuidade: o input
      chega em degraus, o pintado atravessa os degraus quadro a quadro. */
@@ -158,6 +309,12 @@ export default function ScrollExpandMedia({
   /* tamanho final da mídia nesta viewport; medido fora do paint pra não
      ler layout a cada quadro */
   const sizeRef = useRef({ w: W0 + WGROW.wide, h: H0 + HGROW.wide })
+  /* idem pro cubo: escala do estado grande e quanto ele sobe */
+  const cubeGeo = useRef({ big: 2.2, lift: 90 })
+  /* as duas fronteiras de escrita: passado CUBE_END / BEATS_END nada
+     mais muda, então o paint escreve uma última vez e para */
+  const cubeLive = useRef(true)
+  const beatsLive = useRef(true)
   const raf = useRef(0)
   /* timestamp do quadro anterior; 0 significa "laço parado" */
   const lastT = useRef(0)
@@ -172,9 +329,22 @@ export default function ScrollExpandMedia({
      card encolheria conforme o scroll avança. */
   const measure = useCallback(() => {
     const k = narrowRef.current ? 'narrow' : 'wide'
+    const vh = window.innerHeight
     sizeRef.current = {
       w: Math.max(W0, Math.min(W0 + WGROW[k], window.innerWidth * VW_CAP)),
-      h: Math.max(H0, Math.min(H0 + HGROW[k], window.innerHeight * VH_CAP)),
+      h: Math.max(H0, Math.min(H0 + HGROW[k], vh * VH_CAP)),
+    }
+
+    /* o slot do cubo é definido no CSS (e encolhe no mobile por media
+       query), então o tamanho base é LIDO, não duplicado aqui — dois
+       números para a mesma coisa é como o bloco de reduced-motion já
+       sai de sincronia. offsetWidth, não getBoundingClientRect: o
+       segundo devolve a largura JÁ transformada, e no meio do curso o
+       paint deixou um scale pendurado no elemento. */
+    const base = cubeRef.current?.offsetWidth || 132
+    cubeGeo.current = {
+      big: Math.min(CUBE_SCALE_MAX, Math.max(1.4, (CUBE_VH * vh) / base)),
+      lift: CUBE_LIFT * vh,
     }
   }, [])
 
@@ -216,6 +386,64 @@ export default function ScrollExpandMedia({
          cumpriu o papel, e segurá-la até o fim só suja o quadro */
       cueRef.current.style.opacity = String(1 - clamp01(v * 3))
     }
+
+    /* ── o cubo da marca ──────────────────────────────────────────
+       Tudo acaba em CUBE_END. Continuar escrevendo o mesmo valor a
+       cada quadro depois disso é desperdício, então escrevemos uma
+       última vez ao cruzar a fronteira e paramos — a mesma ideia do
+       laço que se desliga sozinho ao encostar no alvo. */
+    const cubeOn = v < CUBE_END
+    if (cubeOn || cubeLive.current) {
+      cubeLive.current = cubeOn
+      const g = cubeGeo.current
+      /* assentamento: sai torto e pequeno, trava reto */
+      const set = seg(v, 0.025, 0.085, outBack)
+      /* estacionamento: do estado grande no meio do palco de volta pro
+         slot de fluxo, onde ele vira assinatura e libera a tela */
+      const park = soft(clamp01((v - 0.08) / 0.12))
+      const s = (1 + (g.big - 1) * (1 - park)) * (0.92 + 0.08 * set)
+
+      if (cubeRef.current) {
+        cubeRef.current.style.transform =
+          `translate3d(0, ${(g.lift * (1 - park)).toFixed(1)}px, 0)` +
+          ` scale(${s.toFixed(3)}) rotate(${((1 - set) * -10).toFixed(2)}deg)`
+      }
+      if (plateRef.current) {
+        plateRef.current.style.opacity = String(ramp(v, 0, 0.05))
+        plateRef.current.style.transform = `scale(${(0.5 + 0.5 * seg(v, 0, 0.06, outBack)).toFixed(3)})`
+      }
+      /* as faces entram na ordem do splash: topo, esquerda, direita */
+      paintFace(fTopRef, seg(v, 0.025, 0.05), 0, -78)
+      paintFace(fLeftRef, seg(v, 0.04, 0.05), -70, 40)
+      paintFace(fRightRef, seg(v, 0.055, 0.05), 70, 40)
+
+      if (barRef.current) {
+        barRef.current.style.transform = `scaleX(${seg(v, 0.10, 0.045, outBack).toFixed(3)})`
+      }
+      /* um pulso só. Dois viram tique. */
+      if (ringRef.current) {
+        const rp = ramp(v, 0.11, 0.09)
+        ringRef.current.style.transform = `translate(-50%, -50%) scale(${(0.3 + 2.4 * rp).toFixed(3)})`
+        ringRef.current.style.opacity = String(rp > 0 && rp < 1 ? (1 - rp) * 0.45 : 0)
+      }
+    }
+
+    /* ── os beats ─────────────────────────────────────────────── */
+    const beatsOn = v < BEATS_END
+    if (beatsOn || beatsLive.current) {
+      beatsLive.current = beatsOn
+      const els = beatEls.current
+      const n = els.length
+      /* as faixas saem do número de batidas: a última entra em 0.66 e
+         está inteira em 0.74, sobrando curso pros CTAs pousarem com
+         ela ainda na tela */
+      const step = n > 1 ? (BEAT_LAST_IN - BEAT_IN0) / (n - 1) : 0
+      for (let i = 0; i < n; i++) {
+        const inA = BEAT_IN0 + i * step
+        /* a saída larga antes de a próxima entrar — ver paintBeat */
+        paintBeat(els[i], staticRef.current, v, inA, i === n - 1 ? Infinity : inA + step - BEAT_LEAD)
+      }
+    }
   }, [])
 
   /* as duas transições discretas da cena. Ficam fora do paint porque
@@ -226,7 +454,7 @@ export default function ScrollExpandMedia({
       expandedRef.current = full
       setExpanded(full)
     }
-    const on = full ? true : v < CONTENT_OFF ? false : contentRef.current
+    const on = v >= CONTENT_ON ? true : v < CONTENT_OFF ? false : contentRef.current
     if (on !== contentRef.current) {
       contentRef.current = on
       setShowContent(on)
@@ -289,6 +517,10 @@ export default function ScrollExpandMedia({
      antes de o browser desenhar. Sem lista de dependências de
      propósito: vale pra TODO render, venha ele de onde vier. */
   useIsoLayoutEffect(() => {
+    /* os beats são renderizados uma vez e nunca mudam, então cachear a
+       lista aqui evita andar no DOM a cada quadro */
+    const box = beatsRef.current
+    if (box) beatEls.current = Array.from(box.children) as HTMLElement[]
     paint(staticRef.current ? 1 : progressRef.current)
   })
 
@@ -471,10 +703,51 @@ export default function ScrollExpandMedia({
           {/* as duas metades do título abrem pros lados e dão passagem
               pra mídia que cresce entre elas */}
           <div className={`seh-copy${textBlend ? ' seh-copy--blend' : ''}`}>
-            <h1 className="seh-title">
-              <span ref={headRef} className="seh-title__a">{head}</span>
-              {tail && <span ref={tailRef} className="seh-title__b">{tail}</span>}
-            </h1>
+            {/* O cubo da marca. z-index acima do título de propósito: a
+                placa cresce do centro e cobre a costura onde o h1 se
+                parte, o que faz a abertura parecer causada por ela.
+                aria-hidden porque é o logo, já nomeado pela navbar. */}
+            <div ref={cubeRef} className="seh-cube" aria-hidden="true">
+              <div ref={plateRef} className="seh-cube__plate">
+                <span className="seh-cube__shine" />
+              </div>
+              <svg className="seh-cube__svg" viewBox="-72 -80 144 176">
+                {/* os três tons de branco (1 / .85 / .55) são a
+                    linguagem de sombreamento da marca — vão no
+                    fill-opacity pra que a entrada, que mexe no opacity,
+                    não precise saber o tom de cada face */}
+                <rect
+                  ref={barRef}
+                  className="seh-cube__bar"
+                  x="-34" y="76" width="68" height="8" rx="4"
+                  fill="#fff" fillOpacity=".6"
+                />
+                <path ref={fLeftRef} className="seh-cube__f" d="M-52,-30 L0,0 L0,64 L-52,34 Z" fill="#fff" fillOpacity=".55" />
+                <path ref={fRightRef} className="seh-cube__f" d="M0,0 L52,-30 L52,34 L0,64 Z" fill="#fff" fillOpacity=".85" />
+                <path ref={fTopRef} className="seh-cube__f" d="M0,-60 L52,-30 L0,0 L-52,-30 Z" fill="#fff" />
+              </svg>
+              <span ref={ringRef} className="seh-cube__ring" />
+            </div>
+
+            <div className="seh-headline">
+              <h1 className="seh-title">
+                <span ref={headRef} className="seh-title__a">{head}</span>
+                {tail && <span ref={tailRef} className="seh-title__b">{tail}</span>}
+              </h1>
+
+              {/* Os beats herdam exatamente o centro que as metades do
+                  título abandonam. Ficam SEMPRE no DOM, na ordem de
+                  leitura: opacity 0 não tira o elemento da árvore de
+                  acessibilidade (ao contrário de visibility/display),
+                  então um leitor de tela ouve os três de uma vez — que
+                  é o texto certo, já que juntos eles são o parágrafo
+                  de posicionamento do site. */}
+              {beats && (
+                <div ref={beatsRef} className="seh-beats">
+                  {beats}
+                </div>
+              )}
+            </div>
 
             {date && <p ref={dateRef} className="seh-date">{date}</p>}
             {scrollToExpand && mode !== 'static' && (
@@ -484,18 +757,28 @@ export default function ScrollExpandMedia({
               </p>
             )}
           </div>
+
+          {/* Os CTAs entram no PALCO, não depois dele: assim a coluna
+              inteira — cubo, texto, botões — é uma composição só e a
+              faixa deles reserva altura desde v=0, sem refluir quando
+              acende. Irmão de .seh-copy, não filho: se textBlend for
+              ligado um dia, mix-blend-mode: difference pegaria o grupo
+              todo e um filho não tem como se excluir. */}
+          <motion.div
+            className="seh-content"
+            initial={false}
+            animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 14 }}
+            transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
+            /* inert, não só aria-hidden: aria-hidden num elemento
+               focável é violação de conformance e prende o teclado nos
+               dois links aqui dentro */
+            inert={!showContent}
+            aria-hidden={showContent ? undefined : true}
+          >
+            {children}
+          </motion.div>
         </div>
       </div>
-
-      <motion.div
-        className="seh-content"
-        initial={false}
-        animate={{ opacity: showContent ? 1 : 0, y: showContent ? 0 : 14 }}
-        transition={{ duration: 0.7, ease: [0.22, 0.61, 0.36, 1] }}
-        aria-hidden={showContent ? undefined : true}
-      >
-        {children}
-      </motion.div>
     </section>
   )
 }

@@ -31,8 +31,10 @@ const CHECK = (
 export default function Home() {
   return (
     <>
-      {/* A entrada do site: a aurora gravada cresce com o scroll e só
-          então entrega subtítulo + CTAs. Substituiu o splash de intro. */}
+      {/* A entrada do site: o cubo da marca se monta com o scroll, a
+          aurora gravada cresce atrás dele e o posicionamento é lido em
+          três batidas ao longo do curso — o subtítulo que antes era um
+          parágrafo só, despejado no fim. Substituiu o splash de intro. */}
       <ScrollExpandMedia
         mediaType="video"
         mediaSrc="/hero/devbase-aurora.mp4"
@@ -41,11 +43,33 @@ export default function Home() {
         title="Construa. Lance. Cresça."
         scrollToExpand="role para explorar"
         textBlend={false}
+        beats={
+          <>
+            {/* a frase vai dentro de um __t: o .seh-beat é um flex em
+                coluna, e sem esse invólucro cada corrida de texto solta
+                vira um item de flex próprio — a frase quebraria numa
+                linha por pedaço */}
+            <p className="seh-beat">
+              <span className="seh-beat__k">para quem desenvolve</span>
+              <span className="seh-beat__t">
+                Ferramentas para quem <span className="seh-beat__ac">desenvolve</span>.
+              </span>
+            </p>
+            <p className="seh-beat">
+              <span className="seh-beat__k">para quem empreende</span>
+              <span className="seh-beat__t">
+                Sites para quem <span className="seh-beat__ac">empreende</span>.
+              </span>
+            </p>
+            <p className="seh-beat">
+              <span className="seh-beat__k">onde</span>
+              <span className="seh-beat__t">
+                Feito em <span className="seh-beat__ac">Goiânia</span>, para o Brasil.
+              </span>
+            </p>
+          </>
+        }
       >
-        <p className="hero-sub">
-          Ferramentas para quem desenvolve. Sites para quem empreende.{' '}
-          Software feito em Goiânia, para o Brasil.
-        </p>
         <div className="hero-cta">
           <a href="/produtos" className="btn btn-primary btn-lg">
             Ver produtos <span className="arr">→</span>

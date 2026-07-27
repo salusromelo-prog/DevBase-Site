@@ -1648,10 +1648,16 @@ body.ls-on .sdots--dark { display: none; }
   overflow-x: clip;
 }
 .seh-track { position: relative; }
+/* palco em COLUNA: cubo, texto e CTAs são uma composição só, centrada.
+   É isso que resolve o orçamento vertical — a faixa dos CTAs reserva a
+   altura dela desde v = 0, então nada reflui quando ela acende. Antes o
+   .seh-content ficava fora do trilho, uma viewport abaixo, e por isso o
+   curso inteiro era uma tela roxa sem nada escrito. */
 .seh-stage {
   position: relative;
   height: 100dvh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -1756,6 +1762,154 @@ body.ls-on .sdots--dark { display: none; }
 }
 .seh-copy--blend { mix-blend-mode: difference; }
 
+/* ── o cubo da marca ─────────────────────────────────────────────────
+   A coreografia é a do splash antigo (components/intro-signature.tsx),
+   agora conduzida pelo scroll. TODO estado de v = 0 mora aqui no CSS e
+   nunca no JSX: o paint() pula as escritas depois de CUBE_END, e se o
+   React fosse dono de um style inline dessas peças um re-render
+   sobrescreveria em silêncio o quadro que o paint deixou de escrever.
+
+   z-index acima do título: a placa cresce do centro e cobre a costura
+   onde o h1 se parte. */
+.seh-cube {
+  position: relative; z-index: 1;
+  width: 132px; height: 132px;
+  flex: 0 0 auto;
+  transform-origin: center;
+  will-change: transform;
+}
+.seh-cube__plate {
+  position: absolute; inset: 0;
+  border-radius: 23%;
+  background: linear-gradient(145deg, #7C7BF8, #5D5CEF);
+  box-shadow: 0 24px 60px rgba(80,79,235,0.45), inset 0 1px 0 rgba(255,255,255,0.28);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(.5);
+}
+/* o lustro é função do TEMPO, não do scroll: scrubado, ele correria de
+   trás pra frente quando o usuário sobe e leria como alça de slider */
+.seh-cube__shine {
+  position: absolute; top: -35%; left: 0;
+  width: 26%; height: 170%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.85), transparent);
+  filter: blur(2px);
+  animation: seh-shine 7s var(--ease) infinite;
+}
+@keyframes seh-shine {
+  0%, 62% { transform: translateX(-160%) rotate(18deg) }
+  100%    { transform: translateX(520%) rotate(18deg) }
+}
+.seh-cube__svg {
+  position: absolute; left: 12.5%; top: 6%;
+  width: 75%; height: 88%;
+  overflow: visible;
+}
+/* transform-box: fill-box prende a origem de transform à caixa de cada
+   peça — sem isso a barra cresceria a partir da origem do viewBox */
+.seh-cube__f { opacity: 0; transform-box: fill-box; }
+.seh-cube__bar {
+  transform: scaleX(0);
+  transform-box: fill-box; transform-origin: 50% 50%;
+}
+.seh-cube__ring {
+  position: absolute; left: 50%; top: 50%;
+  width: 140px; height: 140px;
+  border: 2px solid #7C7BF8; border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.3);
+  pointer-events: none;
+}
+
+/* ── os beats ────────────────────────────────────────────────────────
+   Ficam sobrepostos à caixa do h1: herdam exatamente o centro que as
+   metades do título abandonam quando abrem pros lados. */
+.seh-headline { position: relative; width: 100%; }
+/* a camada cobre a caixa do h1 e cada beat a preenche inteira,
+   centrando-se por flex. Centrar por translateY(-50%) seria mais curto
+   mas o transform aqui é do paint() — e uma batida que quebra em duas
+   linhas cresce simétrica assim, o que -.5em não daria. */
+.seh-beats { position: absolute; inset: 0; }
+/* Duas peças e só duas: o rótulo e a frase. O invólucro __t existe
+   porque num flex em coluna cada corrida de texto solta vira item
+   próprio, e a frase sairia quebrada numa linha por pedaço. */
+.seh-beat {
+  position: absolute; inset: 0;
+  margin: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px;
+  opacity: 0;
+  will-change: transform, filter;
+}
+/* O paint() escreve --a (o quanto a batida já entrou, 0→1) e as peças
+   derivam dele daqui. Registrado com @property pra ser um <number> de
+   verdade: sem isso o calc() abaixo não resolve, porque uma custom
+   property crua é só texto. */
+@property --a {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 1;
+}
+/* Véu local atrás da batida. No fim do curso a aurora toma a tela e a
+   faixa clara dela passa bem embaixo do texto; subir o véu geral
+   desfaria o 526b4eb, que ganhou o roxo de volta justamente baixando
+   aquele véu. Aqui escurece só o que está atrás da frase — e como é
+   filho da batida, entra e sai com ela sem nenhuma escrita a mais no
+   paint(). Fica atrás do texto porque o transform que o paint escreve
+   no .seh-beat já cria contexto de empilhamento. */
+.seh-beat::before {
+  content: '';
+  position: absolute; left: 50%; top: 50%;
+  width: 128%; height: 185%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center,
+    rgba(8,6,26,0.55), rgba(8,6,26,0.30) 45%, transparent 72%);
+  pointer-events: none;
+  z-index: -1;
+}
+.seh-beat__t {
+  display: block;
+  max-width: 17ch;
+  font-size: clamp(26px, 4.2vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.032em; line-height: 1.14;
+  color: #fff;
+  text-wrap: balance;
+  /* o mesmo halo violeta do .seh-title__a, pelo mesmo motivo: aqui o
+     texto cai sobre a FAIXA CLARA da aurora, que ainda por cima muda
+     de brilho com o vídeo — sem o halo a leitura oscila com o loop */
+  text-shadow: 0 0 52px rgba(30,22,90,0.9), 0 1px 2px rgba(0,0,0,0.3);
+}
+/* o rótulo em mono com // — a mesma voz de .eyebrow e .sec-rule__label.
+   Mais claro que o --violet-2 dos rótulos do resto do site: lá o fundo
+   é o dark da marca, aqui é a aurora acesa, e 12px em violeta médio
+   sobre ela praticamente desaparece. */
+.seh-beat__k {
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #ddd9ff;
+  text-shadow: 0 1px 14px rgba(20,14,60,0.8);
+  /* contramovimento: a frase sobe de baixo, o rótulo desce de cima, e
+     os dois se encontram. Em bloco o par deslizava junto e a troca
+     ficava monótona. O atraso vem do expoente — o rótulo só começa a
+     andar depois que a frase já está a caminho. */
+  opacity: clamp(0, calc(var(--a) * 1.6 - 0.6), 1);
+  transform: translateY(calc((1 - var(--a)) * (1 - var(--a)) * -16px));
+}
+.seh-beat__k::before { content: '// '; opacity: .55; }
+/* gradiente puxado pro claro pelo mesmo motivo: a ponta escura do
+   gradiente do título (#8b9dff) some contra a aurora clara.
+   O realce vai em drop-shadow, não text-shadow: com o preenchimento
+   transparente do background-clip, uma text-shadow apareceria ATRAVÉS
+   das letras e sujaria o gradiente; o filtro contorna a forma. */
+.seh-beat__ac {
+  background: linear-gradient(104deg, #f4f2ff, #c8ceff 34%, #e0d2ff 60%, #c2c9ff);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(12,8,40,0.55));
+}
+
 .seh-title {
   display: flex; flex-direction: column; align-items: center;
   gap: 2px;
@@ -1807,9 +1961,11 @@ body.ls-on .sdots--dark { display: none; }
 }
 @keyframes seh-float { 0%,100% { top: 0 } 50% { top: 5px } }
 
+/* dentro do palco agora: o padding grande de antes era pra separar de
+   uma seção que vinha depois; aqui ele só afastaria os botões do texto */
 .seh-content {
   position: relative; z-index: 2;
-  padding: 72px 28px 104px;
+  padding: 34px 28px 0;
   text-align: center;
 }
 
@@ -1820,9 +1976,12 @@ body.ls-on .sdots--dark { display: none; }
    H0 + HGROW no topo de scroll-expansion-hero.tsx): como !important
    vence o style inline, os dois PRECISAM concordar. */
 @media (prefers-reduced-motion: reduce) {
+  /* min() porque o paint() também limita contra a viewport (VW_CAP /
+     VH_CAP) desde que o clamp saiu do CSS e entrou no cálculo do
+     quadro — sem isso as duas pontas discordariam em telas pequenas */
   .seh-media {
-    width: 1550px !important;
-    height: 800px !important;
+    width: min(1550px, 95vw) !important;
+    height: min(800px, 85dvh) !important;
   }
   .seh-bg { opacity: 0 !important; }
   .seh-content { opacity: 1 !important; transform: none !important; }
@@ -1831,9 +1990,44 @@ body.ls-on .sdots--dark { display: none; }
   /* nada respira, entra ou balança */
   .seh-media, .seh-copy, .seh-bloom__i { animation: none !important; }
   .seh-media { filter: none !important; }
+
+  /* o cubo já montado, parado */
+  .seh-cube { transform: none !important; }
+  .seh-cube__plate { opacity: 1 !important; transform: none !important; }
+  .seh-cube__f { opacity: 1 !important; transform: none !important; }
+  .seh-cube__bar { transform: none !important; }
+  .seh-cube__ring, .seh-cube__shine { display: none !important; }
+
+  /* os três beats viram uma coluna legível, não uma pilha sobreposta.
+     O palco deixa de ser uma viewport travada porque a coluna inteira
+     — cubo, título, três beats, CTAs — não cabe em 100dvh. */
+  .seh-stage { height: auto; min-height: 100dvh; padding-block: 110px 72px; }
+  .seh-headline { display: flex; flex-direction: column; align-items: center; gap: 34px; }
+  .seh-beats { position: static; inset: auto; }
+  .seh-beat {
+    position: static; inset: auto; margin: 0 0 24px;
+    opacity: 1 !important; transform: none !important; filter: none !important;
+  }
+  .seh-beat__t { font-size: clamp(22px, 3.2vw, 34px); }
+  /* o rótulo não deriva mais do --a: aqui nada entra */
+  .seh-beat__k { opacity: 1 !important; transform: none !important; }
+  /* sem véu local: sem curso, o texto não passa sobre a faixa clara */
+  .seh-beat::before { display: none !important; }
 }
 @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
-  .seh-media { width: 950px !important; height: 600px !important; }
+  .seh-media { width: min(950px, 95vw) !important; height: min(600px, 85dvh) !important; }
+}
+/* Sem bloco espelhado em [data-mode='static'] de propósito: o JS só
+   escolhe o modo 'static' quando reduce.matches é verdadeiro, então
+   data-mode='static' IMPLICA a media query acima — um segundo bloco não
+   cobriria nenhum caso novo e só criaria duas fontes de verdade pra
+   mesma composição, que é como as regras da .seh-media já quase saíram
+   de sincronia com o paint(). */
+
+/* mobile: o slot do cubo encolhe aqui e o measure() LÊ esse valor por
+   offsetWidth, então o JS não precisa de um ramo pro estreito */
+@media (max-width: 767px) {
+  .seh-cube { width: 104px; height: 104px; }
 }
 
 /* ================================================================
