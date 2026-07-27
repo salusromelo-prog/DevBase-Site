@@ -2030,6 +2030,23 @@ body.ls-on .sdots--dark { display: none; }
   .seh-cube { width: 104px; height: 104px; }
 }
 
+/* ═══ EXPERIMENTO — fundo preto fora do card ════════════════════════
+   Tudo que ficava ao redor da mídia sai de cena: o frame desfocado da
+   aurora com seus gradientes (.seh-bg) e o halo violeta que a mídia
+   jogava no escuro (.seh-bloom). Sobra o card sobre preto puro.
+
+   O paint() continua escrevendo opacity nos dois; com display:none as
+   escritas viram no-op, então nada no JS precisou mudar e apagar este
+   bloco devolve o comportamento anterior inteiro.
+
+   A sombra violeta do próprio card (.seh-media box-shadow) fica — ela
+   é presença do card, não do fundo. Se a ideia for chapar de vez, é a
+   próxima a sair.
+   ══════════════════════════════════════════════════════════════════ */
+.seh { background: #000; }
+.seh-bg,
+.seh-bloom { display: none !important; }
+
 /* ================================================================
    AJUSTE MOBILE — layout em telas estreitas (360 / 390 / 430)
    Só empilhamento, contenção de overflow e alvos de toque.
