@@ -1177,65 +1177,259 @@ main { isolation: isolate; }
 .biz-teaser p { font-size: 1.0625rem; line-height: 1.7; color: #444; margin: 0 0 36px; }
 
 /* ================================================================
-   /portfolio — molduras de navegador com prints reais, badges,
-   lista de destaques. Reaproveita .biz-page / .biz-* do registro.
+   /portfolio — registro escuro do modelo de referência.
+   Página inteira em #030303, com pílulas em gradiente flutuando,
+   tipografia recortada em gradiente e superfícies de vidro.
+   Vocabulário próprio (.pf-*) em vez dos .biz-* do registro claro:
+   aqui o contraste é invertido, e sobrescrever cada regra clara
+   daria uma guerra de especificidade em vez de um sistema.
+   Reaproveita o primitivo de vidro .gcard/.gcard-in da /sobre — ele
+   é dirigido por tokens, e a página só precisa declarar os dela.
    ================================================================ */
-/* moldura de navegador clicável ao redor do print */
-.pf-frame { display: block; background: #fff; border: 1px solid rgba(26,26,26,0.10); border-radius: 16px; box-shadow: 0 34px 70px -34px rgba(26,26,26,0.30); overflow: hidden; max-width: min(600px, 90vw); margin: 0 auto; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
-.pf-frame:hover { transform: translateY(-4px); box-shadow: 0 44px 84px -34px rgba(26,26,26,0.40); }
-.pf-frame__bar { display: flex; gap: 7px; padding: 12px 15px; border-bottom: 1px solid rgba(26,26,26,0.08); background: #fafafa; }
-.pf-frame__bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(26,26,26,0.14); }
+.pf-page {
+  background: #030303;
+  color: rgba(255,255,255,0.55);
+  isolation: isolate;
+  /* tokens consumidos por .gcard / .gcard-in */
+  --edge:   rgba(255,255,255,0.14);
+  --edge-2: rgba(255,255,255,0.28);
+  --pane:   rgba(10,10,12,0.58);
+}
+
+/* ---- seções e cabeçalhos ---- */
+.pf-sec { position: relative; overflow: hidden; padding: clamp(84px, 11vh, 132px) 0; }
+/* régua de luz entre seções — mais leve que uma borda sólida */
+.pf-sec--line::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(1180px, 92%); height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+}
+.pf-head { position: relative; z-index: 2; max-width: 64ch; margin: 0 auto clamp(44px, 6vh, 68px); text-align: center; }
+.pf-label {
+  display: inline-flex; align-items: center; gap: 9px; margin-bottom: 18px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--violet-2);
+}
+.pf-label::before { content: ''; width: 20px; height: 1px; background: currentColor; opacity: .6; }
+.pf-h2 {
+  font-family: var(--font-fraunces); font-weight: 400;
+  font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.1; letter-spacing: -0.02em;
+  margin: 0 0 18px; text-wrap: balance;
+  background: linear-gradient(180deg, #fff, rgba(255,255,255,0.78));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.pf-lead { max-width: 58ch; margin: 0 auto; font-size: 1.0625rem; line-height: 1.75; color: rgba(255,255,255,0.5); }
+
+/* as duas linhas do título do hero — a segunda puxa o índigo/violeta */
+/* cada variante declara o gradiente E o recorte na MESMA regra, com o
+   clip depois do background. Separar em duas regras não funciona: a
+   shorthand `background` reseta background-clip para border-box, e o
+   gradiente passa a pintar a caixa inteira em vez do texto — e não dá
+   para escapar com `background-image`, porque o Lightning CSS reconverte
+   a longhand para a shorthand na saída. */
+.pf-grad-w {
+  display: block;
+  background: linear-gradient(180deg, #fff, rgba(255,255,255,0.8));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.pf-grad-v {
+  display: block;
+  background: linear-gradient(90deg, #a5b4fc, rgba(255,255,255,0.92) 52%, #c4b5fd);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+/* ---- CTAs ---- */
+.pf-cta-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 26px; }
+.pf-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px; border-radius: 999px;
+  background: var(--primary); color: #fff; font-weight: 700; font-size: 16.5px; letter-spacing: -0.01em;
+  box-shadow: 0 16px 40px -16px rgba(99,102,241,0.7);
+  transition: transform .2s var(--ease), box-shadow .2s, background .2s;
+}
+.pf-btn:hover { background: var(--primary-2); transform: translateY(-1px); }
+.pf-ghost {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 15px 26px; border-radius: 999px;
+  border: 1px solid var(--edge); background: rgba(255,255,255,0.03);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  font-size: 15.5px; font-weight: 600; color: rgba(255,255,255,0.78);
+  transition: color .2s var(--ease), border-color .2s, background .2s;
+}
+.pf-ghost:hover { color: #fff; border-color: var(--edge-2); background: rgba(255,255,255,0.06); }
+.pf-btn .arr, .pf-ghost .arr, .pf-page .btn-wa .arr { display: inline-block; transition: transform .2s var(--ease); }
+.pf-btn:hover .arr, .pf-ghost:hover .arr, .pf-page .btn-wa:hover .arr { transform: translateX(4px); }
+
+/* ---- HERO ---- */
+.pfh {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: min(92vh, 820px);
+  display: flex; align-items: center;
+  padding: calc(var(--nav-h) + 72px) 0 96px;
+  background: #030303;
+}
+.pfh-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(135deg, rgba(99,102,241,0.10), transparent 46%, rgba(139,92,246,0.10));
+  filter: blur(60px);
+}
+/* véu: assenta as formas e entrega o preto pro corpo */
+.pfh-veil {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to top, #030303, transparent 34%, rgba(3,3,3,0.7));
+}
+.pfh-content { position: relative; z-index: 2; text-align: center; }
+.pfh-title {
+  font-family: var(--font-fraunces); font-weight: 400;
+  font-size: clamp(2.4rem, 6vw, 5rem); line-height: 1.06; letter-spacing: -0.02em;
+  margin: 0 0 26px; text-wrap: balance;
+}
+.pfh-sub {
+  max-width: 56ch; margin: 0 auto 38px; font-weight: 300;
+  font-size: clamp(1rem, 1.5vw, 1.1875rem); line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ---- formas flutuantes (components/pf-shapes.tsx) ---- */
+.pfs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+/* nas seções internas as formas só sugerem a linguagem do hero */
+.pfs--quiet { opacity: 0.5; }
+.pfs-shape { position: absolute; }
+.pfs-shape__body { position: relative; }
+/* sem backdrop-filter de propósito: as pílulas derivam sem parar, e um
+   filtro de fundo forçaria recompor o backdrop a cada frame. Sobre o
+   #030303 com só um halo atrás, o blur de 2px do modelo original não
+   agregava nada visível — o custo não se pagava. */
+.pfs-shape__fill {
+  position: absolute; inset: 0; border-radius: 999px;
+  border: 2px solid rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px 0 rgba(255,255,255,0.10);
+}
+/* brilho radial no centro da pílula */
+.pfs-shape__fill::after {
+  content: ''; position: absolute; inset: 0; border-radius: 999px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.20), transparent 70%);
+}
+.pfs-shape__fill--a { background: linear-gradient(90deg, rgba(99,102,241,0.22), transparent); }
+.pfs-shape__fill--b { background: linear-gradient(90deg, rgba(139,92,246,0.22), transparent); }
+.pfs-shape__fill--c { background: linear-gradient(90deg, rgba(129,140,248,0.20), transparent); }
+
+.pfs--h1 { left: -10%; top: 15%; }
+.pfs--h2 { right: -5%; top: 70%; }
+.pfs--h3 { left: 5%; bottom: 5%; }
+.pfs--h4 { right: 15%; top: 10%; }
+.pfs--h5 { left: 20%; top: 5%; }
+@media (min-width: 768px) {
+  .pfs--h1 { left: -5%; top: 20%; }
+  .pfs--h2 { right: 0; top: 75%; }
+  .pfs--h3 { left: 10%; bottom: 10%; }
+  .pfs--h4 { right: 20%; top: 15%; }
+  .pfs--h5 { left: 25%; top: 10%; }
+}
+.pfs--q1 { left: -14%; top: 4%; }
+.pfs--q2 { right: -10%; bottom: 6%; }
+.pfs--q3 { right: 9%; top: 0; }
+
+/* ---- vitrine do projeto: o print ganha o palco ---- */
+.pf-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 18px; }
+.pf-live {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 999px;
+  font-size: 13.5px; font-weight: 700; letter-spacing: -0.01em; color: #6ee7a8;
+  background: rgba(22,163,74,0.12); border: 1px solid rgba(110,231,168,0.28);
+}
+.pf-live i { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+@media (prefers-reduced-motion: no-preference) { .pf-live i { animation: pf-live-pulse 2.4s ease-out infinite; } }
+@keyframes pf-live-pulse { 0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); } 70%,100% { box-shadow: 0 0 0 7px rgba(52,211,153,0); } }
+.pf-ramo { font-family: var(--mono); font-size: 13px; letter-spacing: 0.01em; color: rgba(255,255,255,0.42); }
+
+.pf-show { position: relative; z-index: 2; max-width: 900px; margin: 0 auto clamp(38px, 5vh, 56px); }
+/* halo índigo atrás da moldura — o print parece iluminado por trás */
+.pf-show__glow {
+  position: absolute; inset: -10% -8% -16%; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, rgba(99,102,241,0.26), transparent 68%);
+  filter: blur(46px);
+}
+.pf-frame {
+  position: relative; z-index: 1; display: block; overflow: hidden;
+  border-radius: 18px; border: 1px solid var(--edge);
+  background: rgba(14,14,17,0.8);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 40px 90px -40px rgba(0,0,0,0.95);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+}
+.pf-frame:hover { transform: translateY(-5px); border-color: var(--edge-2); box-shadow: 0 52px 110px -40px #000; }
+.pf-frame__bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); }
+.pf-frame__bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.16); }
+.pf-frame__bar em { margin-left: 12px; font-family: var(--mono); font-style: normal; font-size: 11.5px; color: rgba(255,255,255,0.34); }
 .pf-frame__shot { position: relative; display: block; }
 .pf-frame__shot img { display: block; width: 100%; height: auto; }
-/* badge "Demonstração" — sempre legível sobre qualquer print */
-.pf-badge-demo { position: absolute; top: 12px; left: 12px; z-index: 2; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.02em; color: #fff; background: rgba(10,10,10,0.72); backdrop-filter: blur(4px); padding: 6px 12px; border-radius: 999px; box-shadow: 0 4px 14px -4px rgba(0,0,0,0.5); }
 
-/* selo verde "No ar" */
-.pf-live { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; letter-spacing: -0.01em; color: #15803d; background: rgba(22,163,74,0.10); border: 1px solid rgba(22,163,74,0.22); padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; }
-.pf-live i { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 0 rgba(22,163,74,0.5); }
-@media (prefers-reduced-motion: no-preference) { .pf-live i { animation: pf-live-pulse 2.4s ease-out infinite; } }
-@keyframes pf-live-pulse { 0% { box-shadow: 0 0 0 0 rgba(22,163,74,0.5); } 70%,100% { box-shadow: 0 0 0 7px rgba(22,163,74,0); } }
+.pf-story { position: relative; z-index: 2; max-width: 62ch; margin: 0 auto clamp(32px, 4vh, 44px); text-align: center; }
+.pf-story p { margin: 0 0 18px; font-size: 1.0625rem; line-height: 1.78; color: rgba(255,255,255,0.52); }
+.pf-story p:last-child { margin-bottom: 0; }
 
-/* ramo / subtítulo cinza */
-.pf-ramo { font-family: var(--mono); font-size: 13.5px; color: #666; letter-spacing: 0.01em; margin: 0 0 20px; }
+/* pontos do caso em chips de vidro */
+.pf-points {
+  position: relative; z-index: 2; list-style: none; padding: 0;
+  max-width: 780px; margin: 0 auto clamp(34px, 4vh, 46px);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+.pf-points li {
+  display: flex; gap: 13px; align-items: flex-start;
+  padding: 17px 20px; border-radius: 14px;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--edge);
+  font-size: 15px; line-height: 1.55; color: rgba(255,255,255,0.74);
+}
+.pf-points .ck, .pf-orc__list .ck {
+  flex-shrink: 0; width: 24px; height: 24px; border-radius: 8px; margin-top: 1px;
+  display: grid; place-items: center;
+  background: rgba(99,102,241,0.18); color: #a5b4fc;
+}
+.pf-points .ck svg, .pf-orc__list .ck svg { width: 13px; height: 13px; }
 
-/* lista de destaques com checks índigo */
-.pf-list { list-style: none; padding: 0; margin: 4px 0 32px; display: flex; flex-direction: column; gap: 14px; }
-.pf-list li { display: flex; gap: 13px; align-items: flex-start; font-size: 16px; line-height: 1.55; color: #1a1a1a; }
-.pf-list .ck { flex-shrink: 0; width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; background: rgba(99,102,241,0.10); color: var(--primary); margin-top: 1px; }
-.pf-list .ck svg { width: 13px; height: 13px; }
+/* ---- passos: número grande em gradiente sobre vidro ---- */
+.pf-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
+/* o BizReveal embrulha cada cartão, então é ele que estica na linha */
+.pf-steps > .brv { height: 100%; }
+.pf-step__n {
+  display: block; font-family: var(--mono); font-size: 30px; font-weight: 700; line-height: 1;
+  background: linear-gradient(180deg, #a5b4fc, rgba(196,181,253,0.32));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.pf-step__t { font-family: var(--font-fraunces); font-weight: 600; font-size: 1.25rem; letter-spacing: -0.015em; color: #fff; margin: 16px 0 10px; }
+.pf-step__d { margin: 0; font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.5); }
 
-/* botão sólido "Visitar o site →" (cliente principal) */
-.pf-btn { display: inline-flex; align-items: center; gap: 9px; background: var(--primary); color: #fff; font-weight: 700; font-size: 16px; letter-spacing: -0.01em; padding: 15px 30px; border-radius: 999px; box-shadow: 0 14px 34px -16px rgba(99,102,241,0.6); transition: transform .2s var(--ease), box-shadow .2s, background .2s; }
-.pf-btn .arr { transition: transform .2s var(--ease); }
-.pf-btn:hover { background: #4f46e5; transform: translateY(-1px); box-shadow: 0 18px 42px -16px rgba(99,102,241,0.72); }
-.pf-btn:hover .arr { transform: translateX(4px); }
+/* ---- orçamento: um painel só, com as garantias em linhas ---- */
+.pf-orc { position: relative; z-index: 2; max-width: 820px; margin: 0 auto; }
+.pf-orc .gcard-in { padding: clamp(30px, 4.4vw, 48px); }
+.pf-orc__list { list-style: none; padding: 0; margin: 0 0 34px; display: flex; flex-direction: column; }
+.pf-orc__list li {
+  display: flex; gap: 15px; align-items: flex-start; padding: 22px 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 15.5px; line-height: 1.7; color: rgba(255,255,255,0.52);
+}
+.pf-orc__list li:first-child { border-top: 0; padding-top: 0; }
+.pf-orc__list strong { display: block; margin-bottom: 5px; font-size: 16.5px; letter-spacing: -0.01em; color: #fff; }
 
-/* link de texto "Ver demonstração →" (demos) */
-.pf-visit { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; letter-spacing: -0.01em; color: var(--primary); }
-.pf-visit .arr { transition: transform .2s var(--ease); }
-.pf-visit:hover .arr { transform: translateX(4px); }
+/* ---- fecho ---- */
+.pf-close .wrap { position: relative; z-index: 2; text-align: center; }
+.pf-close .pf-label { margin-bottom: 20px; }
+.pf-close__h { font-size: clamp(2rem, 4.6vw, 3.5rem); }
+.pf-close .pf-lead { margin-bottom: 38px; }
 
-/* bloco de depoimento reservado (comentado no JSX) */
-.pf-quote { border-left: 3px solid var(--primary); padding: 4px 0 4px 20px; margin: 0 0 28px; }
-.pf-quote p { font-family: var(--font-fraunces); font-style: italic; font-size: 18px; line-height: 1.6; color: #1a1a1a; margin: 0 0 10px; }
-.pf-quote cite { font-style: normal; font-size: 14px; color: #666; }
+/* depoimento reservado (comentado no JSX) */
+.pf-quote { max-width: 60ch; margin: 0 auto 28px; padding: 4px 0 4px 20px; border-left: 3px solid var(--primary); text-align: left; }
+.pf-quote p { margin: 0 0 10px; font-family: var(--font-fraunces); font-style: italic; font-size: 18px; line-height: 1.6; color: #fff; }
+.pf-quote cite { font-style: normal; font-size: 14px; color: rgba(255,255,255,0.45); }
 
-/* grade das demonstrações */
-.pf-demos { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-.pf-demo .pf-frame { max-width: none; margin: 0 0 24px; }
-.pf-demo__title { font-family: var(--font-fraunces); font-weight: 600; font-size: 1.5rem; letter-spacing: -0.015em; color: #1a1a1a; margin: 0 0 6px; }
-@media (max-width: 920px) { .pf-demos { grid-template-columns: 1fr; gap: 48px; } }
-
-/* label mono centralizada dentro da faixa dark do fecho */
-.biz-band .pf-band-label { justify-content: center; color: #a5b4fc; margin-bottom: 22px; }
-.biz-band .pf-band-label::before { background: #a5b4fc; }
-
-/* mobile: a página é aberta pelo WhatsApp — botões em largura total,
-   altura mínima confortável para o toque. Escopo só na /portfolio. */
+@media (max-width: 1000px) { .pf-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 720px) { .pf-points { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .pf-steps { grid-template-columns: 1fr; } }
 @media (max-width: 560px) {
-  .pf-page .pf-btn,
-  .pf-page .btn-wa { display: flex; width: 100%; justify-content: center; min-height: 52px; box-sizing: border-box; }
+  .pfh { min-height: 0; padding: calc(var(--nav-h) + 52px) 0 76px; }
+  .pf-cta-row { flex-direction: column; align-items: stretch; }
+  .pf-btn, .pf-ghost, .pf-page .btn-wa { display: flex; width: 100%; justify-content: center; min-height: 52px; box-sizing: border-box; }
 }
 
 /* ================================================================
@@ -2204,16 +2398,8 @@ body.ls-on .sdots--dark { display: none; }
    Alvos de toque e CTAs em largura total (Passos 1, 2, 8)
    ---------------------------------------------------------------- */
 
-/* /portfolio — "Ver demonstração" era um link de texto fino: vira um
-   alvo de toque de botão, igual aos demais CTAs da página. */
-@media (max-width: 560px) {
-  .pf-page .pf-visit {
-    display: flex; width: 100%; justify-content: center; align-items: center;
-    min-height: 52px; font-size: 16px; box-sizing: border-box;
-    border: 1px solid rgba(99,102,241,0.35); border-radius: 999px;
-    padding: 0 20px;
-  }
-}
+/* /portfolio — o alvo de toque do CTA do hero mora no bloco .pfh
+   (as demos, e o link fino "Ver demonstração", saíram da página). */
 
 /* páginas de produto — o botão de compra do bloco de oferta acompanha o
    hero: largura total, para não ficar solto no centro em telas estreitas. */
