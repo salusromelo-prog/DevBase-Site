@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero'
-import Aurora from '@/components/Aurora'
 import Reveal from '@/components/reveal'
-import HeroCanvas from '@/components/hero-canvas'
 import SectionShell from '@/components/visual/section-shell'
-import AccentBleed from '@/components/visual/accent-bleed'
 import BizArt from '@/components/biz-art'
 import BizReveal from '@/components/biz-reveal'
 import StackMorph from '@/components/stack-morph'
@@ -39,7 +36,6 @@ export default function Home() {
         mediaType="video"
         mediaSrc="/hero/devbase-aurora.mp4"
         posterSrc="/hero/devbase-aurora-poster.jpg"
-        bgImageSrc="/hero/devbase-aurora-bg.jpg"
         title="Construa. Lance. Cresça."
         scrollToExpand="role para explorar"
         textBlend={false}
@@ -80,10 +76,9 @@ export default function Home() {
         </div>
       </ScrollExpandMedia>
 
-      {/* faixa dark contínua: UMA aurora por trás de todas as seções
-          (não uma por seção); a máscara esmaece nas bordas claras */}
+      {/* faixa dark contínua. A aurora que ficava aqui atrás de todas as
+          seções saiu: os fundos escuros da home são preto chapado. */}
       <div className="dark-zone">
-      <Aurora className="aurora-fx--mask" intensity={0.55} />
 
       {/* ===== A DEVBASE — faixa institucional ===== */}
       <section className="who">
@@ -107,7 +102,7 @@ export default function Home() {
       <StackMorph />
 
       {/* ===== POR QUE EXISTIMOS + PRODUTO EM DESTAQUE (fundidas) ===== */}
-      <SectionShell rail="por-que" tone="dark" bleed="tr" className="sec-dark sec-dark--alt">
+      <SectionShell rail="por-que" tone="dark" className="sec-dark sec-dark--alt">
         <div className="wrap">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// por que existimos</span><span className="sec-rule__line" /></div>
           <div className="showcase">
@@ -149,7 +144,7 @@ export default function Home() {
       </SectionShell>
 
       {/* ===== PRODUCT CATALOG OVERVIEW ===== */}
-      <SectionShell rail="catalogo" tone="dark" bleed="bl" className="sec-dark">
+      <SectionShell rail="catalogo" tone="dark" className="sec-dark">
         <div className="wrap wrap-wide">
           <div className="sec-rule"><span className="sec-rule__line" /><span className="sec-rule__label">// para devs — pagamento único, sem assinatura</span><span className="sec-rule__line" /></div>
           <Reveal className="sec-head center">
@@ -226,10 +221,10 @@ export default function Home() {
       {/* ===== CTA BAND ===== */}
       <SectionShell rail="comecar" tone="dark" tight className="sec-dark sec-dark--alt">
         <div className="wrap wrap-wide">
-          <Reveal className="ctaband">
-            <HeroCanvas variant="silk" className="ctaband-canvas" />
-            <AccentBleed corner="center" size={70} intensity={0.12} />
-            <div className="ctaband-veil" />
+          {/* ctaband--flat: o canvas silk, o halo e o véu em gradiente
+              saíram daqui. O modificador achata o fundo em preto sem
+              afetar o .ctaband das páginas de produto e da /empresa. */}
+          <Reveal className="ctaband ctaband--flat">
             <div className="ctaband-in">
               <h2 data-split>Construa em cima de uma base que já funciona.</h2>
               <p>Ferramentas feitas por devs brasileiros, pro mercado brasileiro. Comece pelo que faz sentido pra você.</p>

@@ -577,6 +577,9 @@ main { isolation: isolate; }
 .ctaband { position: relative; border-radius: 28px; overflow: hidden; background: var(--d-bg); color: #fff; }
 .ctaband-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
 .ctaband-veil { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(10,9,19,0.2), rgba(10,9,19,0.7)); }
+/* só a home achata: as páginas de produto e a /empresa seguem com o
+   canvas silk e o véu em gradiente dentro do mesmo .ctaband */
+.ctaband--flat { background: #000; }
 .ctaband-in { position: relative; z-index: 2; padding: 80px 48px; text-align: center; }
 /* 48px de padding interno em tela de 390px deixava só 238px pro CTA */
 @media (max-width: 560px) {
@@ -1009,8 +1012,10 @@ main { isolation: isolate; }
 /* ================================================================
    REGISTRO DARK — seções dev (home / sobre)
    ================================================================ */
+/* preto chapado e um tom único: a home não alterna mais #0a0a0a/#0f0f0f
+   entre seções. Estas classes são exclusivas da home. */
 .sec-dark {
-  background: #0a0a0a;
+  background: #000;
   border-top: 0.5px solid #1e1e1e;
   color: rgba(244,243,251,0.62);
   --bg:       #141414;
@@ -1025,12 +1030,12 @@ main { isolation: isolate; }
   --soft:     rgba(99,102,241,0.16);
   --soft-2:   rgba(99,102,241,0.30);
 }
-.sec-dark--alt { background: #0f0f0f; }
+.sec-dark--alt { background: #000; }
 .sec-dark .btn-dark { background: var(--primary); }
 .sec-dark .btn-dark:hover { background: var(--primary-2); }
 
 /* faixa institucional "quem somos" (home) */
-.who { background: #0f0f0f; border-top: 0.5px solid #1e1e1e; padding: 96px 0; }
+.who { background: #000; border-top: 0.5px solid #1e1e1e; padding: 96px 0; }
 .who-label { display: block; font-family: var(--mono); font-size: 13px; color: var(--violet-2); letter-spacing: 0.05em; margin-bottom: 28px; }
 .who-text { font-size: 18px; line-height: 1.8; color: rgba(244,243,251,0.62); max-width: 560px; margin: 0 0 40px; }
 .who-manifesto { font-family: var(--mono); font-size: clamp(20px, 2.8vw, 30px); line-height: 1.5; letter-spacing: -0.015em; color: #f4f3fb; max-width: 760px; margin: 0 0 40px; }
@@ -1875,9 +1880,9 @@ body.ls-on .sec { background: var(--bg); }
 body.ls-on .sec.soft { background: var(--bg-soft); }
 body.ls-on .biz-teaser { background: var(--bg); }
 /* seções dark deixam a malha atravessar; o tom alternado vira véu */
-body.ls-on .sec-dark { background: transparent; }
+body.ls-on .sec-dark { background: #000; }
 body.ls-on .sec-dark--alt,
-body.ls-on .who { background: rgba(255, 255, 255, 0.02); }
+body.ls-on .who { background: #000; }
 body.ls-on .page-dark,
 body.ls-on .page-dark .page-head { background: transparent; }
 /* :not(.has-paths) — com os traços animados atrás, a faixa alternada
@@ -1939,19 +1944,18 @@ body.ls-on .sdots--dark { display: none; }
   .aurora-l3 { display: none; } /* mobile: 2 camadas */
 }
 /* máscara de borda — esmaece onde a aurora encosta em seção clara */
-.aurora-fx--mask {
-  -webkit-mask-image: linear-gradient(180deg, transparent, #000 140px, #000 calc(100% - 140px), transparent);
-  mask-image: linear-gradient(180deg, transparent, #000 140px, #000 calc(100% - 140px), transparent);
-}
+/* .aurora-fx--mask saiu junto com a aurora da home: era o único uso. */
 
 /* home: UMA aurora contínua atrás de todas as seções dark pós-hero.
    O wrapper assume o fundo; as seções ficam translúcidas (o tom
    alternado vira véu) e o conteúdo sobe pra z1. */
-.dark-zone { position: relative; isolation: isolate; background: var(--d-bg); }
+.dark-zone { position: relative; isolation: isolate; background: #000; }
 .dark-zone > section { position: relative; z-index: 1; }
-.dark-zone .sec-dark { background: transparent; }
+/* sem aurora atras, nao ha o que deixar atravessar: as secoes herdam
+   o preto da faixa, e o veu alternado saiu. */
+.dark-zone .sec-dark,
 .dark-zone .sec-dark--alt,
-.dark-zone .who { background: rgba(255, 255, 255, 0.02); }
+.dark-zone .who { background: #000; }
 
 /* /sobre: aurora atrás da página inteira.
    position: absolute repetido de propósito — a regra genérica acima
@@ -1984,7 +1988,7 @@ body.ls-on .sdots--dark { display: none; }
    seja, pararia de grudar na viewport). `clip` corta sem criar. */
 .seh {
   position: relative;
-  background: var(--d-bg);
+  background: #000;
   color: var(--d-ink);
   overflow-x: clip;
 }
@@ -2004,52 +2008,17 @@ body.ls-on .sdots--dark { display: none; }
 }
 .seh[data-mode='touch'] .seh-stage { position: sticky; top: 0; }
 
-/* O fundo. Um frame da própria aurora, desfocado e com vinheta, dá a
-   textura que gradiente puro não tem; o escurecimento vem por cima em
-   preto — se fosse feito no ffmpeg, o brilho negativo esmagaria o canal
-   vermelho e o violeta da marca viraria azul. */
-.seh-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background-color: var(--d-bg);
-  background-size: cover;
-  background-position: center;
-}
-.seh-bg::after {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(105% 72% at 50% 4%, rgba(99,102,241,0.22), transparent 58%),
-    radial-gradient(82% 62% at 86% 98%, rgba(139,92,246,0.18), transparent 62%),
-    linear-gradient(180deg, rgba(8,8,12,0.62), rgba(8,8,12,0.50) 45%, rgba(8,8,12,0.80));
-}
+/* O que ficava em volta do card saiu de cena, e o preto do .seh fica.
+   .seh-bg era um frame desfocado da aurora (bgImageSrc) com dois radiais
+   índigo/violeta e um linear escuro por cima; .seh-bloom era o halo
+   violeta que a mídia jogava no escuro.
 
-/* o halo da mídia. Fica num tamanho fixo e só é escalado, porque
-   transform e opacity o compositor resolve sem tocar em layout — dá
-   pra crescer todo frame de graça. */
-.seh-bloom {
-  position: absolute; z-index: 0;
-  left: 50%; top: 50%;
-  width: 1180px; height: 780px;
-  transform: translate(-50%, -50%) scale(0.62);
-  opacity: 0.5;
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-.seh-bloom__i {
-  display: block; width: 100%; height: 100%;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse at center,
-      rgba(124,123,248,0.50),
-      rgba(139,92,246,0.22) 42%,
-      rgba(99,102,241,0.07) 62%,
-      transparent 74%);
-  filter: blur(18px);
-  animation: seh-breathe 7.5s var(--ease) infinite;
-}
-/* a respiração é só de opacidade: mexer no transform aqui brigaria
-   com o scale que o paint() escreve no pai */
-@keyframes seh-breathe { 0%,100% { opacity: .82 } 50% { opacity: 1 } }
+   display:none em vez de remover os elementos: o paint() do componente
+   escreve opacity/transform nos dois, e com eles fora de cena as escritas
+   viram no-op — nada no JS precisou mudar, e apagar estas duas linhas
+   devolve o comportamento anterior inteiro. */
+.seh-bg,
+.seh-bloom { display: none; }
 
 /* a mídia que cresce. width/height mudam a cada frame, mas ela está
    fora do fluxo e contida, então o relayout não sobe pra página. */
@@ -2329,7 +2298,7 @@ body.ls-on .sdots--dark { display: none; }
   .seh-title span { transform: none !important; }
   .seh-cue { display: none !important; }
   /* nada respira, entra ou balança */
-  .seh-media, .seh-copy, .seh-bloom__i { animation: none !important; }
+  .seh-media, .seh-copy { animation: none !important; }
   .seh-media { filter: none !important; }
 
   /* o cubo já montado, parado */
@@ -2371,22 +2340,13 @@ body.ls-on .sdots--dark { display: none; }
   .seh-cube { width: 104px; height: 104px; }
 }
 
-/* ═══ EXPERIMENTO — fundo preto fora do card ════════════════════════
-   Tudo que ficava ao redor da mídia sai de cena: o frame desfocado da
-   aurora com seus gradientes (.seh-bg) e o halo violeta que a mídia
-   jogava no escuro (.seh-bloom). Sobra o card sobre preto puro.
+/* o experimento "fundo preto fora do card" deixou de ser experimento:
+   virou o padrão da home e foi absorvido pelas regras de .seh / .seh-bg
+   / .seh-bloom lá acima, em vez de sobrescrevê-las daqui com !important.
 
-   O paint() continua escrevendo opacity nos dois; com display:none as
-   escritas viram no-op, então nada no JS precisou mudar e apagar este
-   bloco devolve o comportamento anterior inteiro.
-
-   A sombra violeta do próprio card (.seh-media box-shadow) fica — ela
-   é presença do card, não do fundo. Se a ideia for chapar de vez, é a
-   próxima a sair.
-   ══════════════════════════════════════════════════════════════════ */
-.seh { background: #000; }
-.seh-bg,
-.seh-bloom { display: none !important; }
+   A sombra violeta do próprio card (.seh-media box-shadow) continua —
+   ela é presença do card, não do fundo. Se a ideia for chapar de vez,
+   é a próxima a sair. */
 
 /* ================================================================
    AJUSTE MOBILE — layout em telas estreitas (360 / 390 / 430)

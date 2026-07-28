@@ -11,9 +11,10 @@ const HIDDEN_ROUTES = ['/microsaas', '/acesso']
 const LIGHT_ROUTES = ['/empresas', '/obrigado']
 
 /* blocos de registro dark — a navbar sonda o que está sob ela a cada scroll.
-   .pf-page é a /portfolio inteira: sem ela aqui, a navbar desenharia a
-   pílula clara sobre o preto da página. */
-const DARK_BLOCKS = '.hero, .phead, .sec-dark, .who, .page-dark, .pf-page, .biz-band, .footer'
+   Faltando um seletor aqui, a navbar lê a página clara em volta e desenha a
+   pílula clara sobre o preto: .seh é o hero da home (que virou preto puro) e
+   .pf-page é a /portfolio inteira. */
+const DARK_BLOCKS = '.hero, .seh, .phead, .sec-dark, .who, .page-dark, .pf-page, .biz-band, .footer'
 
 const LINKS = [
   { label: 'Produtos', href: '/produtos', key: 'produtos' },
