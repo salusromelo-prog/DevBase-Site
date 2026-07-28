@@ -5,8 +5,8 @@ import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export interface AnimatedMarqueeHeroProps {
-  /** Texto da pílula acima do título. */
-  tagline: string
+  /** Pílula acima do título. Omitir deixa o título abrir a página sozinho. */
+  tagline?: string
   /** String (anima palavra a palavra) ou JSX pronto. */
   title: React.ReactNode
   description: string
@@ -80,13 +80,15 @@ export function AnimatedMarqueeHero({
         variants={STAGGER}
         className="relative z-10 mx-auto flex w-full max-w-3xl flex-1 flex-col items-center justify-center px-6 pb-10 pt-[calc(var(--nav-h)+40px)] text-center"
       >
-        <motion.span
-          variants={RISE}
-          className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-[rgba(99,102,241,0.22)] bg-[rgba(99,102,241,0.06)] px-4 py-1.5 font-[family-name:var(--mono)] text-[12px] uppercase tracking-[0.1em] text-[#6366f1]"
-        >
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#6366f1]" />
-          {tagline}
-        </motion.span>
+        {tagline && (
+          <motion.span
+            variants={RISE}
+            className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-[rgba(99,102,241,0.22)] bg-[rgba(99,102,241,0.06)] px-4 py-1.5 font-[family-name:var(--mono)] text-[12px] uppercase tracking-[0.1em] text-[#6366f1]"
+          >
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#6366f1]" />
+            {tagline}
+          </motion.span>
+        )}
 
         {/* os `!` não são preguiça: globals.css é CSS sem @layer, então as
             regras de elemento (h1 { font-weight: 700 } e p { margin: 0 })

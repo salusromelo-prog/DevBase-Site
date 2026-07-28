@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import BizReveal from '@/components/biz-reveal'
 import BizFaq from '@/components/biz-faq'
+import BizPains from '@/components/biz-pains'
+import BizSolutions from '@/components/biz-solutions'
 import { AnimatedMarqueeHero } from '@/components/ui/hero-3'
 
 const WHATSAPP =
@@ -28,13 +30,13 @@ const HERO_IMAGES = [
 ]
 
 export const metadata: Metadata = {
-  title: 'Sites para empresas · DevBase',
+  title: 'Sistemas e sites para empresas · DevBase',
   description:
-    'Sites profissionais e sistemas sob medida para o seu negócio. Proposta com escopo e valor fechados, sem surpresa. Feito em Goiânia, para o Brasil.',
+    'Sistemas sob medida, automações e sites para o seu negócio: agendamento, controle de clientes, painel de gestão. Escopo e valor fechados, sem surpresa. Feito em Goiânia, para o Brasil.',
   openGraph: {
-    title: 'Sites para empresas · DevBase',
+    title: 'Sistemas e sites para empresas · DevBase',
     description:
-      'Sites profissionais e sistemas sob medida para o seu negócio. Proposta com escopo e valor fechados, sem surpresa. Feito em Goiânia, para o Brasil.',
+      'Sistemas sob medida, automações e sites para o seu negócio: agendamento, controle de clientes, painel de gestão. Escopo e valor fechados, sem surpresa. Feito em Goiânia, para o Brasil.',
     images: [{ url: '/og.png' }],
   },
 }
@@ -45,50 +47,29 @@ const CHECK = (
   </svg>
 )
 
-const POINTS = [
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="11" cy="11" r="7" />
-        <path d="M21 21l-4.35-4.35" />
-      </svg>
-    ),
-    title: 'Encontrado no Google',
-    text: 'Quem procura pelo seu serviço acha você, não o concorrente.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="M9 12l2 2 4-4" />
-      </svg>
-    ),
-    title: 'Confiança antes da conversa',
-    text: 'O cliente chega já convencido de que você é profissional.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3 3" />
-      </svg>
-    ),
-    title: 'Aberto o tempo todo',
-    text: 'Responde as perguntas de sempre, inclusive às onze da noite de um domingo.',
-  },
-]
-
 const STEPS = [
-  { num: '01', title: 'Conversa', text: 'Você conta o que precisa. Sem compromisso.' },
-  { num: '02', title: 'Proposta', text: 'Escopo e valor fechados antes de começar. Sem surpresa no meio do caminho.' },
-  { num: '03', title: 'No ar', text: 'Você acompanha tudo até a publicação, e a parte técnica é problema nosso, não seu.' },
+  {
+    num: '01',
+    title: 'Conversa',
+    text: 'Você conta como o negócio funciona hoje e o que trava no meio do caminho. Sem compromisso.',
+  },
+  {
+    num: '02',
+    title: 'Proposta',
+    text: 'Escopo, prazo e valor fechados antes de começar. Sem surpresa no meio do caminho.',
+  },
+  {
+    num: '03',
+    title: 'No ar',
+    text: 'A gente constrói, você acompanha, e a parte técnica continua sendo problema nosso.',
+  },
 ]
 
 const INCLUDED = [
-  'Endereço do site (domínio) registrado e configurado pela gente',
-  'Site no ar, rápido e funcionando em celular e computador',
-  'Toda a parte técnica — você nunca precisa mexer em nada',
-  'Escopo e valor definidos por escrito antes de começar',
+  'Domínio, servidor e hospedagem configurados e mantidos pela gente',
+  'Tudo rápido e funcionando no celular, no computador e no tablet do balcão',
+  'Backup e segurança dos dados do seu negócio, por padrão',
+  'Escopo, prazo e valor definidos por escrito antes de começar',
 ]
 
 export default function Empresas() {
@@ -96,13 +77,12 @@ export default function Empresas() {
     <div className="biz-page">
       {/* ===== HERO ===== */}
       <AnimatedMarqueeHero
-        tagline="Sites e sistemas para empresas"
         title={
           <>
             Seu cliente já procurou você no <em>Google</em> hoje
           </>
         }
-        description="O que ele encontrou? Se a resposta é “nada” — ou pior, o concorrente — você está perdendo cliente sem nem ficar sabendo. Cartão de visita fica na gaveta, e Instagram sozinho não convence quem vai gastar dinheiro de verdade."
+        description="O que ele encontrou? Se a resposta é “nada” — ou pior, o concorrente — você está perdendo cliente sem nem ficar sabendo. A DevBase resolve isso, e também constrói os sistemas que fazem a empresa rodar depois que o cliente chega."
         ctaText="Chamar no WhatsApp"
         ctaHref={WHATSAPP}
         secondaryText="Ver projetos que já estão no ar"
@@ -110,39 +90,46 @@ export default function Empresas() {
         images={HERO_IMAGES}
       />
 
-      {/* ===== O QUE UM SITE RESOLVE ===== */}
-      <section className="biz-sec biz-sec--gray">
+      {/* ===== O QUE A GENTE CONSTRÓI — grade escura ===== */}
+      <section className="biz-sec biz-sec--dark">
+        <div className="biz-glow" aria-hidden="true" />
         <div className="wrap">
           <BizReveal>
-            <span className="biz-label">// benefícios</span>
+            <span className="biz-label">// o que a gente constrói</span>
+            <h2 className="biz-h2">
+              Nem todo problema de empresa se resolve com um <em>site</em>
+            </h2>
+            <p className="biz-lead">
+              Site é a porta de entrada — e a gente faz. Mas boa parte do que trava uma
+              empresa acontece depois que o cliente entra: a agenda, o cadastro, a
+              cobrança, o relatório do fim do mês. É aí que entra software sob medida.
+            </p>
           </BizReveal>
-          <div className="biz-grid2">
-            <div className="biz-points">
-              {POINTS.map((p, i) => (
-                <BizReveal key={p.title} delay={i * 100}>
-                  <div className="biz-point">
-                    <span className="ic">{p.icon}</span>
-                    <div>
-                      <h3>{p.title}</h3>
-                      <p>{p.text}</p>
-                    </div>
-                  </div>
-                </BizReveal>
-              ))}
-            </div>
-            <BizReveal delay={150}>
+          <BizSolutions />
+        </div>
+      </section>
+
+      {/* ===== SINAIS ===== */}
+      <section className="biz-sec biz-sec--gray">
+        <div className="wrap">
+          <div className="biz-grid2 biz-grid2--top">
+            <BizReveal>
+              <span className="biz-label">// sinais</span>
+              <h2 className="biz-h2" style={{ marginBottom: 26 }}>
+                Talvez já tenha passado da <em>hora</em>
+              </h2>
               <p className="biz-p">
-                Um site profissional trabalha por você o dia inteiro: aparece quando
-                procuram pelo seu serviço, responde as perguntas de sempre e passa
-                confiança antes mesmo da primeira conversa. Inclusive às onze da noite
-                de um domingo.
+                Toda empresa tem aquela tarefa que rouba tempo e ninguém assume: a
+                planilha que só uma pessoa entende, o agendamento que vive dando
+                conflito, o controle de clientes espalhado em três lugares.
               </p>
               <p className="biz-p" style={{ marginBottom: 0 }}>
-                A DevBase constrói sites com a mesma engenharia dos produtos que
-                programadores pagam para usar. Rápido de abrir, seguro, e desenhado
-                para o seu negócio — não um modelo pronto com o seu logo em cima.
+                Isso não é desorganização — é problema de software. E problema de
+                software tem solução: a ferramenta certa, feita do jeito que o seu
+                negócio já funciona.
               </p>
             </BizReveal>
+            <BizPains />
           </div>
         </div>
       </section>
@@ -162,52 +149,6 @@ export default function Empresas() {
                 <p>{s.text}</p>
               </BizReveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SOB MEDIDA ===== */}
-      <section className="biz-sec">
-        <div className="wrap">
-          <div className="biz-grid2">
-            <BizReveal>
-              <span className="biz-label">// sob medida</span>
-              <h2 className="biz-h2">E quando o problema <em>não é</em> o site</h2>
-              <p className="biz-p">
-                Toda empresa tem aquela tarefa que rouba tempo: a planilha que só uma
-                pessoa entende, o agendamento pelo WhatsApp que vive dando conflito,
-                o controle de clientes espalhado em três lugares. Isso também é problema
-                de software — e a gente constrói a ferramenta certa pra ele.
-              </p>
-              <p className="biz-p" style={{ marginBottom: 0 }}>
-                Sistemas de agendamento, controle de clientes e atendimentos, automação
-                de tarefas repetitivas, ferramentas internas do jeito que o seu negócio
-                funciona. Sob medida, sob demanda: você conta o problema, a gente desenha
-                a solução junto e você só fecha sabendo exatamente o que vai receber.
-              </p>
-            </BizReveal>
-            <BizReveal delay={150}>
-              <div className="biz-art biz-art--flow" aria-hidden="true">
-                <svg viewBox="0 0 320 240" fill="none">
-                  <path d="M142 50 C 164 50, 158 84, 178 84" stroke="#c7c8d4" strokeWidth="1.5" strokeDasharray="4 5" />
-                  <path d="M240 116 C 240 140, 160 136, 160 160" stroke="#c7c8d4" strokeWidth="1.5" strokeDasharray="4 5" />
-                  <path d="M78 82 C 78 124, 160 122, 160 160" stroke="#c7c8d4" strokeWidth="1.5" strokeDasharray="4 5" />
-                  <rect x="18" y="20" width="124" height="62" rx="12" fill="#fff" stroke="rgba(26,26,26,0.14)" strokeWidth="1.5" />
-                  <rect x="34" y="38" width="70" height="7" rx="3.5" fill="rgba(26,26,26,0.14)" />
-                  <rect x="34" y="55" width="48" height="7" rx="3.5" fill="rgba(26,26,26,0.09)" />
-                  <rect x="178" y="54" width="124" height="62" rx="12" fill="#fff" stroke="rgba(26,26,26,0.14)" strokeWidth="1.5" />
-                  <rect x="194" y="72" width="70" height="7" rx="3.5" fill="rgba(26,26,26,0.14)" />
-                  <rect x="194" y="89" width="48" height="7" rx="3.5" fill="rgba(26,26,26,0.09)" />
-                  <rect x="98" y="160" width="124" height="62" rx="12" fill="#fff" stroke="#6366f1" strokeWidth="1.5" />
-                  <rect x="114" y="178" width="70" height="7" rx="3.5" fill="rgba(99,102,241,0.45)" />
-                  <rect x="114" y="195" width="48" height="7" rx="3.5" fill="rgba(99,102,241,0.22)" />
-                  <circle cx="142" cy="50" r="4" fill="#6366f1" />
-                  <circle cx="240" cy="116" r="4" fill="#6366f1" />
-                  <circle cx="78" cy="82" r="4" fill="#6366f1" />
-                  <circle cx="160" cy="160" r="4" fill="#6366f1" />
-                </svg>
-              </div>
-            </BizReveal>
           </div>
         </div>
       </section>
@@ -232,10 +173,10 @@ export default function Empresas() {
             </ul>
             <BizReveal delay={200}>
               <p className="biz-p" style={{ maxWidth: '68ch', marginBottom: 0 }}>
-                O que cada projeto inclui além disso — páginas, funcionalidades,
-                acompanhamento mensal — é definido junto com você na proposta.
-                Transparência é regra aqui: você fecha sabendo exatamente o que
-                vai receber e quanto custa.
+                O que cada projeto inclui além disso — telas, funcionalidades,
+                integrações, acompanhamento mensal — é definido junto com você na
+                proposta. Transparência é regra aqui: você fecha sabendo exatamente
+                o que vai receber e quanto custa.
               </p>
             </BizReveal>
           </div>
