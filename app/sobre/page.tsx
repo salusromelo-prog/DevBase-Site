@@ -35,7 +35,7 @@ const VALORES = [
 
 const TIME = [
   { initials: 'S', name: 'Samuel', role: 'founder · produto e dev', sig: 'Samuel <produto·dev>' },
-  { initials: 'I', name: 'Isaque', role: 'co-founder · marketing', sig: 'Isaque <marketing>' },
+  { initials: 'I', name: 'Isaque', role: 'co-founder · marketing e vendas', sig: 'Isaque <marketing·vendas>' },
   { initials: 'D', name: 'Daniel', role: 'co-founder · marketing', sig: 'Daniel <marketing>' },
 ]
 
@@ -68,12 +68,54 @@ export default function Sobre() {
           </div>
         </section>
 
-        {/* git log — a história, um cartão por commit */}
+        {/* a história em prosa — vem antes do git log de propósito: aqui
+            está a narrativa, e o registro datado logo abaixo comprova. */}
         <section className="section">
           <div className="wrap">
             <Reveal>
               <div className="section-head">
-                <SectionLabel>// git log — a história</SectionLabel>
+                <SectionLabel>// a história</SectionLabel>
+                <h2>Um ano construindo antes de ter site.</h2>
+              </div>
+            </Reveal>
+            <Reveal delay={90}>
+              <div className="sobre-story">
+                <p className="lead">
+                  A DevBase nasceu em Goiânia, em maio de 2025 — três pessoas e
+                  uma regra que segue valendo: <b>só conta o que está no ar</b>.
+                </p>
+                <p>
+                  Entre a fundação e o site publicado passou-se um ano inteiro.
+                  Um ano de construção, não de anúncio. Quando o{' '}
+                  <span className="ac">devbase.tools</span> entrou no ar, em maio
+                  de 2026, entrou já vendendo o Boilerplate desde o primeiro
+                  commit — porque abrir uma vitrine vazia quebraria a única regra
+                  que existia.
+                </p>
+                <p>
+                  O catálogo cresceu na mesma lógica. Primeiro o kit de
+                  componentes em português e o combo com o Boilerplate. Depois as{' '}
+                  <b>100 ideias de micro-SaaS</b>, com 25 automações: problema,
+                  público, monetização e stack, prontas pra executar. Nenhuma
+                  entrou na lista antes de existir.
+                </p>
+                <p>
+                  Em julho de 2026 abrimos a segunda frente. Além de produtos para
+                  quem desenvolve, passamos a construir sites e sistemas para
+                  empresas — a mesma engenharia, um público novo. A régua não
+                  mudou.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* git log — o registro datado, um cartão por commit */}
+        <section className="section">
+          <div className="wrap">
+            <Reveal>
+              <div className="section-head">
+                <SectionLabel>// git log — o registro</SectionLabel>
                 <h2>Um repositório vivo.</h2>
                 <p className="sub">Cada linha aqui já aconteceu. Nada de roadmap.</p>
               </div>

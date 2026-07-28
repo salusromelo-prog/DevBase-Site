@@ -1239,7 +1239,9 @@ main { isolation: isolate; }
 }
 
 /* ---- CTAs ---- */
-.pf-cta-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 26px; }
+/* z-index: agora há formas flutuando em todas as seções — os CTAs
+   precisam ficar acima delas para continuarem clicáveis e legíveis */
+.pf-cta-row { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 26px; }
 .pf-btn {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 16px 32px; border-radius: 999px;
@@ -1292,8 +1294,8 @@ main { isolation: isolate; }
 
 /* ---- formas flutuantes (components/pf-shapes.tsx) ---- */
 .pfs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-/* nas seções internas as formas só sugerem a linguagem do hero */
-.pfs--quiet { opacity: 0.5; }
+/* fora do hero as formas só sugerem a linguagem, sem disputar o texto */
+.pfs:not(.pfs--hero) { opacity: 0.5; }
 .pfs-shape { position: absolute; }
 .pfs-shape__body { position: relative; }
 /* sem backdrop-filter de propósito: as pílulas derivam sem parar, e um
@@ -1326,9 +1328,16 @@ main { isolation: isolate; }
   .pfs--h4 { right: 20%; top: 15%; }
   .pfs--h5 { left: 25%; top: 10%; }
 }
-.pfs--q1 { left: -14%; top: 4%; }
-.pfs--q2 { right: -10%; bottom: 6%; }
-.pfs--q3 { right: 9%; top: 0; }
+/* posições por seção — sempre nas bordas, nunca na coluna do conteúdo,
+   e diferentes entre si para a página não repetir o mesmo desenho */
+.pfs--s1 { left: -12%; top: 22%; }
+.pfs--s2 { right: -8%; top: 6%; }
+.pfs--t1 { right: -10%; top: 12%; }
+.pfs--t2 { left: -9%; bottom: 8%; }
+.pfs--o1 { left: -13%; top: 5%; }
+.pfs--o2 { right: -10%; bottom: 7%; }
+.pfs--c1 { left: -11%; bottom: 14%; }
+.pfs--c2 { right: -7%; top: 10%; }
 
 /* ---- vitrine do projeto: o print ganha o palco ---- */
 .pf-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 18px; }
@@ -1726,6 +1735,21 @@ main { isolation: isolate; }
 .has-paths .manifesto p { color: rgba(244,243,251,0.5); }
 /* índigo puro fica escuro sobre o preto — o accent do manifesto sobe pro violeta */
 .has-paths .manifesto p .ac { color: var(--violet-2); }
+
+/* ---- a história em prosa ---------------------------------------
+   Prosa centrada, sem moldura: a página já tem três famílias de
+   cartão de vidro (commits, contributors, valores), e fechar este
+   texto em outro bloco viraria repetição em vez de hierarquia. */
+.sobre-story { max-width: 66ch; margin: 0 auto; text-align: center; }
+.sobre-story p { margin: 0 0 22px; font-size: 17px; line-height: 1.85; color: rgba(244,243,251,0.52); }
+.sobre-story p:last-child { margin-bottom: 0; }
+.sobre-story .lead {
+  margin-bottom: 26px; letter-spacing: -0.015em;
+  font-size: clamp(19px, 2.2vw, 23px); line-height: 1.6; color: var(--d-ink);
+}
+.sobre-story b { font-weight: 600; color: rgba(244,243,251,0.82); }
+.sobre-story .lead b { color: #fff; }
+.sobre-story .ac { font-family: var(--mono); font-size: 0.94em; color: var(--violet-2); }
 
 /* ---- cartão de vidro (primitivo) -------------------------------
    a borda de 1px é o gradiente do pai aparecendo em volta do filho:

@@ -93,6 +93,7 @@ export default function Portfolio() {
 
       {/* ===== O PROJETO — vitrine central ===== */}
       <section className="pf-sec" id="marzini">
+        <PfShapes set="show" />
         <div className="wrap">
           <BizReveal>
             <div className="pf-head">
@@ -179,6 +180,7 @@ export default function Portfolio() {
 
       {/* ===== COMO FUNCIONA ===== */}
       <section className="pf-sec pf-sec--line">
+        <PfShapes set="steps" />
         <div className="wrap">
           <BizReveal>
             <div className="pf-head">
@@ -210,7 +212,7 @@ export default function Portfolio() {
 
       {/* ===== ORÇAMENTO ===== */}
       <section className="pf-sec pf-sec--line">
-        <PfShapes set="quiet" />
+        <PfShapes set="orc" />
         <div className="wrap">
           <BizReveal>
             <div className="pf-head">
@@ -256,7 +258,7 @@ export default function Portfolio() {
 
       {/* ===== FECHO — o próprio site ===== */}
       <section className="pf-sec pf-close">
-        <PfShapes set="quiet" />
+        <PfShapes set="close" />
         <div className="wrap">
           <BizReveal>
             <span className="pf-label">// e este aqui</span>
