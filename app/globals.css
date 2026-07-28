@@ -627,7 +627,10 @@ main { isolation: isolate; }
 /* ================================================================
    FOOTER
    ================================================================ */
-.footer { background: var(--d-bg); color: var(--d-ink); padding: 84px 0 40px; }
+/* position/z-index: o rodapé fica acima de camadas decorativas fixas que
+   vivem dentro do <main> (ex.: .sobre-paths, que é fixed e sem esse
+   empilhamento desenhava as curvas por cima do texto do rodapé). */
+.footer { position: relative; z-index: 1; background: var(--d-bg); color: var(--d-ink); padding: 84px 0 40px; }
 .foot-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr; gap: 44px; margin-bottom: 60px; }
 .foot-brand p { font-size: 14.5px; color: var(--d-body); max-width: 34ch; margin: 18px 0; line-height: 1.7; }
 .foot-soc { display: flex; gap: 10px; }
@@ -1320,6 +1323,49 @@ main { isolation: isolate; }
 .page-dark .page-head { background: transparent; }
 .page-dark .section { padding: 96px 0; border-top: 0.5px solid #1e1e1e; }
 .page-dark .section:nth-of-type(even) { background: rgba(255, 255, 255, 0.02); }
+/* quando o fundo animado (.sobre-paths) está montado fora do .page-dark,
+   ele precisa ficar transparente pra deixar os traços atravessarem */
+.page-dark.has-paths { background: transparent; }
+
+/* ================================================================
+   BACKGROUND PATHS — fundo animado de página inteira (components/
+   background-paths.tsx). Fixo, atrás de tudo; a cor de base #0a0a0a
+   vive aqui (não no .page-dark, que fica transparente por cima).
+   ================================================================ */
+.sobre-paths {
+  position: fixed; inset: 0; z-index: -1;
+  background: #0a0a0a; overflow: hidden; pointer-events: none;
+}
+.paths-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* hero de página inteira — título entra letra a letra sobre o
+   fundo de traços animados */
+.sobre-hero { position: relative; min-height: 90vh; display: flex; align-items: center; padding: calc(var(--nav-h) + 40px) 0 100px; }
+.sobre-hero .wrap { text-align: center; }
+.sobre-hero .hero-badge { margin: 0 auto 30px; }
+/* precisa de .sobre-hero na frente: ".page-head h1" (0,1,1) vence uma
+   classe sozinha e reimpõe margin: 12px 0 16px — o que zera o "auto" e
+   descentraliza o título inteiro. */
+.sobre-hero .sobre-hero-title {
+  font-size: clamp(40px, 7.4vw, 96px); letter-spacing: -0.045em; line-height: 0.98;
+  max-width: 17ch; margin: 0 auto 26px; text-wrap: balance;
+  filter: drop-shadow(0 8px 30px rgba(0,0,0,0.55));
+}
+.sobre-hero-title .w { display: inline-block; margin-right: 0.22em; }
+.sobre-hero-title .w:last-child { margin-right: 0; }
+/* monocromático de propósito: o índigo vive nos traços do fundo, e um
+   título colorido brigaria com eles */
+.sobre-hero-title .ltr {
+  display: inline-block;
+  background: linear-gradient(180deg, #fff 22%, rgba(255,255,255,0.72));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.sobre-hero .sub { max-width: 52ch; margin: 0 auto; font-size: 17.5px; color: var(--d-body); }
+/* numa composição centrada, a deixa de scroll no canto fica órfã */
+.sobre-hero .scrollcue { left: 50%; transform: translateX(-50%); }
+@media (max-width: 700px) {
+  .sobre-hero { min-height: 78vh; }
+}
 
 /* ================================================================
    VIDA AMBIENTE — spotlight de cursor (camada fixa, só desktop)
@@ -1459,64 +1505,139 @@ main { isolation: isolate; }
 }
 
 /* ================================================================
-   /sobre — repositório vivo
-   git log timeline · config de valores · fecho em duas vozes
+   /sobre — registro "vidro" sobre os traços animados
+   Composição centrada, cartões com borda de 1px em gradiente, muito
+   respiro. Paleta híbrida: tipografia monocromática (branco → branco
+   translúcido) e o índigo/violeta da marca só nos traços do fundo e
+   em micro-accents (data do commit, chave do valor, caret).
+   Escopado em .has-paths e posicionado DEPOIS das regras de
+   .page-dark no arquivo — é assim que vence por ordem em vez de
+   precisar de !important.
    ================================================================ */
+.has-paths {
+  --edge:   rgba(255,255,255,0.15);
+  --edge-2: rgba(255,255,255,0.30);
+  --pane:   rgba(12,12,14,0.62);
+}
 
-/* timeline estilo git log */
-.gitlog { position: relative; max-width: 720px; margin-top: 48px; padding-left: 34px; }
-.gitlog::before {
-  content: ''; position: absolute; left: 3px; top: 8px; bottom: 24px; width: 1px;
-  background: linear-gradient(to bottom, rgba(99,102,241,0.45), rgba(99,102,241,0.10));
+/* sem régua nem faixa alternada: cortariam os traços do fundo */
+.has-paths .section { padding: clamp(80px, 11vh, 128px) 0; border-top: 0; background: transparent; }
+.has-paths .section:nth-of-type(even) { background: transparent; }
+
+/* cabeçalhos de seção centrados */
+.has-paths .section-head { text-align: center; max-width: 62ch; margin: 0 auto clamp(44px, 6vh, 64px); }
+.has-paths .section-head h2 { font-size: clamp(30px, 4vw, 50px); letter-spacing: -0.038em; text-wrap: balance; }
+.has-paths .section-head .sub { max-width: 48ch; margin: 14px auto 0; font-size: 16px; color: var(--d-body); }
+.has-paths .section-label { color: var(--violet-2); }
+.has-paths .manifesto p { color: rgba(244,243,251,0.5); }
+/* índigo puro fica escuro sobre o preto — o accent do manifesto sobe pro violeta */
+.has-paths .manifesto p .ac { color: var(--violet-2); }
+
+/* ---- cartão de vidro (primitivo) -------------------------------
+   a borda de 1px é o gradiente do pai aparecendo em volta do filho:
+   rende um fio de luz que `border: 1px solid` não reproduz. */
+.gcard {
+  height: 100%; padding: 1px; border-radius: 26px;
+  background: linear-gradient(150deg, var(--edge), rgba(255,255,255,0.04) 46%, rgba(255,255,255,0.10));
+  box-shadow: 0 22px 56px -28px rgba(0,0,0,0.92);
+  transition: transform .5s var(--ease), background .5s var(--ease), box-shadow .5s var(--ease);
 }
-.glog-entry { position: relative; padding-bottom: 48px; }
-.gitlog > :last-child .glog-entry { padding-bottom: 0; }
-.glog-entry::before {
-  content: ''; position: absolute; left: -34px; top: 5px; width: 7px; height: 7px;
-  border-radius: 50%; background: #0a0a0a; border: 1.5px solid var(--primary);
+.gcard-in {
+  position: relative; height: 100%; border-radius: 25px; padding: 28px 30px; overflow: hidden;
+  background: var(--pane);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
 }
-.glog-wip::before { background: var(--primary); box-shadow: 0 0 12px rgba(99,102,241,0.55); }
-.glog-meta { display: flex; align-items: baseline; gap: 14px; font-family: var(--mono); font-size: 12.5px; margin-bottom: 8px; }
-.glog-hash { color: rgba(244,243,251,0.35); letter-spacing: 0.02em; }
-.glog-date { color: var(--violet-2); }
-.glog-msg { font-family: var(--mono); font-size: 15.5px; color: var(--d-ink); letter-spacing: -0.01em; }
-.glog-type { color: var(--primary); }
-.glog-desc { margin: 8px 0 0; font-size: 14.5px; line-height: 1.7; color: var(--d-body); max-width: 560px; }
-.glog-wip .glog-msg { display: flex; align-items: center; gap: 8px; }
+/* fio de luz no topo — o "vidro" sem precisar de imagem */
+.gcard-in::before {
+  content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.34), transparent);
+}
+@media (hover: hover) and (pointer: fine) {
+  .gcard:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(150deg, var(--edge-2), rgba(255,255,255,0.07) 46%, rgba(255,255,255,0.16));
+    box-shadow: 0 32px 72px -30px rgba(0,0,0,0.96);
+  }
+}
+
+/* trio de cartões (contributors e valores) — o Reveal embrulha cada
+   cartão, então é ele que precisa esticar na linha do grid */
+.gtrio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+.gtrio > .reveal { height: 100%; }
+
+/* ---- git log — um cartão por commit ---- */
+.glog-stack { max-width: 680px; margin: 0 auto; display: grid; gap: 16px; }
+.glog-top { display: flex; align-items: center; gap: 11px; font-family: var(--mono); font-size: 12.5px; margin-bottom: 12px; }
+.glog-dot { flex: none; width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+.glog-hash { color: rgba(244,243,251,0.42); letter-spacing: 0.02em; }
+.glog-date { margin-left: auto; color: var(--violet-2); }
+.glog-msg {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 0;
+  font-family: var(--mono); font-size: 15.5px; font-weight: 500;
+  letter-spacing: -0.01em; color: var(--d-ink);
+}
+.glog-type { color: var(--violet-2); }
+.glog-desc { margin: 11px 0 0; font-size: 14.5px; line-height: 1.7; color: var(--d-body); }
+.glog-wip .glog-dot { background: var(--primary); box-shadow: 0 0 14px 2px rgba(99,102,241,0.55); }
 .glog-wip-txt { color: rgba(244,243,251,0.45); }
 
-/* contributors — linha de autoria estilo commit */
-.member .sig { font-family: var(--mono); font-size: 12px; color: var(--violet-2); margin-top: 10px; opacity: 0.85; }
-
-/* devbase.config — syntax highlighting sutil */
-.cfg-card { max-width: 720px; margin-top: 40px; }
-.cfg-card .cc-body { font-size: 13.5px; }
-.cfg-card .cfg-ind { padding-left: 2ch; margin-bottom: 6px; }
-.cc-body .ky { color: var(--d-ink); }
-.cc-body .eq { color: var(--primary); }
-.cc-body .st { color: var(--signal); }
-.cc-body .cm { color: rgba(255,255,255,0.34); }
-
-/* fecho em duas vozes — corte seco, sem transição */
-.sobre-split { display: grid; grid-template-columns: 1fr 1fr; border-top: 0.5px solid #1e1e1e; }
-.split-half {
-  display: flex; flex-direction: column; justify-content: center; gap: 16px;
-  padding: clamp(64px, 9vw, 110px) clamp(28px, 6vw, 90px);
-  text-decoration: none; min-height: 280px;
+/* ---- contributors ---- */
+.member-card .gcard-in { text-align: center; padding: 34px 26px; }
+.member-av {
+  width: 60px; height: 60px; margin: 0 auto 18px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 20px; font-weight: 700; color: #fff;
+  background: linear-gradient(150deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
+  border: 1px solid var(--edge);
 }
-.split-dev { background: #0a0a0a; }
-.split-dev .split-q { font-family: var(--mono); font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 500; color: var(--d-ink); letter-spacing: -0.01em; }
-.split-dev .split-link { font-family: var(--mono); font-size: 14px; color: var(--violet-2); }
-.split-biz { background: #f5f5f7; }
-.split-biz .split-q { font-family: var(--font-fraunces); font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 2.1rem); color: #1a1a1a; letter-spacing: -0.02em; }
-.split-biz .split-link { font-size: 14.5px; font-weight: 600; color: #1a1a1a; }
-.split-arr { display: inline-block; transition: transform 0.3s var(--ease); }
-@media (hover: hover) {
-  .split-half:hover .split-arr { transform: translateX(5px); }
+.member-nm { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: var(--d-ink); }
+.member-rl { margin: 6px 0 0; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.member-sig { margin: 14px 0 0; font-family: var(--mono); font-size: 12px; color: var(--violet-2); opacity: 0.85; }
+
+/* ---- valores — três cartões numerados ---- */
+.val-card .gcard-in { display: flex; flex-direction: column; padding: 32px 30px; }
+.val-num { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.06em; color: rgba(244,243,251,0.34); }
+.val-title { margin: 16px 0 0; font-size: 20px; letter-spacing: -0.025em; line-height: 1.25; color: var(--d-ink); }
+.val-desc { margin: 12px 0 0; font-size: 14.5px; line-height: 1.7; color: var(--d-body); }
+/* a chave do antigo devbase.config sobrevive como assinatura, colada no pé */
+.val-key { margin-top: auto; padding-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--violet-2); opacity: 0.8; }
+
+/* ---- fecho — dois pills de vidro, centrados ---- */
+.sobre-close .wrap { text-align: center; }
+.close-h { margin: 0 0 clamp(32px, 5vh, 48px); font-size: clamp(28px, 3.8vw, 46px); letter-spacing: -0.038em; }
+.close-pills { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; }
+.gpill {
+  padding: 1px; border-radius: 22px; text-decoration: none;
+  background: linear-gradient(150deg, var(--edge), rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.12));
+  box-shadow: 0 18px 44px -24px rgba(0,0,0,0.9);
+  transition: transform .45s var(--ease), background .45s var(--ease);
 }
-@media (max-width: 780px) {
-  .sobre-split { grid-template-columns: 1fr; }
-  .split-half { min-height: 220px; }
+.gpill-in {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
+  border-radius: 21px; padding: 22px 30px; min-width: 264px;
+  background: var(--pane);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+}
+.gpill-q { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; color: var(--d-ink); }
+.gpill-go { font-family: var(--mono); font-size: 13.5px; color: var(--violet-2); }
+.gpill-arr { display: inline-block; transition: transform .3s var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .gpill:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(150deg, var(--edge-2), rgba(255,255,255,0.07) 50%, rgba(255,255,255,0.18));
+  }
+  .gpill:hover .gpill-arr { transform: translateX(5px); }
+}
+
+@media (max-width: 860px) {
+  .gtrio { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+}
+@media (max-width: 600px) {
+  .gcard-in { padding: 24px 22px; }
+  .glog-msg { font-size: 14.5px; }
+  .close-pills { flex-direction: column; align-items: stretch; }
+  .gpill-in { min-width: 0; }
 }
 
 /* ================================================================
@@ -1541,7 +1662,9 @@ body.ls-on .sec-dark--alt,
 body.ls-on .who { background: rgba(255, 255, 255, 0.02); }
 body.ls-on .page-dark,
 body.ls-on .page-dark .page-head { background: transparent; }
-body.ls-on .page-dark .section:nth-of-type(even) { background: rgba(255, 255, 255, 0.02); }
+/* :not(.has-paths) — com os traços animados atrás, a faixa alternada
+   viraria uma barra por cima deles */
+body.ls-on .page-dark:not(.has-paths) .section:nth-of-type(even) { background: rgba(255, 255, 255, 0.02); }
 /* hero de produto: o silk convive — screen deixa a malha atravessar o preto */
 body.ls-on .phead { background: transparent; }
 body.ls-on .phead-canvas { mix-blend-mode: screen; }
@@ -2069,21 +2192,8 @@ body.ls-on .sdots--dark { display: none; }
   .hero-cta .btn { width: 100%; justify-content: center; }
 }
 
-/* /sobre — grid de contributors não colapsava (usa .team-grid legado) */
-@media (max-width: 760px) {
-  .team-grid { grid-template-columns: 1fr; }
-}
-
-/* /sobre — timeline git log e devbase.config em telas estreitas */
-@media (max-width: 600px) {
-  .gitlog { padding-left: 26px; margin-top: 36px; }
-  .glog-entry { padding-bottom: 36px; }
-  .gitlog::before { left: 2px; }
-  .glog-entry::before { left: -26px; }
-  .glog-desc { max-width: 100%; }
-  /* config: fonte menor; se ainda estourar, rola só o bloco de código */
-  .cfg-card .cc-body { font-size: 12.5px; overflow-x: auto; }
-}
+/* /sobre — o colapso dos grids agora mora no bloco ".has-paths"
+   (.gtrio / .close-pills), junto do resto do registro de vidro. */
 
 /* ilustrações abstratas: no máximo 70vw, centralizadas */
 @media (max-width: 640px) {
