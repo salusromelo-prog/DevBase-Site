@@ -23,7 +23,7 @@ function CheckIcon() {
 
 function ObrigadoContent() {
   return (
-    <div style={{
+    <div className="page-dark" style={{
       minHeight: 'calc(100vh - 160px)',
       display: 'flex',
       flexDirection: 'column',

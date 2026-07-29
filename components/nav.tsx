@@ -8,7 +8,7 @@ import Logo from './logo'
 const HIDDEN_ROUTES = ['/microsaas', '/acesso']
 
 /* rotas claras do topo ao fim — tema inicial antes da 1ª medição no cliente */
-const LIGHT_ROUTES = ['/empresas', '/obrigado']
+const LIGHT_ROUTES = ['/empresas']
 
 /* blocos de registro dark — a navbar sonda o que está sob ela a cada scroll.
    Faltando um seletor aqui, a navbar lê a página clara em volta e desenha a

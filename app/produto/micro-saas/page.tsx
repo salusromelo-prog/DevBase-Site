@@ -194,18 +194,18 @@ export default function ProdutoMicroSaas() {
       </section>
 
       <style>{`
-        .p-micro .eyebrow { color: #0d9488; font-size: 14px; letter-spacing: 0.12em; }
+        .p-micro .eyebrow { color: #0f766e; font-size: 14px; letter-spacing: 0.12em; }
         .p-micro .phead .wrap { text-align: center; }
         .p-micro .phead h1 { margin-left: auto; margin-right: auto; }
         .p-micro .phead > .wrap > p { margin-left: auto; margin-right: auto; max-width: 56ch; }
         .p-micro .phead .prod-stats { justify-content: center; }
-        .p-micro .btn-primary { background: #0d9488; box-shadow: 0 8px 24px -10px rgba(217,119,6,0.5); }
-        .p-micro .btn-primary:hover { background: #0f766e; }
+        .p-micro .btn-primary { background: #0f766e; box-shadow: 0 8px 24px -10px rgba(15,118,110,0.55); }
+        .p-micro .btn-primary:hover { background: #115e56; }
         .p-micro .phead h1 .grad {
           background: linear-gradient(110deg, #fde68a, #fbbf24 40%, #fde68a);
           -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .p-micro .offer-now { color: #0d9488; }
+        .p-micro .offer-now { color: #0f766e; }
         .prod-stats { display: flex; gap: 48px; margin-top: 52px; flex-wrap: wrap; }
         .ps-item { display: flex; flex-direction: column; gap: 4px; align-items: center; }
         .ps-n { font-size: 38px; font-weight: 700; letter-spacing: -0.04em; color: #fff; line-height: 1; }

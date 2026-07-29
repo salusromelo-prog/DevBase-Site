@@ -186,17 +186,17 @@ export default function ProdutoCombo() {
       </section>
 
       <style>{`
-        .p-combo .eyebrow { color: #818cf8; font-size: 14px; letter-spacing: 0.12em; }
+        .p-combo .eyebrow { color: #4f46e5; font-size: 14px; letter-spacing: 0.12em; }
         .p-combo .phead .wrap { text-align: center; }
         .p-combo .phead h1 { margin-left: auto; margin-right: auto; }
         .p-combo .phead > .wrap > p { margin-left: auto; margin-right: auto; max-width: 56ch; }
         .p-combo .btn-primary {
-          background: linear-gradient(110deg, #6366f1, #8b5cf6);
+          background: linear-gradient(110deg, #4f46e5, #7c3aed);
           box-shadow: 0 8px 24px -10px rgba(99,102,241,0.6);
           border: none;
         }
         .p-combo .btn-primary:hover {
-          background: linear-gradient(110deg, #4f46e5, #7c3aed);
+          background: linear-gradient(110deg, #4338ca, #6d28d9);
           transform: translateY(-2px);
         }
         .p-combo .phead h1 .grad {
@@ -204,7 +204,7 @@ export default function ProdutoCombo() {
           -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
         .combo-badge { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin: 28px 0 0; flex-wrap: wrap; }
-        .combo-old { font-size: 20px; color: rgba(244,243,251,0.45); text-decoration: line-through; }
+        .combo-old { font-size: 20px; color: rgba(244,243,251,0.62); text-decoration: line-through; }
         .combo-now { font-size: 44px; font-weight: 700; letter-spacing: -0.04em; color: #fff; line-height: 1; }
         .combo-save { font-family: var(--mono); font-size: 13px; color: #86efac; padding: 5px 10px; border-radius: 999px; border: 1px solid rgba(134,239,172,0.3); }
         .combo-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -215,7 +215,7 @@ export default function ProdutoCombo() {
         .combo-col-price { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; color: var(--ink-2); }
         .combo-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
         .combo-list li { font-size: 14px; color: var(--ink-2); display: grid; grid-template-columns: 16px 1fr; gap: 9px; }
-        .combo-list li .b { color: #818cf8; }
+        .combo-list li .b { color: #4f46e5; }
         .p-combo .offer-block { max-width: 560px; border: 1px solid var(--line-2); border-radius: 16px; padding: 48px; background: var(--bg-soft); box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
         /* 48px de padding no card deixava o CTA com 238px numa tela de 390 */
         @media (max-width: 560px) {

@@ -191,13 +191,13 @@ export default function ProdutoBoilerplate() {
       </section>
 
       <style>{`
-        .p-boiler .eyebrow { color: #6366f1; font-size: 14px; letter-spacing: 0.12em; }
+        .p-boiler .eyebrow { color: #4f46e5; font-size: 14px; letter-spacing: 0.12em; }
         .p-boiler .phead .wrap { text-align: center; }
         .p-boiler .phead h1 { margin-left: auto; margin-right: auto; }
         .p-boiler .phead > .wrap > p { margin-left: auto; margin-right: auto; max-width: 56ch; }
         .p-boiler .phead .prod-stats { justify-content: center; }
-        .p-boiler .btn-primary { background: #6366f1; box-shadow: 0 8px 24px -10px rgba(99,102,241,0.6); }
-        .p-boiler .btn-primary:hover { background: #4f46e5; }
+        .p-boiler .btn-primary { background: #4f46e5; box-shadow: 0 8px 24px -10px rgba(79,70,229,0.6); }
+        .p-boiler .btn-primary:hover { background: #4338ca; }
         .p-boiler .phead h1 .grad {
           background: linear-gradient(110deg, #a5b4fc, #818cf8 40%, #c4b5fd 65%, #a5b4fc);
           -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
@@ -221,7 +221,7 @@ export default function ProdutoBoilerplate() {
         }
         .offer-price { display: flex; align-items: baseline; gap: 16px; margin: 20px 0 16px; }
         .offer-old { font-size: 22px; color: var(--muted); text-decoration: line-through; }
-        .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: #6366f1; line-height: 1; }
+        .offer-now { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; color: #4f46e5; line-height: 1; }
         .offer-sub { font-size: 16px; color: var(--body); margin-bottom: 28px; max-width: 50ch; }
         .offer-note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 14px; }
         .delivery-note { font-family: var(--mono); font-size: 12px; color: var(--muted); opacity: 0.7; text-align: center; margin-top: 8px; }

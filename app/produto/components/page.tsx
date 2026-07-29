@@ -158,7 +158,7 @@ export default function ProdutoComponents() {
             <a href={CHECKOUT} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
               Comprar agora — R$ 67 <span className="arr">→</span>
             </a>
-            <p className="offer-note">acesso imediato após a compra · combina com o Boilerplate — <a href="/produto/combo" style={{ color: 'var(--primary)' }}>veja o combo</a></p>
+            <p className="offer-note">acesso imediato após a compra · combina com o Boilerplate — <a href="/produto/combo" style={{ color: 'var(--primary-2)' }}>veja o combo</a></p>
             <p className="delivery-note">Acesso entregue por e-mail em até 15 minutos após a confirmação do pagamento.</p>
           </Reveal>
         </div>
@@ -184,18 +184,18 @@ export default function ProdutoComponents() {
       </section>
 
       <style>{`
-        .p-comp .eyebrow { color: #8b5cf6; font-size: 14px; letter-spacing: 0.12em; }
+        .p-comp .eyebrow { color: #7c3aed; font-size: 14px; letter-spacing: 0.12em; }
         .p-comp .phead .wrap { text-align: center; }
         .p-comp .phead h1 { margin-left: auto; margin-right: auto; }
         .p-comp .phead > .wrap > p { margin-left: auto; margin-right: auto; max-width: 56ch; }
         .p-comp .phead .prod-stats { justify-content: center; }
-        .p-comp .btn-primary { background: #8b5cf6; box-shadow: 0 8px 24px -10px rgba(139,92,246,0.6); }
+        .p-comp .btn-primary { background: #7c3aed; box-shadow: 0 8px 24px -10px rgba(124,58,237,0.6); }
         .p-comp .btn-primary:hover { background: #7c3aed; }
         .p-comp .phead h1 .grad {
           background: linear-gradient(110deg, #c4b5fd, #a78bfa 40%, #ddd6fe 65%, #c4b5fd);
           -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .p-comp .offer-now { color: #8b5cf6; }
+        .p-comp .offer-now { color: #7c3aed; }
         .prod-stats { display: flex; gap: 48px; margin-top: 52px; flex-wrap: wrap; }
         .ps-item { display: flex; flex-direction: column; gap: 4px; align-items: center; }
         .ps-n { font-size: 38px; font-weight: 700; letter-spacing: -0.04em; color: #fff; line-height: 1; }
