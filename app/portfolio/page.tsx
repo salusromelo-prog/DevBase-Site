@@ -30,6 +30,24 @@ const CHECK = (
   </svg>
 )
 
+/* O primeiro exemplo do portfólio é a própria página que a pessoa já está
+   lendo — e é ele que estabelece a régua antes de mostrar um projeto de
+   escopo menor. Sem print: o exemplo está aberto na tela. */
+const ESTE_SITE = [
+  {
+    t: 'Escrito do zero, linha por linha.',
+    d: 'Nenhum tema comprado, nenhum construtor de arrastar bloco. Cada tela, cada animação e cada texto deste site foi decidido e programado por nós.',
+  },
+  {
+    t: 'Rápido porque foi feito para ser.',
+    d: 'Abre em segundos no celular, e isso conta no Google. Velocidade não sobra por sorte no fim do projeto — ela é escolhida no começo.',
+  },
+  {
+    t: 'É o nosso teto, e ele é honesto.',
+    d: 'Quando o escopo é livre, este é o nível que entregamos. Serve como referência do que somos capazes — e do que um projeto vira quando há espaço para ir até o fim.',
+  },
+]
+
 const MARZINI_PONTOS = [
   'Catálogo completo com fotos',
   'Montador de orçamento que vira mensagem no WhatsApp',
@@ -72,6 +90,10 @@ const ORCAMENTO = [
     d: 'Domínio e hospedagem ficam no seu nome. Se quiser que a gente cuide da manutenção, é opcional e o valor aparece separado.',
   },
   {
+    t: 'O orçamento define o tamanho, não o cuidado.',
+    d: 'Todo projeto sai com o mesmo padrão de código, de velocidade e de acabamento. O que o valor decide é a extensão: quantas telas, quanto design sob medida, quanta animação, quanto sistema por trás. Na conversa a gente diz com clareza o que cabe no que você tem para investir.',
+  },
+  {
     t: 'Orçamento sem compromisso.',
     d: 'Você manda a ideia e recebe escopo e valor por escrito. Se não fizer sentido para o seu momento, não tem custo e não tem insistência.',
   },
@@ -84,20 +106,61 @@ export default function Portfolio() {
       <PfHero
         title1="Não mostramos mockup."
         title2="Mostramos o site no ar."
-        sub="Todo projeto desta página tem endereço público. Você abre, navega e testa antes de falar com a gente. Se não está publicado, não entra aqui."
-        ctaHref="#marzini"
-        ctaLabel="Ver o projeto"
+        sub="Todo projeto desta página tem endereço público. Você abre, navega e testa antes de falar com a gente. Se não está publicado, não entra aqui. O primeiro exemplo é esta página."
+        ctaHref="#este-site"
+        ctaLabel="Começar pelo primeiro"
         altHref={WHATSAPP_FECHO}
         altLabel="Falar no WhatsApp"
       />
 
+      {/* ===== ESTE SITE — o exemplo que vem antes de todos ===== */}
+      <section className="pf-sec" id="este-site">
+        <PfShapes set="close" />
+        <div className="wrap">
+          <BizReveal>
+            <div className="pf-head">
+              <span className="pf-label">// projeto 01 · devbase.tools</span>
+              <h2 className="pf-h2">Você já está dentro de um projeto nosso.</h2>
+              <p className="pf-lead">
+                Este site é nosso — feito por nós, do design ao código. Antes de
+                mostrar o trabalho que fizemos para outra pessoa, faz sentido
+                mostrar o que fazemos quando o cliente somos nós mesmos.
+              </p>
+            </div>
+          </BizReveal>
+
+          <BizReveal delay={110}>
+            <div className="gcard pf-orc">
+              <div className="gcard-in">
+                <ul className="pf-orc__list">
+                  {ESTE_SITE.map(e => (
+                    <li key={e.t}>
+                      <span className="ck">{CHECK}</span>
+                      <span>
+                        <strong>{e.t}</strong>
+                        {e.d}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="pf-note">
+                  O projeto logo abaixo foi feito para um orçamento bem menor que
+                  este — e a gente prefere explicar essa diferença a fingir que
+                  ela não existe.
+                </p>
+              </div>
+            </div>
+          </BizReveal>
+        </div>
+      </section>
+
       {/* ===== O PROJETO — vitrine central ===== */}
-      <section className="pf-sec" id="marzini">
+      <section className="pf-sec pf-sec--line" id="marzini">
         <PfShapes set="show" />
         <div className="wrap">
           <BizReveal>
             <div className="pf-head">
-              <span className="pf-label">// cliente no ar</span>
+              <span className="pf-label">// projeto 02 · cliente no ar</span>
               <h2 className="pf-h2">Marzini Locações e Eventos</h2>
               <div className="pf-meta">
                 <span className="pf-live">
@@ -105,6 +168,7 @@ export default function Portfolio() {
                   No ar
                 </span>
                 <span className="pf-ramo">Locação para eventos · Goiânia e região</span>
+                <span className="pf-tag">orçamento enxuto</span>
               </div>
             </div>
           </BizReveal>
@@ -145,6 +209,21 @@ export default function Portfolio() {
                 itens e as quantidades, informa data e local, e envia tudo pronto
                 pelo WhatsApp com um toque. A Marzini recebe o pedido organizado e
                 só precisa responder com o valor.
+              </p>
+              <p>
+                Vale dizer com franqueza: este foi um projeto de orçamento enxuto.
+                O escopo foi desenhado para caber no que a Marzini podia investir
+                naquele momento — resolver o problema do orçamento manual, ficar
+                rápido no celular e aparecer no Google. Foi isso que entregamos, e
+                é isso que está no ar funcionando.
+              </p>
+              <p>
+                Comparar esta página com a que você está lendo é justo, e a
+                explicação é simples: o orçamento não define o cuidado do código,
+                define o tamanho do projeto. Quantas telas, quanto design sob
+                medida, quanta animação, quanto sistema por trás. Com mais espaço,
+                o resultado chega mais perto do nível deste site. Com menos, ele
+                resolve o essencial — bem feito, no ar e seu.
               </p>
             </div>
           </BizReveal>
@@ -256,16 +335,17 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ===== FECHO — o próprio site ===== */}
+      {/* ===== FECHO — o próximo projeto ===== */}
       <section className="pf-sec pf-close">
         <PfShapes set="close" />
         <div className="wrap">
           <BizReveal>
-            <span className="pf-label">// e este aqui</span>
-            <h2 className="pf-h2 pf-close__h">Este site também é nosso.</h2>
+            <span className="pf-label">// projeto 03</span>
+            <h2 className="pf-h2 pf-close__h">O próximo no ar pode ser o seu.</h2>
             <p className="pf-lead">
-              Tudo que você viu até agora — o design, a velocidade, os detalhes —
-              foi feito pela mesma equipe que vai construir o seu.
+              Conte o que o seu negócio precisa e o quanto dá para investir. A
+              gente responde com escopo e valor por escrito, e diz na cara o que
+              cabe e o que não cabe — grande ou pequeno, a mesma equipe faz.
             </p>
             <div className="pf-cta-row">
               <a href={WHATSAPP_FECHO} target="_blank" rel="noopener" className="btn-wa">

@@ -1456,6 +1456,15 @@ main { isolation: isolate; }
 @media (prefers-reduced-motion: no-preference) { .pf-live i { animation: pf-live-pulse 2.4s ease-out infinite; } }
 @keyframes pf-live-pulse { 0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); } 70%,100% { box-shadow: 0 0 0 7px rgba(52,211,153,0); } }
 .pf-ramo { font-family: var(--mono); font-size: 13px; letter-spacing: 0.01em; color: rgba(255,255,255,0.6); }
+/* etiqueta de contexto do projeto (ex.: o tamanho do orçamento). Fica
+   deliberadamente discreta: informa a régua sem virar desculpa. */
+.pf-tag {
+  display: inline-flex; align-items: center;
+  padding: 5px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.04);
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.58);
+}
 
 .pf-show { position: relative; z-index: 2; max-width: 900px; margin: 0 auto clamp(38px, 5vh, 56px); }
 /* halo índigo atrás da moldura — o print parece iluminado por trás */
@@ -1525,6 +1534,12 @@ main { isolation: isolate; }
 }
 .pf-orc__list li:first-child { border-top: 0; padding-top: 0; }
 .pf-orc__list strong { display: block; margin-bottom: 5px; font-size: 16.5px; letter-spacing: -0.01em; color: #fff; }
+/* recado de rodapé do painel — puxa o olho para a seção seguinte sem
+   competir com as linhas da lista */
+.pf-note {
+  margin: 0; padding-left: 16px; border-left: 2px solid var(--primary);
+  font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.46);
+}
 
 /* ---- fecho ---- */
 .pf-close .wrap { position: relative; z-index: 2; text-align: center; }
@@ -2543,7 +2558,7 @@ body.ls-on .sdots--dark { display: none; }
 .price .now.teal { color: #2dd4bf; }
 
 /* ================================================================
-   PRATELEIRA — o catálogo lido de lombada
+   PRATELEIRA — o catálogo em quatro painéis
    Quatro painéis iguais; o que está sob o cursor (ou com foco de
    teclado) abre e conta o que é. Sem JS: a abertura é :hover /
    :focus-within, e o corpo já está no DOM em opacity 0 — por isso
@@ -2592,15 +2607,17 @@ body.ls-on .sdots--dark { display: none; }
 .cshelf-slot:hover .spine__n,
 .cshelf-slot:focus-within .spine__n { color: var(--ac); }
 
-/* lombada: escrita de baixo pra cima, ancorada no rodapé do painel */
+/* rótulo fechado: nome e preço na horizontal, ancorados no rodapé do painel.
+   Já foi escrita vertical (lombada de livro) — bonito e ilegível: obrigava a
+   virar a cabeça pra ler quatro nomes. A leitura ganhou da metáfora. */
 .spine__rail {
-  position: absolute; left: 18px; bottom: 22px; z-index: 2;
-  max-height: calc(100% - 70px); overflow: hidden;
-  writing-mode: vertical-rl; transform: rotate(180deg);
-  display: flex; align-items: center; gap: 18px;
+  position: absolute; left: 20px; right: 18px; bottom: 22px; z-index: 2;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
   transition: opacity .3s var(--ease);
 }
-.spine__nome { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); white-space: nowrap; }
+/* sem nowrap: quando os vizinhos abrem, o painel encolhe — melhor quebrar
+   o nome em duas linhas do que deixar o overflow do .spine cortá-lo */
+.spine__nome { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; color: var(--ink); }
 .spine__preco { font-family: var(--mono); font-size: 13px; color: rgba(244,243,251,0.62); white-space: nowrap; }
 .cshelf-slot:hover .spine__rail,
 .cshelf-slot:focus-within .spine__rail { opacity: 0; transition-duration: .18s; }
@@ -2632,12 +2649,12 @@ body.ls-on .sdots--dark { display: none; }
   .spine { min-height: 72px; display: flex; align-items: center; padding: 14px 20px 14px 54px; border-radius: 16px; }
   .spine__n { top: 50%; transform: translateY(-50%); }
   .spine__rail {
-    position: static; max-height: none; overflow: visible;
-    writing-mode: horizontal-tb; transform: none;
-    width: 100%; justify-content: space-between; gap: 14px;
+    position: static;
+    width: 100%; flex-direction: row; align-items: center;
+    justify-content: space-between; gap: 14px;
     opacity: 1 !important;
   }
-  .spine__nome { font-size: 16px; white-space: normal; }
+  .spine__nome { font-size: 16px; }
   .spine__body { display: none; }
 }
 

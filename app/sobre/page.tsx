@@ -68,42 +68,53 @@ export default function Sobre() {
           </div>
         </section>
 
-        {/* a história em prosa — vem antes do git log de propósito: aqui
-            está a narrativa, e o registro datado logo abaixo comprova. */}
+        {/* quem somos, em prosa — datas e marcos ficam no git log abaixo.
+            Aqui é o lugar do propósito: por que existimos e como pensamos. */}
         <section className="section">
           <div className="wrap">
             <Reveal>
               <div className="section-head">
-                <SectionLabel>// a história</SectionLabel>
-                <h2>Um ano construindo antes de ter site.</h2>
+                <SectionLabel>// quem somos</SectionLabel>
+                <h2>Três pessoas que preferem construir a prometer.</h2>
               </div>
             </Reveal>
             <Reveal delay={90}>
               <div className="sobre-story">
                 <p className="lead">
-                  A DevBase nasceu em Goiânia, em maio de 2025 — três pessoas e
-                  uma regra que segue valendo: <b>só conta o que está no ar</b>.
+                  A DevBase é um estúdio pequeno de Goiânia. Somos três — e é com
+                  os três que você fala. Quem responde a sua mensagem é quem vai
+                  escrever o código, e isso muda tudo: <b>não existe camada entre
+                  quem promete e quem entrega</b>.
                 </p>
                 <p>
-                  Entre a fundação e o site publicado passou-se um ano inteiro.
-                  Um ano de construção, não de anúncio. Quando o{' '}
-                  <span className="ac">devbase.tools</span> entrou no ar, em maio
-                  de 2026, entrou já vendendo o Boilerplate desde o primeiro
-                  commit — porque abrir uma vitrine vazia quebraria a única regra
-                  que existia.
+                  A gente começou construindo para si mesmo. Todo produto do
+                  catálogo existe porque um de nós travou naquele ponto: a página
+                  em branco sem saber o que fazer, as duas semanas de configuração
+                  antes da primeira tela, o formulário que quebra na hora de
+                  validar um CPF. Em vez de reclamar, resolvemos — e depois
+                  achamos justo entregar resolvido para quem viria atrás.
                 </p>
                 <p>
-                  O catálogo cresceu na mesma lógica. Primeiro o kit de
-                  componentes em português e o combo com o Boilerplate. Depois as{' '}
-                  <b>100 ideias de micro-SaaS</b>, com 25 automações: problema,
-                  público, monetização e stack, prontas pra executar. Nenhuma
-                  entrou na lista antes de existir.
+                  O propósito é esse: tirar do caminho a parte chata para que
+                  alguém possa fazer a parte que importa. Vale para o dev que
+                  quer lançar sem gastar um mês em fundação, e vale para o
+                  comerciante de Goiânia que só precisa parar de perder cliente
+                  por causa de um site que não existe. Em português, com preço em
+                  real, sem termo que ninguém entende.
                 </p>
                 <p>
-                  Em julho de 2026 abrimos a segunda frente. Além de produtos para
-                  quem desenvolve, passamos a construir sites e sistemas para
-                  empresas — a mesma engenharia, um público novo. A régua não
-                  mudou.
+                  Também é o que a gente não é: não somos agência de proposta
+                  bonita, não vendemos “em breve” e não usamos número inventado
+                  para parecer maior.{' '}
+                  <b>Só conta o que está no ar</b> — essa é a régua desde o
+                  primeiro dia, e é por isso que o registro logo abaixo é um{' '}
+                  <span className="ac">git log</span>, não um roadmap.
+                </p>
+                <p>
+                  Somos um time pequeno construindo devagar e de propósito, uma
+                  entrega por vez. Se um dia a DevBase for grande, vai ser porque
+                  cada coisa aqui funcionou de verdade para alguém — não porque
+                  contamos uma história melhor.
                 </p>
               </div>
             </Reveal>

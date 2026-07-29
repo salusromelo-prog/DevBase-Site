@@ -7,9 +7,9 @@ export type Produto = {
   id: string
   n: string
   nome: string
-  /* nome curto — cabe na lombada vertical da prateleira */
+  /* nome curto — cabe no painel fechado da prateleira */
   curto: string
-  /* frase curta que aparece na lombada da prateleira */
+  /* frase curta que aparece no painel aberto da prateleira */
   linha: string
   desc: string
   itens: string[]

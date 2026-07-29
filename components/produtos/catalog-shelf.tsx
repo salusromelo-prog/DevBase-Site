@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 import { PRODUTOS } from '@/data/produtos'
 
-/* A prateleira: o catálogo lido de lombada.
+/* A prateleira: o catálogo em quatro painéis.
    Quatro painéis do mesmo tamanho; o que está sob o cursor abre e conta
    o que é, os outros encolhem. É índice e ilustração ao mesmo tempo —
    clicar leva à ficha correspondente mais abaixo na página.
@@ -24,7 +24,7 @@ export default function CatalogShelf() {
             <span className="spine__glow" aria-hidden="true" />
             <span className="spine__n" aria-hidden="true">{p.n}</span>
 
-            {/* estado fechado: nome de lombada + preço */}
+            {/* estado fechado: nome + preço, na horizontal */}
             <span className="spine__rail">
               <span className="spine__nome">{p.curto}</span>
               <span className="spine__preco">{p.preco.por}</span>
