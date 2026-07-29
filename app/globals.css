@@ -249,7 +249,7 @@ main { isolation: isolate; }
 /* scroll cue */
 .scrollcue {
   position: absolute; left: 28px; bottom: 26px; z-index: 3;
-  font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.4);
+  font-family: var(--mono); font-size: 11.5px; color: rgba(255,255,255,0.6);
   letter-spacing: 0.08em; display: flex; align-items: center; gap: 10px;
 }
 .scrollcue .ln { width: 30px; height: 1px; background: rgba(255,255,255,0.3); position: relative; overflow: hidden; }
@@ -1349,11 +1349,12 @@ main { isolation: isolate; }
 .pf-btn {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 16px 32px; border-radius: 999px;
-  background: var(--primary); color: #fff; font-weight: 700; font-size: 16.5px; letter-spacing: -0.01em;
+  /* mesmo motivo do .btn-primary: branco sobre #6366f1 fica em 4,47:1 */
+  background: var(--primary-2); color: #fff; font-weight: 700; font-size: 16.5px; letter-spacing: -0.01em;
   box-shadow: 0 16px 40px -16px rgba(99,102,241,0.7);
   transition: transform .2s var(--ease), box-shadow .2s, background .2s;
 }
-.pf-btn:hover { background: var(--primary-2); transform: translateY(-1px); }
+.pf-btn:hover { background: #4338ca; transform: translateY(-1px); }
 .pf-ghost {
   display: inline-flex; align-items: center; gap: 9px;
   padding: 15px 26px; border-radius: 999px;
@@ -1454,7 +1455,7 @@ main { isolation: isolate; }
 .pf-live i { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
 @media (prefers-reduced-motion: no-preference) { .pf-live i { animation: pf-live-pulse 2.4s ease-out infinite; } }
 @keyframes pf-live-pulse { 0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); } 70%,100% { box-shadow: 0 0 0 7px rgba(52,211,153,0); } }
-.pf-ramo { font-family: var(--mono); font-size: 13px; letter-spacing: 0.01em; color: rgba(255,255,255,0.42); }
+.pf-ramo { font-family: var(--mono); font-size: 13px; letter-spacing: 0.01em; color: rgba(255,255,255,0.6); }
 
 .pf-show { position: relative; z-index: 2; max-width: 900px; margin: 0 auto clamp(38px, 5vh, 56px); }
 /* halo índigo atrás da moldura — o print parece iluminado por trás */
@@ -1474,7 +1475,7 @@ main { isolation: isolate; }
 .pf-frame:hover { transform: translateY(-5px); border-color: var(--edge-2); box-shadow: 0 52px 110px -40px #000; }
 .pf-frame__bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); }
 .pf-frame__bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.16); }
-.pf-frame__bar em { margin-left: 12px; font-family: var(--mono); font-style: normal; font-size: 11.5px; color: rgba(255,255,255,0.34); }
+.pf-frame__bar em { margin-left: 12px; font-family: var(--mono); font-style: normal; font-size: 12px; color: rgba(255,255,255,0.6); }
 .pf-frame__shot { position: relative; display: block; }
 .pf-frame__shot img { display: block; width: 100%; height: auto; }
 
@@ -2900,7 +2901,7 @@ a.ctable-row:hover .ct-preco .arr { transform: translateX(4px); }
 @media (max-width: 700px) {
   .foot-col a { padding: 12px 0; }
   .who-link { padding: 10px 0; }
-  .biz-hero__portfolio { padding: 10px 0; }
+  .biz-hero__portfolio, .biz-sol__link { padding: 10px 0; }
   /* a pílula do produto no diagrama do caminho tinha 35px de altura */
   .cpath-prod { padding: 11px 16px; }
 }

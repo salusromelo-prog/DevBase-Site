@@ -104,7 +104,8 @@ function ObrigadoContent() {
               href="/acesso/login"
               style={{
                 display: 'block',
-                marginTop: 12,
+                marginTop: 6,
+                padding: '11px 0',
                 textAlign: 'center',
                 fontSize: 13,
                 color: 'var(--text-3)',
@@ -119,7 +120,7 @@ function ObrigadoContent() {
               Dúvidas?{' '}
               <a
                 href="mailto:devbasebr@gmail.com"
-                style={{ color: 'var(--text-2)', textDecoration: 'underline', textUnderlineOffset: 3 }}
+                style={{ color: 'var(--text-2)', textDecoration: 'underline', textUnderlineOffset: 3, display: 'inline-block', padding: '10px 4px' }}
               >
                 devbasebr@gmail.com
               </a>
@@ -131,7 +132,7 @@ function ObrigadoContent() {
           <div style={{ marginTop: 36 }}>
             <Link
               href="/"
-              style={{ fontFamily: 'var(--mono)', fontSize: 12, color: 'var(--text-3)' }}
+              style={{ fontFamily: 'var(--mono)', fontSize: 12.5, color: 'var(--text-3)', display: 'inline-block', padding: '11px 8px' }}
             >
               Voltar para devbase.tools
             </Link>

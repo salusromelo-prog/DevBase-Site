@@ -125,7 +125,7 @@ export function AnimatedMarqueeHero({
           {secondaryText && secondaryHref && (
             <a
               href={secondaryHref}
-              className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-[#56565f] transition-colors hover:text-[#1a1a1a]"
+              className="group inline-flex items-center gap-1.5 py-2.5 text-[15px] font-medium text-[#56565f] transition-colors hover:text-[#1a1a1a]"
             >
               {secondaryText}
               <span className="transition-transform duration-200 group-hover:translate-x-1">
