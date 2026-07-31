@@ -1,85 +1,58 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 
-/* páginas com spotlight ambiente: dark = índigo ~7% + dots que acendem;
-   light = índigo ~4%, sem dots. Demais rotas: nada. */
-const DARK_PAGES = ['/', '/sobre', '/produtos']
-const LIGHT_PAGES = ['/empresas']
+/* A luz que seguia o ponteiro saiu de cena.
+   Era uma camada fixa por cima da página inteira — um radial índigo e um
+   recorte de dots que acendiam — presa ao cursor em todas as rotas
+   escuras. O brilho grudado no ponteiro puxava o olho para onde o mouse
+   estava parado em vez de para o que estava escrito ali, e a camada
+   cobria a tela toda só para desenhar um círculo.
 
+   O que sobrou é o rastreamento LOCAL dos cards do catálogo: a borda viva
+   do .pcard, que só existe sob o cursor, morre com ele e não tem camada
+   nenhuma pairando sobre o resto da página. */
 export default function CursorFx() {
-  const pathname = usePathname()
-  const ref = useRef<HTMLDivElement>(null)
-
-  const mode: 'dark' | 'light' | null = DARK_PAGES.includes(pathname)
-    ? 'dark'
-    : LIGHT_PAGES.includes(pathname)
-      ? 'light'
-      : null
-
   useEffect(() => {
-    if (!mode) return
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const root = ref.current
-    if (!root) return
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    /* um listener global; posição via rAF + CSS vars, com lerp (persegue o cursor) */
-    let tx = -900, ty = -900, x = tx, y = ty
-    let raf = 0
     let card: HTMLElement | null = null
-    let cardX = 0, cardY = 0, cardDirty = false
+    /* a caixa do card em cache: getBoundingClientRect() a cada mousemove
+       força layout síncrono, e a caixa só muda quando o card muda, a
+       página rola ou a janela é redimensionada */
+    let rect: DOMRect | null = null
+    let x = 0, y = 0, raf = 0
 
-    function frame() {
+    function flush() {
       raf = 0
-      x += (tx - x) * 0.08
-      y += (ty - y) * 0.08
-      const done = Math.abs(tx - x) < 0.3 && Math.abs(ty - y) < 0.3
-      if (done) { x = tx; y = ty }
-      root!.style.setProperty('--mx', x.toFixed(1))
-      root!.style.setProperty('--my', y.toFixed(1))
-      if (cardDirty && card) {
-        card.style.setProperty('--px', cardX.toFixed(1) + 'px')
-        card.style.setProperty('--py', cardY.toFixed(1) + 'px')
-        cardDirty = false
-      }
-      if (!done) raf = requestAnimationFrame(frame)
+      if (!card) return
+      card.style.setProperty('--px', x.toFixed(1) + 'px')
+      card.style.setProperty('--py', y.toFixed(1) + 'px')
     }
 
     function onMove(e: MouseEvent) {
-      tx = e.clientX
-      ty = e.clientY
-      /* borda viva dos cards do catálogo — coordenadas locais por card, via delegação */
       const t = e.target as Element | null
       const c = t && 'closest' in t ? t.closest<HTMLElement>('.pcard') : null
-      if (c) {
-        const r = c.getBoundingClientRect()
-        card = c
-        cardX = e.clientX - r.left
-        cardY = e.clientY - r.top
-        cardDirty = true
-      }
-      if (!raf) raf = requestAnimationFrame(frame)
+      if (!c) { card = null; rect = null; return }
+      if (c !== card || !rect) { card = c; rect = c.getBoundingClientRect() }
+      x = e.clientX - rect.left
+      y = e.clientY - rect.top
+      if (!raf) raf = requestAnimationFrame(flush)
     }
 
-    window.addEventListener('mousemove', onMove, { passive: true })
+    const invalidate = () => { rect = null }
+
+    addEventListener('mousemove', onMove, { passive: true })
+    addEventListener('scroll', invalidate, { passive: true })
+    addEventListener('resize', invalidate)
     return () => {
-      window.removeEventListener('mousemove', onMove)
+      removeEventListener('mousemove', onMove)
+      removeEventListener('scroll', invalidate)
+      removeEventListener('resize', invalidate)
       cancelAnimationFrame(raf)
     }
-  }, [mode, pathname])
+  }, [])
 
-  if (!mode) return null
-
-  return (
-    <div ref={ref} className={`cfx cfx--${mode}`} aria-hidden="true">
-      <div className="cfx-glow" />
-      {mode === 'dark' && (
-        <div className="cfx-dots-win">
-          <div className="cfx-dots" />
-        </div>
-      )}
-    </div>
-  )
+  return null
 }

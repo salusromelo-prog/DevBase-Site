@@ -1692,41 +1692,10 @@ main { isolation: isolate; }
   .sobre-hero { min-height: 78vh; }
 }
 
-/* ================================================================
-   VIDA AMBIENTE — spotlight de cursor (camada fixa, só desktop)
-   Movimento 100% via transform (vars --mx/--my setadas em rAF).
-   ================================================================ */
-.cfx { position: fixed; inset: 0; z-index: 40; pointer-events: none; display: none; --mx: -900; --my: -900; }
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .cfx { display: block; }
-}
-.cfx-glow {
-  position: absolute; left: -320px; top: -320px; width: 640px; height: 640px;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(99,102,241,0.07), rgba(99,102,241,0.03) 45%, transparent 72%);
-  transform: translate3d(calc(var(--mx) * 1px), calc(var(--my) * 1px), 0);
-  will-change: transform;
-}
-.cfx--light .cfx-glow {
-  background: radial-gradient(closest-side, rgba(99,102,241,0.04), rgba(99,102,241,0.018) 45%, transparent 72%);
-}
-/* dots que "acendem" perto do cursor: a janela mascarada segue o cursor
-   e o grid interno contra-transla — tudo composto, zero repaint */
-.cfx-dots-win {
-  position: absolute; left: -320px; top: -320px; width: 640px; height: 640px;
-  transform: translate3d(calc(var(--mx) * 1px), calc(var(--my) * 1px), 0);
-  -webkit-mask-image: radial-gradient(closest-side, #000, transparent 68%);
-  mask-image: radial-gradient(closest-side, #000, transparent 68%);
-  overflow: hidden;
-  will-change: transform;
-}
-.cfx-dots {
-  position: absolute; left: 320px; top: 320px; width: 100vw; height: 100vh;
-  background-image: radial-gradient(circle, rgba(165,180,252,0.20) 1.2px, transparent 1.2px);
-  background-size: 28px 28px;
-  transform: translate3d(calc(var(--mx) * -1px), calc(var(--my) * -1px), 0);
-  will-change: transform;
-}
+/* O spotlight de cursor (.cfx — radial índigo + dots mascarados, camada
+   fixa por cima da página inteira) foi removido junto com a camada que o
+   desenhava, em components/cursor-fx.tsx. O componente continua existindo
+   só para alimentar o --px/--py da borda viva logo abaixo. */
 
 /* ================================================================
    VIDA AMBIENTE — borda viva nos cards do catálogo (desktop)
@@ -2370,11 +2339,12 @@ body.ls-on .sdots--dark { display: none; }
   font-family: var(--mono); font-size: 12px;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: rgba(199,201,255,0.78);
-  /* o balanço vai em `top`, não em transform: o paint() escreve
-     translateX inline aqui, e animação CSS venceria o inline. Com
-     position:relative o deslocamento é só de pintura — não reflui
-     os irmãos. */
-  position: relative;
+  /* o balanço vai na propriedade `translate`, não em transform: o paint()
+     escreve translateX inline em transform, e uma animação CSS na MESMA
+     propriedade venceria o inline. `translate` é uma propriedade
+     independente — compõe com o transform sem disputá-lo, e é composta na
+     GPU. (Antes isto era uma animação em `top`, que é propriedade de
+     layout: 3,4s em loop infinito sujando o layout do palco inteiro.) */
   animation: seh-float 3.4s var(--ease) infinite;
 }
 .seh-cue__ln {
@@ -2386,7 +2356,7 @@ body.ls-on .sdots--dark { display: none; }
   background: linear-gradient(90deg, transparent, #c4b5fd, transparent);
   animation: cue 2.4s var(--ease) infinite;
 }
-@keyframes seh-float { 0%,100% { top: 0 } 50% { top: 5px } }
+@keyframes seh-float { 0%,100% { translate: 0 0 } 50% { translate: 0 5px } }
 
 /* dentro do palco agora: o padding grande de antes era pra separar de
    uma seção que vinha depois; aqui ele só afastaria os botões do texto */
@@ -2455,6 +2425,42 @@ body.ls-on .sdots--dark { display: none; }
    offsetWidth, então o JS não precisa de um ramo pro estreito */
 @media (max-width: 767px) {
   .seh-cube { width: 104px; height: 104px; }
+
+  /* ── o que o celular não aguenta pagar por quadro ─────────────────
+     Durante o curso inteiro o card muda de tamanho a cada quadro, e tudo
+     que é desenhado EM FUNÇÃO da caixa dele precisa ser rasterizado de
+     novo junto. Numa GPU de desktop isso desaparece no orçamento; num
+     telefone são estes três que produziam as travadas:
+
+     1. a sombra. 110px de desfoque redesenhados num tamanho novo 60 vezes
+        por segundo. Aqui ela vira uma sombra curta de contato — o card
+        continua assentado no preto, só não custa uma tela inteira de
+        blur por quadro.
+     2. o filtro de cor sobre o vídeo. Aplicar saturate/contrast quadro a
+        quadro em cima de um vídeo que está sendo DECODIFICADO ao mesmo
+        tempo dobra o trabalho de cada frame do vídeo. A aurora fica um
+        fio menos saturada no celular; ninguém compara lado a lado.
+     3. a animação de entrada, que anima blur(14px) → 0 por 1,1s bem no
+        momento em que a página está carregando o vídeo de 2MB. Vira
+        fade puro. */
+  .seh-media {
+    box-shadow:
+      0 18px 42px -20px rgba(49,40,120,0.8),
+      inset 0 0 0 1px rgba(255,255,255,0.09);
+    animation-name: seh-media-in-lite;
+  }
+  .seh-media > video,
+  .seh-media > img { filter: none; }
+
+  /* as batidas perdem o desfoque de profundidade (o paint() já para de
+     escrevê-lo no modo touch — ver LITE em scroll-expansion-hero.tsx), e
+     sem filtro por quadro o will-change não precisa reservar o caminho
+     de filtro: a camada é rasterizada uma vez e só transladada depois */
+  .seh-beat { will-change: transform; }
+}
+@keyframes seh-media-in-lite {
+  from { opacity: 0 }
+  to   { opacity: 1 }
 }
 
 /* o experimento "fundo preto fora do card" deixou de ser experimento:

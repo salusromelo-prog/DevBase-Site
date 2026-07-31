@@ -219,7 +219,7 @@ function paintFace(r: RefObject<SVGPathElement | null>, p: number, tx: number, t
 const BEAT_LEAD = 0.025
 const BEAT_OP = 0.05, BEAT_MOVE = 0.085
 
-function paintBeat(el: HTMLElement, st: boolean, v: number, inA: number, outA: number) {
+function paintBeat(el: HTMLElement, st: boolean, v: number, inA: number, outA: number, lite: boolean) {
   /* em reduced-motion os três ficam acesos e o CSS os empilha em coluna */
   if (st) {
     el.style.opacity = '1'
@@ -236,10 +236,26 @@ function paintBeat(el: HTMLElement, st: boolean, v: number, inA: number, outA: n
   const aMove = outCubic(ramp(v, inA, BEAT_MOVE))
   const bMove = outA === Infinity ? 0 : ramp(v, outA, BEAT_MOVE)
   /* escala mínima: 1.5% de aproximação dá o empurrão de profundidade
-     sem virar zoom */
+     sem virar zoom. No modo leve ela dobra, porque é o que sobra de
+     profundidade quando o desfoque sai — o dobro de 1,5% ainda é metade
+     do que o olho chamaria de zoom. */
   const y = (1 - aMove) * 34 - bMove * 30
-  const s = 0.985 + 0.015 * aMove - 0.012 * bMove
+  const gs = lite ? 0.030 : 0.015
+  const s = 1 - gs + gs * aMove - gs * 0.8 * bMove
   el.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${s.toFixed(4)})`
+
+  /* O desfoque é o que separa quem entra de quem sai — sem ele o que
+     sobra de sobreposição lê como sujeira em vez de profundidade. Mas ele
+     custa re-rasterizar o texto INTEIRO a cada quadro, com as text-shadows
+     de 52px e o drop-shadow do trecho em gradiente junto, e é isso que o
+     celular não consegue entregar dentro de 16ms. No modo leve a
+     separação passa a ser só opacidade + escala (ver `gs` acima), e a
+     camada da batida é rasterizada uma vez e depois apenas transladada. */
+  if (lite) {
+    if (el.style.filter !== 'none') el.style.filter = 'none'
+    el.style.setProperty('--a', aOp.toFixed(3))
+    return
+  }
 
   const blur = (1 - aMove) * 10 + bMove * 9
   /* 'none' quando assentado: desfoque exige re-rasterizar o texto todo
@@ -305,10 +321,16 @@ export default function ScrollExpandMedia({
   const contentRef = useRef(false)
   const narrowRef = useRef(false)
   const staticRef = useRef(false)
+  /* modo leve: o mesmo aparelho que roda no modo 'touch'. Corta do quadro
+     o que só um desktop paga sem engasgar — hoje, o desfoque das batidas.
+     O resto do corte é CSS (sombra, filtro do vídeo), na @media de 767px. */
+  const liteRef = useRef(false)
   const tauRef = useRef(TAU.wheel)
   /* tamanho final da mídia nesta viewport; medido fora do paint pra não
      ler layout a cada quadro */
   const sizeRef = useRef({ w: W0 + WGROW.wide, h: H0 + HGROW.wide })
+  /* último tamanho REALMENTE escrito, em pixels inteiros */
+  const drawnRef = useRef({ w: 0, h: 0 })
   /* idem pro cubo: escala do estado grande e quanto ele sobe */
   const cubeGeo = useRef({ big: 2.2, lift: 90 })
   /* as duas fronteiras de escrita: passado CUBE_END / BEATS_END nada
@@ -356,11 +378,23 @@ export default function ScrollExpandMedia({
     const media = mediaRef.current
     if (media) {
       const { w, h } = sizeRef.current
-      /* arredondado pra meio pixel: sem isso a largura muda em frações
-         mínimas todo quadro e o navegador reflui o card à toa em
-         movimentos que não rendem um pixel de diferença na tela */
-      media.style.width = `${Math.round((W0 + m * (w - W0)) * 2) / 2}px`
-      media.style.height = `${Math.round((H0 + m * (h - H0)) * 2) / 2}px`
+      /* Pixel INTEIRO, e só escreve quando muda de pixel.
+         width/height são propriedades de layout: toda escrita invalida o
+         layout do card e obriga a redesenhar tudo que depende da caixa
+         dele, mesmo quando o valor novo cai no mesmo pixel de tela. O
+         meio pixel de antes já cortava parte disso, mas ainda deixava
+         passar escrita redundante — e nas partes lentas da curva (as duas
+         pontas, onde soft() achata) vários quadros seguidos pedem
+         exatamente o mesmo tamanho. Agora esses quadros não custam nada. */
+      const nw = Math.round(W0 + m * (w - W0))
+      const nh = Math.round(H0 + m * (h - H0))
+      const drawn = drawnRef.current
+      if (nw !== drawn.w || nh !== drawn.h) {
+        drawn.w = nw
+        drawn.h = nh
+        media.style.width = `${nw}px`
+        media.style.height = `${nh}px`
+      }
     }
     if (bgRef.current) bgRef.current.style.opacity = String(1 - d)
     if (veilRef.current) veilRef.current.style.opacity = String(0.7 - m * 0.3)
@@ -441,7 +475,14 @@ export default function ScrollExpandMedia({
       for (let i = 0; i < n; i++) {
         const inA = BEAT_IN0 + i * step
         /* a saída larga antes de a próxima entrar — ver paintBeat */
-        paintBeat(els[i], staticRef.current, v, inA, i === n - 1 ? Infinity : inA + step - BEAT_LEAD)
+        paintBeat(
+          els[i],
+          staticRef.current,
+          v,
+          inA,
+          i === n - 1 ? Infinity : inA + step - BEAT_LEAD,
+          liteRef.current
+        )
       }
     }
   }, [])
@@ -543,6 +584,7 @@ export default function ScrollExpandMedia({
           : 'touch'
       staticRef.current = next === 'static'
       narrowRef.current = !wide.matches
+      liteRef.current = next === 'touch'
       tauRef.current = next === 'touch' ? TAU.touch : TAU.wheel
       measure()
       if (next === 'static') {
